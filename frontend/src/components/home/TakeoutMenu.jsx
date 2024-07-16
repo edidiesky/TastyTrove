@@ -14,12 +14,12 @@ export default function TakeoutMenu() {
           />
         </div>
         <div className="TakeoutMenuRight flex items-center justify-center">
-          <div className="flex TakeoutMenuRightC flex-col gap-4 auto">
+          <div className="flex TakeoutMenuRightC flex-col gap-8 auto">
             <h4 className="text-lg family1 uppercase text-light text-white">
               ENJOY YOUR MEAL AT HOME
             </h4>
-            <h1 className="family3 text-6xl text-white">TAKEOUT NOW AVAILABLE</h1>
-            <h4 className="text-lg family2 text-light text-white">
+            <h1 className="family3 leading-[1.6] text-6xl md:text-7xl text-white">TAKEOUT NOW AVAILABLE</h1>
+            <h4 className="text-xl md:text-2xl family2 text-light text-white">
               Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
               scelerisque nisi in urna nulla.
             </h4>
@@ -39,7 +39,6 @@ const TakeoutMenuContent = styled.div`
   padding: 4rem 0;
   .exWrapper {
     .imageContent {
-      min-height: 15rem;
       flex: 1;
       img {
         height: 100%;
@@ -53,7 +52,7 @@ const TakeoutMenuContent = styled.div`
       padding: 15rem 0;
       background-color: #000;
       .TakeoutMenuRightC {
-        width: 50%;
+        width: 60%;
       }
     }
     @media (max-width: 980px) {

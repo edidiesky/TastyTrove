@@ -24,18 +24,18 @@ export default function About() {
   return (
     <AboutContent className="flex w-full flex-col gap-4">
       <div className="w-full flex flex-col gap-4">
-        <div className="w-85 auto wrapper flex gap-2">
-          <div className="flex-1 flex flex-col gap-2">
-            <h4 className="text-lg family2 text-light">
+        <div className="w-85 auto wrapper flex gap-20">
+          <div className="flex-1 flex flex-col gap-12">
+            <h4 className="text-lg md:text-xl family2">
               HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget
               tortor, donec amet, blandit. Tristique facilisi faucibus elementum
               feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet
               vulputate.
             </h4>
-            <h1 className="family3">
+            <h1 className="family3 text-6xl md:text-7xl leading-[1.5]">
               food is our common ground, a universal experience.
             </h1>
-            <h4 className="text-lg family2 text-light">
+            <h4 className="text-lg md:text-xl  family2 font-normal">
               HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget
               tortor, donec amet, blandit. Tristique facilisi faucibus elementum
               feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet
@@ -77,16 +77,16 @@ export default function About() {
                     data-aos="fade"
                     data-aos-duration="1200"
                     data-aos-delay={index * 300}
-                    className="flex flex-col gap-2 w-full"
+                    className="flex flex-col gap-4 w-full"
                   >
-                    <h3 className="family3 text-center text-3xl text-light">
+                    <h3 className="family3 text-center pb-3 text-3xl md:text-4xl font-normal">
                       {x.title}
                     </h3>
-                    <h4 className="family2 text-center text-lg text-light">
+                    <h4 className="family2 text-center text-lg md:text-xl font-normal">
                       {x.desc}
                     </h4>
                     <div className="w-full text-center">
-                      <button className="btn text-dark family1 text-light text-lg py-2">
+                      <button className="btn text-dark family1 font-normal text-lg py-1">
                         Explore the Menu
                       </button>
                     </div>

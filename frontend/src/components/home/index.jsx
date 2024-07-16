@@ -7,18 +7,22 @@ import SingleTakout from "./SingleTakout";
 import TakeoutList from "./TakeoutList";
 import TakeoutMenu from "./TakeoutMenu";
 import Hero from "./Hero";
+import Footer from "../common/Footer";
 
 export default function HomeIndex() {
   return (
     <div>
       <Hero />
-      {/* <About />
+      <About />
       <Experience />
       <Critics />
       <News />
       <TakeoutMenu />
       <TakeoutList />
+      {/*
+      <TakeoutList />
       <SingleTakout /> */}
+      <Footer />
     </div>
   );
 }

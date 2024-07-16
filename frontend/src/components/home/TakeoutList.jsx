@@ -4,8 +4,8 @@ import { planData } from "../../data/Plan";
 export default function Plans() {
   return (
     <PlansContent>
-      <div className="w-90 auto container">
-        <div className="w-full grid-cols-3">
+      <div className="w-85 auto container">
+        <div className="w-full grid grid-cols-3">
           {planData.map((x, index) => {
             return (
               <div
@@ -86,16 +86,6 @@ const PlansContent = styled.div`
       box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
       transform: translateY(-10px) scale(1.1);
       background-color: #000;
-      h2 {
-        font-size: 4.5rem;
-        font-weight: normal;
-        color: #fff;
-      }
-    }
-    h2 {
-      font-size: 4.5rem;
-      font-weight: normal;
-      color: #000;
     }
   }
   .grid2 {
