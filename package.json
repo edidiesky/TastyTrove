@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "concurrently \"cd ./backend && npm run dev\" \"cd ./frontend && npm run dev\"",
+    "build": "npm i vite @vitejs/plugin-react@3.1.0 && cd frontend && npm i --save-dev @types/react-dom --legacy-peer-deps && vite build",
+    "start": "cd backend && npm install && npm run server",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.0"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^3.1.0",
+    "framer-motion": "^11.2.10",
+    "vite": "^4.4.11"
+  }
+}

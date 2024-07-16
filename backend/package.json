@@ -1,0 +1,45 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node ./dist/index.js",
+    "server": "node ./index.js",
+    "data:import": "node seeder",
+    "dev": "nodemon ./index.js",
+    "postinstall": "prisma generate",
+    "build": "prisma generate && npm run build"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@prisma/client": "^5.5.2",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.2",
+    "cloudinary": "^1.40.0",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "crypto": "^1.0.1",
+    "date-fns": "^3.6.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.3",
+    "express-async-handler": "^1.2.0",
+    "express-session": "^1.17.3",
+    "flutterwave-node-v3": "^1.1.10",
+    "jsonwebtoken": "^9.0.1",
+    "moment": "^2.29.4",
+    "mongoose": "^7.4.3",
+    "multer": "^1.4.5-lts.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "nodemon": "^3.0.1",
+    "passport": "^0.6.0",
+    "passport-google-oauth20": "^2.0.0",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "prisma": "^5.5.2"
+  }
+}

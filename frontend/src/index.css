@@ -1,0 +1,244 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&family=Forum&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,300;1,400;1,500&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+  }
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+* {
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  list-style: none;
+  scroll-behavior: smooth;
+}
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.shadows {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s;
+}
+
+.shadows:hover {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+:root {
+  --grey-1: rgb(167, 167, 167);
+  --dark-1: #000000;
+  --primary: #e4c590;
+  --background_2: #0e0d0c;
+}
+
+.text-grey {
+  color: rgb(141, 141, 141) !important;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #fff;
+  line-height: 1;
+  font-family: "DM Sans";
+}
+
+.hide {
+  overflow: hidden !important;
+}
+
+textarea {
+  border: 1px solid rgba(0, 0, 0, 0.2) !important;
+  padding: 0.6rem;
+  font-family: "Booking_Normal_Bold";
+  border-radius: 10px;
+}
+input {
+  border: none;
+  outline: none;
+  font-family: "DM Sans";
+}
+
+.hide {
+  overflow: hidden;
+}
+.gradient {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    #000000 40%,
+    hsla(0, 0%, 0%, calc(100% - 40%)) 100%
+  );
+  z-index: 300;
+}
+.gradient2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    #000000 12%,
+    hsla(0, 0%, 0%, calc(100% - 45%)) 100%
+  );
+  z-index: 300;
+}
+
+.family1 {
+  font-family: "DM Sans", sans-serif;
+}
+
+.family2 {
+  font-family: "Forum", sans-serif;
+}
+
+.family3 {
+  font-family: "Bebas Neue", sans-serif;
+}
+
+.shadow {
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
+
+.btn {
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 1rem 2rem;
+  z-index: 300;
+  background-color: transparent;
+}
+.btn.btn-2 {
+  border: 1px solid #fff;
+  color: #fff;
+}
+.btn.btn-2:hover {
+  background-color: #fff !important;
+  color: #000;
+}
+.btn:hover {
+  border: 1px solid rgba(0, 0, 0, 0.7);
+  background-color: #fff;
+  color: #000;
+}
+
+.w-70 {
+  width: 70%;
+  max-width: 1290px;
+}
+
+.w-85 {
+  width: 86%;
+  max-width: 1290px;
+}
+
+.w-90 {
+  width: 95%;
+  max-width: 1290px;
+}
+.auto {
+  margin: 0 auto;
+}

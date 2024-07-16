@@ -1,0 +1,131 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum ReservationStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+}
+
+model User {
+  id              String          @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  username        String
+  email           String?         @unique
+  emailVerified   DateTime?
+  image           String?
+  isAdmin         Boolean?
+  hashedPassword  String?
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+  conversationIds String[]        @db.ObjectId
+  conversations   Conversations[] @relation(fields: [conversationIds], references: [id])
+
+  seenMessageIds String[]  @db.ObjectId
+  seenMessages   Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
+
+  messages    Message[]
+  rooms       Rooms[]
+  reservation Reservations[]
+  favourites  String[]
+  payment     Payment[]
+}
+
+model Rooms {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  description String
+  price       String?
+  city        String
+  cautionfee  String?
+  guests      Int?
+  // latitude    Int?
+  // longitude   Int?
+  type        String?
+  bedroom     Int
+  bathroom    Int
+  images      String[]
+  features    Json?
+  amenities   Json?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  userid String @db.ObjectId
+
+  user         User?          @relation(fields: [userid], references: [id], onDelete: Cascade)
+  reservations Reservations[]
+}
+
+model Reservations {
+  id         String            @id @default(auto()) @map("_id") @db.ObjectId
+  startDate  DateTime
+  endDate    DateTime
+  totalPrice Int?
+  guests     Int?
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
+  status     ReservationStatus @default(PENDING)
+  roomid     String            @db.ObjectId
+  userid     String            @db.ObjectId
+  payment    Payment[]
+  rooms      Rooms?            @relation(fields: [roomid], references: [id], onDelete: Cascade)
+  user       User?             @relation(fields: [userid], references: [id], onDelete: Cascade)
+}
+
+model Payment {
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
+  amount        Int?
+  currency      String
+  status        PaymentStatus @default(PENDING)
+  userid        String        @db.ObjectId
+  reservationid String        @db.ObjectId
+  user          User          @relation(fields: [userid], references: [id])
+  reservation   Reservations  @relation(fields: [reservationid], references: [id])
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+}
+
+model Conversations {
+  id            String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt     DateTime @default(now())
+  lastMessageAt DateTime @default(now())
+  lastMessage   String?
+  isGroup       Boolean?
+
+  messagesIds String[]  @db.ObjectId
+  messages    Message[]
+
+  userIds String[] @db.ObjectId
+  users   User[]   @relation(fields: [userIds], references: [id])
+}
+
+model Message {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  body      String?
+  image     String?
+  createdAt DateTime @default(now())
+
+  seenIds String[] @db.ObjectId
+  seen    User[]   @relation("Seen", fields: [seenIds], references: [id])
+
+  conversationId String?        @db.ObjectId
+  conversation   Conversations? @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+
+  senderId String @db.ObjectId
+  sender   User   @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
