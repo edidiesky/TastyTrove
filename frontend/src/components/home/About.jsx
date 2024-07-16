@@ -56,7 +56,7 @@ export default function About() {
               />
             </div>
           </div>
-          <span className="flex-1 aboutImageWrapper">
+          <span className="flex-1 md:flex hidden aboutImageWrapper">
             {/* eslint-disable-next-line @next/next/no-img-element,
           @next/next/no-img-element */}
             <img

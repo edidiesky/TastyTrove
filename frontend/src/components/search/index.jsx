@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import Footer from "../common/Footer";
 import Banner from "../common/Banner";
+import Menulist from "./menulist";
 const HomeIndex = () => {
   return (
     <div className="bg-[var(--light-grey)] w-full flex flex-col">
@@ -11,6 +12,7 @@ const HomeIndex = () => {
         subtext={"Best Table in Town"}
         text={"Our Takeout Menu"}
       />
+      <Menulist/>
       <Footer />
     </div>
   );

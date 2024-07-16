@@ -11,7 +11,7 @@ export default function Hero() {
             <h4 className="text-lg family1 text-light uppercase text-white">
               THE BEST RESTAURANTS IN TOWN
             </h4>
-            <div className="family3 text-6xl lg:text-8xl text-white">
+            <div className="family3 text-7xl lg:text-8xl text-white">
               FINE DINING EXPERIENCE
             </div>
             <h4 className="text-lg md:text-2xl family2 text-light text-white">

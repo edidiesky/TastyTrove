@@ -14,7 +14,7 @@ const linkData = [
   },
   {
     title: "Menu",
-    path: "search",
+    path: "restaurant/menu",
   },
   {
     title: "Cart",
@@ -208,7 +208,7 @@ const Navbar = () => {
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base hover:text-grey family2 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                    className={`text-base hover:text-grey family4 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />
