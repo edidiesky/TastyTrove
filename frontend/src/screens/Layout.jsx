@@ -4,6 +4,7 @@ import RegisterModal from "@/components/modals/Register";
 import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
+import Copyright from "@/components/common/Copyright";
 const Layout = () => {
   const { loginmodal, registermodal } = useSelector((store) => store.modal);
   return (
@@ -19,6 +20,7 @@ const Layout = () => {
 
       <div className="w-full">
         <Outlet />
+        <Copyright/>
       </div>
     </>
   );
