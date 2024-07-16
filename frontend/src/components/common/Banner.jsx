@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import React from "react";
 import styled from "styled-components";
 
@@ -6,21 +6,18 @@ export default function Banner({ type, text, subtext }) {
   if (type === "type") {
     return (
       <BannerContent className="image1">
-        <div className="w-85 bannerHeader auto flex item-center justify-center column gap-2">
+        <div className="w-85 bannerHeader auto flex items-center justify-center flex-col gap-4">
           <h4
-            className="fs-24 text-light uppercase text-white family3"
+            className="text-lg text-light uppercase text-white family1"
             style={{ letterSpacing: "1.5px", fontWeight: "normal" }}
           >
             {subtext}
           </h4>
-          <h1 className="family3 text-light uppercase text-white">{text}</h1>
+          <h1 className="family3 text-6xl md:text-7xl text-light uppercase text-white">{text}</h1>
         </div>
         <div className="gradient2"></div>
-        <Image
+        <img
           alt=""
-          width={0}
-          sizes="100vw"
-          height={0}
           loading="lazy"
           src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu272x.jpg  "
           className="imagewrapper"
@@ -30,20 +27,17 @@ export default function Banner({ type, text, subtext }) {
   }
   return (
     <BannerContent >
-      <div className="w-85 bannerHeader auto flex column gap-2">
-        <h4 className="fs-30 text-light uppercase text-white family3">
+      <div className="w-85 bannerHeader auto flex flex-col gap-2">
+        <h4 className="fs-30 text-light uppercase text-white  text-6xl">
           BEST TABLE IN TOWN
         </h4>
-        <h1 className="family3 text-light uppercase text-white">
+        <h1 className=" text-6xl text-light uppercase text-white">
           Our Takeout Menu
         </h1>
       </div>
       <div className="gradient2"></div>
-      <Image
+      <img
         alt=""
-        width={0}
-        sizes="100vw"
-        height={0}
         loading="lazy"
         src="	https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
         className="imagewrapper image1"
@@ -58,7 +52,7 @@ const BannerContent = styled.div`
   display: flex;
   align-items: center;
   &.image1 {
-    min-height: 30rem;
+    min-height: 20rem;
   }
   .bannerHeader {
     z-index: 3000;

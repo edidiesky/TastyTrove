@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 export default function SingleTakout() {
   return (
@@ -19,9 +20,12 @@ export default function SingleTakout() {
             Fringilla nibh pharetra sociis leo amet.
           </h4>
           <div className="w-full text-start">
-            <button className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2">
+            <Link
+              to={`restaurant/takeout/${"BRAISED ABALONE"}`}
+              className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2"
+            >
               View takeout Menu
-            </button>
+            </Link>
           </div>
         </div>
         <div className="flex-1"></div>

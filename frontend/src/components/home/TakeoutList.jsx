@@ -30,7 +30,7 @@ export default function Plans() {
                     {x.list.map((x) => {
                       return (
                         // eslint-disable-next-line react/jsx-key
-                        <Link to={`/restaurant/menu/${x?.title}`} className="w-full" key={index}>
+                        <Link to={`/restaurant/takeout/${x?.title}`} className="w-full" key={index}>
                           <li className="w-full auto flex flex-col gap-2 text-base center border-bottom py-1 auto">
                             <div className="flex w-full items-center gap-2 justify-space">
                               <div className="flex w-full justify-between gap-4 items-center">

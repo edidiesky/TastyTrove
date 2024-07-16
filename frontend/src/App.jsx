@@ -18,7 +18,7 @@ import { ProtectRoute } from "./lib/ProtectRoute";
 import Animation from "./animations/Animation";
 const HomeWrapper = lazy(() => import("./screens/Home"));
 // const SearchWrapper = lazy(() => import("./screens/Search"));
-// const SingleWrapper = lazy(() => import("./screens/Single"));
+const SingleWrapper = lazy(() => import("./screens/Single"));
 // const SavedWrapper = lazy(() => import("./screens/Saved"));
 // const TripsWrapper = lazy(() => import("./screens/Trips"));
 // const PaymentWrapper = lazy(() => import("./screens/Payment"));
@@ -36,6 +36,14 @@ export default function App() {
             element={
               <Suspense fallback={<Loader />}>
                 <HomeWrapper />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/restaurant/takeout/:food"
+            element={
+              <Suspense fallback={<></>}>
+                <SingleWrapper />
               </Suspense>
             }
           />
