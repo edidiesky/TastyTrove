@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { planData } from "../../data/Plan";
+import { Link } from "react-router-dom";
 export default function Plans() {
   return (
     <PlansContent>
@@ -16,36 +17,51 @@ export default function Plans() {
                 }
                 key={index}
               >
-                <h2
-                  className={
-                    index === 1
-                      ? "top w-85 auto text-start py-3 px-3 text-xl family3 uppercase active"
-                      : "top w-85 auto text-start py-3 px-3 text-xl family3 uppercase"
-                  }
-                >
-                  {x.title}
-                </h2>
+                <div className="w-[70%] mx-auto flex flex-col gap-12 justify-center items-start">
+                  <h2
+                    className={`${
+                      index === 1 ? "text-[#fff]" : "text-[#000"
+                    } family3 text-5xl uppercase text-start`}
+                  >
+                    {x.title}
+                  </h2>
 
-                <ul className="w-full flex flex-col gap-1 py-3">
-                  {x.list.map((x, index) => {
-                    return (
-                      // eslint-disable-next-line react/jsx-key
-                      <div className="w-full hidden" key={index}>
-                        <li className="w-85 auto flex flex-col gap-2 text-base text-light center border-bottom py-1 auto">
-                          <div className="flex w-full items-center gap-2 justify-space">
-                            <h3 className="family3 text-light text-5xl text-dark">
-                              {x.title}
-                            </h3>
-                            <h3 className="family3 text-light text-xl text-dark">
-                              ${x.price}
-                            </h3>
-                          </div>
-                          <h4 className="family2 text-lg text-light">{x.desc}</h4>
-                        </li>
-                      </div>
-                    );
-                  })}
-                </ul>
+                  <ul className="w-full flex flex-col gap-6 py-3">
+                    {x.list.map((x) => {
+                      return (
+                        // eslint-disable-next-line react/jsx-key
+                        <Link to={`/restaurant/menu/${x?.title}`} className="w-full" key={index}>
+                          <li className="w-full auto flex flex-col gap-2 text-base center border-bottom py-1 auto">
+                            <div className="flex w-full items-center gap-2 justify-space">
+                              <div className="flex w-full justify-between gap-4 items-center">
+                                <h3
+                                  className={`${
+                                    index === 1 ? "text-[#fff]" : "text-[#000"
+                                  } family3 text-4xl text-dark`}
+                                >
+                                  {x.title}
+                                </h3>
+                                <span className={`${
+                                index === 1 ? "text-[var(--grey-1)]" : "text-[#000"
+                              } text-xl text-dark`}>
+                                  ${x.price}
+                                </span>
+                              </div>
+                            </div>
+                            <h4
+                              className={`${
+                                index === 1 ? "text-[var(--grey-1)]" : "text-[#000"
+                              } text-dark family2 text-xl`}
+                              // className="family2 text-xl"
+                            >
+                              {x.desc}
+                            </h4>
+                          </li>
+                        </Link>
+                      );
+                    })}
+                  </ul>
+                </div>
               </div>
             );
           })}
@@ -80,11 +96,10 @@ const PlansContent = styled.div`
     background-color: #e8e8e8;
     width: 100%;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    padding: 4rem 0;
+    padding: 6rem 0;
     gap: 5rem;
     &.active {
-      box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
-      transform: translateY(-10px) scale(1.07);
+      transform: translateY(-50px);
       background-color: #000;
     }
   }

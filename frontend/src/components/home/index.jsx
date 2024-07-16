@@ -19,9 +19,7 @@ export default function HomeIndex() {
       <News />
       <TakeoutMenu />
       <TakeoutList />
-      {/*
-      <TakeoutList />
-      <SingleTakout /> */}
+      <SingleTakout />
       <Footer />
     </div>
   );
