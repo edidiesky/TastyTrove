@@ -32,7 +32,7 @@ export default function News() {
       <h2
         data-aos="fade"
         data-aos-duration="1200"
-        className="  md:text-4xl text-5xl w-full text-center family2 text-dark"
+        className="  text-5xl lg:text-6xl w-full text-center family2 text-dark"
       >
         Latest news & promotions
       </h2>

@@ -6,7 +6,7 @@ export default function Plans() {
   return (
     <PlansContent>
       <div className="w-85 px-16 auto container">
-        <div className="w-full grid md:grid-cols-3">
+        <div className="w-full gap-8 md:gap-0 grid md:grid-cols-3">
           {planData.map((x, index) => {
             return (
               <div

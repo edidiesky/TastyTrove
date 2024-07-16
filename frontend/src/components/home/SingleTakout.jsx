@@ -10,7 +10,7 @@ export default function SingleTakout() {
       />
       <div className="flex md:flex-row flex-col w-85 z-40 auto">
         <div className="flex-1 md:flex-[0.5] bg-[#000] flex-col flex gap-12 px-12 md:px-20 py-24">
-          <h1 className="family3 flex items-start leading-[1.6] text-6xl md:text-7xl text-white">
+          <h1 className="family3 flex items-start gap-4 justify-between leading-[1.6] text-6xl md:text-7xl text-white">
             <span className="leading-[1.3]">BRAISED ABALONE</span>
             <span className="family1 pt-8 text-xl">$30</span>
           </h1>

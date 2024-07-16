@@ -6,7 +6,7 @@ import { FaTwitter } from "react-icons/fa";
 import { AiOutlineInstagram, AiOutlineYoutube } from "react-icons/ai";
 export default function Footer() {
   return (
-    <FooterContainer className="flex items-center">
+    <FooterContainer className="flex py-40 items-center">
       <div className="w-full family2 flex flex-col gap-8 items-center">
         <div className="flex items-center gap-2">
           <img
@@ -39,8 +39,6 @@ export default function Footer() {
 
 const FooterContainer = styled.div`
   width: 100%;
-  min-height: 80vh;
-  padding: 4rem 0;
   background-image: linear-gradient(
       180deg,
       #000000 40%,
