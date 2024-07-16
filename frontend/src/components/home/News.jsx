@@ -32,7 +32,7 @@ export default function News() {
       <h2
         data-aos="fade"
         data-aos-duration="1200"
-        className="text-6xl w-full text-center family2 text-dark"
+        className="  md:text-4xl text-5xl w-full text-center family2 text-dark"
       >
         Latest news & promotions
       </h2>
@@ -84,9 +84,6 @@ const NewsContent = styled.div`
     transition: all 0.7s;
     position: relative;
     overflow: hidden;
-    @media (max-width: 980px) {
-      height: 80rem;
-    }
     .gradient2,
     .NewsRightCenter {
       opacity: 0;

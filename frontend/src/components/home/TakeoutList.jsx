@@ -6,7 +6,7 @@ export default function Plans() {
   return (
     <PlansContent>
       <div className="w-85 px-16 auto container">
-        <div className="w-full grid grid-cols-3">
+        <div className="w-full grid md:grid-cols-3">
           {planData.map((x, index) => {
             return (
               <div
@@ -101,6 +101,9 @@ const PlansContent = styled.div`
     &.active {
       transform: translateY(-50px);
       background-color: #000;
+      @media (max-width: 780px) {
+        transform: translateY(0);
+      }
     }
   }
   .grid2 {
