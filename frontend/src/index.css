@@ -176,6 +176,7 @@ input {
 
 .family3 {
   font-family: "Bebas Neue", sans-serif;
+  line-height: 1.2 !important;
 }
 
 .shadow {
