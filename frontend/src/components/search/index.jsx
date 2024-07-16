@@ -1,16 +1,17 @@
 import React, {useEffect} from "react";
-import Navbar from "../common/navbar";
-import MainContent from "./main/maincontent";
 import Footer from "../common/Footer";
-import Newsletter from "../common/Newsletter";
+import Banner from "../common/Banner";
 const HomeIndex = () => {
   return (
     <div className="bg-[var(--light-grey)] w-full flex flex-col">
-      <Navbar />
-      <div className="w-full flex relative gap-4">
-        <MainContent />
-      </div>
-      <Footer/>
+      <Banner
+        image={
+          "https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/page22x.jpg"
+        }
+        subtext={"Best Table in Town"}
+        text={"Our Takeout Menu"}
+      />
+      <Footer />
     </div>
   );
 };

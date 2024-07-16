@@ -53,7 +53,6 @@ const HeroContent = styled.div`
   }
   .exWrapper {
     .imageContent {
-      min-height: 40rem;
       flex: 1;
       position: relative;
       @media (max-width: 980px) {
@@ -69,7 +68,7 @@ const HeroContent = styled.div`
     }
     .HeroRight {
       flex: 1;
-      padding: 15rem 0;
+      padding: 8rem 0;
       background-color: #000;
       .HeroRightC {
         width: 50%;
