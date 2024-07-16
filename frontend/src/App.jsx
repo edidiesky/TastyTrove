@@ -19,7 +19,7 @@ import Animation from "./animations/Animation";
 const HomeWrapper = lazy(() => import("./screens/Home"));
 // const SearchWrapper = lazy(() => import("./screens/Search"));
 const SingleWrapper = lazy(() => import("./screens/Single"));
-// const SavedWrapper = lazy(() => import("./screens/Saved"));
+const Cart = lazy(() => import("./screens/Cart"));
 // const TripsWrapper = lazy(() => import("./screens/Trips"));
 // const PaymentWrapper = lazy(() => import("./screens/Payment"));
 // const PaymentSuccess = lazy(() => import("./screens/Payment-Success"));
@@ -44,6 +44,14 @@ export default function App() {
             element={
               <Suspense fallback={<></>}>
                 <SingleWrapper />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/restaurant/cart"
+            element={
+              <Suspense fallback={<></>}>
+                <Cart />
               </Suspense>
             }
           />
