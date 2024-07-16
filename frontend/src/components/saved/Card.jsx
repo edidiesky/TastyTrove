@@ -43,19 +43,15 @@ export default function Card({ x, type }) {
 
   return (
     <tr key={x?._id}>
-      <td className="svg">
-        <div className="iconsWrapper" onClick={() => dispatch(onCartAlert(x))}>
-          <RxCross1 />
-        </div>
-      </td>
       <td>
-        <div className="cartProduct">
+        <div className="flex items-center gap-4">
           <div className="imageWrapper">
             <img src={x?.image} alt="images" />
           </div>
+          {x?.title}
         </div>
       </td>
-      <td className="title">{x?.title}</td>
+      {/* <td className="text-lg">{x?.price}</td> */}
       <td>{x?.price}</td>
       <td>
         <div className="btnWrapper">
@@ -76,7 +72,12 @@ export default function Card({ x, type }) {
           </button>
         </div>
       </td>
-      <td className="title">{x?.price * x?.quantity}</td>
+      <td className="text-xl">{x?.price * x?.quantity}</td>
+      <td className="svg">
+        <div className="w-12 h-12 rounded-full hover:bg-[#eee] flex items-center justify-center cursor-pointer" onClick={() => dispatch(onCartAlert(x))}>
+          <RxCross1 />
+        </div>
+      </td>
     </tr>
   );
 }
