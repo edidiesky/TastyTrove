@@ -34,54 +34,64 @@ export default function CartHolder({ type }) {
     );
   }
   return (
-    <CartHolderContainer>
-      <h3 className="family3 uppercase">Cart totals</h3>
-      <div className="w-full flex column gap-4">
-        <h4 className="family3 fs-20 uppercase subtotal">
-          Subtotal{" "}
-          <span className="family3 uppercase subspan">${totalPrice}</span>
-        </h4>
-        <h4 className="family3 fs-20 uppercase total">
-          Shipping{" "}
-          <span className="family3 uppercase subspan span1">
-            Shipping to <span className="text-bold">Nigeria</span>
-          </span>
-        </h4>
-        <h4 className="family3 fs-20 uppercase total">
-          Total{" "}
-          <span className="family3 uppercase subspan span1">
-            ${TotalShoppingPrice}
-          </span>
-        </h4>
-      </div>
-      <div className="uppercase btnWrapper">
-        <Link to={"/billing"} className="family1 btn text-dark fs-16 uppercase">
-          Proceed to Checkout
-        </Link>
+    <CartHolderContainer className="relative">
+      <img
+        src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
+        alt=""
+        className="w-full h-full z-10 absolute left-0 top-0 object-cover"
+      />
+      <div className="gradient2 absolute top-0 left-0 h-full w-full z-20"></div>
+      <div className="w-full z-[400] flex flex-col gap-12">
+        <div className="w-full z-[400] text-[#fff] flex flex-col gap-4">
+          <h3 className="family3 text-3xl md:text-4xl text-[#fff] z-30 uppercase">
+            Cart totals
+          </h3>
+          <div className="w-full flex flex-col gap-6">
+            <h4 className="family3 text-2xl uppercase subtotal">
+              Subtotal{" "}
+              <span className="family3 uppercase subspan">${totalPrice}</span>
+            </h4>
+            <h4 className="family3 text-2xl uppercase total">
+              Shipping{" "}
+              <span className="family3 uppercase subspan span1">
+                Shipping to <span className="text-bold">Nigeria</span>
+              </span>
+            </h4>
+            <h4 className="family3 text-2xl uppercase total">
+              Total{" "}
+              <span className="family3 uppercase subspan span1">
+                ${TotalShoppingPrice}
+              </span>
+            </h4>
+          </div>
+        </div>
+        <div className="uppercase btnWrapper">
+          <Link
+            to={"/billing"}
+            className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base uppercase"
+          >
+            Proceed to Checkout
+          </Link>
+        </div>
       </div>
     </CartHolderContainer>
   );
 }
 
 const CartHolderContainer = styled.div`
-  padding: 4rem;
+  padding: 4rem 2rem;
   border: 1px solid rgba(0, 0, 0, 0.09);
   display: flex;
   flex: 1;
   flex-direction: column;
   gap: 2rem;
   margin-bottom: 2rem;
+  position: relative;
+  width: 100%;
   @media (max-width: 980px) {
     width: 100%;
   }
-  h3 {
-    font-size: 3.5rem;
-    font-weight: 400;
-    color: var(--dark-1);
-    font-weight: normal;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.09);
-  }
+
 
   .btnWrapper {
     width: 100%;
@@ -114,7 +124,6 @@ const CartHolderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    color: var(--dark-1);
     font-weight: normal;
     &.subtotal {
       padding: 2.4rem 0;

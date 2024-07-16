@@ -56,15 +56,15 @@ export default function Card({ x, type }) {
       <td>
         <div className="btnWrapper">
           <button
-            className="cartBtn"
+            className="cartBtn border-r"
             disabled={x?.quantity === x?.countInStock}
             onClick={() => dispatch(increaseBagQty(x))}
           >
             <BiPlus />
           </button>
-          <h3>{x?.quantity}</h3>
+          <span className="border-l border-r">{x?.quantity}</span>
           <button
-            className="cartBtn"
+            className="cartBtn border-l"
             disabled={x?.quantity === 1}
             onClick={() => dispatch(decreaseBagQty(x))}
           >

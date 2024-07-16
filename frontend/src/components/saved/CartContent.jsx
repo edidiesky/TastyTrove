@@ -41,10 +41,6 @@ const CartContentContainer = styled.div`
   flex-direction: column;
   gap: 2rem;
 
-  @media (max-width: 780px) {
-    display: none;
-  }
-
   h3 {
     /* font-size: 1.8rem; */
     font-weight: normal;
@@ -62,7 +58,7 @@ const CartContentContainer = styled.div`
         max-width: 900px;
         min-width: 900px;
       } */
-    @media (max-width: 780px) {
+    @media (max-width: 980px) {
       max-width: 600px;
       min-width: 600px;
     }
@@ -97,17 +93,16 @@ const CartContentContainer = styled.div`
       width: 150px;
       display: flex;
       align-items: center;
-      height: 4rem;
+      height: 3.5rem;
       justify-content: center;
       margin: 0 auto;
-      h3 {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      span {
         font-size: 1.4rem;
         font-weight: 600;
         color: #333;
         flex: 1;
         font-family: "Bebas Neue", sans-serif;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
         height: 100%;
         display: grid;
         place-items: center;
@@ -121,8 +116,9 @@ const CartContentContainer = styled.div`
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        border: 1px solid rgba(0, 0, 0, 0.2);
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        /* border-right: 1px solid rgba(0, 0, 0, 0.2);
+        border-left: 1px solid rgba(0, 0, 0, 0.2); */
+        /* border-top: 1px solid rgba(0, 0, 0, 0.2); */
         &:hover {
           background: rgb(0 0 0 / 13%);
           svg {
