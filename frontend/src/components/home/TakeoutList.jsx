@@ -4,7 +4,7 @@ import { planData } from "../../data/Plan";
 export default function Plans() {
   return (
     <PlansContent>
-      <div className="w-85 auto container">
+      <div className="w-85 px-16 auto container">
         <div className="w-full grid grid-cols-3">
           {planData.map((x, index) => {
             return (
@@ -80,11 +80,11 @@ const PlansContent = styled.div`
     background-color: #e8e8e8;
     width: 100%;
     box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
-    padding: 10rem 0;
+    padding: 4rem 0;
     gap: 5rem;
     &.active {
       box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
-      transform: translateY(-10px) scale(1.1);
+      transform: translateY(-10px) scale(1.07);
       background-color: #000;
     }
   }
