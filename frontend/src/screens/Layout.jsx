@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import { useSelector } from "react-redux";
 import Copyright from "@/components/common/Copyright";
+import Navbar from "@/components/common/navbar";
 const Layout = () => {
   const { loginmodal, registermodal } = useSelector((store) => store.modal);
   return (
@@ -19,6 +20,7 @@ const Layout = () => {
       </AnimatePresence>
 
       <div className="w-full">
+      <Navbar/>
         <Outlet />
         <Copyright/>
       </div>

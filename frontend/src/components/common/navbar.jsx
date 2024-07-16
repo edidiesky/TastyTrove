@@ -13,15 +13,19 @@ const linkData = [
     path: "",
   },
   {
-    title: "Search",
+    title: "Menu",
     path: "search",
   },
   {
-    title: "My Favourites",
+    title: "Cart",
     path: "savedhomes",
   },
   {
-    title: "My Trips",
+    title: "Reservations",
+    path: "trips",
+  },
+  {
+    title: "Team",
     path: "trips",
   },
   // {
@@ -40,40 +44,15 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="p-3 z-[50] bg-[var(--grey-1)] px-2 md:px-8 min-h-[72px] sticky top-0 left-0 flex items-center justify-center">
-        <div className="w-full flex items-center gap-2 justify-between">
+      <div className="py-12 z-[50] relative px-2  top-0 left-0 flex items-center justify-center">
+        <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
+        <div className="w-85 auto flex z-[30] items-center gap-2 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">
             <img
-              alt="Cotion"
-              width={0}
-              sizes="100vw"
-              height={0}
-              loading="lazy"
-              src="https://www.hopper.com/assets/treasure-D-5S8iOp.svg"
-              className="w-14 h-14 rounded-full object-cover"
+              src="https://avada.website/restaurant/wp-content/uploads/sites/112/2021/04/logo-svg.svg"
+              alt=""
             />
-            <h4 className="hidden md:flex flex-col text-sm md:text-base font-booking_font4 text-dark">
-              Zyra&Stones{" "}
-              <span className="block text-grey text-xs font-booking_font">
-                {" "}
-                Home of Comfort
-              </span>
-            </h4>
           </Link>
-          <div className="items-center justify-start hidden lg:flex gap-4">
-            {linkData?.map((list, index) => {
-              return (
-                <Link
-                  to={`/${list.path}`}
-                  key={index}
-                  className={`text-sm hover:text-grey font-booking_font4 flex items-center gap-2 p-3 px-3 rounded-[40px]`}
-                >
-                  {/* <img src={list?.icon} className="w-4" alt="" /> */}
-                  <AnimateText children={list?.title} />
-                </Link>
-              );
-            })}
-          </div>
 
           {/* <img src="/images/TestLogo.png" alt="" className="w-40" /> */}
 
@@ -207,12 +186,12 @@ const Navbar = () => {
                 </div>
               ) : (
                 <span className="flex items-center gap-4">
-                  <div
+                  {/* <div
                     onClick={() => dispatch(onLoginModal())}
                     className="btn text-xs text-center p-4 font-booking_font4 text-white px-6 rounded-[40px]"
                   >
                     <AnimateText children={" Book Your Stay"} />
-                  </div>
+                  </div> */}
                   <span
                     onClick={() => setBar(true)}
                     className="flex text-3xl text-dark lg:hidden"
@@ -222,6 +201,21 @@ const Navbar = () => {
                 </span>
               )}
             </ProfileDropdownStyles>
+            <div className="items-center justify-start hidden lg:flex gap-4">
+              {linkData?.map((list, index) => {
+                return (
+                  <Link
+                    to={`/${list.path}`}
+                    key={index}
+                    style={{ letterSpacing: "2px" }}
+                    className={`text-base hover:text-grey family2 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                  >
+                    {/* <img src={list?.icon} className="w-4" alt="" /> */}
+                    <AnimateText children={list?.title} />
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>
