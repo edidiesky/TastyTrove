@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Link } from "react-router-dom";
 import { IoBag } from "react-icons/io5";
@@ -41,14 +40,13 @@ const Navbar = () => {
   };
   return (
     <>
-      <div className="py-12 z-[50] relative px-2  top-0 left-0 flex items-center justify-center">
+      <div className="py-12 z-[50] relative flex items-center justify-center">
         <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
         <div className="w-85 auto flex z-[30] items-center gap-2 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">
-            <img
-              src="https://avada.website/restaurant/wp-content/uploads/sites/112/2021/04/logo-svg.svg"
-              alt=""
-            />
+            <h3 className="text-3xl md:text-4xl text-white family3">
+              <AnimateText children={"TastyTrove Restaurant"} />
+            </h3>
           </Link>
 
           {/* <img src="/images/TestLogo.png" alt="" className="w-40" /> */}
@@ -191,7 +189,7 @@ const Navbar = () => {
                   </div> */}
                   <span
                     onClick={() => setBar(true)}
-                    className="flex text-3xl text-dark lg:hidden"
+                    className="flex text-4xl cursor-pointer text-[#fff] lg:hidden"
                   >
                     <HiBars3BottomRight />
                   </span>
@@ -205,7 +203,7 @@ const Navbar = () => {
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base md:text-lg hover:text-grey family2 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                    className={`text-base md:text-lg hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />
@@ -224,7 +222,7 @@ const Navbar = () => {
         </div>
       </div>
       <div
-        style={{ zIndex: "200" }}
+        style={{ zIndex: "400000" }}
         className={`${
           bar ? "left-0" : "-left-[100%]"
         } w-[300px] h-full transition-all ease duration-700 fixed flex lg:hidden top-0 bg-[#fff] shadow-2xl column gap-2`}
@@ -239,8 +237,14 @@ const Navbar = () => {
 
         <div
           style={{ zIndex: "200" }}
-          className="w-full Header_wrapper h-full bg-white flex item-center flex-col gap-4"
+          className="w-full Header_wrapper relative h-full bg-white flex item-center flex-col gap-4"
         >
+          <div className="gradient2 absolute"></div>
+          <img
+            src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
+            alt=""
+            className="absolute w-full h-full object-cover"
+          />
           {currentUser && (
             <div className="flex p-4 items-center gap-2">
               {currentUser?.image ? (
@@ -275,17 +279,22 @@ const Navbar = () => {
               )}
             </div>
           )}
-          <ul className="flex flex-col w-full">
+          <Link to={"/"} className=" flex z-[2000000] p-4 items-center gap-1 justify-start">
+            <h3 className="text-3xl text-white family3">
+              <AnimateText children={"TastyTrove Restaurant"} />
+            </h3>
+          </Link>
+          <ul className="flex z-[400000] flex-col w-full">
             {currentUser
               ? linkData?.slice(0, 6)?.map((x, index) => {
                   return (
                     <Link
                       to={`/${x.path}`}
                       key={index}
-                      className="text-dark font-booking_font4
-                        hover:bg-[rgba(0,0,0,.1)] py-[20px] border-b text-sm px-8"
+                      className="text-dark 
+                        hover:bg-[rgba(0,0,0,.3)]  py-[20px] border-b border-[rgba(255,255,255,.1)] text-lg family4 text-[#fff] px-8"
                     >
-                      {x.title}
+                      <AnimateText children={x.title} />
                     </Link>
                   );
                 })
@@ -294,9 +303,9 @@ const Navbar = () => {
                     <Link
                       to={`/${x.path}`}
                       key={index}
-                      className="text-dark family2  hover:bg-[rgba(0,0,0,.1)] py-[20px] border-b text-sm px-8"
+                      className="text-dark  hover:bg-[rgba(0,0,0,.3)] border-b border-[rgba(255,255,255,.1)] py-[20px]  text-lg family4 text-[#fff] px-8"
                     >
-                      {x.title}
+                      <AnimateText children={x.title} />
                     </Link>
                   );
                 })}

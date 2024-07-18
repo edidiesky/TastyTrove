@@ -9,10 +9,9 @@ export default function Footer() {
     <FooterContainer className="flex py-24 items-center">
       <div className="w-full family2 flex flex-col gap-8 items-center">
         <div className="flex items-center gap-2">
-          <img
-            src="https://avada.website/restaurant/wp-content/uploads/sites/112/2021/04/logo-svg.svg"
-            alt=""
-          />
+          <h3 className="text-3xl md:text-5xl text-white family3">
+            TastyTrove Restaurant
+          </h3>
         </div>
         <h4 className="text-lg md:text-xl text-light w-ful md:w-[400px] text-center auto text-white">
           Quam eu proin sit massa condimentum. Volutpat non pulvinar aliquet

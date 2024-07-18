@@ -59,6 +59,7 @@ const DetailsContent = styled.div`
     .detailsInfoL {
       flex: 0.6;
       padding: 2rem 1rem;
+      padding-left: 2rem;
       background-color: #f7f7f7;
       @media (max-width: 350px) {
         flex: 1;
@@ -108,11 +109,11 @@ const DetailsContent = styled.div`
     }
   }
   .topWrapper {
-    @media (max-width: 980px) {
+    @media (max-width: 780px) {
       flex-direction: column;
     }
     .topleft {
-      /* min-height: 50rem; */
+      min-height: 30rem;
       flex: 1;
       position: relative;
       @media (max-width: 980px) {
@@ -130,13 +131,15 @@ const DetailsContent = styled.div`
       flex: 1;
       padding: 10rem 0;
       background-color: #000;
-      @media (max-width: 480px) {
+      @media (max-width: 780px) {
         width: 100%;
+        padding: 2rem 0;
       }
       .HeroRightC {
-        width: 70%;
-        @media (max-width: 480px) {
+        width: 60%;
+        @media (max-width: 780px) {
           width: 90%;
+          padding: 5rem 0;
         }
       }
     }
