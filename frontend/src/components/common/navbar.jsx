@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { IoBag } from "react-icons/io5";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,10 +16,10 @@ const linkData = [
     title: "Menu",
     path: "restaurant/menu",
   },
-  {
-    title: "Cart",
-    path: "savedhomes",
-  },
+  // {
+  //   title: "Cart",
+  //   path: "savedhomes",
+  // },
   {
     title: "Reservations",
     path: "restaurant/reservations",
@@ -199,24 +199,26 @@ const Navbar = () => {
             <div className="items-center justify-start hidden lg:flex gap-3">
               {linkData?.map((list, index) => {
                 return (
-                  <Link
+                  <NavLink
+                    end
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base md:text-lg hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                    className={`text-base tab md:text-lg hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />
-                  </Link>
+                  </NavLink>
                 );
               })}
-              <Link
+              <NavLink
+                end
                 to={"/restaurant/cart"}
-                className="w-12 rounded-full cursor-pointer
+                className="w-12 tab rounded-full cursor-pointer
                hover:bg-[#18181885] text-[#fff] h-12 flex items-center justify-center text-xl"
               >
                 <IoBag />
-              </Link>
+              </NavLink>
             </div>
           </div>
         </div>
@@ -279,7 +281,10 @@ const Navbar = () => {
               )}
             </div>
           )}
-          <Link to={"/"} className=" flex z-[2000000] p-4 items-center gap-1 justify-start">
+          <Link
+            to={"/"}
+            className=" flex z-[2000000] p-4 items-center gap-1 justify-start"
+          >
             <h3 className="text-3xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />
             </h3>
@@ -292,7 +297,7 @@ const Navbar = () => {
                       to={`/${x.path}`}
                       key={index}
                       className="text-dark 
-                        hover:bg-[rgba(0,0,0,.3)]  py-[20px] border-b border-[rgba(255,255,255,.1)] text-lg family4 text-[#fff] px-8"
+                        hover:bg-[rgba(0,0,0,.3)] tab py-[20px] border-b border-[rgba(255,255,255,.1)] text-lg family4 text-[#fff] px-8"
                     >
                       <AnimateText children={x.title} />
                     </Link>
@@ -303,7 +308,7 @@ const Navbar = () => {
                     <Link
                       to={`/${x.path}`}
                       key={index}
-                      className="text-dark  hover:bg-[rgba(0,0,0,.3)] border-b border-[rgba(255,255,255,.1)] py-[20px]  text-lg family4 text-[#fff] px-8"
+                      className="text-dark tab hover:bg-[rgba(0,0,0,.3)] border-b border-[rgba(255,255,255,.1)] py-[20px]  text-lg family4 text-[#fff] px-8"
                     >
                       <AnimateText children={x.title} />
                     </Link>
@@ -352,6 +357,19 @@ export const ProfileDropdownStyles = styled.div`
     }
     &:hover {
       background: #eee;
+    }
+  }
+  .tab {
+    &.active {
+      position: relative;
+      background: #fff;
+      color: #000;
+
+      span {
+        svg {
+          color: #fff;
+        }
+      }
     }
   }
   .dropdown {

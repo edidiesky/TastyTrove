@@ -30,7 +30,6 @@ const registerUser = asyncHandler(async (req, res) => {
     hashedPassword: hashedpassword,
     name,
     username,
-    isAdmin: false,
   };
   const user = await prisma.user.create({
     data: Tempuser,

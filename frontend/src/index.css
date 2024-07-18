@@ -251,3 +251,8 @@ html.lenis body {
 .auto {
   margin: 0 auto;
 }
+
+
+.tab.active {
+  color: #BDA16B;
+}
