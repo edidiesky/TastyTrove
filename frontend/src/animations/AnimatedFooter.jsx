@@ -2,7 +2,7 @@ import React from "react";
 const AnimatedFooter = ({ children }) => {
   return (
     <div
-      className="relative h-[800px]  bg-[var(--green-1)]"
+      className="relative h-[800px]  bg-[#000]"
       style={{ clipPath: "polygon(0% 0, 100% 0%, 100% 100%, 0 100%)" }}
     >
       <div className="relative h-[calc(100vh+800px)] -top-[100vh]">

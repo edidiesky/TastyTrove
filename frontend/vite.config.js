@@ -9,7 +9,7 @@ export default defineConfig({
     sourcemap: true,
   },
   server: {
-    sourcemap: true,
+    hmr: true,
   },
   resolve: {
     alias: {
