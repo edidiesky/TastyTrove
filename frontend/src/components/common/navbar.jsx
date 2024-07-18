@@ -22,7 +22,7 @@ const linkData = [
   },
   {
     title: "Reservations",
-    path: "trips",
+    path: "restaurant/reservations",
   },
   {
     title: "Team",

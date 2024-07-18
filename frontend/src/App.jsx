@@ -20,7 +20,7 @@ const HomeWrapper = lazy(() => import("./screens/Home"));
 const SearchWrapper = lazy(() => import("./screens/Search"));
 const SingleWrapper = lazy(() => import("./screens/Single"));
 const Cart = lazy(() => import("./screens/Cart"));
-// const TripsWrapper = lazy(() => import("./screens/Trips"));
+const TripsWrapper = lazy(() => import("./screens/Trips"));
 // const PaymentWrapper = lazy(() => import("./screens/Payment"));
 // const PaymentSuccess = lazy(() => import("./screens/Payment-Success"));
 // // PaymentSuccess
@@ -60,6 +60,14 @@ export default function App() {
             element={
               <Suspense fallback={<></>}>
                 <SearchWrapper />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/restaurant/reservations"
+            element={
+              <Suspense fallback={<></>}>
+                <TripsWrapper />
               </Suspense>
             }
           />

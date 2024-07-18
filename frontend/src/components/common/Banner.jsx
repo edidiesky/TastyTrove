@@ -60,11 +60,11 @@ export default function Banner({ type, text, subtext, image }) {
 
 const BannerContent = styled.div`
   position: relative;
-  min-height: 40rem;
+  min-height: 30rem;
   display: flex;
   align-items: center;
   &.image1 {
-    min-height: 18rem;
+    min-height: 14rem;
   }
   .bannerHeader {
     z-index: 3000;
