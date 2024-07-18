@@ -2,8 +2,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,300;1,400;1,500&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -106,6 +104,7 @@ button:disabled {
 }
 :root {
   --grey-1: rgb(167, 167, 167);
+  --light-grey: #f2f2f2;
   --dark-1: #000000;
   --primary: #e4c590;
   --background_2: #0e0d0c;
@@ -124,21 +123,23 @@ body {
   font-family: "DM Sans";
 }
 
+input {
+  height: 4rem;
+  background-color: var(--light-grey);
+  padding: 0 1rem;
+  border: none;
+  outline: none;
+}
+textarea {
+  background-color: var(--light-grey);
+  padding: 1rem;
+  border: none;
+  outline: none;
+}
 .hide {
   overflow: hidden !important;
 }
 
-textarea {
-  border: 1px solid rgba(0, 0, 0, 0.2) !important;
-  padding: 0.6rem;
-  font-family: "Booking_Normal_Bold";
-  border-radius: 10px;
-}
-input {
-  border: none;
-  outline: none;
-  font-family: "DM Sans";
-}
 
 .hide {
   overflow: hidden;
@@ -177,7 +178,6 @@ input {
 .family4 {
   font-family: "Lora", sans-serif;
 }
-
 
 .family3 {
   font-family: "Bebas Neue", sans-serif;

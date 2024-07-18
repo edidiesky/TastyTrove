@@ -93,7 +93,7 @@ const CartContentContainer = styled.div`
       width: 150px;
       display: flex;
       align-items: center;
-      height: 3.5rem;
+      height: 3rem;
       justify-content: center;
       margin: 0 auto;
       border: 1px solid rgba(0, 0, 0, 0.2);
@@ -126,8 +126,6 @@ const CartContentContainer = styled.div`
           }
         }
         svg {
-          width: 1.4rem;
-          height: 1.4rem;
           color: #333;
         }
       }

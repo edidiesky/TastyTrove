@@ -1,6 +1,6 @@
 import React from "react";
 import Meta from "@/components/common/Meta";
-import HomeIndex from "../components/trips";
+import HomeIndex from "../components/reservations";
 const Trips = () => {
   return (
     <div>

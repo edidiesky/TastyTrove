@@ -9,7 +9,7 @@ const HomeIndex = () => {
   //   dispatch(GetUserFavouriteRooms());
   // },[])
   return (
-    <div className="bg-[var(--light-grey)] w-full flex flex-col">
+    <div className=" w-full flex flex-col">
       <Cartindex />
       <Footer />
     </div>

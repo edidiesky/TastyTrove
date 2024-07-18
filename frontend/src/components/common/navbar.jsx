@@ -1,6 +1,7 @@
-"use client";
+
 import React from "react";
 import { Link } from "react-router-dom";
+import { IoBag } from "react-icons/io5";
 import { HiBars3BottomRight } from "react-icons/hi2";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
@@ -28,10 +29,6 @@ const linkData = [
     title: "Team",
     path: "trips",
   },
-  // {
-  //   title: "About & FAQ",
-  //   path: "about",
-  // },
 ];
 
 const Navbar = () => {
@@ -201,20 +198,27 @@ const Navbar = () => {
                 </span>
               )}
             </ProfileDropdownStyles>
-            <div className="items-center justify-start hidden lg:flex gap-4">
+            <div className="items-center justify-start hidden lg:flex gap-3">
               {linkData?.map((list, index) => {
                 return (
                   <Link
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base hover:text-grey family4 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                    className={`text-base md:text-lg hover:text-grey family2 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />
                   </Link>
                 );
               })}
+              <Link
+                to={"/restaurant/cart"}
+                className="w-12 rounded-full cursor-pointer
+               hover:bg-[#18181885] text-[#fff] h-12 flex items-center justify-center text-xl"
+              >
+                <IoBag />
+              </Link>
             </div>
           </div>
         </div>
@@ -290,7 +294,7 @@ const Navbar = () => {
                     <Link
                       to={`/${x.path}`}
                       key={index}
-                      className="text-dark font-booking_font4  hover:bg-[rgba(0,0,0,.1)] py-[20px] border-b text-sm px-8"
+                      className="text-dark family2  hover:bg-[rgba(0,0,0,.1)] py-[20px] border-b text-sm px-8"
                     >
                       {x.title}
                     </Link>

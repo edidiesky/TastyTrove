@@ -52,7 +52,7 @@ export default function Card({ x, type }) {
         </div>
       </td>
       {/* <td className="text-lg">{x?.price}</td> */}
-      <td>{x?.price}</td>
+      <td>${x?.price}</td>
       <td>
         <div className="btnWrapper">
           <button
@@ -60,7 +60,7 @@ export default function Card({ x, type }) {
             disabled={x?.quantity === x?.countInStock}
             onClick={() => dispatch(increaseBagQty(x))}
           >
-            <BiPlus />
+            <BiPlus fontSize={'14px'} />
           </button>
           <span className="border-l border-r">{x?.quantity}</span>
           <button
@@ -68,7 +68,7 @@ export default function Card({ x, type }) {
             disabled={x?.quantity === 1}
             onClick={() => dispatch(decreaseBagQty(x))}
           >
-            <BiMinus />
+            <BiMinus fontSize={'14px'} />
           </button>
         </div>
       </td>

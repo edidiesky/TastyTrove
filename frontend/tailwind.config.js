@@ -28,10 +28,10 @@ module.exports = {
         custom_2: "1304px",
       },
       fontFamily: {
-        booking_font: ["DM Sans", "sans-serif"],
-        booking_font_bold: ["DM Sans", "sans-serif"],
-        booking_font_normal: ["DM Sans", "sans-serif"],
-        booking_font4: ["DM Sans", "sans-serif"],
+        booking_font: ["Lora", "sans-serif"],
+        booking_font_bold: ["Lora", "sans-serif"],
+        booking_font_normal: ["Lora", "sans-serif"],
+        booking_font4: ["Lora", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
