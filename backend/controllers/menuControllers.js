@@ -5,6 +5,9 @@ const GetAllMenu = asyncHandler(async (req, res) => {
     orderBy: {
       createdAt: "desc",
     },
+    include: {
+      user: true,
+    },
   });
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
@@ -38,6 +41,9 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
   const Menus = await prisma.menu.findMany({
     skip: skip,
     take: limit,
+    include: {
+      user: true,
+    },
   });
 
   const noOfPages = Math.ceil(totalMenu / limit);
@@ -63,6 +69,9 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
   const Menu = await prisma.menu.findUnique({
     where: {
       id: id,
+    },
+    include: {
+      user: true,
     },
   });
 

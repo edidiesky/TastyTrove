@@ -14,12 +14,13 @@ export default function HomeIndex() {
     <div>
       <Hero />
       <About />
+      <SingleTakout />
+      <TakeoutList />
       <Experience />
       <Critics />
       <News />
       <TakeoutMenu />
-      <TakeoutList />
-      <SingleTakout />
+
       <Footer />
     </div>
   );
