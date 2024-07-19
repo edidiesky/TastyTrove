@@ -1,15 +1,30 @@
 import React from "react";
 import HomeIndex from "../components/single";
+import { useParams, useSearchParams } from "react-router-dom";
 import Meta from "@/components/common/Meta";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Banner from "@/components/common/Banner";
 import Navbar from "@/components/common/Navbar";
+import Loader from "@/components/loader";
+import { getSingleMenu } from "@/features/menu/menuReducer";
 const Single = () => {
-  const { room } = useSelector((store) => store.room);
+  const { menu, getallMenuisLoading } = useSelector((store) => store.menu);
+  const { food } = useParams();
+  const dispatch = useDispatch();
+
+  // decodeURIComponent
+  // console.log(decodeURIComponent(food));
+
+  useEffect(() => {
+    if (food) {
+      dispatch(getSingleMenu(decodeURIComponent(food)));
+    }
+  }, [food]);
   return (
     <div>
-      <Meta title={`Home Detail for ${room?.title ? room?.title : ""} `} />
+      {/* <Meta title={`Home Detail for ${menu?.title ? menu?.title : ""} `} /> */}
       <Navbar />
+      {!getallMenuisLoading && <Loader />}
       <Banner
         type={"type"}
         subtext={"RESTAURANT TAKEOUT"}
