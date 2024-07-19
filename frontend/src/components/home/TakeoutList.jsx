@@ -30,7 +30,7 @@ export default function Plans() {
                   return (
                     <div key={index} className=" w-full items-center flex">
                       <Link
-                        to={`/restaurant/takeout/${x?.title}`}
+                        to={`/restaurant/takeout/${x?.id}?category=${x?.category}`}
                         className="w-full"
                         key={index}
                       >
@@ -71,7 +71,7 @@ export default function Plans() {
                   return (
                     <div key={index} className=" w-full items-center flex">
                       <Link
-                        to={`/restaurant/takeout/${x?.title}`}
+                        to={`/restaurant/takeout/${x?.id}?category=${x?.category}`}
                         className="w-full"
                         key={index}
                       >
@@ -112,7 +112,7 @@ export default function Plans() {
                   return (
                     <div key={index} className=" w-full items-center flex">
                       <Link
-                        to={`/restaurant/takeout/${x?.title}`}
+                        to={`/restaurant/takeout/${x?.id}?category=${x?.category}`}
                         className="w-full"
                         key={index}
                       >

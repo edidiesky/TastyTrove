@@ -1,6 +1,7 @@
 import React from "react";
 import { RiFacebookFill } from "react-icons/ri";
 import { IoLogoTwitter } from "react-icons/io";
+import {  useSearchParams } from "react-router-dom";
 import { AiOutlineMail } from "react-icons/ai";
 import Top from "./Top";
 import Bottom from "./Bottom";
@@ -8,22 +9,24 @@ import styled from "styled-components";
 import Related from "./Likes";
 
 export default function Details() {
+    let [searchParams, setSearchParams] = useSearchParams();
+    const category = searchParams.get("category");
   return (
     <DetailsContent>
       <div className="w-85 flex auto flex-col gap-4" style={{ gap: "3rem" }}>
-        <div className="w-100 detop flex items-center justify-between gap-3">
-          <h5 className="text-xl family2 text-dark text-light">
-            Categories: HORS D'OEUVRES
+        <div className="w-100 detop flex items-center gap-4 justify-between">
+          <h5 className="text-lg family4 text-dark text-light">
+            Categories: {category}
           </h5>
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-3 text-lg text-light family2">
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-3 text-sm md:text-base text-light family4">
               <RiFacebookFill fontSize={"20px"} color="var(--blue-1)" /> Share
               this
             </div>
-            <div className="flex items-center gap-3 text-lg text-light family2">
+            <div className="flex items-center gap-3 text-sm md:text-base text-light family4">
               <IoLogoTwitter /> Tweet this
             </div>
-            <div className="flex items-center gap-3 text-lg text-light family2">
+            <div className="flex items-center gap-3 text-sm md:text-base text-light family4">
               <AiOutlineMail fontSize={"22px"} /> Email this
             </div>
           </div>
@@ -31,7 +34,7 @@ export default function Details() {
         <div className="flex flex-col gap-3" style={{ gap: "8rem" }}>
           <Top />
           <Bottom />
-          <Related />
+          {/* <Related /> */}
         </div>
       </div>
     </DetailsContent>
@@ -109,16 +112,15 @@ const DetailsContent = styled.div`
     }
   }
   .topWrapper {
+
     @media (max-width: 780px) {
       flex-direction: column;
     }
     .topleft {
-      min-height: 30rem;
-      flex: 1;
       position: relative;
-      @media (max-width: 980px) {
+      @media (max-width: 780px) {
         width: 100%;
-        height: 48rem;
+        height: 28rem;
       }
       img {
         height: 100%;
@@ -128,7 +130,6 @@ const DetailsContent = styled.div`
       }
     }
     .topright {
-      flex: 1;
       padding: 10rem 0;
       background-color: #000;
       @media (max-width: 780px) {
@@ -137,8 +138,8 @@ const DetailsContent = styled.div`
       }
       .HeroRightC {
         width: 60%;
-        @media (max-width: 780px) {
-          width: 90%;
+        @media (max-width: 980px) {
+          width: 80%;
           padding: 5rem 0;
         }
       }

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 export default function SingleTakout() {
   const { menus } = useSelector((store) => store.menu);
   return (
-    <div className="w-full min-h-[100vh] flex items-center justify-center py-40 relative">
+    <div className="w-full flex items-center justify-center py-40 relative">
       <img
         loading="lazy"
         src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu372x.jpg"
@@ -22,7 +22,7 @@ export default function SingleTakout() {
           </h4>
           <div className="w-full text-start">
             <Link
-              to={`restaurant/takeout/${menus[0]?.title}`}
+              to={`restaurant/takeout/${menus[0]?.id}?category=${menus[0]?.category}`}
               className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2"
             >
               View This Menu

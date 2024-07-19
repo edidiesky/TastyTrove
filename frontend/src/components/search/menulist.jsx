@@ -22,7 +22,7 @@ const Menulist = () => {
             return (
               <Link
                 to={`/restaurant/takeout/${data?.title}`}
-                className="flex w-full flex-col gap-8"
+                className="flex w-full group flex-col gap-8"
               >
                 <div className="w-full h-52">
                   <img
@@ -33,7 +33,7 @@ const Menulist = () => {
                 </div>
                 <div className="flex w-full flex-col gap-4">
                   <div className="flex items-center justify-between w-full">
-                    <h4 className="text-4xl family3">{data?.title}</h4>
+                    <h4 className="text-4xl group-hover:text-[var(--primary)] family3">{data?.title}</h4>
                     <h4 className="text-xl font-normal family4">
                       ${data?.price}
                     </h4>
@@ -78,7 +78,7 @@ const Menulist = () => {
               return (
                 <Link
                   to={`/restaurant/takeout/${data?.title}`}
-                  className="flex w-full flex-col gap-8"
+                  className="flex w-full group flex-col gap-8"
                 >
                   <div className="w-full h-52">
                     <img
@@ -89,7 +89,7 @@ const Menulist = () => {
                   </div>
                   <div className="flex w-full flex-col gap-4">
                     <div className="flex items-center justify-between w-full">
-                      <h4 className="text-4xl family3">{data?.title}</h4>
+                      <h4 className="text-4xl group-hover:text-[var(--primary)] family3">{data?.title}</h4>
                       <h4 className="text-xl font-normal family4">
                         ${data?.price}
                       </h4>
@@ -134,7 +134,7 @@ const Menulist = () => {
               return (
                 <Link
                   to={`/restaurant/takeout/${data?.title}`}
-                  className="flex w-full flex-col gap-8"
+                  className="flex w-full group flex-col gap-8"
                 >
                   <div className="w-full h-52">
                     <img
@@ -145,7 +145,7 @@ const Menulist = () => {
                   </div>
                   <div className="flex w-full flex-col gap-4">
                     <div className="flex items-center justify-between w-full">
-                      <h4 className="text-4xl family3">{data?.title}</h4>
+                      <h4 className="text-4xl group-hover:text-[var(--primary)] family3">{data?.title}</h4>
                       <h4 className="text-xl font-normal family4">
                         ${data?.price}
                       </h4>
@@ -190,7 +190,7 @@ const Menulist = () => {
               return (
                 <Link
                   to={`/restaurant/takeout/${data?.title}`}
-                  className="flex w-full flex-col gap-8"
+                  className="flex w-full group flex-col gap-8"
                 >
                   <div className="w-full h-52">
                     <img
@@ -201,7 +201,7 @@ const Menulist = () => {
                   </div>
                   <div className="flex w-full flex-col gap-4">
                     <div className="flex items-center justify-between w-full">
-                      <h4 className="text-4xl family3">{data?.title}</h4>
+                      <h4 className="text-4xl group-hover:text-[var(--primary)] family3">{data?.title}</h4>
                       <h4 className="text-xl font-normal family4">
                         ${data?.price}
                       </h4>
