@@ -70,16 +70,14 @@ model Menu {
 
 model Cart {
   id         String            @id @default(auto()) @map("_id") @db.ObjectId
-  startDate  DateTime
-  endDate    DateTime
   totalPrice Int?
-  guests     Int?
+  totalCount   Int?
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
-  roomid     String            @db.ObjectId
+  menuid     String            @db.ObjectId
   userid     String            @db.ObjectId
   payment    Payment[]
-  menu       Menu?             @relation(fields: [roomid], references: [id], onDelete: Cascade)
+  menu       Menu?             @relation(fields: [menuid], references: [id], onDelete: Cascade)
   user       User?             @relation(fields: [userid], references: [id], onDelete: Cascade)
 }
 

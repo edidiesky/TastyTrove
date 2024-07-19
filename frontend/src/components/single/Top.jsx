@@ -57,10 +57,14 @@ export default function Top() {
             <p className="text-2xl text-white family4">${menu?.price}</p>
             <div className="w-full gap-4 grid grid-cols-2 text-start">
               <button
-                className="btn text-dark btn-2 family1 uppercase text-white text-base py-1"
+                className={`${
+                  menu?.availabilityCount === 0
+                    ? "bg-[var(--primary-1)] opacity-[.1] cursor-not-allowed"
+                    : ""
+                } btn text-dark btn-2 family1 uppercase text-white text-base py-1`}
                 style={{ padding: "1rem" }}
               >
-                ADD TO CART
+                {menu?.availabilityCount === 0 ? "UNAVAILABLE" : "ADD TO CART"}
               </button>
 
               <span className="grid h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
