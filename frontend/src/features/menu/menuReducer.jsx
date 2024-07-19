@@ -2,12 +2,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getAllRooms = createAsyncThunk(
-  "getAllRooms",
+export const getAllMenu = createAsyncThunk(
+  "getAllMenu",
   async (name, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/room`
+        `${import.meta.env.VITE_API_BASE_URLS}/menu`
       );
       return data;
     } catch (error) {
@@ -20,22 +20,22 @@ export const getAllRooms = createAsyncThunk(
   }
 );
 
-export const getAllRoomsForAdmin = createAsyncThunk(
-  "getAllRoomsForAdmin",
+export const getAllMenuForAdmin = createAsyncThunk(
+  "getAllMenuForAdmin",
   async (name, thunkAPI) => {
     try {
-      const { page, search, limit } = thunkAPI.getState().room;
-      let roomUrl = `${import.meta.env.VITE_API_BASE_URLS}/room/admin`;
+      const { page, search, limit } = thunkAPI.getState().menu;
+      let MenuUrl = `${import.meta.env.VITE_API_BASE_URLS}/menu/admin`;
       if (page) {
-        roomUrl = roomUrl + `?page=${page}`;
-        const { data } = await axios.get(roomUrl);
+        MenuUrl = MenuUrl + `?page=${page}`;
+        const { data } = await axios.get(MenuUrl);
         return data;
       } else if (search) {
-        roomUrl = roomUrl + `?search=${search}`;
-        const { data } = await axios.get(roomUrl);
+        MenuUrl = MenuUrl + `?search=${search}`;
+        const { data } = await axios.get(MenuUrl);
         return data;
       } else {
-        const { data } = await axios.get(roomUrl);
+        const { data } = await axios.get(MenuUrl);
         return data;
       }
     } catch (error) {
@@ -47,12 +47,12 @@ export const getAllRoomsForAdmin = createAsyncThunk(
     }
   }
 );
-export const getSingleRooms = createAsyncThunk(
-  "getSingleRooms",
-  async (roomid, thunkAPI) => {
+export const getSingleMenu = createAsyncThunk(
+  "getSingleMenu",
+  async (Menuid, thunkAPI) => {
     try {
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/room/${roomid}`
+        `${import.meta.env.VITE_API_BASE_URLS}/menu/${Menuid}`
       );
       return data;
     } catch (error) {
@@ -64,9 +64,9 @@ export const getSingleRooms = createAsyncThunk(
     }
   }
 );
-export const DeleteRoom = createAsyncThunk(
-  "DeleteRoom",
-  async (roomdataid, thunkAPI) => {
+export const DeleteMenu = createAsyncThunk(
+  "DeleteMenu",
+  async (Menudataid, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
       const config = {
@@ -75,11 +75,11 @@ export const DeleteRoom = createAsyncThunk(
         },
       };
       const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_BASE_URLS}/room/${roomdataid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/menu/${Menudataid}`,
         config
       );
 
-      return roomdataid;
+      return Menudataid;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response && error.response.data.message
@@ -89,9 +89,9 @@ export const DeleteRoom = createAsyncThunk(
     }
   }
 );
-export const CreateRoom = createAsyncThunk(
-  "CreateRoom",
-  async (roomdata, thunkAPI) => {
+export const CreateMenu = createAsyncThunk(
+  "CreateMenu",
+  async (menudata, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
       const config = {
@@ -100,8 +100,8 @@ export const CreateRoom = createAsyncThunk(
         },
       };
       const { data } = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URLS}/room`,
-        roomdata,
+        `${import.meta.env.VITE_API_BASE_URLS}/menu`,
+        menudata,
         config
       );
 
@@ -115,9 +115,9 @@ export const CreateRoom = createAsyncThunk(
     }
   }
 );
-export const UpdateRoom = createAsyncThunk(
-  "UpdateRoom",
-  async (roomdata, thunkAPI) => {
+export const UpdateMenu = createAsyncThunk(
+  "UpdateMenu",
+  async (menudata, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
       const config = {
@@ -126,8 +126,8 @@ export const UpdateRoom = createAsyncThunk(
         },
       };
       const { data } = await axios.put(
-        `${import.meta.env.VITE_API_BASE_URLS}/room/${state?.room?.room?.id}`,
-        roomdata,
+        `${import.meta.env.VITE_API_BASE_URLS}/menu/${state?.menu?.menu?.id}`,
+        menudata,
         config
       );
 

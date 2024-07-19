@@ -6,7 +6,7 @@ import { BiSearch } from "react-icons/bi";
 import { Table } from "@/components/common/styles";
 import TableCard from "@/components/common/TableCard";
 import Loader from "@/components/home/loader";
-import { handlePage } from "@/features/room/roomSlice";
+import { handlePage } from "@/features/menu/menuSlice";
 
 const RoomsList = () => {
   const dispatch = useDispatch();

@@ -9,7 +9,7 @@ export default function Critics() {
         data-aos="fade"
         data-aos-duration="1200"
         // style={{fontStyle:"italic"}}
-        className="text-6xl w-full text-center family2 text-dark"
+        className="text-5xl italic w-full text-center family4 text-dark"
       >
         What critics are saying about us
       </h2>

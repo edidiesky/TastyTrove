@@ -7,10 +7,10 @@ import {
   CreateRoom,
   getSingleRooms,
   UpdateRoom,
-} from "@/features/room/roomReducer";
+} from "@/features/menu/roomReducer";
 import Loader from "@/components/home/loader";
 import { useNavigate, useParams } from "react-router-dom";
-import { handleClearRoomAlert } from "@/features/room/roomSlice";
+import { handleClearRoomAlert } from "@/features/menu/menuSlice";
 const DashboardIndex = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");

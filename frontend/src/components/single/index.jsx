@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Footer from "../common/Footer";
 import Loader from "../home/loader";
 import Details from "./Details";
-import { getAllRooms, getSingleRooms } from "@/features/room/roomReducer";
+import { getAllRooms, getSingleRooms } from "@/features/menu/roomReducer";
 export default function BookingItem() {
   const { id } = useParams();
   const dispatch = useDispatch();

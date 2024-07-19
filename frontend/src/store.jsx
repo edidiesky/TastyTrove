@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import roomSlice from "./features/room/roomSlice";
+import menuSlice from "./features/menu/menuSlice";
 import modalSlice from "./features/modals/modalSlice";
 import authSlice from "./features/auth/authSlice";
 import reservationSlice from "./features/reservation/reservationSlice";
@@ -8,7 +8,7 @@ import statSlice from "./features/stat/statSlice";
 import cartSlice from "./features/cart/cartSlice";
 export const store = configureStore({
   reducer: {
-    room: roomSlice,
+    menu: menuSlice,
     modal: modalSlice,
     auth: authSlice,
     reservation: reservationSlice,

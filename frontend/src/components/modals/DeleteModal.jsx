@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../home/loader";
 import { DeleteSingleUser } from "@/features/auth/authReducer";
 import { handleClearUserAlert } from "@/features/auth/authSlice";
-import { handleClearRoomAlert } from "@/features/room/roomSlice";
-import { DeleteRoom } from "@/features/room/roomReducer";
+import { handleClearRoomAlert } from "@/features/menu/menuSlice";
+import { DeleteRoom } from "@/features/menu/roomReducer";
 export default function DeleteModal({ type, modal, setModal, room, id }) {
   const { deleteRoomisLoading, deleteRoomisSuccess } = useSelector(
     (store) => store.room

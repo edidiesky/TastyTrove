@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import ReservationRoomsModal from "@/components/modals/ReservationRoomsModal";
 import RoomsList from "./rooms";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRoomsForAdmin } from "@/features/room/roomReducer";
+import { getAllRoomsForAdmin } from "@/features/menu/roomReducer";
 const DashboardIndex = () => {
   const [roommodal, setRoomModal] = useState(false);
   const { deleteRoomisSuccess,page } = useSelector((store) => store.room);

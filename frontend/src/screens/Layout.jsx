@@ -20,9 +20,8 @@ const Layout = () => {
       </AnimatePresence>
 
       <div className="w-full">
-      <Navbar/>
         <Outlet />
-        <Copyright/>
+      
       </div>
     </>
   );

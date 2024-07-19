@@ -46,8 +46,14 @@ const ExperienceContent = styled.div`
       flex: 0.7;
       padding: 15rem 0;
       background-color: #000;
+      @media (max-width: 780px) {
+        padding: 5rem 0;
+      }
       .experienceRightC {
         width: 50%;
+        @media (max-width: 780px) {
+          width: 80%;
+        }
       }
     }
     @media (max-width: 980px) {
