@@ -28,7 +28,7 @@ export default function Top() {
         </div>
         <div className="topright">
           <div className="flex HeroRightC flex-col gap-8 auto">
-            <div className="family3 text-6xl text-white">{menu?.title}</div>
+            <div className="family3 text-5xl md:text-6xl text-white">{menu?.title}</div>
             <h4 className="text-xl leading-[1.4] family2 text-white">
               {/* Tristique tempus condimentum diam donec. Condimentum ullamcorper
               sit elementum hendrerit mi nulla in consequat, ut. Metus, nullam
@@ -37,7 +37,7 @@ export default function Top() {
               {menu?.description}
             </h4>
             <div className="flex flex-col gap-3">
-              <p className="text-xl text-grey family4">
+              <p className="text-base md:text-xl text-grey family4">
                 Number of {menu?.category}
               </p>
               <div className="flex items-center gap-1">
@@ -55,7 +55,7 @@ export default function Top() {
               </div>
             </div>
             <p className="text-2xl text-white family4">${menu?.price}</p>
-            <div className="w-full gap-4 grid grid-cols-2 text-start">
+            <div className="w-full gap-4 grid md:grid-cols-2 text-start">
               <button
                 className={`${
                   menu?.availabilityCount === 0
@@ -67,7 +67,7 @@ export default function Top() {
                 {menu?.availabilityCount === 0 ? "UNAVAILABLE" : "ADD TO CART"}
               </button>
 
-              <span className="grid h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
+              <span className="grid h-[50px] md:h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
                 <button
                   onClick={() => setCount(count - 1)}
                   disabled={count <= 1}

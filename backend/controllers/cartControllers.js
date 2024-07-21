@@ -44,58 +44,46 @@ const GetSingleCart = asyncHandler(async (req, res) => {
 });
 
 const CreateUserCart = asyncHandler(async (req, res) => {
-  let { startDate, endDate, totalPrice, guests } = req.body;
   const id = req.params.id;
-  startDate = formatISO(parse(startDate, "MMMM do yyyy", new Date()));
-  endDate = formatISO(parse(endDate, "MMMM do yyyy", new Date()));
-  // check for available menu
-  const availableRooms = await prisma.cart.findMany({
-    where: {
-      roomid: id,
-      OR: [
-        {
-          AND: [
-            { startDate: { lte: startDate } },
-            { endDate: { gte: startDate } },
-          ],
-        },
-        {
-          AND: [{ startDate: { lte: endDate } }, { endDate: { gte: endDate } }],
-        },
-      ],
-    },
-  });
 
-  if (availableRooms.length > 0) {
-    res.status(404);
-    throw new Error("Room has alrady been booked");
-  }
+  const session = await prisma.$transaction(async (prisma) => {
+    const { totalCount, totalPrice } = req.body;
+    const menu = await prisma.menu.findUnique({
+      where: { id: id },
+    });
 
-  // Book the room
-  const CartData = {
-    startDate,
-    endDate,
-    totalPrice,
-    userid: req.user.userId,
-    roomid: id,
-    status: "PENDING",
-    guests: guests,
-  };
+    if (!menu) {
+      res.status(404);
+      throw new Error("The menu does not exist");
+    }
 
-  const newCart = await prisma.cart.create({
-    data: CartData,
-  });
-
-  await prisma.menu.update({
-    where: { id },
-    data: {
-      cart: {
-        connect: { id: newCart?.id },
+    if (menu.availabilityCount < totalCount) {
+      res.status(400);
+      throw new Error("Insufficient availability");
+    }
+    const updatedMenu = await prisma.menu.update({
+      where: { id },
+      data: {
+        availabilityCount: menu.availabilityCount - totalCount,
+        servedCount: totalCount,
       },
-    },
+    });
+
+    const newCart = await prisma.cart.create({
+      data: {
+        totalPrice: totalPrice,
+        userid: req.user.userId,
+        menuid: id,
+        status: "PENDING",
+        totalCount: totalCount,
+      },
+    });
+    // console.log(menu);
+
+    return { newCart, updatedMenu };
   });
 
-  return res.json(newCart);
+  return res.json(session);
 });
 const DeleteCart = asyncHandler(async (req, res) => {
   const cart = await prisma.cart.findUnique({
@@ -117,12 +105,10 @@ const DeleteCart = asyncHandler(async (req, res) => {
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  res
-    .status(200)
-    .json({ msg: "The cart has been successfully deleted" });
+  res.status(200).json({ msg: "The cart has been successfully deleted" });
 });
 
-const UpdateCarts = asyncHandler(async (req, res) => {
+const UpdateCart = asyncHandler(async (req, res) => {
   const cart = await prisma.cart.findUnique({
     where: {
       id: req.params.id,
@@ -154,5 +140,5 @@ export {
   CreateUserCart,
   GetSingleCart,
   DeleteCart,
-  UpdateCarts,
+  UpdateCart,
 };

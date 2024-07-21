@@ -38,12 +38,14 @@ import userAuth from "./routes/userRoute.js";
 import menuRoute from "./routes/menuRoutes.js";
 import reservationRoute from "./routes/reservationsRoute.js";
 import uploadRoute from "./routes/uploadRoute.js";
+import cartRoute from "./routes/cartRoute.js";
 import orderRoute from "./routes/orderRoutes.js";
 import StatRoute from "./routes/statRoute.js";
 
 app.use("/api/v1/auth", Auth);
 app.use("/api/v1/user", userAuth);
 app.use("/api/v1/menu", menuRoute);
+app.use("/api/v1/cart", cartRoute);
 app.use("/api/v1/reservation", reservationRoute);
 app.use("/api/v1/upload", uploadRoute);
 app.use("/api/v1/payment", orderRoute);
