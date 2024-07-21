@@ -1,19 +1,25 @@
 import React, { useEffect } from "react";
 import Footer from "../common/Footer";
-import { useDispatch } from "react-redux";
-import { GetUserFavouriteRooms } from "@/features/favourites/favouritesReducer";
+import { useDispatch, useSelector } from "react-redux";
 import Cartindex from "./Cart";
+import { GetUserCart } from "@/features/cart/cartReducer";
+import Loader from "../loader";
 const HomeIndex = () => {
   const dispatch = useDispatch();
-  // useEffect(()=> {
-  //   dispatch(GetUserFavouriteRooms());
-  // },[])
-  return (
-    <div className=" w-full flex flex-col">
-      <Cartindex />
-      <Footer />
-    </div>
-  );
+  const {getsingleCartisLoading} = useSelector(store=> store.cart)
+  useEffect(()=> {
+    dispatch(GetUserCart());
+  },[])
+
+  if (getsingleCartisLoading) {
+    return <Loader/>
+  }
+    return (
+      <div className=" w-full flex flex-col">
+        <Cartindex />
+        <Footer />
+      </div>
+    );
 };
 
 export default HomeIndex;

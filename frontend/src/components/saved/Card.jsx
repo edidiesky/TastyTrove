@@ -1,18 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiPlus, BiMinus } from "react-icons/bi";
 import { TiTimes } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 // import { Delete } from "../modals";
-import {
-  removeBagItem,
-  increaseBagQty,
-  decreaseBagQty,
-  onCartAlert,
-} from "../../Features/cart/cartSlice";
+// import {
+//   removeBagItem,
+// increaseBagQty,
+// decreaseBagQty,
+// onCartAlert,
+// } from "../../Features/cart/cartSlice";
 import { RxCross1 } from "react-icons/rx";
 
 export default function Card({ x, type }) {
   const dispatch = useDispatch();
+
+  const [cartcount, setCartCount] = useState(0);
+  useEffect(() => {
+    setCartCount(x?.totalCount);
+  }, [x, setCartCount]);
 
   if (type === "payment") {
     return (
@@ -46,35 +51,40 @@ export default function Card({ x, type }) {
       <td>
         <div className="flex items-center gap-4">
           <div className="imageWrapper">
-            <img src={x?.image} alt="images" />
+            <img src={x?.menu?.image} alt="images" />
           </div>
-          {x?.title}
+          {x?.menu?.title}
         </div>
       </td>
       {/* <td className="text-lg">{x?.price}</td> */}
-      <td>${x?.price}</td>
+      <td>${x?.menu?.price}</td>
       <td>
         <div className="btnWrapper">
           <button
             className="cartBtn border-r"
-            disabled={x?.quantity === x?.countInStock}
-            onClick={() => dispatch(increaseBagQty(x))}
+            disabled={cartcount >= x?.menu?.availabilityCount}
+            onClick={() => setCartCount(cartcount + 1)}
           >
-            <BiPlus fontSize={'14px'} />
+            <BiPlus fontSize={"14px"} />
           </button>
-          <span className="border-l border-r">{x?.quantity}</span>
+          <span className="border-l family4 font-bold border-r">
+            {cartcount}
+          </span>
           <button
             className="cartBtn border-l"
-            disabled={x?.quantity === 1}
-            onClick={() => dispatch(decreaseBagQty(x))}
+            disabled={cartcount === 1}
+            onClick={() => setCartCount(cartcount - 1)}
           >
-            <BiMinus fontSize={'14px'} />
+            <BiMinus fontSize={"14px"} />
           </button>
         </div>
       </td>
-      <td className="text-xl">{x?.price * x?.quantity}</td>
+      <td className="text-xl">${x?.menu?.price * cartcount}</td>
       <td className="svg">
-        <div className="w-12 h-12 rounded-full hover:bg-[#eee] flex items-center justify-center cursor-pointer" onClick={() => dispatch(onCartAlert(x))}>
+        <div
+          className="w-12 h-12 rounded-full hover:bg-[#eee] flex items-center justify-center cursor-pointer"
+          // onClick={() => dispatch(onCartAlert(x))}
+        >
           <RxCross1 />
         </div>
       </td>

@@ -7,7 +7,7 @@ const GetUserCart = asyncHandler(async (req, res) => {
       userid: req.user.userId,
     },
     include: {
-      user: true,
+      // user: true,
       menu: true,
     },
     orderBy: {

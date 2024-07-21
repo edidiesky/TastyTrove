@@ -81,13 +81,29 @@ const cartSlice = createSlice({
       state.createCartisLoading = false;
       state.createCartisSuccess = true;
       state.cartDetails = action.payload;
-      toast.success("Room has been succesfully booked!!");
+      toast.success("Cart has been succesfully placed!!");
     });
     builder.addCase(CreateCart.rejected, (state, action) => {
       state.createCartisSuccess = false;
       state.createCartisLoading = false;
       toast.error(action.payload);
     });
+
+    // GetUserCart
+     builder.addCase(GetUserCart.pending, (state, action) => {
+       state.getsingleCartisLoading = true;
+     });
+     builder.addCase(GetUserCart.fulfilled, (state, action) => {
+       state.getsingleCartisLoading = false;
+       state.getsingleCartisSuccess = true;
+       state.cart = action.payload;
+      //  toast.success("Room has been succesfully booked!!");
+     });
+     builder.addCase(GetUserCart.rejected, (state, action) => {
+       state.getsingleCartisSuccess = false;
+       state.getsingleCartisLoading = false;
+      //  toast.error(action.payload);
+     });
   },
 });
 

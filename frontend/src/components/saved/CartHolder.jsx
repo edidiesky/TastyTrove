@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
-import { calculateBagItem } from "../../Features/cart/cartSlice";
+// import { calculateBagItem } from "../../Features/cart/cartSlice";
 import { Link } from "react-router-dom";
 export default function CartHolder({ type }) {
   const dispatch = useDispatch();
@@ -15,9 +15,9 @@ export default function CartHolder({ type }) {
     TotalShoppingPrice,
   } = useSelector((store) => store.cart);
 
-  useEffect(() => {
-    dispatch(calculateBagItem());
-  }, [ cart]);
+  // useEffect(() => {
+  //   dispatch(calculateBagItem());
+  // }, [ cart]);
   if (type === "code") {
     return (
       <CartHolderContainer>
@@ -65,13 +65,14 @@ export default function CartHolder({ type }) {
             </h4>
           </div>
         </div>
-        <div className="uppercase btnWrapper">
-          <Link
-            to={"/billing"}
-            className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base uppercase"
-          >
+        <div className="uppercase flex flex-col gap-4">
+          <button className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base uppercase">
             Proceed to Checkout
-          </Link>
+          </button>
+
+          <button className="family1 py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base uppercase">
+            Update Cart
+          </button>
         </div>
       </div>
     </CartHolderContainer>
@@ -91,7 +92,6 @@ const CartHolderContainer = styled.div`
   @media (max-width: 980px) {
     width: 100%;
   }
-
 
   .btnWrapper {
     width: 100%;

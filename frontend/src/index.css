@@ -225,6 +225,11 @@ html.lenis body {
   border: 1px solid #fff;
   color: #fff;
 }
+
+.btn.btn-3 {
+ background-color: var(--primary);
+  color: #000;
+}
 .btn.btn-2:hover {
   background-color: #fff !important;
   color: #000;

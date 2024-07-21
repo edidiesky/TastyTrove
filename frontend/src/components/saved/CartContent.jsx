@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import Message from "../common/Message";
+import { Link } from "react-router-dom";
 export default function CartContent() {
   // get the cart content
   const { cart } = useSelector((store) => store.cart);
@@ -10,7 +11,16 @@ export default function CartContent() {
   return (
     <CartContentContainer>
       {cart?.length === 0 ? (
-        <Message alertText="No items in your cart" alertType={"danger"} />
+        // ""
+        // <Message alertText="No items in your cart" alertType={"danger"} />
+        <div className="w-full p-8 flex border rounded-xl items-center justify-between gap-8">
+          <h2 className="text-4xl text-dark family4 italic">
+            No Items in your cart
+          </h2>
+          <Link to={"/restaurant/menu"} className="btn btn-1 text-base">
+            Visit Menu
+          </Link>
+        </div>
       ) : (
         <>
           <table>
@@ -59,7 +69,7 @@ const CartContentContainer = styled.div`
         min-width: 900px;
       } */
     @media (max-width: 980px) {
-      max-width: 600px;
+      max-width: 900px;
       min-width: 600px;
     }
 
@@ -102,7 +112,6 @@ const CartContentContainer = styled.div`
         font-weight: 600;
         color: #333;
         flex: 1;
-        font-family: "Bebas Neue", sans-serif;
         height: 100%;
         display: grid;
         place-items: center;
@@ -146,7 +155,7 @@ const CartContentContainer = styled.div`
           padding: 1.6rem 1rem !important;
           font-size: 20px !important;
           color: #000;
-          font-family: "Forum";
+          font-family: "Lora";
 
           span {
             &.danger {
