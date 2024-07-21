@@ -30,7 +30,7 @@ export default function Card({ x, type }) {
           </div>
           <div
             style={{ fontWeight: "normal" }}
-            className="title w-100 flex fs-20 family3 item-center gap-1"
+            className="title w-100 flex family3 item-center gap-1"
           >
             {x?.title} <RxCross1 fontSize={"12px"} /> {x?.quantity || 1}
           </div>

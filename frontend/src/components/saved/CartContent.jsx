@@ -92,7 +92,7 @@ const CartContentContainer = styled.div`
           font-size: 0.8rem;
           text-align: start;
           font-size: 30px !important;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
           padding: 1.7rem 1rem;
           font-family: "Bebas Neue";
           font-weight: normal !important;
@@ -100,7 +100,7 @@ const CartContentContainer = styled.div`
       }
     }
     .btnWrapper {
-      width: 150px;
+      width: 120px;
       display: flex;
       align-items: center;
       height: 3rem;
@@ -108,7 +108,7 @@ const CartContentContainer = styled.div`
       margin: 0 auto;
       border: 1px solid rgba(0, 0, 0, 0.2);
       span {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
         font-weight: 600;
         color: #333;
         flex: 1;
@@ -141,7 +141,7 @@ const CartContentContainer = styled.div`
     }
     .imageWrapper {
       img {
-        width: 6rem;
+        width: 90px;
         position: relative;
         object-fit: cover;
       }
@@ -153,7 +153,7 @@ const CartContentContainer = styled.div`
         td {
           text-align: start;
           padding: 1.6rem 1rem !important;
-          font-size: 20px !important;
+          font-size: 18px !important;
           color: #000;
           font-family: "Lora";
 
