@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import { onLoginModal } from "@/features/modals/modalSlice";
 import Loader from "../loader";
 import { CreateCart } from "@/features/cart/cartReducer";
+import { clearCartAlert } from "@/features/cart/cartSlice";
 
 export default function Top() {
   const { menu, getallMenuisLoading } = useSelector((store) => store.menu);
@@ -36,13 +37,17 @@ export default function Top() {
   };
 
   useEffect(() => {
-    if (cartDetails !== null) {
+    dispatch(clearCartAlert());
+  }, []);
+  useEffect(() => {
+    // dispatch(clearCartAlert());
+    if (createCartisSuccess) {
       const interval = setTimeout(() => {
         navigate(`/restaurant/cart`);
       }, 4000);
       return () => clearTimeout(interval);
     }
-  }, [cartDetails, createCartisSuccess]);
+  }, [createCartisSuccess]);
   // availabilityCount
 
   return (
@@ -126,8 +131,10 @@ export default function Top() {
                 >
                   <BiMinus />
                 </button>
-                <span className=" h-full family1 w-full flex items-center justify-center 
-                border-r border-[rgba(255,255,255,.6)] text-lg lg:text-xl text-white cursor-pointer">
+                <span
+                  className=" h-full family1 w-full flex items-center justify-center 
+                border-r border-[rgba(255,255,255,.6)] text-lg lg:text-xl text-white cursor-pointer"
+                >
                   {count}
                 </span>
                 <button

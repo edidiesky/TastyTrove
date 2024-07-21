@@ -47,44 +47,72 @@ const CreateUserCart = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
   const session = await prisma.$transaction(async (prisma) => {
-    const { totalCount, totalPrice } = req.body;
-    const menu = await prisma.menu.findUnique({
-      where: { id: id },
-    });
+    // check if the menu exists in the cart
+    // if it exists update the cart
+    // if it does not exist go unto create a new cart for the user and update the menu data
 
-    if (!menu) {
-      res.status(404);
-      throw new Error("The menu does not exist");
+    // find the menu in the cart to check if it exists
+    const existingCartItem = await prisma.cart.findFirst({
+      where: { menuid: id, userid: req.user.userId },
+    });
+    if (existingCartItem) {
+      const { totalCount, totalPrice } = req.body;
+      const newCart = await prisma.cart.update({
+        where: {
+          id: existingCartItem?.id,
+        },
+        data: {
+          totalPrice: totalPrice,
+          userid: req.user.userId,
+          menuid: id,
+          status: "PENDING",
+          totalCount: totalCount,
+        },
+      });
+      // console.log(menu);
+
+      return { newCart };
+    } else {
+      const { totalCount, totalPrice } = req.body;
+      const menu = await prisma.menu.findUnique({
+        where: { id: id },
+      });
+      // check if the menu exists
+      if (!menu) {
+        res.status(404);
+        throw new Error("The menu does not exist");
+      }
+      // check if the menu avalability count is less than the request body count Stock
+      if (menu.availabilityCount < totalCount) {
+        res.status(400);
+        throw new Error("Insufficient availability");
+      }
+      await prisma.menu.update({
+        where: { id },
+        data: {
+          availabilityCount: menu.availabilityCount - totalCount,
+          servedCount: totalCount,
+        },
+      });
+
+      const newCart = await prisma.cart.create({
+        data: {
+          totalPrice: totalPrice,
+          userid: req.user.userId,
+          menuid: id,
+          status: "PENDING",
+          totalCount: totalCount,
+        },
+      });
+      // console.log(menu);
+
+      return { newCart };
     }
-
-    if (menu.availabilityCount < totalCount) {
-      res.status(400);
-      throw new Error("Insufficient availability");
-    }
-     await prisma.menu.update({
-      where: { id },
-      data: {
-        availabilityCount: menu.availabilityCount - totalCount,
-        servedCount: totalCount,
-      },
-    });
-
-    const newCart = await prisma.cart.create({
-      data: {
-        totalPrice: totalPrice,
-        userid: req.user.userId,
-        menuid: id,
-        status: "PENDING",
-        totalCount: totalCount,
-      },
-    });
-    // console.log(menu);
-
-    return { newCart };
   });
 
   return res.json(session);
 });
+
 const DeleteCart = asyncHandler(async (req, res) => {
   const cart = await prisma.cart.findUnique({
     where: {

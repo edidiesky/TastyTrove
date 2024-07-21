@@ -12,12 +12,13 @@ export default function Cartindex() {
         <div className="w-full">
           <CartContent />
         </div>
-
-        <div className="flex sticky top-0 flex-col w-[400px] items-start gap-2">
-          {cart?.length !== 0 && <CartHolder />}
-
-          {/* <CartHolder type={"code"} /> */}
-        </div>
+        {cart?.length !== 0 && (
+          <div className="flex sticky top-0 flex-col w-[400px] items-start gap-2">
+            {/* {cart?.length !== 0 && <CartHolder />} */}
+            <CartHolder />
+            {/* <CartHolder type={"code"} /> */}
+          </div>
+        )}
       </div>
     </CartContainer>
   );

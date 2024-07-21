@@ -48,7 +48,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     clearCartAlert: (state, action) => {
-      state.cartAlert = false;
+     state.createCartisSuccess = false;
+     state.createCartisLoading = false;
     },
     clearCartMessage: (state, action) => {
       state.showAlert = false;

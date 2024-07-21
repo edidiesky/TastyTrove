@@ -1,15 +1,18 @@
-import { menudata } from "@/data/menu";
+// import { menudata } from "@/data/menu";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Menulist = () => {
   // get houres collections
   // get drinks collections
   // get maincourse collections
-  const maincourse = menudata.filter((data) => data.category === "Main Course");
-  const houres = menudata.filter((data) => data.category === "Hors d’oeuvres");
+  const { menus } = useSelector((store) => store.menu);
+  const maincourse = menus?.filter((data) => data.category === "Main Course");
+  const houres = menus?.filter((data) => data.category === "Hors d’oeuvres");
   // get desserts collections
-  const desserts = menudata.filter((data) => data.category === "desserts");
-  const DRINK = menudata.filter((data) => data.category === "DRINK & COCKTAIL");
+  const desserts = menus?.filter((data) => data.category === "desserts");
+  const DRINK = menus?.filter((data) => data.category === "DRINK & COCKTAIL");
+  // console.log(maincourse)
   // "DRINK & COCKTAIL"
   return (
     <div className="py-24 w-full flex flex-col gap-32">
@@ -21,7 +24,7 @@ const Menulist = () => {
           {maincourse?.map((data) => {
             return (
               <Link
-                to={`/restaurant/takeout/${data?.title}`}
+                to={`/restaurant/takeout/${data?.id}?category=${data?.category}`}
                 className="flex w-full group flex-col gap-8"
               >
                 <div className="w-full h-52">
@@ -77,7 +80,7 @@ const Menulist = () => {
             {houres?.map((data) => {
               return (
                 <Link
-                  to={`/restaurant/takeout/${data?.title}`}
+                  to={`/restaurant/takeout/${data?.id}?category=${data?.category}`}
                   className="flex w-full group flex-col gap-8"
                 >
                   <div className="w-full h-52">
@@ -133,7 +136,7 @@ const Menulist = () => {
             {desserts?.map((data) => {
               return (
                 <Link
-                  to={`/restaurant/takeout/${data?.title}`}
+                  to={`/restaurant/takeout/${data?.id}?category=${data?.category}`}
                   className="flex w-full group flex-col gap-8"
                 >
                   <div className="w-full h-52">
@@ -189,7 +192,7 @@ const Menulist = () => {
             {DRINK?.map((data) => {
               return (
                 <Link
-                  to={`/restaurant/takeout/${data?.title}`}
+                  to={`/restaurant/takeout/${data?.id}?category=${data?.category}`}
                   className="flex w-full group flex-col gap-8"
                 >
                   <div className="w-full h-52">

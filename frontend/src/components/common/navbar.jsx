@@ -60,7 +60,7 @@ const Navbar = () => {
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base tab md:text-lg hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                    className={`text-base tab md:text-base hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />

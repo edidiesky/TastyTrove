@@ -13,12 +13,12 @@ export default function CartContent() {
       {cart?.length === 0 ? (
         // ""
         // <Message alertText="No items in your cart" alertType={"danger"} />
-        <div className="w-full p-8 flex border rounded-xl items-center justify-between gap-8">
-          <h2 className="text-4xl text-dark family4 italic">
-            No Items in your cart
+        <div className="w-full flex  items-center justify-center flex-col gap-2">
+          <h2 className="text-4xl md:text-7xl text-dark family3">
+            Cart is empty
           </h2>
-          <Link to={"/restaurant/menu"} className="btn btn-1 text-base">
-            Visit Menu
+          <Link to={"/restaurant/menu"} className="btn btn-1 text-lg">
+            Browse Our Menu
           </Link>
         </div>
       ) : (
