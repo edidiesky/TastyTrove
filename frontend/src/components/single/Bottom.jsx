@@ -16,7 +16,7 @@ export default function Bottom() {
           <div className="family3 text-4xl uppercase text-light text-dark">
             Additional informations
           </div>
-          <h4 className="family2 md:pl-20 md:pr-8 leading-[1.5] text-xl text-light text-dark">
+          <h4 className="family2 lg:pl-20 md:pr-8 leading-[1.5] text-xl text-light text-dark">
             Quisque velit nisi, pretium ut lacinia in, elementum id enim. Donec
             sollicitudin molestie malesuada. Proin eget tortor risus. Nulla
             porttitor accumsan tincidunt. Curabitur arcu erat, accumsan id

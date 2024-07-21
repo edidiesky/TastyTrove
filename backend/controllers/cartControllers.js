@@ -61,7 +61,7 @@ const CreateUserCart = asyncHandler(async (req, res) => {
       res.status(400);
       throw new Error("Insufficient availability");
     }
-    const updatedMenu = await prisma.menu.update({
+     await prisma.menu.update({
       where: { id },
       data: {
         availabilityCount: menu.availabilityCount - totalCount,
@@ -80,7 +80,7 @@ const CreateUserCart = asyncHandler(async (req, res) => {
     });
     // console.log(menu);
 
-    return { newCart, updatedMenu };
+    return { newCart };
   });
 
   return res.json(session);

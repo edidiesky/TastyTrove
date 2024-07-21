@@ -1,12 +1,48 @@
 // import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import { onLoginModal } from "@/features/modals/modalSlice";
+import Loader from "../loader";
+import { CreateCart } from "@/features/cart/cartReducer";
 
 export default function Top() {
   const { menu, getallMenuisLoading } = useSelector((store) => store.menu);
+  const [bookingloading, setBookingLoading] = useState(false);
+  const [bookingdata, setBookingData] = useState(null);
+  const { currentUser, token } = useSelector((store) => store.auth);
+  const { createCartisSuccess, cartDetails, createCartisLoading } = useSelector(
+    (store) => store.cart
+  );
   const [count, setCount] = useState(1);
   const [countpieces, setCountPieces] = useState(1);
+  const totalPrice = menu?.price * count;
+  const menudata = {
+    totalCount: count,
+    totalPrice: totalPrice,
+  };
+  // console.log(menudata);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const handleReservationBooking = async () => {
+    if (currentUser) {
+      dispatch(CreateCart({ roomId: menu?.id, cart: menudata }));
+    } else {
+      dispatch(onLoginModal());
+    }
+  };
+
+  useEffect(() => {
+    if (cartDetails !== null) {
+      const interval = setTimeout(() => {
+        navigate(`/restaurant/cart`);
+      }, 4000);
+      return () => clearTimeout(interval);
+    }
+  }, [cartDetails, createCartisSuccess]);
   // availabilityCount
 
   return (
@@ -28,7 +64,9 @@ export default function Top() {
         </div>
         <div className="topright">
           <div className="flex HeroRightC flex-col gap-8 auto">
-            <div className="family3 text-5xl md:text-6xl text-white">{menu?.title}</div>
+            <div className="family3 text-5xl md:text-6xl text-white">
+              {menu?.title}
+            </div>
             <h4 className="text-xl leading-[1.4] family2 text-white">
               {/* Tristique tempus condimentum diam donec. Condimentum ullamcorper
               sit elementum hendrerit mi nulla in consequat, ut. Metus, nullam
@@ -55,33 +93,47 @@ export default function Top() {
               </div>
             </div>
             <p className="text-2xl text-white family4">${menu?.price}</p>
-            <div className="w-full gap-4 grid md:grid-cols-2 text-start">
+            <div className="w-full gap-4 grid md:grid-cols-2 lg:grid-cols-2 text-start">
               <button
+                onClick={handleReservationBooking}
                 className={`${
                   menu?.availabilityCount === 0
                     ? "bg-[var(--primary-1)] opacity-[.1] cursor-not-allowed"
                     : ""
-                } btn text-dark btn-2 family1 uppercase text-white text-base py-1`}
+                } btn text-dark btn-2 family1 uppercase text-white text-sm lg:text-base py-1`}
                 style={{ padding: "1rem" }}
               >
-                {menu?.availabilityCount === 0 ? "UNAVAILABLE" : "ADD TO CART"}
+                {createCartisLoading ? (
+                  <span className="flex items-center justify-center gap-3">
+                    Loading
+                    <Loader type={"dots"} />
+                  </span>
+                ) : (
+                  <>
+                    {menu?.availabilityCount === 0
+                      ? "UNAVAILABLE"
+                      : "ADD TO CART"}
+                  </>
+                )}
               </button>
 
               <span className="grid h-[50px] md:h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
                 <button
                   onClick={() => setCount(count - 1)}
                   disabled={count <= 1}
-                  className=" h-full w-full flex items-center justify-center border-r border-[rgba(255,255,255,.6)] text-xl text-white cursor-pointer"
+                  className=" h-full w-full flex items-center justify-center border-r
+                   border-[rgba(255,255,255,.6)] text-lg text-white cursor-pointer"
                 >
                   <BiMinus />
                 </button>
-                <span className=" h-full w-full flex items-center justify-center border-r border-[rgba(255,255,255,.6)] text-xl text-white cursor-pointer">
+                <span className=" h-full family1 w-full flex items-center justify-center 
+                border-r border-[rgba(255,255,255,.6)] text-lg lg:text-xl text-white cursor-pointer">
                   {count}
                 </span>
                 <button
                   onClick={() => setCount(count + 1)}
                   disabled={count === menu?.availabilityCount}
-                  className=" h-full w-full text-xl text-white cursor-pointer flex items-center justify-center "
+                  className=" h-full w-full text-lg text-white cursor-pointer flex items-center justify-center "
                 >
                   <BiPlus />
                 </button>

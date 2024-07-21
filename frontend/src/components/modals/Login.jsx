@@ -44,8 +44,8 @@ const LoginModal = () => {
     dispatch(offLoginModal());
   };
   const [formvalue, setFormValue] = useState({
-    email: "",
-    hashedPassword: "",
+    email: "edidiong1000@gmail.com",
+    hashedPassword: "12345",
   });
 
   const handleFormChange = (e) => {
@@ -85,21 +85,33 @@ const LoginModal = () => {
         className="guestModalCard"
       >
         <div className="w-full mx-auto overflow-hidden flex flex-col">
-          <div className="w-full sticky top-0 left-0 p-6 px-8 border-b flex border-[rgba(0,0,0,.2)] items-center justify-between">
-            <h3 className="text-3xl font-booking_font4">
-              Sign In
-              <span className="block text-sm font-normal font-booking_font">
-                Login to your account and check out your bookings
+          <div
+            className="cross absolute z-[30000000000] top-3 right-3"
+            onClick={handleClearAlert}
+          >
+            <RxCross2 />
+          </div>
+          <div className="w-full sticky top-0 left-0 p-6 px-8 border-b flex items-center flex-col justify-between">
+            <div className="flex flex-col">
+              <h3 className="text-3xl md:text-4xl family3">
+                {/* <AnimateText children={"TastyTrove Restaurant"} /> */}
+                TastyTrove Restaurant
+              </h3>
+              <span className="block text-base text-center -mt-2 font-normal family1">
+                Login to your account
               </span>
-            </h3>
-            <div className="cross" onClick={handleClearAlert}>
-              <RxCross2 />
             </div>
+            {/* <h3 className="text-3xl family4 font-extrabold">
+              Sign In
+              <span className="block text-base font-normal family1">
+                Login to your account
+              </span>
+            </h3> */}
           </div>
           <div className="w-full overflow-auto h-[350px]  flex">
             <form
               onSubmit={handleFormSubmision}
-              className="w-[90%] mx-auto p-4 md:px-8 pb-8 flex flex-col gap-6"
+              className="w-[100%] mx-auto p-4 md:px-8 pb-8 flex flex-col gap-6"
             >
               <div className="w-full flex flex-col gap-2">
                 {LoginFormInputData?.map((input, index) => {
@@ -107,9 +119,9 @@ const LoginModal = () => {
                     <label
                       key={index}
                       htmlFor={input.label}
-                      className="text-sm font-booking_font rounded-[10px] flex flex-col gap-2 text-dark"
+                      className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                     >
-                      <span className="text-dark">{input.label}</span>
+                      <span className="text-dark font-bold">{input.label}</span>
                       <input
                         className="w-full input rounded-2xl text-dark
                            font-normal text-sm"
@@ -128,8 +140,8 @@ const LoginModal = () => {
               <div className="w-full flex items-center justify-center flex-col gap-3">
                 <button
                   type="submit"
-                  className="p-4 px-8 text-base flex items-center justify-center w-full cursor-pointer 
-                  btn bg-[#000] rounded-[40px] font-booking_font_bold text-white"
+                  className="p-4 px-8 btn flex items-center justify-center w-full cursor-pointer 
+                  btn bg-[#000] rounded-[40px] family1 font-bold"
                 >
                   <AnimateText children={"Sign In"} />
                 </button>
@@ -139,7 +151,7 @@ const LoginModal = () => {
                     <span
                       onClick={handleLoginModal}
                       style={{ textDecoration: "underline" }}
-                      className="font-booking_font_bold cursor-pointer"
+                      className="font-bold family1 cursor-pointer"
                       // href={"#"}
                     >
                       Sign Up
@@ -148,12 +160,12 @@ const LoginModal = () => {
                 </div>
               </div>
 
-              <div className="option text-dark">Or sign in with Google</div>
+              <div className="option text-dark">Or </div>
 
               <div
                 // onClick={() => signIn("google")}
                 className="p-4 px-8 items-center flex justify-center gap-4
-                 w-full cursor-pointer btn text-[#fff] rounded-[40px] font-booking_font_bold"
+                 w-full cursor-pointer btn rounded-[40px] family1 font-bold"
               >
                 <FcGoogle fontSize={"24px"} />
                 <AnimateText children={"Continue with Google"} />
@@ -210,7 +222,7 @@ const LoginModalStyles = styled(motion.div)`
   }
   .guestModalCard {
     max-width: 400px;
-    min-width: 540px;
+    min-width: 400px;
     display: flex;
     height: 500px;
     align-items: center;
@@ -218,7 +230,7 @@ const LoginModalStyles = styled(motion.div)`
     flex-direction: column;
     background: #fff;
     gap: 2rem;
-    border-radius: 20px;
+    border-radius: 10px;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
     @media (max-width: 580px) {
@@ -226,18 +238,19 @@ const LoginModalStyles = styled(motion.div)`
       min-width: 90%;
     }
     .cross {
-      width: 3rem;
-      height: 3rem;
+      width: 34px;
+      height: 34px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+
       &:hover {
         background: #d9d8d8;
       }
       svg {
-        font-size: 20px;
+        font-size: 16px;
       }
     }
     .deleteCardBottom {

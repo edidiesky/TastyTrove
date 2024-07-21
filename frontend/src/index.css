@@ -125,7 +125,7 @@ body {
 }
 
 input {
-  height: 4rem;
+  height: 55px;
   background-color: var(--light-grey);
   padding: 0 1rem;
   border: none;

@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import {
   GetSingleCart,
   GetUserCart,
@@ -8,6 +8,7 @@ import {
   UpdateCart,
   CreateCart,
 } from "./cartReducer";
+import toast from "react-hot-toast";
 
 const initialState = {
   isSuccess: false,
@@ -36,10 +37,11 @@ const initialState = {
   updateCartisLoading: false,
   updateCartisSuccess: false,
   updateCartisError: false,
+
+  createCartisLoading: false,
+  createCartisSuccess: false,
+  createCartisError: false,
 };
-
-
-
 
 const cartSlice = createSlice({
   name: "cart",
@@ -73,15 +75,17 @@ const cartSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(CreateCart.pending, (state, action) => {
-      state.getsingleCartisLoading = true;
+      state.createCartisLoading = true;
     });
     builder.addCase(CreateCart.fulfilled, (state, action) => {
-      state.getsingleCartisLoading = false;
-      state.getsingleCartisSuccess = true;
-      state.cart = action.payload;
+      state.createCartisLoading = false;
+      state.createCartisSuccess = true;
+      state.cartDetails = action.payload;
+      toast.success("Room has been succesfully booked!!");
     });
     builder.addCase(CreateCart.rejected, (state, action) => {
-      state.getsingleCartisSuccess = false;
+      state.createCartisSuccess = false;
+      state.createCartisLoading = false;
       toast.error(action.payload);
     });
   },
@@ -97,7 +101,7 @@ export const {
   increaseBagQty,
   decreaseBagQty,
   onCartAlert,
-  clearCartMessage
-} = cartSlice.actions
+  clearCartMessage,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
