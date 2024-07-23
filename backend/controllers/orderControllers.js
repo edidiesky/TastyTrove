@@ -8,7 +8,7 @@ import expressAsyncHandler from "express-async-handler";
 const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
-  const { reservationid, amount, currency } = req.body;
+  const { cartId, amount, currency } = req.body;
 
   // create payment history for the user
   const payment = await prisma.payment.create({
@@ -16,7 +16,7 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
       amount,
       currency,
       userid: userId,
-      reservationid: reservationid,
+      cartId: cartId,
     },
   });
 

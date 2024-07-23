@@ -6,21 +6,21 @@ import { CreatePayment } from "@/features/payment/paymentReducer";
 import { useNavigate } from "react-router-dom";
 import Loader from "../home/loader";
 import { handleClearPaymentAlert } from "@/features/payment/paymentSlice";
-const FlutterPaymentButton = () => {
+const FlutterPaymentButton = ({ totalPrice }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(handleClearPaymentAlert());
   }, []);
   const { currentUser } = useSelector((store) => store.auth);
-  const { reservation } = useSelector((store) => store.reservation);
+  const { cartDetails } = useSelector((store) => store.cart);
   const { payment, createpaymentisSuccess, createpaymentisLoading } =
     useSelector((store) => store.payment);
   const [flutterpaymentsuccess, setFlutterPaymentSuccess] = useState(false);
   const config = {
     public_key: import.meta.env.VITE_FLUTTER_PUBLIC_KEY,
     tx_ref: Date.now(),
-    amount: reservation?.totalPrice,
+    amount: cartDetails?.totalPrice,
     currency: "NGN",
     payment_options: "card,mobilemoney,ussd",
     customer: {
@@ -39,8 +39,8 @@ const FlutterPaymentButton = () => {
   const handleCreateOrderPayment = () => {
     dispatch(
       CreatePayment({
-        reservationid: reservation?.id,
-        amount: reservation?.totalPrice,
+        cartId: cartDetails?.id,
+        amount: totalPrice,
         currency: "NGN",
       })
     );
@@ -82,7 +82,7 @@ const FlutterPaymentButton = () => {
         });
       }}
       style={{ letterSpacing: "4px" }}
-      className="btn p-6 rounded-[40px] cursor-pointer px-8 text-sm font-normal uppercase text-center text-white font-booking_font"
+      className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base font-bold uppercase"
     >
       {createpaymentisLoading ? (
         <span className="flex items-center justify-center gap-2">

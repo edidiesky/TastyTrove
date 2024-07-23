@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 // import { calculateBagItem } from "../../Features/cart/cartSlice";
 import { Link } from "react-router-dom";
+import FlutterPaymentButton from "../payment/FlutterPaymentButton";
 export default function CartHolder({ type }) {
   const dispatch = useDispatch();
   // const { productDetails } = useSelector((store) => store.product);
@@ -82,9 +83,7 @@ export default function CartHolder({ type }) {
           </div>
         </div>
         <div className="uppercase flex flex-col gap-4">
-          <button className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base font-bold uppercase">
-            Place Order
-          </button>
+          <FlutterPaymentButton totalPrice={totalPrice} />
 
           <button className="family1 py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base font-bold uppercase">
             Update Cart
