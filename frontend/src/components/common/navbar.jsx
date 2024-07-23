@@ -84,9 +84,11 @@ const Navbar = () => {
                hover:bg-[#18181885] text-[#fff] h-12 hidden lg:flex items-center justify-center text-xl"
             >
               <IoBag />
-              <div className="w-6 h-6 absolute bg-[var(--red)] -top-1 right-6 text-[#fff] text-xs rounded-full flex items-center justify-center">
-                {cart?.length}
-              </div>
+              {cart?.length !== 0 && (
+                <div className="w-6 h-6 absolute bg-[var(--red)] -top-1 right-6 text-[#fff] text-xs rounded-full flex items-center justify-center">
+                  {cart?.length}
+                </div>
+              )}
             </NavLink>
             <ProfileDropdownStyles className="z-[30000000000000] relative flex items-end justify-end gap-4">
               {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full bg-[#000] flex items-center justify-center text-2xl text-white">

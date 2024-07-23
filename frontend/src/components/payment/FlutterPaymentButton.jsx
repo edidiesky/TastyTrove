@@ -13,15 +13,15 @@ const FlutterPaymentButton = ({ totalPrice }) => {
     dispatch(handleClearPaymentAlert());
   }, []);
   const { currentUser } = useSelector((store) => store.auth);
-  const { cartDetails } = useSelector((store) => store.cart);
+  const { cart } = useSelector((store) => store.cart);
   const { payment, createpaymentisSuccess, createpaymentisLoading } =
     useSelector((store) => store.payment);
   const [flutterpaymentsuccess, setFlutterPaymentSuccess] = useState(false);
   const config = {
     public_key: import.meta.env.VITE_FLUTTER_PUBLIC_KEY,
     tx_ref: Date.now(),
-    amount: cartDetails?.totalPrice,
-    currency: "NGN",
+    amount: totalPrice,
+    currency: "USD",
     payment_options: "card,mobilemoney,ussd",
     customer: {
       email: currentUser?.email,
@@ -39,9 +39,9 @@ const FlutterPaymentButton = ({ totalPrice }) => {
   const handleCreateOrderPayment = () => {
     dispatch(
       CreatePayment({
-        cartId: cartDetails?.id,
+        cartItems: cart,
         amount: totalPrice,
-        currency: "NGN",
+        currency: "USD",
       })
     );
   };

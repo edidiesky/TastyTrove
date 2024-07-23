@@ -77,7 +77,6 @@ model Cart {
   menuid     String            @db.ObjectId
   userid     String            @db.ObjectId
   status     ReservationStatus @default(PENDING)
-  payment    Payment[]
   menu       Menu?             @relation(fields: [menuid], references: [id], onDelete: Cascade)
   user       User?             @relation(fields: [userid], references: [id], onDelete: Cascade)
 }
@@ -103,8 +102,7 @@ model Payment {
   user          User          @relation(fields: [userid], references: [id])
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
-  Cart          Cart?         @relation(fields: [cartId], references: [id])
-  cartId        String?       @db.ObjectId
+  cartItems        Json?
 }
 
 model Conversations {
