@@ -82,11 +82,11 @@ export default function CartHolder({ type }) {
           </div>
         </div>
         <div className="uppercase flex flex-col gap-4">
-          <button className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base uppercase">
+          <button className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base font-bold uppercase">
             Place Order
           </button>
 
-          <button className="family1 py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base uppercase">
+          <button className="family1 py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base font-bold uppercase">
             Update Cart
           </button>
         </div>

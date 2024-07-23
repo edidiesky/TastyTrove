@@ -10,14 +10,14 @@ import { DeleteSingleUser } from "@/features/auth/authReducer";
 import { handleClearUserAlert } from "@/features/auth/authSlice";
 import { handleClearMenuAlert } from "@/features/menu/menuSlice";
 import { DeleteMenu } from "@/features/menu/menuReducer";
-import { DeleteSingleCart } from "@/features/cart/cartReducer";
+import { DeleteSingleCart, GetSingleCart } from "@/features/cart/cartReducer";
 import { clearCartAlert } from "@/features/cart/cartSlice";
 export default function DeleteModal({ type, modal, setModal, menu, id }) {
   const { deleteRoomisLoading, deleteRoomisSuccess } = useSelector(
     (store) => store.menu
   );
 
-  const { deleteCartisLoading, deleteCartisSuccess } = useSelector(
+  const { deleteCartisLoading, cartDetails, deleteCartisSuccess } = useSelector(
     (store) => store.cart
   );
   const { deleteUserisLoading, deleteUserisSuccess } = useSelector(
@@ -38,6 +38,13 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
     dispatch(DeleteSingleUser(id));
   }, []);
 
+  // get singleCart
+  useEffect(() => {
+    if (id) {
+      dispatch(GetSingleCart(id));
+    }
+  }, [id]);
+  // console.log(menu);
   useEffect(() => {
     dispatch(handleClearMenuAlert());
     dispatch(handleClearUserAlert());
@@ -57,6 +64,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
         exit={{ opacity: 0 }}
         animate={{ opacity: 1 }}
       >
+        {deleteCartisLoading && <Loader />}
         <motion.div
           initial={{
             y: "100vh",
@@ -79,8 +87,14 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
               <CiWarning fontSize={"55px"} color={"#c31212"} />
             </span>
             <h3 className="text-3xl text-center family3">
-              Delete this menu?
-              <span className="block text-xs w-[80%] pt-2 mx-auto capitalize text-center family1">
+              <span
+                className="family3 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
+               after:bg-[#eee] after:rounded-lg after:absolute uppercase text-light text-dark"
+              >
+                Delete {cartDetails?.menu?.title}?
+              </span>
+
+              <span className="block text-xs w-[80%] pt-3 mx-auto capitalize text-center family1">
                 By deleting this menu, you are directly removing the menu form
                 the database and the website. It cannot be retrieved back if
                 this action you carry has been taken.

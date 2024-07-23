@@ -122,6 +122,20 @@ const cartSlice = createSlice({
       state.deleteCartisLoading = false;
       toast.error(action.payload);
     });
+
+    builder.addCase(GetSingleCart.pending, (state, action) => {
+      // state.deleteCartisLoading = true;
+    });
+    builder.addCase(GetSingleCart.fulfilled, (state, action) => {
+      // state.deleteCartisSuccess = true;
+      // state.deleteCartisLoading = false;
+      state.cartDetails = action.payload;
+    });
+    builder.addCase(GetSingleCart.rejected, (state, action) => {
+      state.deleteCartisSuccess = false;
+      state.deleteCartisLoading = false;
+      toast.error(action.payload);
+    });
   },
 });
 
