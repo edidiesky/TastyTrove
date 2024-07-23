@@ -109,6 +109,7 @@ button:disabled {
   --dark-1: #000000;
   --primary: #BDA16B;
   --background_2: #0e0d0c;
+  --red:#c31212;
 }
 
 .text-grey {
@@ -246,7 +247,7 @@ html.lenis body {
 }
 
 .w-85 {
-  width: 86%;
+  width: 90%;
   max-width: 1290px;
 }
 

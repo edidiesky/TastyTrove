@@ -4,7 +4,7 @@ import {
   GetUserCart,
   GetAllCart,
   GetAllRoomAndCart,
-  DeleteCart,
+  DeleteSingleCart,
   UpdateCart,
   CreateCart,
 } from "./cartReducer";
@@ -48,8 +48,10 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     clearCartAlert: (state, action) => {
-     state.createCartisSuccess = false;
-     state.createCartisLoading = false;
+      state.createCartisSuccess = false;
+      state.createCartisLoading = false;
+      state.deleteCartisSuccess = false;
+      state.deleteCartisLoading = false;
     },
     clearCartMessage: (state, action) => {
       state.showAlert = false;
@@ -91,20 +93,35 @@ const cartSlice = createSlice({
     });
 
     // GetUserCart
-     builder.addCase(GetUserCart.pending, (state, action) => {
-       state.getsingleCartisLoading = true;
-     });
-     builder.addCase(GetUserCart.fulfilled, (state, action) => {
-       state.getsingleCartisLoading = false;
-       state.getsingleCartisSuccess = true;
-       state.cart = action.payload;
+    builder.addCase(GetUserCart.pending, (state, action) => {
+      state.getsingleCartisLoading = true;
+    });
+    builder.addCase(GetUserCart.fulfilled, (state, action) => {
+      state.getsingleCartisLoading = false;
+      state.getsingleCartisSuccess = true;
+      state.cart = action.payload;
       //  toast.success("Room has been succesfully booked!!");
-     });
-     builder.addCase(GetUserCart.rejected, (state, action) => {
-       state.getsingleCartisSuccess = false;
-       state.getsingleCartisLoading = false;
+    });
+    builder.addCase(GetUserCart.rejected, (state, action) => {
+      state.getsingleCartisSuccess = false;
+      state.getsingleCartisLoading = false;
       //  toast.error(action.payload);
-     });
+    });
+
+    builder.addCase(DeleteSingleCart.pending, (state, action) => {
+      state.deleteCartisLoading = true;
+    });
+    builder.addCase(DeleteSingleCart.fulfilled, (state, action) => {
+      state.deleteCartisSuccess = true;
+      state.deleteCartisLoading = false;
+      state.cart = state.cart.filter((cart) => cart.id !== action.payload);
+      toast.success("cart has been deleted");
+    });
+    builder.addCase(DeleteSingleCart.rejected, (state, action) => {
+      state.deleteCartisSuccess = false;
+      state.deleteCartisLoading = false;
+      toast.error(action.payload);
+    });
   },
 });
 

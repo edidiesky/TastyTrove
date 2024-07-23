@@ -124,7 +124,7 @@ const DeleteCart = asyncHandler(async (req, res) => {
     throw new Error("The cart does not exist");
   }
   await prisma.payment.deleteMany({
-    where: { Cartid: req.params.id },
+    where: { cartId: req.params.id },
   });
   await prisma.cart.delete({
     where: { id: req.params.id },

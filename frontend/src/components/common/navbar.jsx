@@ -16,6 +16,14 @@ const linkData = [
     title: "Menu",
     path: "restaurant/menu",
   },
+  {
+    title: "History",
+    path: "restaurant/menu",
+  },
+  {
+    title: "Bulletin",
+    path: "restaurant/menu",
+  },
   // {
   //   title: "Cart",
   //   path: "savedhomes",
@@ -42,7 +50,7 @@ const Navbar = () => {
     <>
       <div className="py-12 z-[50000] relative flex items-center justify-center">
         <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
-        <div className="w-85 auto flex z-[30] items-center gap-1 justify-between">
+        <div className="w-85 auto flex z-[30] items-center gap-4 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">
             <h3 className="text-3xl md:text-4xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />
@@ -51,8 +59,8 @@ const Navbar = () => {
 
           {/* <img src="/images/TestLogo.png" alt="" className="w-40" /> */}
 
-          <div className="w-full flex items-center justify-end gap-4">
-            <div className="items-center justify-end hidden lg:flex gap-3">
+          <div className="w-full flex items-center justify-end gap-3">
+            <div className="items-center justify-end hidden lg:flex gap-4">
               {linkData?.map((list, index) => {
                 return (
                   <NavLink
@@ -60,7 +68,7 @@ const Navbar = () => {
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base tab md:text-base hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-3 rounded-[40px]`}
+                    className={`text-base tab md:text-base hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-1 rounded-[40px]`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />

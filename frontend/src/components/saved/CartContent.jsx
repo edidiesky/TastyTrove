@@ -54,9 +54,8 @@ const CartContentContainer = styled.div`
   h3 {
     /* font-size: 1.8rem; */
     font-weight: normal;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    padding: 2rem 0;
-    text-transform: uppercase;
+    /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
+
   }
 
   table {

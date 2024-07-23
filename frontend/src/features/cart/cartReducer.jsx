@@ -101,8 +101,8 @@ export const GetAllCart = createAsyncThunk(
   }
 );
 
-export const DeleteCart = createAsyncThunk(
-  "DeleteCart",
+export const DeleteSingleCart = createAsyncThunk(
+  "DeleteSingleCart",
   async (CartId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
