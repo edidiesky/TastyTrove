@@ -22,19 +22,21 @@ const Single = () => {
       dispatch(getAllMenu());
     }
   }, [food]);
-  return (
-    <div>
-      <Meta
-        title={`Details for ${
-          menu?.title ? menu?.title : ""
-        } - TastyTrove Restaurant`}
-      />
-      <Navbar />
-      {getallMenuisLoading && <Loader />}
-      <Banner type={"type"} subtext={"RESTAURANT TAKEOUT"} text={category} />
-      <HomeIndex />
-    </div>
-  );
+  if (getallMenuisLoading) {
+return <Loader />;
+  }
+    return (
+      <div>
+        <Meta
+          title={`Details for ${
+            menu?.title ? menu?.title : ""
+          } - TastyTrove Restaurant`}
+        />
+        <Navbar />
+        <Banner type={"type"} subtext={"RESTAURANT TAKEOUT"} text={category} />
+        <HomeIndex />
+      </div>
+    );
 };
 
 export default Single;

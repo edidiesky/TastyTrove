@@ -80,7 +80,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
             </span>
             <h3 className="text-3xl text-center family3">
               Delete this menu?
-              <span className="block text-xs w-[90%] mx-auto capitalize text-center family1">
+              <span className="block text-xs w-[80%] pt-2 mx-auto capitalize text-center family1">
                 By deleting this menu, you are directly removing the menu form
                 the database and the website. It cannot be retrieved back if
                 this action you carry has been taken.
@@ -145,7 +145,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
           </span>
           <h3 className="text-3xl text-center family3">
             Delete this menu?
-            <span className="block text-xs w-[90%] mx-auto capitalize text-center family1">
+            <span className="block text-xs w-[80%] mx-auto capitalize text-center family1">
               By deleting this menu, you are directly removing the menu form the
               database and the website. It cannot be retrieved back if this
               action you carry has been taken.
@@ -208,8 +208,8 @@ const DeleteContainer = styled(motion.div)`
       min-width: 350px;
     }
     @media (max-width: 480px) {
-      max-width: 90%;
-      min-width: 90%;
+      max-width: 80%;
+      min-width: 80%;
     }
     .cross {
       position: absolute;

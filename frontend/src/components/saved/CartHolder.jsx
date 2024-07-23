@@ -8,7 +8,7 @@ export default function CartHolder({ type }) {
   // const { productDetails } = useSelector((store) => store.product);
   const {
     cart,
-    totalPrice,
+    cartDetails,
     totalQuantity,
     shippingPrice,
     estimatedTax,
@@ -18,6 +18,16 @@ export default function CartHolder({ type }) {
   // useEffect(() => {
   //   dispatch(calculateBagItem());
   // }, [ cart]);
+
+  const { totalShoppingPrice } = cart?.reduce(
+    (acc, total) => {
+      const totalPrice = total?.totalPrice;
+      acc.totalShoppingPrice += totalPrice;
+      return acc;
+    },
+    { totalShoppingPrice: 0 }
+  );
+  // console.log(totalShoppingPrice);
   if (type === "code") {
     return (
       <CartHolderContainer>
@@ -49,17 +59,25 @@ export default function CartHolder({ type }) {
           <div className="w-full flex flex-col gap-6">
             <h4 className="family3 text-2xl uppercase subtotal">
               Subtotal{" "}
-              <span className="family3 uppercase subspan">${totalPrice}</span>
+              <span className=" family4  text-xl">
+                ${totalShoppingPrice}
+              </span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Shipping{" "}
-              <span className="family3 uppercase subspan span1">
-                Shipping to <span className="text-bold">Nigeria</span>
+              <span className=" family4  text-end text-xl span1">
+                <span className="block pb-3">
+                  Flat rate: <br />{" "}
+                  <span className="pt-2">${totalShoppingPrice + 20}</span>
+                </span>
+                <span className="text-end">
+                  Shipping to <br /> <span className=" text-bold">Nigeria</span>
+                </span>
               </span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Total{" "}
-              <span className="family3 uppercase subspan span1">
+              <span className=" family4 text-xl span1">
                 ${TotalShoppingPrice}
               </span>
             </h4>
@@ -67,7 +85,7 @@ export default function CartHolder({ type }) {
         </div>
         <div className="uppercase flex flex-col gap-4">
           <button className="family1 py-4 hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base uppercase">
-            Proceed to Checkout
+            Place Order
           </button>
 
           <button className="family1 py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base uppercase">
@@ -129,14 +147,13 @@ const CartHolderContainer = styled.div`
       padding: 2.4rem 0;
     }
 
-    .subspan {
+    /* .text-2xl {
       color: var(--grey);
       font-family: "Lora", sans-serif;
-      font-size: 16px;
       text-transform: capitalize;
       &.span1 {
         color: var(--blue-2);
       }
-    }
+    } */
   }
 `;

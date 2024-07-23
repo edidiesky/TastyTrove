@@ -53,7 +53,7 @@ const CreateUserCart = asyncHandler(async (req, res) => {
 
     // find the menu in the cart to check if it exists
     const existingCartItem = await prisma.cart.findFirst({
-      where: { menuid: id, userid: req.user.userId },
+      where: { menuid: id },
     });
     if (existingCartItem) {
       const { totalCount, totalPrice } = req.body;

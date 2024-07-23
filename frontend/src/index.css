@@ -231,12 +231,18 @@ html.lenis body {
  background-color: var(--primary);
   color: #000;
 }
+
+.btn.btn-4 {
+ background-color: #000 !important;
+  color: #fff !important;
+  border: none;
+}
 .btn.btn-2:hover {
   background-color: #fff !important;
   color: #000;
 }
 .btn:hover {
-  border: 1px solid rgba(0, 0, 0, 0.7);
+  transform: scale(.88);
   background-color: #fff;
   color: #000;
 }
