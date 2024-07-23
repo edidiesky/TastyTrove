@@ -28,6 +28,8 @@ export default function CartHolder({ type }) {
     { totalShoppingPrice: 0 }
   );
   // console.log(totalShoppingPrice);
+  const tax = totalShoppingPrice + 20;
+  const totalPrice = tax + totalShoppingPrice;
   if (type === "code") {
     return (
       <CartHolderContainer>
@@ -59,9 +61,7 @@ export default function CartHolder({ type }) {
           <div className="w-full flex flex-col gap-6">
             <h4 className="family3 text-2xl uppercase subtotal">
               Subtotal{" "}
-              <span className=" family4  text-xl">
-                ${totalShoppingPrice}
-              </span>
+              <span className=" family4  text-xl">${totalShoppingPrice}</span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Shipping{" "}
@@ -77,9 +77,7 @@ export default function CartHolder({ type }) {
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Total{" "}
-              <span className=" family4 text-xl span1">
-                ${TotalShoppingPrice}
-              </span>
+              <span className=" family4 text-xl span1">${totalPrice}</span>
             </h4>
           </div>
         </div>

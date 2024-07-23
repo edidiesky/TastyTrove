@@ -41,6 +41,7 @@ const linkData = [
 const Navbar = () => {
   const [bar, setBar] = React.useState(false);
   const { currentUser } = useSelector((store) => store.auth);
+  const { cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(ClearUserInfo());
@@ -79,10 +80,13 @@ const Navbar = () => {
             <NavLink
               end
               to={"/restaurant/cart"}
-              className="w-12 tab rounded-full cursor-pointer
+              className="w-12 tab relative rounded-full cursor-pointer
                hover:bg-[#18181885] text-[#fff] h-12 hidden lg:flex items-center justify-center text-xl"
             >
               <IoBag />
+              <div className="w-6 h-6 absolute bg-[var(--red)] -top-1 right-6 text-[#fff] text-xs rounded-full flex items-center justify-center">
+                {cart?.length}
+              </div>
             </NavLink>
             <ProfileDropdownStyles className="z-[30000000000000] relative flex items-end justify-end gap-4">
               {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full bg-[#000] flex items-center justify-center text-2xl text-white">
@@ -184,7 +188,7 @@ const Navbar = () => {
                       )}
                       {currentUser && (
                         <h4 className="text-base hidden lg:block family1 text-[#fff] family1">
-                          {currentUser?.name}
+                          {currentUser?.username}
                           <span className="block font-normal family1 text-xs text-[var(--grey-1)]">
                             {currentUser?.email}
                           </span>
