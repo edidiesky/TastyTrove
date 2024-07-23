@@ -14,7 +14,7 @@ export default function CartContent() {
         // ""
         // <Message alertText="No items in your cart" alertType={"danger"} />
         <div className="w-full flex  items-center justify-center flex-col gap-2">
-          <h2 className="text-4xl md:text-7xl text-dark family3">
+          <h2 className="text-6xl md:text-7xl text-dark family3">
             Cart is empty
           </h2>
           <Link to={"/restaurant/menu"} className="btn btn-1 text-lg">
@@ -45,7 +45,7 @@ export default function CartContent() {
   );
 }
 
-const CartContentContainer = styled.div`
+export const CartContentContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -138,20 +138,20 @@ const CartContentContainer = styled.div`
         }
       }
     }
-    .imageWrapper {
+    /* .imageWrapper {
       img {
         width: 90px;
         position: relative;
         object-fit: cover;
       }
-    }
+    } */
     tbody {
       tr {
         transition: all 0.5s;
         z-index: 200;
         td {
           text-align: start;
-          padding: 1.6rem 1rem !important;
+          padding: 1.2rem 1rem !important;
           font-size: 18px !important;
           color: #000;
           font-family: "Lora";

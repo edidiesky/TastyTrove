@@ -8,7 +8,7 @@ import expressAsyncHandler from "express-async-handler";
 const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
-  const {cartItems, amount, currency } = req.body;
+  const { cartItems, amount, currency } = req.body;
 
   // create payment history for the user
   const payment = await prisma.payment.create({
@@ -16,7 +16,7 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
       amount,
       currency,
       userid: userId,
-      cartItems:cartItems
+      cartItems: cartItems,
     },
   });
 
@@ -87,36 +87,30 @@ const UpdatePaymentToSuccess = expressAsyncHandler(async (req, res) => {
   const paymentId = req.params.id;
 
   // Update the payment status to "CONFIRMED"
-  const payment = await prisma.payment.update({
-    where: { id: paymentId },
-    data: { status: "CONFIRMED" },
-    include: {
-      user: true,
-    },
-  });
-
-  // Find the reservation
-  const reservation = await prisma.reservations.findFirst({
-    where: {
-      userid: req.user.userId,
-      id: reservationid,
-    },
-  });
-
-  if (reservation) {
-    // Update the reservation status using the unique `id`
-    const updatedReservation = await prisma.reservations.update({
-      where: { id: reservation.id },
+  const payment = await prisma.$transaction(async (prisma) => {
+    const payment = await prisma.payment.update({
+      where: { id: paymentId },
       data: { status: "CONFIRMED" },
       include: {
-        rooms: true,
+        user: true,
       },
     });
-
-    res.status(200).json({ payment, updatedReservation });
-  } else {
-    res.status(404).json({ message: "Reservation not found" });
-  }
+    // check if the user has a cart
+    const cart = await prisma.cart.findMany({
+      where: { userid: req.user?.userId },
+    });
+    if (cart?.length > 0) {
+      // delete the user cart
+      await prisma.cart.deleteMany({
+        where: { userid: req.user?.userId },
+      });
+      // will display message in the future
+      return payment;
+    } else {
+      return {payment};
+    }
+  });
+  res.status(200).json(payment);
 });
 
 export {

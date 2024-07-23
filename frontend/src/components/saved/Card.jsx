@@ -17,28 +17,38 @@ export default function Card({ x, type }) {
 
   if (type === "payment") {
     return (
-      <div key={x?.id} className="flex card w-100 item-center justify-space">
-        <div className="flex item-center gap-2 ">
-          <div className="cartProduct">
-            <div className="imageWrapper">
-              <img src={x?.image} alt="images" />
-            </div>
-          </div>
-          <div
-            style={{ fontWeight: "normal" }}
-            className="title w-100 flex family3 item-center gap-1"
-          >
-            {x?.title} <RxCross1 fontSize={"12px"} /> {x?.quantity || 1}
-          </div>
-        </div>
+      <>
+        <AnimatePresence>
+          {deletecartmodal && (
+            <DeleteModal
+              deletecartmodal={deletecartmodal}
+              setModal={setUserDeleteCartModal}
+              type={"menu"}
+              menu={x}
+              id={x?.id}
+            />
+          )}
+        </AnimatePresence>
 
-        <div
-          style={{ fontWeight: "normal" }}
-          className="price fs-20 family3 text-dark"
-        >
-          {x?.price * x?.quantity}
-        </div>
-      </div>
+        <tr key={x?.id}>
+          <td>
+            <div className="flex items-center gap-4">
+              <div className="imageWrapper">
+                <img src={x?.menu?.image} className='w-[70px]' alt="images" />
+              </div>
+              {x?.menu?.title}
+            </div>
+          </td>
+          {/* <td className="text-lg">{x?.price}</td> */}
+          <td>${x?.menu?.price}</td>
+          <td>
+            <span className="">
+              {cartcount}
+            </span>
+          </td>
+          <td className="text-xl">${x?.menu?.price * cartcount}</td>
+        </tr>
+      </>
     );
   }
 
@@ -60,7 +70,7 @@ export default function Card({ x, type }) {
         <td>
           <div className="flex items-center gap-4">
             <div className="imageWrapper">
-              <img src={x?.menu?.image} alt="images" />
+              <img src={x?.menu?.image} className="w-[100px]" alt="images" />
             </div>
             {x?.menu?.title}
           </div>
@@ -92,7 +102,7 @@ export default function Card({ x, type }) {
         <td className="svg">
           <div
             className="w-12 h-12 rounded-full hover:bg-[#eee] flex items-center justify-center cursor-pointer"
-            onClick={() => setUserDeleteCartModal(true) }
+            onClick={() => setUserDeleteCartModal(true)}
           >
             <RxCross1 />
           </div>

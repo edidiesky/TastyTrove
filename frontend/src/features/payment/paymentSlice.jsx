@@ -89,8 +89,6 @@ export const reservationSlice = createSlice({
       state.updatepaymentisLoading = false;
       state.updatepaymentisSuccess = true;
       state.payment = action.payload.payment;
-      state.updatedReservation = action.payload.updatedReservation;
-      // toast.success("Payment Details has been updated to success");
     });
     builder.addCase(UpdatePaymentToSuccess.rejected, (state, action) => {
       state.updatepaymentisSuccess = false;

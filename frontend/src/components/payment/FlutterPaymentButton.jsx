@@ -49,9 +49,9 @@ const FlutterPaymentButton = ({ totalPrice }) => {
     if (flutterpaymentsuccess) {
       const timer = setTimeout(() => {
         navigate(
-          `/payment-success/${payment?.id}?reservationid=${payment?.reservationid}`
+          `/payment-success/${payment?.id}`
         );
-      }, 3000);
+      }, 300);
 
       return () => clearTimeout(timer);
     }
