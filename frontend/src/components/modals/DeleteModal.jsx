@@ -82,21 +82,20 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
           <div className="cross" onClick={handleClearAlert}>
             <RxCross2 />
           </div>
-          <div className="w-full p-8 px-4 flex items-center justify-center flex-col gap-3">
+          <div className="w-full p-8 px-4 flex items-center justify-center flex-col gap-2">
             <span className="w-full flex items-center justify-center">
               <CiWarning fontSize={"55px"} color={"#c31212"} />
             </span>
-            <h3 className="text-3xl text-center family1">
+            <h3 className="text-2xl font-bold text-center family1">
               <span
                 className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
-               after:bg-[#eee] after:rounded-lg after:absolute uppercase text-light text-dark"
+               after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
               >
                 Delete {cartDetails?.menu?.title}?
               </span>
 
-              <span className="block text-xs w-[80%] pt-3 mx-auto capitalize text-center family1">
-                By deleting this menu, you are directly removing the menu form
-                the database and the website. It cannot be retrieved back if
+              <span className="block text-xs w-[80%] pt-2 mx-auto capitalize text-center family1">
+                By deleting this menu, It cannot be retrieved back if
                 this action you carry has been taken.
               </span>
             </h3>
@@ -153,11 +152,11 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
         <div className="cross" onClick={handleClearAlert}>
           <RxCross2 />
         </div>
-        <div className="w-full p-8 px-4 flex items-center justify-center flex-col gap-8">
+        <div className="w-full p-8 px-4 flex items-center justify-center flex-col gap-2">
           <span className="w-full flex items-center justify-center">
             <CiWarning fontSize={"45px"} color={"#c31212"} />
           </span>
-          <h3 className="text-2xl font-semibold text-center family1">
+          <h3 className="text-2xl font-bold text-center family1">
             <span>Delete this menu?</span>
             <span className="block pt-2 font-normal text-xs w-[80%] mx-auto capitalize text-center family1">
               By deleting this menu, It cannot be retrieved back if this

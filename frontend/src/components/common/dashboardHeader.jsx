@@ -69,7 +69,7 @@ const DashboardHeader = () => {
         <div className="flex items-center gap-2">
           <div
             onClick={() => setBar(!bar)}
-            className="flex flex-1 lg:hidden gap-4 items-center justify-start text-dark"
+            className="flex flex-1 md:hidden gap-4 items-center justify-start text-dark"
           >
             {bar ? (
               <RxCross1 fontSize={"30px"} />
