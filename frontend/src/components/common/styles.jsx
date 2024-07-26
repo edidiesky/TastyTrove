@@ -60,23 +60,21 @@ export const Table = styled.div`
 
       thead {
         tr {
-          text-align: start;
-          z-index: 200;
-          text-align: start;
+          text-align: center;
           transition: all 0.4s;
 
           border-radius: 40px;
-          padding: 1rem;
+          padding: 1rem 0;
           /* text-transform: uppercase; */
           font-weight: normal !important;
           &:hover {
             background-color: rgba(0, 0, 0, 0.1);
           }
           th {
-            text-align: start;
+            text-align: center;
             font-size: 15px !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1.5rem 1rem;
+            padding: 1.7rem .1rem;
             font-family: "Work Sans";
             font-weight: normal !important;
           }
@@ -93,9 +91,10 @@ export const Table = styled.div`
             background-color: rgba(0, 0, 0, 0.06);
           }
           td {
-            text-align: start;
-            padding: 1.5rem 1rem !important;
-            font-size: 14px !important;
+            text-align: center;
+            padding: 1.5rem .1rem !important;
+            font-size: 15px !important;
+            font-weight: normal !important;
             color: #000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 

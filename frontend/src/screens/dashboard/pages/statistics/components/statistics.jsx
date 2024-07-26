@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Statistics = () => {
   return (
-    <div className="w-full grid md:grid-cols-custom_1 items-start gap-4">
+    <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
       <div className="flex w-full">
         <GrowthStat />
       </div>
@@ -20,15 +20,6 @@ const Statistics = () => {
 
 const GrowthStat = () => {
   const { totalStatAmount, totalMonth } = useSelector((store) => store.stat);
-const chartData = [
-  { month: "January", desktop: 186, mobile: 80 },
-  { month: "February", desktop: 305, mobile: 200 },
-  { month: "March", desktop: 237, mobile: 120 },
-  { month: "April", desktop: 73, mobile: 190 },
-  { month: "May", desktop: 209, mobile: 130 },
-  { month: "June", desktop: 214, mobile: 140 },
-];
-
   const [options, setOptions] = useState({
     chart: {
       height: 350,
@@ -49,7 +40,7 @@ const chartData = [
       curve: "smooth",
     },
     xaxis: {
-      categories: ["January", "February", "March", "April", "May", "June", "July", "August"],
+      categories: ["Jan", "Febr", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "sept"],
     },
   });
 
@@ -105,10 +96,10 @@ const SalesStat = () => {
   // }, []);
   const { payments } = useSelector((store) => store.payment);
   return (
-    <div className="w-full md:w-[40vw] py-8 flex flex-col gap-4 bg-[#F1F1F1] rounded-[10px]">
+    <div className="w-full lg:w-[40vw] py-8 flex flex-col gap-4 bg-[#F1F1F1] rounded-[10px]">
       <div className="w-full flex flex-col gap-4">
         <div className="w-full px-6 flex items-center justify-between">
-          <h3 className="text-xl md:text-2xl family1">Transaction History</h3>
+          <h3 className="text-xl lg:text-2xl family1">Transaction History</h3>
           <Link
             style={{ textDecoration: "underline" }}
             className="text-sm text-[var(--dark-1)] family1"

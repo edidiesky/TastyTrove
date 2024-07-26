@@ -24,8 +24,8 @@ const AdminSidebarData = [
     id: 61,
     tab: {
       icon: <FaHotel fontSize={"16px"} />,
-      title: "Rooms",
-      path: "/rooms",
+      title: "Menu",
+      path: "/menu",
     },
     list: [],
   },

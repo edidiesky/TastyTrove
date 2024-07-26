@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BiSearch } from "react-icons/bi";
+import { BiChevronLeft, BiChevronRight, BiSearch } from "react-icons/bi";
 import { Table } from "@/components/common/styles";
 import TableCard from "@/components/common/TableCard";
 import Loader from "@/components/home/loader";
@@ -10,13 +10,13 @@ import { handlePage } from "@/features/menu/menuSlice";
 
 const RoomsList = () => {
   const dispatch = useDispatch();
-  const { rooms, getallRoomisLoading, page } = useSelector(
-    (store) => store.room
+  const { menus, getallRoomisLoading, page } = useSelector(
+    (store) => store.menu
   );
   return (
     <>
       {getallRoomisLoading && <Loader />}
-      <div className="w-full bg-white shadows p-4 px-6 border rounded-[20px]">
+      <div className="w-full bg-[#FAFAFA] p-4 px-6 rounded-[20px]">
         {/* <label
           htmlFor=""
           className="hidden md:flex text-xl text-dark w-[200px] lg:w-[250px]
@@ -39,33 +39,38 @@ const RoomsList = () => {
                   {/* <th>ID</th> */}
                   <th>Room Name</th>
                   {/* <th>Location</th> */}
-                  <th>City</th>
+                  <th>Category</th>
                   <th>Price</th>
+                  <th>Availability</th>
                   <th>Date Created</th>
                   <th>Manage Room</th>
                 </tr>
               </thead>
               <tbody>
-                {rooms?.map((x, index) => {
-                  return <TableCard x={x} type={"rooms"} key={x?._id} />;
+                {menus?.map((x, index) => {
+                  return <TableCard x={x} type={"menus"} key={x?._id} />;
                 })}
               </tbody>
             </table>
           </div>
         </Table>
-        <div className="w-full flex items-center justify-end gap-2">
+        <div className="w-full text-xl flex items-center justify-end gap-4">
           <div
             onClick={() => dispatch(handlePage("prev"))}
-            className="p-3 rounded-2xl text-sm font-bold font-booking_font_bold px-4 border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.3)]"
+            className="p-3 rounded-2xl text-xl font-bold font-booking_font_bold px-4
+             border hover:opacity-[.8]
+             cursor-pointer border-[rgba(0,0,0,0.3)]"
           >
-            Previous
+            <BiChevronLeft />
           </div>
           {page}
           <div
             onClick={() => dispatch(handlePage("next"))}
-            className="p-3 rounded-2xl text-sm font-bold font-booking_font_bold px-4 border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.3)]"
+            className="p-3 rounded-2xl text-xl font-bold 
+            font-booking_font_bold px-4 border 
+            hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.3)]"
           >
-            Next
+            <BiChevronRight />
           </div>
         </div>
       </div>

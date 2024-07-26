@@ -64,7 +64,7 @@ export const menuSlice = createSlice({
     });
     builder.addCase(getAllMenuForAdmin.fulfilled, (state, action) => {
       state.getallMenuisLoading = false;
-      state.menus = action.payload.menus;
+      state.menus = action.payload.Menus;
       state.noOfPages = action.payload.noOfPages;
     });
     builder.addCase(getAllMenuForAdmin.rejected, (state, action) => {
@@ -78,7 +78,7 @@ export const menuSlice = createSlice({
     });
     builder.addCase(getAllMenu.fulfilled, (state, action) => {
       state.getallMenuisLoading = false;
-      state.menus = action.payload;
+      state.Menus = action.payload;
     });
     builder.addCase(getAllMenu.rejected, (state, action) => {
       state.getallMenuisSuccess = false;

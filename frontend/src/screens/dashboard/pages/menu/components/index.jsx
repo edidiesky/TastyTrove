@@ -2,16 +2,17 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
-import ReservationRoomsModal from "@/components/modals/ReservationRoomsModal";
-import RoomsList from "./rooms";
+// import ReservationRoomsModal from "@/components/modals/ReservationRoomsModal";
+import RoomsList from "./menu"
 import { useDispatch, useSelector } from "react-redux";
-import { getAllRoomsForAdmin } from "@/features/menu/roomReducer";
+import { getAllMenuForAdmin } from "@/features/menu/menuReducer";
+// import { getAllRoomsForAdmin } from "@/features/menu/roomReducer";
 const DashboardIndex = () => {
   const [roommodal, setRoomModal] = useState(false);
-  const { deleteRoomisSuccess,page } = useSelector((store) => store.room);
+  const { deleteRoomisSuccess, page } = useSelector((store) => store.menu);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getAllRoomsForAdmin());
+    dispatch(getAllMenuForAdmin());
   }, [page]);
   return (
     <div className="w-full">
@@ -22,18 +23,18 @@ const DashboardIndex = () => {
       </AnimatePresence>
       <div className="w-full pb-20 flex flex-col gap-12">
         <div className="w-full grid lg:grid-cols-2 lg:items-center gap-4 justify-between">
-          <h3 className="text-3xl lg:text-4xl font-booking_font4">
-            My Rooms
-            <span className="block pt-3 text-base font-booking_font">
-              Make a review of your rooms created either by adding or modifying
+          <h3 className="text-4xl lg:text-5xl font-bold family1">
+            Summary of <br /> your Menu
+            <span className="block pt-3 text-base font-normal">
+              Make a review of your menu created either by adding or modifying
               their content
             </span>
           </h3>
           <div className="flex items-center lg:justify-end gap-2">
             <Link
-              to={"/dashboard/rooms/create-room"}
-              className="p-3 btn cursor-pointer text-sm px-8 font-booking_font4 
-             rounded-[10px]  text-white"
+              to={"/dashboard/menu/create-room"}
+              className="p-3 btn btn-4 cursor-pointer text-sm px-4 family1 
+             rounded-[10px]  text-[#fff]"
             >
               Add a room
             </Link>

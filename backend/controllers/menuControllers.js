@@ -41,6 +41,9 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
   const Menus = await prisma.menu.findMany({
     skip: skip,
     take: limit,
+    where: {
+      userid: req.user?.userId,
+    },
     include: {
       user: true,
     },

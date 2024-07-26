@@ -101,7 +101,7 @@ export default function App() {
           />
           <Route
             exact
-            path="rooms"
+            path="menu"
             element={
               <Suspense fallback={<Loader />}>
                 <Rooms />
@@ -110,7 +110,7 @@ export default function App() {
           />
           <Route
             exact
-            path="rooms/:id"
+            path="menu/:id"
             element={
               <Suspense fallback={<Loader />}>
                 <CreateRoom />
@@ -160,7 +160,7 @@ export default function App() {
 
           <Route
             exact
-            path="rooms/create-room"
+            path="menu/create-room"
             element={
               <Suspense fallback={<Loader />}>
                 <CreateRoom />
