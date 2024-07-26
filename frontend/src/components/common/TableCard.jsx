@@ -20,9 +20,9 @@ const TableCard = ({ x, type }) => {
         {/* <Delete /> */}
         <tr key={x?.id}>
           <td>
-            <span className="flex items-center gap-2">
+            <span className="flex items-center justify-center gap-2">
               Payment Received from{" "}
-              <span className="font-booking_font font-bold text-dark">
+              <span className="family1 font-bold text-dark">
                 {x?.user?.name}
               </span>
             </span>
@@ -35,11 +35,11 @@ const TableCard = ({ x, type }) => {
             </span> */}
 
             {x?.status === "CONFIRMED" ? (
-              <span className=" font-normal text-xs font-booking_font_bold text-center success">
+              <span className=" font-normal text-xs family1 text-center success">
                 {x?.status}
               </span>
             ) : (
-              <span className=" font-normal text-xs font-booking_font_bold text-center danger">
+              <span className=" font-normal text-xs family1 text-center danger">
                 {x?.status}
               </span>
             )}
@@ -76,17 +76,19 @@ const TableCard = ({ x, type }) => {
             </div>
           </td>
           <td>
-            <span className=" font-normal family1  text-dark">
-              {x?.email}
-            </span>
+            <span className=" font-normal family1  text-dark">{x?.email}</span>
           </td>
           <td>
-            {x?.isAdmin ? (
-              <span className=" font-normal text-xs font-booking_font_bold text-center success">
-               Admin
+            {x?.role === "ADMIN" ? (
+              <span className=" font-normal text-xs family1 text-center success">
+                Admin
+              </span>
+            ) : x?.role === "SELLER" ? (
+              <span className=" font-normal text-xs family1 text-center success">
+                SELLER
               </span>
             ) : (
-              <span className=" font-normal text-xs font-booking_font_bold text-center danger">
+              <span className=" font-normal text-xs family1 text-center danger">
                 User
               </span>
             )}
@@ -187,11 +189,11 @@ const TableCard = ({ x, type }) => {
             </span> */}
 
             {x?.status === "CONFIRMED" ? (
-              <span className=" font-normal text-xs font-booking_font_bold text-center success">
+              <span className=" font-normal text-xs family1 text-center success">
                 {x?.status}
               </span>
             ) : (
-              <span className=" font-normal text-xs font-booking_font_bold text-center danger">
+              <span className=" font-normal text-xs family1 text-center danger">
                 {x?.status}
               </span>
             )}

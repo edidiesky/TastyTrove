@@ -71,7 +71,7 @@ const GrowthStat = () => {
   return (
     <div id="chart" className="w-full">
       <div className="w-full flex flex-col gap-8">
-        <div className="p-6 bg-[#F1F1F1] w-full px-6 py-8 flex-col rounded-[10px] min-h-[400px] flex gap-4">
+        <div className="p-6 bg-[#fafafa] w-full px-6 py-8 flex-col rounded-[10px] min-h-[400px] flex gap-4">
           <h3 className="text-4xl family1">Sales Statistics</h3>
           <div className="flex w-full flex-col gap-8">
             <Chart
@@ -96,7 +96,7 @@ const SalesStat = () => {
   // }, []);
   const { payments } = useSelector((store) => store.payment);
   return (
-    <div className="w-full lg:w-[40vw] py-8 flex flex-col gap-4 bg-[#F1F1F1] rounded-[10px]">
+    <div className="w-full lg:w-[40vw] py-8 flex flex-col gap-4 bg-[#fafafa] rounded-[10px]">
       <div className="w-full flex flex-col gap-4">
         <div className="w-full px-6 flex items-center justify-between">
           <h3 className="text-xl lg:text-2xl family1">Transaction History</h3>

@@ -93,7 +93,7 @@ export const Table = styled.div`
           td {
             text-align: center;
             padding: 1.5rem .1rem !important;
-            font-size: 15px !important;
+            font-size: 14px !important;
             font-weight: normal !important;
             color: #000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.09);
@@ -106,10 +106,10 @@ export const Table = styled.div`
                 background: #f3efe5;
               }
               &.success {
-                color: #28a745;
+                color: #07581a;
                 padding: 0.56rem 1rem;
                 border-radius: 4px;
-                background: #dcf6d9;
+                background: #bef4b8;
               }
             }
           }

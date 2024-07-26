@@ -51,7 +51,7 @@ const Widget = () => {
             key={index}
             style={{ transition: "all .3s", gridTemplateColumns: "1fr 50px" }}
             className={`${
-              index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#F1F1F1] text-[#000]"
+              index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#fafafa] text-[#000]"
             } p-6 family1  w-full rounded-[30px] flex-col
                cursor-pointer flex items-start justify-between gap-4 min-h-64`}
           >
