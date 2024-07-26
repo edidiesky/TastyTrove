@@ -32,7 +32,7 @@ app.use(
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cookieParser());
-
+import NotificationRoutes from "./routes/notificationRoutes.js";
 import Auth from "./routes/authRoute.js";
 import userAuth from "./routes/userRoute.js";
 import menuRoute from "./routes/menuRoutes.js";
@@ -50,7 +50,7 @@ app.use("/api/v1/reservation", reservationRoute);
 app.use("/api/v1/upload", uploadRoute);
 app.use("/api/v1/payment", orderRoute);
 app.use("/api/v1/stat", StatRoute);
-
+app.use("/api/v1/notification", NotificationRoutes);
 // // Middlewares
 app.use(NotFound);
 app.use(errorHandler);
