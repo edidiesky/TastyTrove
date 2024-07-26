@@ -3,7 +3,7 @@ import Meta from "@/components/common/Meta";
 export default function Home() {
   return (
     <div>
-      <Meta title={"Dashboard - Manage your Room"} />
+      <Meta title={"Dashboard - Manage your menu"} />
       <DashboardIndex />
     </div>
   );

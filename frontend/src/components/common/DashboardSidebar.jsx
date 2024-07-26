@@ -62,7 +62,7 @@ const DashboardSidebar = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const pathname = true;
   return (
-    <HeaderStyles className={`w-full hidden px-4 md:flex column gap-2`}>
+    <HeaderStyles className={`w-full hidden px-4 z-[40000] md:flex column gap-2`}>
       <div className="w-full h-full py-4 justify-between flex items-center flex-col gap-4">
         <div className="w-full h-[90%] flex flex-col gap-8">
           <div className="flex flex-col w-full items-start justify-between py-1">

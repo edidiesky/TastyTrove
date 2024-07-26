@@ -5,7 +5,7 @@ const Reservation = lazy(() => import("./pages/reservation"));
 const Orders = lazy(() => import("./pages/orders"));
 const Rooms = lazy(() => import("./pages/menu"));
 const Statistics = lazy(() => import("./pages/statistics"));
-const CreateRoom = lazy(() => import("./pages/create-room"));
+const CreateMenu = lazy(() => import("./pages/manage-menu"));
 const Settings = lazy(() => import("./pages/settings"));
 // Settings
 
@@ -14,7 +14,7 @@ export {
   Statistics,
   Customers,
   Reservation,
-  CreateRoom,
+  CreateMenu,
   Orders,
   Settings,
 };

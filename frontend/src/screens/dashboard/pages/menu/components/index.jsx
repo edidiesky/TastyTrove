@@ -32,7 +32,7 @@ const DashboardIndex = () => {
           </h3>
           <div className="flex items-center lg:justify-end gap-2">
             <Link
-              to={"/dashboard/menu/create-room"}
+              to={"/dashboard/menu/create-menu"}
               className="p-3 btn btn-4 cursor-pointer text-sm px-4 family1 
              rounded-[10px]  text-[#fff]"
             >

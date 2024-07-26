@@ -4,68 +4,67 @@ import RoomForms from "./roomsform";
 import RoomDetail from "./roomdetail";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  CreateRoom,
-  getSingleRooms,
-  UpdateRoom,
-} from "@/features/menu/roomReducer";
+  CreateMenu,
+  getSingleMenu,
+  UpdateMenu,
+} from "@/features/menu/menureducer";
 import Loader from "@/components/home/loader";
 import { useNavigate, useParams } from "react-router-dom";
-import { handleClearRoomAlert } from "@/features/menu/menuSlice";
+import { handleClearMenuAlert } from "@/features/menu/menuSlice";
 const DashboardIndex = () => {
   const navigate = useNavigate();
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
-  const [city, setCity] = useState("");
+  const [availability, setAvailability] = useState(0);
   const [images, setImages] = useState([]);
 
   const [features, setFeatures] = useState([]);
-  const [amenities, setAmenities] = useState([]);
-  const [rooms, setRooms] = useState(0);
+  const [menus, setMenus] = useState(0);
   const [bathrooms, setBathRooms] = useState(0);
   const [description, setDescription] = useState("");
   const [shortdescription, setShortDescription] = useState("");
 
   const dispatch = useDispatch();
   const {
-    creatingRoomisLoading,
-    updateRoomisSuccess,
-    creatingRoomisSuccess,
-    updateRoomisLoading,
-    room,
-  } = useSelector((store) => store.room);
-  // get the room id
+    creatingMenuisLoading,
+    updateMenuisSuccess,
+    creatingMenuisSuccess,
+    updateMenuisLoading,
+    menu,
+  } = useSelector((store) => store.menu);
+  // get the menu id
   const { id } = useParams();
 
   useEffect(() => {
-     dispatch(handleClearRoomAlert());
+     dispatch(handleClearMenuAlert());
     if (id) {
-      dispatch(getSingleRooms(id));
+      dispatch(getSingleMenu(id));
     }
   }, [id]);
 
   useEffect(() => {
-    if (room) {
-      setTitle(room?.title);
-      setPrice(room?.price);
-      setCity(room?.city);
-      setDescription(room?.description);
-      setImages(room?.images);
-      setBathRooms(room?.bathroom);
-      setRooms(room?.bedroom);
-      // dispatch(getSingleRooms(room));
+    if (menu) {
+      setTitle(menu?.title);
+      setPrice(menu?.price);
+      setAvailability(menu?.availabilityCount);
+      setDescription(menu?.description);
+      setImages(menu?.images);
+      setBathRooms(menu?.bathroom);
+      setMenus(menu?.bedroom);
+      // dispatch(getSingleMenu(menu));
     } else {
        setTitle("");
        setPrice("");
-       setCity("");
+       setAvailability("");
        setDescription("");
        setImages([]);
        setBathRooms("");
-       setRooms("");
+       setMenus("");
     }
   }, [
-    room,
+    menu,
     setTitle,
-    setRooms,
+    setMenus,
     setPrice,
     setDescription,
     setImages,
@@ -76,66 +75,63 @@ const DashboardIndex = () => {
     title: title,
     price: price.toString(),
     images: images,
-    city: city,
+    availability: availability,
     features: features,
-    bedroom: rooms,
-    bathroom: bathrooms,
     description: description,
   };
   // console.log(roomData);
   const handleRoomCreation = () => {
-    if (room) {
+    if (menu) {
       dispatch(
-        UpdateRoom({
+        UpdateMenu({
           ...roomData,
         })
       );
     } else {
-      dispatch(CreateRoom(roomData));
+      dispatch(CreateMenu(roomData));
     }
   };
 
   useEffect(() => {
    
-    if (creatingRoomisSuccess) {
+    if (creatingMenuisSuccess) {
       const timeout = setTimeout(() => {
-        navigate(`/dashboard/rooms`);
+        navigate(`/dashboard/menu`);
       }, 700);
 
       return () => clearTimeout(timeout);
     }
-  }, [creatingRoomisSuccess, navigate]);
+  }, [creatingMenuisSuccess, navigate]);
 
   return (
     <div className="w-full relative">
       <div className="w-full relative pb-20 flex flex-col gap-12">
         <div className="w-full grid md:grid-cols-2 md:items-center gap-4 justify-between">
-          <h3 className="text-3xl lg:text-4xl font-booking_font4">
-            {room ? "Update Your room" : "Add Your Room"}
-            <span className="block font-normal text-dark pt-2 text-base font-booking_font">
-              The most important idea about this section is that it gives u
-              ability to add your rooms. When adding your room product idea do
+          <h3 className="text-4xl lg:text-5xl family1 font-bold">
+            {menu ? "Update Your menu" : <>Create <br /> Your Menu</>}
+            <span className="block font-normal text-dark pt-2 text-base family1">
+              When adding your menu product idea, do
               not forget to fill out the forms else errors are bound to occur
             </span>
           </h3>
           <div className="flex items-center md:justify-end">
             <button
-              disabled={creatingRoomisLoading || updateRoomisLoading}
+              disabled={creatingMenuisLoading || updateMenuisLoading}
               onClick={handleRoomCreation}
-              className="btn text-base font-booking_font_bold p-3  px-8 text-white rounded-[40px]"
+              className="btn btn-4 text-base family1 p-3  px-8 text-white rounded-[40px]"
             >
-              {creatingRoomisLoading || updateRoomisLoading ? (
+              {creatingMenuisLoading || updateMenuisLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader type="dots" />
-                  {room ? " Updating in progress" : "Room Creating"}
+                  {menu ? " Updating in progress" : "Room Creating"}
                 </span>
               ) : (
-                <>{room ? "Update Room" : "Create Room"}</>
+                <>{menu ? "Update Room" : "Create Room"}</>
               )}
             </button>
           </div>
         </div>
-        <div className="w-full relative flex gap-8 flex-col-reverse lg:grid items-start lg:grid-cols-custom">
+        <div className="w-full relative flex gap-8 flex-col-reverse lg:grid items-start lg:grid-cols-1">
           <RoomForms
             description={description}
             setTitle={setTitle}
@@ -145,29 +141,27 @@ const DashboardIndex = () => {
             shortdescription={shortdescription}
             setPrice={setPrice}
             price={price}
-            rooms={rooms}
-            setRooms={setRooms}
+            menu={menus}
+            setMenus={setMenus}
             setBathRooms={setBathRooms}
             bathrooms={bathrooms}
             setImages={setImages}
             images={images}
             features={features}
             setFeatures={setFeatures}
-            setAmenities={setAmenities}
-            amenities={amenities}
-            city={city}
-            setCity={setCity}
+            availability={availability}
+            setAvailability={setAvailability}
           />
-          <div className="w-full md:w-[350px] relative lg:sticky top-[15%] left-0">
+          {/* <div className="w-full md:w-[350px] relative lg:sticky top-[15%] left-0">
             <RoomDetail
               images={images}
               title={title}
               price={price}
-              rooms={rooms}
+              menu={menus}
               bathrooms={bathrooms}
               shortdescription={shortdescription}
             />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

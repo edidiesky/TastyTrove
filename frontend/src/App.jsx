@@ -9,7 +9,7 @@ import {
   Statistics,
   Rooms,
   Customers,
-  CreateRoom,
+  CreateMenu,
   Reservation,
   Orders,
   Settings,
@@ -113,7 +113,7 @@ export default function App() {
             path="menu/:id"
             element={
               <Suspense fallback={<Loader />}>
-                <CreateRoom />
+                <CreateMenu />
               </Suspense>
             }
           />
@@ -160,10 +160,10 @@ export default function App() {
 
           <Route
             exact
-            path="menu/create-room"
+            path="menu/create-menu"
             element={
               <Suspense fallback={<Loader />}>
-                <CreateRoom />
+                <CreateMenu />
               </Suspense>
             }
           />

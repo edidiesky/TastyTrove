@@ -188,14 +188,14 @@ const Navbar = () => {
                           className="w-10 lg:w-12 h-10 lg:h-12 rounded-full"
                         />
                       )}
-                      {currentUser && (
+                      {/* {currentUser && (
                         <h4 className="text-base hidden lg:block family1 text-[#fff] family1">
                           {currentUser?.username}
                           <span className="block font-normal family1 text-xs text-[var(--grey-1)]">
                             {currentUser?.email}
                           </span>
                         </h4>
-                      )}
+                      )} */}
                     </div>
                   </div>
                   <span

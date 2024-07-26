@@ -78,7 +78,7 @@ export const menuSlice = createSlice({
     });
     builder.addCase(getAllMenu.fulfilled, (state, action) => {
       state.getallMenuisLoading = false;
-      state.Menus = action.payload;
+      state.menus = action.payload;
     });
     builder.addCase(getAllMenu.rejected, (state, action) => {
       state.getallMenuisSuccess = false;

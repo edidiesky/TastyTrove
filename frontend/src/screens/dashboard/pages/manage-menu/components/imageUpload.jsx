@@ -44,38 +44,46 @@ const ImageUpload = ({ images, setImages }) => {
   };
 
   return (
-    <div className="w-full bg-[#fff] border p-6 px-2 rounded-[10px]">
+    <div className="w-[400px] flex bg-[#fdfdfd] border py-8 px-4 rounded-[20px]">
       {uploading && <Loader />}
-      <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-8">
+      <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-4">
         <div className="w-full flex items-center justify-between">
-          <h4 className="text-2xl font-booking_font4">
+          <h4 className="text-2xl family1">
             Room Images
-            <span className="font-normal font-booking_font text-base block">
+            <span className="font-normal family1 text-sm block">
               Share what makes your rooms images special.
             </span>
           </h4>
         </div>
         <div className="w-full flex flex-col gap-4">
-          <div className="w-full flex flex-col gap-4 text-sm font-booking_font4">
-            <span>Photos</span>
+          <div className="w-full flex flex-col gap-4 text-sm family1">
             {images?.length > 0 ? (
-              <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2">
-                {images?.map((image, index) => {
-                  return (
-                    <div className="w-full border p-2">
-                      <img alt="Cotion" loading="lazy" className="h-20 w-full object-cover" src={image} />
-                    </div>
-                  );
-                })}
+              <div className="flex flex-col gap-4">
+                <span>Photos</span>
+                <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2">
+                  {images?.map((image, index) => {
+                    return (
+                      <div className="w-full border p-2">
+                        <img
+                          alt="Cotion"
+                          loading="lazy"
+                          className="h-20 w-full object-cover"
+                          src={image}
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
             ) : (
               <label
                 htmlFor="upload"
-                className="w-full bg-[#fafafa] rounded-lg flex items-center justify-center h-[300px]"
+                className="w-full bg-[#fafafa] rounded-lg family1 flex items-center justify-center h-[100px]"
               >
                 <div
                   style={{ transition: "all .4s" }}
-                  className="text-base font-bold cursor-pointer flex items-center shadow-sm hover:shadow-lg border rounded-lg justify-center bg-white p-4 gap-3 font-booking_font_bold"
+                  className="text-sm font-normal cursor-pointer flex items-center border rounded-lg justify-center
+                   bg-white p-4 gap-3 family1"
                 >
                   <input
                     type="file"
