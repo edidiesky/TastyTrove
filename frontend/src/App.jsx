@@ -21,6 +21,7 @@ const SearchWrapper = lazy(() => import("./screens/Search"));
 const SingleWrapper = lazy(() => import("./screens/Single"));
 const Cart = lazy(() => import("./screens/Cart"));
 const TripsWrapper = lazy(() => import("./screens/Trips"));
+const TeamWrapper = lazy(() => import("./screens/Team"));
 // const PaymentWrapper = lazy(() => import("./screens/Payment"));
 const PaymentSuccess = lazy(() => import("./screens/Payment-Success"));
 // // PaymentSuccess
@@ -71,7 +72,15 @@ export default function App() {
               </Suspense>
             }
           />
-
+          <Route
+            path="/restaurant/team"
+            element={
+              <Suspense fallback={<></>}>
+                <TeamWrapper />
+              </Suspense>
+            }
+          />
+          {/* TeamWrapper */}
           <Route
             path="/payment-success/:id"
             element={

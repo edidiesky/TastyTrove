@@ -15,7 +15,8 @@ export default function Bottom() {
     <div>
       <div className="w-full flex items-start gap-4 justify-between topWrapper">
         <div className="flex flex-col gap-8 flex-1">
-          <h3 className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] after:rounded-lg after:absolute text-5xl uppercase text-light text-dark">
+          <h3 className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
+          after:rounded-lg after:absolute text-5xl uppercase text-light text-dark">
             Additional informations
           </h3>
           <h4 className="family2 lg:pl-20 md:pr-8 leading-[1.5] text-xl text-light text-dark">

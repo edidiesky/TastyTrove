@@ -34,7 +34,7 @@ const linkData = [
   },
   {
     title: "Team",
-    path: "trips",
+    path: "restaurant/team",
   },
 ];
 
