@@ -112,12 +112,12 @@ const Profile = () => {
   return (
     <div className="w-full lg:grid-cols-custom_2 relative items-start gap-8 grid">
       {(updateUserisLoading || getallUserisLoading || uploading) && <Loader />}
-      <div className="w-full lg:sticky top-[10%] py-8 bg-white border rounded-[20px]">
+      <div className="w-full lg:w-[340px] lg:sticky top-[10%] py-8 bg-[#fafafa] rounded-[10px]">
         <div
           onClick={() => setIndex(0)}
           className={`px-6  ${
-            index === 0 ? "bg-[#fafafa] border-r-4" : " bg-white border-0"
-          }  text-base font-booking_font4 cursor-pointer py-4 flex items-center justify-start gap-4`}
+            index === 0 ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]" : " bg-[#fafafa] border-0"
+          }  text-base family1 cursor-pointer py-4 flex items-center justify-start gap-4`}
         >
           <BiUser /> Profile Settings
         </div>
@@ -125,8 +125,8 @@ const Profile = () => {
         <div
           onClick={() => setIndex(1)}
           className={`px-6  ${
-            index === 1 ? "bg-[#fafafa] border-r-4" : " bg-white border-0"
-          }  text-base font-booking_font4 cursor-pointer py-4 flex items-center justify-start gap-4`}
+            index === 1 ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]" : " bg-[#fafafa] border-0"
+          }  text-base family1 cursor-pointer py-4 flex items-center justify-start gap-4`}
         >
           <BiLock /> Password
         </div>
@@ -170,7 +170,7 @@ const Profile = () => {
                   <div
                     onClick={handleUpdateUser}
                     style={{ letterSpacing: "2px" }}
-                    className="btn btn-2 text-xs font-booking_font p-4 px-6 uppercase font-normal rounded-[40px] text-white"
+                    className="btn btn-3 text-xs family1 p-2 px-6 uppercase font-normal rounded-[40px]"
                   >
                     Upload Now
                   </div>
@@ -182,7 +182,7 @@ const Profile = () => {
                     <label
                       key={index}
                       htmlFor={input.label}
-                      className="text-sm font-booking_font_normal rounded-[10px] flex flex-col gap-2 text-dark"
+                      className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                     >
                       <span className="text-dark font-normal">
                         {input.label}
@@ -213,7 +213,7 @@ const Profile = () => {
                         User Priviledge
                       </span>
 
-                      <span className="text-sm font-normal font-booking_font">
+                      <span className="text-sm font-normal family1">
                         Modify the users priviledge from normal user to admin
                       </span>
                     </div>
@@ -227,7 +227,7 @@ const Profile = () => {
                   <div
                     onClick={handleUpdateUser}
                     style={{ letterSpacing: "2px" }}
-                    className="btn btn-2 text-xs font-booking_font p-4 px-6 uppercase font-normal rounded-[40px] text-white"
+                    className="btn btn-4 text-xs family1 p-4 px-6 uppercase font-normal rounded-[40px]"
                   >
                     Save Changes
                   </div>
@@ -239,12 +239,12 @@ const Profile = () => {
           <div className="w-full p-8 px-6 bg-white border rounded-[20px]">
             <div className="w-full flex flex-col gap-8">
               <div className="w-full flex items-center gap-8">
-                <h4 className="text-xl font-booking_font4">Change Password</h4>
+                <h4 className="text-xl family1">Change Password</h4>
               </div>
               <form className="w-full grid grid-cols-1 gap-4">
                 <label
                   htmlFor={"password"}
-                  className="text-base font-booking_font_normal rounded-[10px] flex flex-col gap-2 text-dark"
+                  className="text-base family1 rounded-[10px] flex flex-col gap-2 text-dark"
                 >
                   <span className="text-grey font-normal">Password</span>
                   <div className="input flex item-center gap-1">
@@ -264,7 +264,7 @@ const Profile = () => {
 
                 <label
                   htmlFor={"confirmpassword"}
-                  className="text-base font-booking_font_normal rounded-[10px] flex flex-col gap-2 text-dark"
+                  className="text-base family1 rounded-[10px] flex flex-col gap-2 text-dark"
                 >
                   <span className="text-grey font-normal">
                     Confirm Password
@@ -290,7 +290,7 @@ const Profile = () => {
                     disabled={password === "" && confirmpassword === ""}
                     onClick={handleUpdateUserPassword}
                     style={{ letterSpacing: "2px" }}
-                    className="btn btn-2 text-xs font-booking_font p-4 px-6 uppercase font-normal rounded-[40px] text-white"
+                    className="btn btn-4 text-xs family1 p-4 px-6 uppercase font-normal rounded-[40px]"
                   >
                     Save Changes
                   </button>

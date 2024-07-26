@@ -9,7 +9,7 @@ const RoomsList = () => {
   //   const [roommodal, setRoomModal] = useState(false);
     const { users, getallRoomisLoading } = useSelector((store) => store.auth);
   return (
-    <div className="w-full bg-[#fdfdfd] p-8 px-6 rounded-[20px]">
+    <div className="w-full bg-[#fafafa] p-8 px-6 rounded-[20px]">
       <label
         htmlFor=""
         className="hidden md:flex text-xl text-dark w-[200px] lg:w-[250px]

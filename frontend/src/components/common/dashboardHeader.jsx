@@ -113,9 +113,9 @@ const DashboardHeader = () => {
                 alt=""
                 className="w-10 rounded-full"
               />
-              <h4 className="text-base text-dark font-booking_font4 family1">
+              <h4 className="text-base text-dark family1 family1">
                 {currentUser?.name}
-                <span className="block font-normal font-booking_font text-xs text-dark">
+                <span className="block font-normal family1 text-xs text-dark">
                   {currentUser?.email}
                 </span>
               </h4> */}
@@ -132,9 +132,9 @@ const DashboardHeader = () => {
                 className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
               />
             )}
-            {/* <h4 className="text-base text-dark font-booking_font4 family1">
+            {/* <h4 className="text-base text-dark family1 family1">
               {currentUser?.name}
-              <span className="block font-normal font-booking_font text-xs text-dark">
+              <span className="block font-normal family1 text-xs text-dark">
                 {currentUser?.email}
               </span>
             </h4> */}
@@ -173,7 +173,7 @@ const DashboardHeader = () => {
         style={{ zIndex: "200" }}
         className={`${
           bar ? "left-0" : "-left-[100%]"
-        } w-[300px] bg-[#151515] border-r shadow-2xl  h-full transition-all ease duration-700 fixed flex lg:hidden top-0 flex-col gap-2`}
+        } w-[300px] bg-[#fafafa] border-r shadow-2xl  h-full transition-all ease duration-700 fixed flex lg:hidden top-0 flex-col gap-2`}
       >
         <div
           onClick={() => setBar(!bar)}
@@ -185,7 +185,7 @@ const DashboardHeader = () => {
         {/* <div className="w-full h-full absolute bg-[#fff] z-[24] object-cover" /> */}
         <div
           style={{ zIndex: "200" }}
-          className="w-full h-full bg-[#151515] Header_wrapper py-4 flex items-start flex-col gap-2"
+          className="w-full h-full bg-[#fafafa] Header_wrapper py-4 flex items-start flex-col gap-2"
         >
           <div className="flex px-3 items-center gap-2">
             {currentUser?.image ? (
@@ -206,9 +206,9 @@ const DashboardHeader = () => {
             ) : (
               ""
             )}
-            <h4 className="text-base font-booking_font4 text-white">
+            <h4 className="text-base family1 text-[#000]">
               {currentUser?.name}
-              <span className="block font-normal font-booking_font text-sm text-white">
+              <span className="block font-normal family1 text-xs text-[#000]">
                 {currentUser?.email}
               </span>
             </h4>
@@ -221,11 +221,11 @@ const DashboardHeader = () => {
                     onClick={() => setBar(!bar)}
                     end
                     className={`
-                      text-xm w-[90%] mx-auto text-white font-booking_font4`}
+                      text-xm w-[90%] mx-auto text-[#000] family1`}
                     to={`/dashboard${x.tab.path}`}
                   >
                     <div className="flex items-center">
-                      <span className="w-12 h-12 text-lg rounded-xl flex items-center text-blue justify-center">
+                      <span className="w-12 h-12 text-lg rounded-xl flex items-center text-[#00] justify-center">
                         {" "}
                         {x.tab.icon}
                       </span>
@@ -302,25 +302,13 @@ export const HeaderStyles = styled.div`
     align-items: center;
     gap: 1rem;
     position: relative;
-    svg {
-      color: #fff;
-    }
 
     &:hover {
-      background: #3a616a;
-      color: #fff;
-
-      svg {
-        color: #fff;
-      }
+      background: #eee;
     }
     &.active {
       position: relative;
-      background: #3a616a;
-      color: #fff;
-      svg {
-        color: #fff;
-      }
+      background: #eee;
     }
   }
 `;

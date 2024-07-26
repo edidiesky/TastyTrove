@@ -9,6 +9,9 @@ import { FaRegUser, FaHotel, FaMoneyBill } from "react-icons/fa";
 // import { NavLink } from "react-router-dom";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { BiFoodMenu, BiMessage } from "react-icons/bi";
+import { LayoutDashboard } from "lucide-react";
+import { MdRateReview } from "react-icons/md";
 
 const AdminSidebarData = [
   {
@@ -16,14 +19,14 @@ const AdminSidebarData = [
     tab: {
       title: "Dashboard",
       path: "",
-      icon: <TiHome fontSize={"18px"} />,
+      icon: <LayoutDashboard fontSize={"20px"} />,
     },
     list: [],
   },
   {
     id: 61,
     tab: {
-      icon: <FaHotel fontSize={"16px"} />,
+      icon: <BiFoodMenu fontSize={"20px"} />,
       title: "Menu",
       path: "/menu",
     },
@@ -32,25 +35,34 @@ const AdminSidebarData = [
   {
     id: 6,
     tab: {
-      icon: <FaMoneyBill fontSize={"16px"} />,
+      icon: <FaMoneyBill fontSize={"20px"} />,
       title: "Transactions",
       path: "/orders",
+    },
+    list: [],
+  },
+    {
+    id: 8,
+    tab: {
+      icon: <MdRateReview fontSize={"20px"} />,
+      title: "Reviews",
+      path: "/review",
     },
     list: [],
   },
   {
     id: 6,
     tab: {
-      icon: <LuBedDouble fontSize={"16px"} />,
-      title: "Reservation",
-      path: "/reservation",
+      icon: <BiMessage fontSize={"20px"} />,
+      title: "Messages",
+      path: "/message",
     },
     list: [],
   },
   {
     id: 4,
     tab: {
-      icon: <FaRegUser fontSize={"16px"} />,
+      icon: <FaRegUser fontSize={"18px"} />,
       title: "Clients",
       path: "/customers",
     },
@@ -64,7 +76,7 @@ const DashboardSidebar = () => {
   return (
     <HeaderStyles className={`w-full hidden px-4 z-[40000] md:flex column gap-2`}>
       <div className="w-full h-full py-4 justify-between flex items-center flex-col gap-4">
-        <div className="w-full h-[90%] flex flex-col gap-8">
+        <div className="w-full h-[90%] flex flex-col gap-2">
           <div className="flex flex-col w-full items-start justify-between py-1">
             {/* <h4 className="text-sm text-[#000]">RockTrading</h4> */}
             <div className=" w-[90%] mx-auto relative flex gap-4 items-center flex-col justify-between">
@@ -87,7 +99,7 @@ const DashboardSidebar = () => {
               </Link>
             </div>
           </div>
-          <div className="w-full my-4 flex flex-col gap-1">
+          <div className="w-full flex flex-col gap-1">
             {AdminSidebarData?.map((x, index) => {
               // console.log(pathname, `/dashboard${x.tab.path}`);
               return (

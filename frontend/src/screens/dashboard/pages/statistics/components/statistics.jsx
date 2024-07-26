@@ -71,8 +71,8 @@ const GrowthStat = () => {
   return (
     <div id="chart" className="w-full">
       <div className="w-full flex flex-col gap-8">
-        <div className="p-6 bg-[#fafafa] w-full px-6 py-8 flex-col rounded-[10px] min-h-[400px] flex gap-4">
-          <h3 className="text-4xl family1">Sales Statistics</h3>
+        <div className="p-6 bg-[#fafafa] w-full px-6 py-12 flex-col rounded-[10px] min-h-[400px] flex gap-4">
+          <h3 className="text-3xl font-semibold family1">Sales Statistics</h3>
           <div className="flex w-full flex-col gap-8">
             <Chart
               options={options}
@@ -91,15 +91,15 @@ const GrowthStat = () => {
 const SalesStat = () => {
   const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch(GetPaymentHistory());
-  // }, []);
+  useEffect(() => {
+    dispatch(GetPaymentHistory());
+  }, []);
   const { payments } = useSelector((store) => store.payment);
   return (
     <div className="w-full lg:w-[40vw] py-8 flex flex-col gap-4 bg-[#fafafa] rounded-[10px]">
       <div className="w-full flex flex-col gap-4">
         <div className="w-full px-6 flex items-center justify-between">
-          <h3 className="text-xl lg:text-2xl family1">Transaction History</h3>
+          <h3 className="text-xl lg:text-2xl font-semibold family1">Transaction History</h3>
           <Link
             style={{ textDecoration: "underline" }}
             className="text-sm text-[var(--dark-1)] family1"
@@ -119,14 +119,14 @@ const SalesStat = () => {
                   <div className="w-10 h-10 rounded-full bg-[#000] flex items-center justify-center text-white text-base">
                     {data?.user?.name[0]}
                   </div>
-                  <span className="text-base">
+                  <span className="text-base family1 font-semibold">
                     {data?.user?.name}
-                    <div className="block font-booking_font text-xs text-grey">
+                    <div className="block family1 font-normal text-xs text-grey">
                       {data?.user?.email}
                     </div>
                   </span>
                 </div>
-                <span>+#{Number(data?.amount).toLocaleString()}</span>
+                <span>+${Number(data?.amount).toLocaleString()}</span>
               </li>
             );
           })}

@@ -8,9 +8,9 @@ const DashboardLayout = () => {
     <>
       <DashboardStyles className="w-full relative bg-[#fff] flex">
         <DashboardSidebar />
-        <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col gap-4">
           <DashboardHeader />
-          <div className="px-4 py-12 lg:px-6 bg-[#fff] w-full">
+          <div className="px-4 lg:px-6 bg-[#fff] w-full">
             <Outlet />
           </div>
         </div>

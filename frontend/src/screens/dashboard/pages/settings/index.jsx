@@ -16,7 +16,7 @@ export default function Settings() {
     dispatch(GetSingleUser(id))
   }, [id]);
   return (
-    <div>
+    <div className="py-12">
       <Meta title={"Update User Profile"} />
       <DashboardIndex />
     </div>

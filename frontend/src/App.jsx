@@ -10,9 +10,9 @@ import {
   Rooms,
   Customers,
   CreateMenu,
-  Reservation,
   Orders,
   Settings,
+  Messages,
 } from "./screens/dashboard";
 import { ProtectRoute } from "./lib/ProtectRoute";
 import Animation from "./animations/Animation";
@@ -126,17 +126,6 @@ export default function App() {
               </Suspense>
             }
           />
-          {/* Settings */}
-          <Route
-            exact
-            path="reservation"
-            element={
-              <Suspense fallback={<Loader />}>
-                <Reservation />
-              </Suspense>
-            }
-          />
-
           <Route
             exact
             path="profile/:id"
@@ -146,7 +135,16 @@ export default function App() {
               </Suspense>
             }
           />
-
+          <Route
+            exact
+            path="message"
+            element={
+              <Suspense fallback={<Loader />}>
+                <Messages />
+              </Suspense>
+            }
+          />
+          {/* Messages */}
           <Route
             exact
             path="orders"

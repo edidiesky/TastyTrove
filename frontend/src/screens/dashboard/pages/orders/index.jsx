@@ -16,7 +16,7 @@ export default function Orders() {
     return <Loader />;
   }
   return (
-    <div>
+    <div className="py-12">
       <Meta title={"My Orders Summary"} />
       <DashboardIndex />
     </div>

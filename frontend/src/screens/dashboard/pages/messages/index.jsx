@@ -11,7 +11,7 @@ export default function Customers() {
     dispatch(GetAllUsers())
   },[])
   return (
-    <div className="py-12">
+    <div>
       <DashboardIndex />
     </div>
   );
