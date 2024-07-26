@@ -9,12 +9,12 @@ const DashboardIndex = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const { getStatisLoading } = useSelector((store) => store.stat);
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAdminStat());
-  }, []);
-  if (getStatisLoading) {
-    return <Loader />;
-  }
+  // useEffect(() => {
+  //   dispatch(getAdminStat());
+  // }, []);
+  // if (getStatisLoading) {
+  //   return <Loader />;
+  // }
   return (
     <div className="w-full">
       <div className="w-full flex flex-col gap-12">
@@ -27,9 +27,9 @@ const DashboardIndex = () => {
             {currentUser?.name}
           </span>
         </h2>
-        <Widget />
+        {/* <Widget />
         <Statistics />
-        <ReservationList />
+        <ReservationList /> */}
       </div>
       {/* <DashboardBanner/> */}
     </div>

@@ -50,9 +50,9 @@ const ReservationList = () => {
   const dispatch = useDispatch()
   const {reservations} = useSelector((store)=> store.reservation)
 
-  useEffect(()=> {
-    dispatch(GetAllReservations())
-  },[])
+  // useEffect(()=> {
+  //   dispatch(GetAllReservations())
+  // },[])
   return (
     <div className="w-full border bg-white p-6 flex flex-col gap-4 shdow-xl rounded-[10px]">
       <h3 className="text-2xl font-booking_font4">Reservation History</h3>

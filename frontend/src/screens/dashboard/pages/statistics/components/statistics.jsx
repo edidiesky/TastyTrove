@@ -92,9 +92,9 @@ const GrowthStat = () => {
 const SalesStat = () => {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(GetPaymentHistory());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(GetPaymentHistory());
+  // }, []);
   const { payments } = useSelector((store) => store.payment);
   return (
     <div className="w-full py-6 flex flex-col gap-4 bg-white border rounded-[10px]">

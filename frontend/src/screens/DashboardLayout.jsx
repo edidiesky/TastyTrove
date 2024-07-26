@@ -2,20 +2,25 @@ import { Outlet } from "react-router-dom";
 import React from "react";
 import DashboardSidebar from "@/components/common/DashboardSidebar";
 import DashboardHeader from "@/components/common/dashboardHeader";
+import styled from "styled-components";
 const DashboardLayout = () => {
   return (
     <>
-      <div className="w-full relative bg-[#f9f9f9] flex">
+      <DashboardStyles className="w-full relative bg-[#fff] flex">
         <DashboardSidebar />
         <div className="flex w-full flex-col gap-6">
           <DashboardHeader />
-          <div className="px-4 py-8 lg:px-6 bg-[#f9f9f9] w-full">
+          <div className="px-4 py-8 lg:px-6 bg-[#fff] w-full">
             <Outlet />
           </div>
         </div>
-      </div>
+      </DashboardStyles>
     </>
   );
 };
+
+const DashboardStyles = styled.div`
+  font-family: "Work Sans", sans-serif !important;
+`;
 
 export default DashboardLayout;

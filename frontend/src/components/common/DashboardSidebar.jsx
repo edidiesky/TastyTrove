@@ -62,7 +62,7 @@ const DashboardSidebar = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const pathname = true;
   return (
-    <HeaderStyles className={`w-full hidden lg:flex column gap-2`}>
+    <HeaderStyles className={`w-full hidden px-4 lg:flex column gap-2`}>
       <div className="w-full h-full py-4 justify-between flex items-center flex-col gap-4">
         <div className="w-full h-[90%] flex flex-col gap-8">
           <div className="flex flex-col w-full items-start justify-between py-1">
@@ -77,14 +77,13 @@ const DashboardSidebar = () => {
                   src="https://www.hopper.com/assets/treasure-D-5S8iOp.svg"
                   className="w-14 h-14 rounded-full object-cover"
                 />
-                <h4 className="hidden md:flex flex-col text-sm font-booking_font4 text-[#fff]">
-                 
+                {/* <h4 className="hidden md:flex flex-col text-sm family5">
                   Zyra&Stones
-                  <span className="block text-grey text-xs font-booking_font">
+                  <span className="block text-grey text-xs family5">
                     {" "}
-                 Home of Comfort
+                    Home of Comfort
                   </span>
-                </h4>
+                </h4> */}
               </Link>
             </div>
           </div>
@@ -94,21 +93,29 @@ const DashboardSidebar = () => {
               return (
                 <div
                   key={index}
-                  className="w-[90%] font-booking_font4 font-normal text-sm mx-auto"
+                  className="w-[100%]  family5 font-normal text-sm mx-auto"
                 >
                   <NavLink
                     // activeClassName="active"
                     end
-                    className={` tab
-                      text-base w-[90%] mx-auto text-[#fff]`}
+                    className={`group tab
+                      relative
+                      text-base w-[90%] mx-auto`}
                     to={`/dashboard${x.tab.path}`}
                   >
-                    <div className="flex items-center">
+                    <div className="flex w-full  md:justify-center relative items-center">
                       <span className="w-12 h-12 text-base rounded-xl flex items-center text-blue justify-center">
                         {" "}
                         {x.tab.icon}
                       </span>
-                      {<span>{x.tab?.title}</span>}
+                      <div
+                        className="span_details absolute text-sm group-hover:opacity-1 
+                        opacity-1  block 
+                        px-4 py-2 bg-[#000] text-[#fff]
+                       rounded-[40px] left-[140%] "
+                      >
+                        {x.tab?.title}
+                      </div>
                     </div>
                   </NavLink>
                 </div>
@@ -118,15 +125,31 @@ const DashboardSidebar = () => {
         </div>
         <div className="flex flex-col gap-2 w-full items-start justify-between py-1">
           <div className="w-[90%] mx-auto flex flex-col gap-4">
-            <NavLink
-              // activeClassName="active"
-              end
-              className={`text-sm tab flex items-center gap-4 p-[12px] px-4 font-booking_font4 text-[#fff] family1`}
-              to={`/dashboard/profile/${currentUser?.id}`}
-            >
-              <FiSettings fontSize={"24px"} />
-              Settings
-            </NavLink>
+            <div className="w-[100%]  family5 font-normal text-sm mx-auto">
+              <NavLink
+                // activeClassName="active"
+                to={`/dashboard/profile/${currentUser?.id}`}
+                end
+                className={`group tab
+                      relative
+                      text-base w-[90%] mx-auto`}
+              >
+                <div className="flex w-full  md:justify-center relative items-center">
+                  <span className="w-12 h-12 text-base rounded-xl flex items-center text-blue justify-center">
+                    {" "}
+                    <FiSettings fontSize={"24px"} />
+                  </span>
+                  <div
+                    className="span_details absolute text-sm group-hover:opacity-1 
+                        opacity-1  block 
+                        px-4 py-2 bg-[#000] text-[#fff]
+                       rounded-[40px] left-[140%] "
+                  >
+                    Settings
+                  </div>
+                </div>
+              </NavLink>
+            </div>
             <div className=" w-full relative px-2 flex gap-1 items-center justify-between">
               <div className="flex flex-1 gap-2 items-center">
                 {currentUser?.image ? (
@@ -151,12 +174,12 @@ const DashboardSidebar = () => {
                     className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
                   />
                 )}
-                <h4 className="text-base text-[#fff] font-booking_font4">
+                {/* <h4 className="text-base family5">
                   {currentUser?.name}
-                  <span className="block font-booking_font text-xs font-normal text-grey">
+                  <span className="block family5 text-xs font-normal text-grey">
                     {currentUser?.email}
                   </span>
-                </h4>
+                </h4> */}
               </div>
             </div>
           </div>
@@ -167,11 +190,11 @@ const DashboardSidebar = () => {
 };
 
 export const HeaderStyles = styled.div`
-  width: 350px;
+  width: 100px;
   position: sticky;
   top: 0;
   height: 100vh;
-  background: #151515;
+  background: #fafafa;
   /* border-right: 1px solid rgba(0, 0, 0, 0.1); */
 
   .dropdown {
@@ -185,23 +208,37 @@ export const HeaderStyles = styled.div`
 
   .tab {
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: 40px;
     width: 100%;
     display: flex;
     align-items: center;
+    padding: 5px 10px;
     gap: 1rem;
     position: relative;
+    background: #fff;
+    .span_details {
+      opacity: 0;
+      transform: scale(0.89);
+      transition: all ease 0.4s;
+      top: 55%;
+    }
 
     &:hover {
-      background: #3a616a;
+      background: #000000;
       color: #fff;
+      .span_details {
+        opacity: 1;
+        /* transform: ; */
+        transform: scale(1);
+        top: 25%;
+      }
       svg {
         color: #fff;
       }
     }
     &.active {
       position: relative;
-      background: #3a616a;
+      background: #000000;
       border: 1px solid rgba(0, 0, 0, 0.08);
       color: #fff;
 
