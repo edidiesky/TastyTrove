@@ -66,7 +66,7 @@ const DashboardHeader = () => {
   return (
     <HeaderStyles className="w-full z-[3000] py-4 flex relative items-center justify-center">
       <div className="Header_wrapper w-[95%] mx-auto flex items-center justify-between">
-        <div className="flex w-full items-center gap-3">
+        <div className="flex items-center gap-2">
           <div
             onClick={() => setBar(!bar)}
             className="flex flex-1 lg:hidden gap-4 items-center justify-start text-dark"
@@ -80,10 +80,10 @@ const DashboardHeader = () => {
 
           <label
             htmlFor=""
-            className="hidden md:grid grid-cols-custom_2 text-dark w-[200px] lg:w-[350px]
+            className="hidden md:grid grid-cols-custom_2 text-dark w-[200px] lg:w-[310px]
              items-center min-h-14 py-1 border rounded-[40px] px-4"
           >
-            <div className="w-12 text-grey text-2xl h-12 bg-[#eee] rounded-full text-dark flex items-center justify-center">
+            <div className="w-12 text-grey text-2xl h-12 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center">
               <BiSearch />
             </div>
             <input
@@ -96,14 +96,14 @@ const DashboardHeader = () => {
         <div className="flex w-full auto items-center justify-end gap-4">
           <label
             htmlFor=""
-            className="hidden md:flex justify-between gap-3 text-dark w-[200px] lg:w-[250px]
+            className="flex justify-between gap-3 text-dark w-[250px]
              items-center min-h-14 py-1 border rounded-[40px] px-4"
           >
-            <div className="w-12 text-grey text-2xl h-12 bg-[#eee] rounded-full text-dark flex items-center justify-center">
+            <div className="w-12 text-grey text-2xl h-12 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center">
               <FaBell />
             </div>
             Notifications
-            <div className="w-8 text-lg h-8 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
+            <div className="w-8 text-sm h-8 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
               1
             </div>
           </label>

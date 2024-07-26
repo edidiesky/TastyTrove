@@ -62,7 +62,7 @@ const DashboardSidebar = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const pathname = true;
   return (
-    <HeaderStyles className={`w-full hidden px-4 lg:flex column gap-2`}>
+    <HeaderStyles className={`w-full hidden px-4 md:flex column gap-2`}>
       <div className="w-full h-full py-4 justify-between flex items-center flex-col gap-4">
         <div className="w-full h-[90%] flex flex-col gap-8">
           <div className="flex flex-col w-full items-start justify-between py-1">
@@ -221,6 +221,7 @@ export const HeaderStyles = styled.div`
       transform: scale(0.89);
       transition: all ease 0.4s;
       top: 55%;
+      box-shadow:0 3px 10px rgba(0,0,0,.3);
     }
 
     &:hover {

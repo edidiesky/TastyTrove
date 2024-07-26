@@ -3,7 +3,6 @@ import styled from "styled-components";
 export const Table = styled.div`
   width: 100%;
   padding: 1rem 0;
-  background: #ffff;
   border-radius: 3px;
   display: flex;
   flex-direction: column;
@@ -65,7 +64,7 @@ export const Table = styled.div`
           z-index: 200;
           text-align: start;
           transition: all 0.4s;
-          background-color: #f5f5f5;
+
           border-radius: 40px;
           padding: 1rem;
           /* text-transform: uppercase; */
@@ -74,12 +73,11 @@ export const Table = styled.div`
             background-color: rgba(0, 0, 0, 0.1);
           }
           th {
-            font-size: 0.8rem;
             text-align: start;
             font-size: 15px !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1.7rem 1rem;
-            font-family: "playfair";
+            padding: 1.5rem 1rem;
+            font-family: "Work Sans";
             font-weight: normal !important;
           }
         }
@@ -96,10 +94,10 @@ export const Table = styled.div`
           }
           td {
             text-align: start;
-            padding: 1.6rem 1rem !important;
+            padding: 1.5rem 1rem !important;
             font-size: 14px !important;
-            border-bottom: 1px solid rgba(0, 0, 0, 0.07);
             color: #000;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 
             span {
               &.danger {

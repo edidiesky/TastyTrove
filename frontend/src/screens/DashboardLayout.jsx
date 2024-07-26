@@ -10,7 +10,7 @@ const DashboardLayout = () => {
         <DashboardSidebar />
         <div className="flex w-full flex-col gap-6">
           <DashboardHeader />
-          <div className="px-4 py-8 lg:px-6 bg-[#fff] w-full">
+          <div className="px-4 py-12 lg:px-6 bg-[#fff] w-full">
             <Outlet />
           </div>
         </div>

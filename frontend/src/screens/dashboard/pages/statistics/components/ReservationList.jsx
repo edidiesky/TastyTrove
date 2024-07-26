@@ -54,8 +54,8 @@ const ReservationList = () => {
   //   dispatch(GetAllReservations())
   // },[])
   return (
-    <div className="w-full border bg-white p-6 flex flex-col gap-4 shdow-xl rounded-[10px]">
-      <h3 className="text-2xl font-booking_font4">Reservation History</h3>
+    <div className="p-6 bg-[#F1F1F1] w-full px-6 py-8 flex-col rounded-[10px] min-h-[400px] flex gap-4">
+      <h3 className="text-2xl md:text-4xl family1">Reservation History</h3>
       <Table>
         <div className="TableContainer">
           <table className="tableWrapper">
@@ -71,7 +71,7 @@ const ReservationList = () => {
               </tr>
             </thead>
             <tbody>
-              {reservations?.map((x, index) => {
+              {reservation?.map((x, index) => {
                 return <TableCard x={x} type={"Reservation"} key={x?._id} />;
               })}
             </tbody>

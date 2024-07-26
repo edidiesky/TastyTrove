@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 
 const Statistics = () => {
   return (
-    <div className="w-full grid md:grid-cols-custom_6 items-start gap-4">
+    <div className="w-full grid md:grid-cols-custom_1 items-start gap-4">
       <div className="flex w-full">
         <GrowthStat />
       </div>
@@ -20,12 +20,20 @@ const Statistics = () => {
 
 const GrowthStat = () => {
   const { totalStatAmount, totalMonth } = useSelector((store) => store.stat);
+const chartData = [
+  { month: "January", desktop: 186, mobile: 80 },
+  { month: "February", desktop: 305, mobile: 200 },
+  { month: "March", desktop: 237, mobile: 120 },
+  { month: "April", desktop: 73, mobile: 190 },
+  { month: "May", desktop: 209, mobile: 130 },
+  { month: "June", desktop: 214, mobile: 140 },
+];
 
   const [options, setOptions] = useState({
     chart: {
       height: 350,
-      type: "line",
-      fontFamily: "playfair",
+      type: "bar",
+      fontFamily: "Work Sans",
       foreColor: "#333",
       fontSize: "30px",
       textTransform: "capitalize",
@@ -41,44 +49,44 @@ const GrowthStat = () => {
       curve: "smooth",
     },
     xaxis: {
-      categories: totalMonth,
+      categories: ["January", "February", "March", "April", "May", "June", "July", "August"],
     },
   });
 
   const [series, setSeries] = useState([
     {
       name: "Transactions",
-      data: totalStatAmount,
+      data: [10,4,5,670,20,4,5,17,20],
     },
   ]);
-  useEffect(() => {
-     if (Array.isArray(totalMonth) && Array.isArray(totalStatAmount)) {
-       if (totalMonth.length !== 0 || totalStatAmount.length !== 0) {
-         setOptions((prevOptions) => ({
-           ...prevOptions,
-           xaxis: {
-             categories: totalMonth,
-           },
-         }));
-         setSeries([
-           {
-             name: "Transactions",
-             data: totalStatAmount,
-           },
-         ]);
-       }
-     }
-  }, [totalStatAmount, totalMonth, setSeries, setOptions]);
+  // useEffect(() => {
+  //    if (Array.isArray(totalMonth) && Array.isArray([10,4,5,670,20,4,5,17,20])) {
+  //      if (totalMonth.length !== 0 || totalStatAmount.length !== 0) {
+  //        setOptions((prevOptions) => ({
+  //          ...prevOptions,
+  //          xaxis: {
+  //            categories: totalMonth,
+  //          },
+  //        }));
+  //        setSeries([
+  //          {
+  //            name: "Transactions",
+  //            data: totalStatAmount,
+  //          },
+  //        ]);
+  //      }
+  //    }
+  // }, [totalStatAmount, totalMonth, setSeries, setOptions]);
   return (
     <div id="chart" className="w-full">
       <div className="w-full flex flex-col gap-8">
-        <div className="p-6 w-full px-6 flex-col rounded-[10px] min-h-[400px] border bg-white flex gap-4">
-          <h3 className="text-2xl font-booking_font4">This Year Growth</h3>
+        <div className="p-6 bg-[#F1F1F1] w-full px-6 py-8 flex-col rounded-[10px] min-h-[400px] flex gap-4">
+          <h3 className="text-4xl family1">Sales Statistics</h3>
           <div className="flex w-full flex-col gap-8">
             <Chart
               options={options}
               series={series}
-              type="line"
+              type="bar"
               width={"100%"}
               height={340}
             />
@@ -97,13 +105,13 @@ const SalesStat = () => {
   // }, []);
   const { payments } = useSelector((store) => store.payment);
   return (
-    <div className="w-full py-6 flex flex-col gap-4 bg-white border rounded-[10px]">
+    <div className="w-full md:w-[40vw] py-8 flex flex-col gap-4 bg-[#F1F1F1] rounded-[10px]">
       <div className="w-full flex flex-col gap-4">
         <div className="w-full px-6 flex items-center justify-between">
-          <h3 className="text-xl font-booking_font4">Transaction History</h3>
+          <h3 className="text-xl md:text-2xl family1">Transaction History</h3>
           <Link
             style={{ textDecoration: "underline" }}
-            className="text-sm text-[var(--dark-1)] font-booking_font_bold"
+            className="text-sm text-[var(--dark-1)] family1"
             to={"/dashboard/orders"}
           >
             View All
@@ -114,7 +122,7 @@ const SalesStat = () => {
             return (
               <li
                 key={index}
-                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] font-booking_font4 flex items-center justify-between w-full"
+                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
               >
                 <div className="flex items-center gap-2">
                   <div className="w-10 h-10 rounded-full bg-[#000] flex items-center justify-center text-white text-base">
