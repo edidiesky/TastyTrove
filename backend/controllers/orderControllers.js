@@ -31,8 +31,10 @@ const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   const payment = await prisma.payment.findMany({
     include: {
       user: true,
-      reservation: true,
     },
+    // where:{
+      
+    // },
     orderBy: {
       createdAt: "desc",
     },

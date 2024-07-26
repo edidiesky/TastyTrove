@@ -36,7 +36,7 @@ const RoomForms = ({
     toolbar: [["bold", "italic"], ["link"]],
   };
   return (
-    <div className="w-full grid grid-cols-custom_1 items-start gap-8">
+    <div className="w-full grid lg:grid-cols-custom_1 items-start gap-8">
       <div className="w-full flex bg-[#fdfdfd] border rounded-[20px] py-8  px-4 flex-col gap-8">
         <div className="w-full flex flex-col gap-8">
           {/* title */}

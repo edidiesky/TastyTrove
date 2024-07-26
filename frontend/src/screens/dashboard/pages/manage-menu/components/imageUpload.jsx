@@ -2,6 +2,7 @@ import React, { useCallback, useState } from "react";
 import axios from "axios";
 import { BiSearch, BiUpload } from "react-icons/bi";
 import toast from "react-hot-toast";
+import { BsImage } from "react-icons/bs";
 import Loader from "@/components/home/loader";
 const ImageUpload = ({ images, setImages }) => {
   const [uploading, setUploading] = useState(false);
@@ -78,25 +79,20 @@ const ImageUpload = ({ images, setImages }) => {
             ) : (
               <label
                 htmlFor="upload"
-                className="w-full bg-[#fafafa] rounded-lg family1 flex items-center justify-center h-[100px]"
+                className="w-full bg-[#fafafa] rounded-lg cursor-pointer family1 flex-col gap-2 flex items-center justify-center border border-dotted h-[200px]"
               >
-                <div
-                  style={{ transition: "all .4s" }}
-                  className="text-sm font-normal cursor-pointer flex items-center border rounded-lg justify-center
-                   bg-white p-4 gap-3 family1"
-                >
-                  <input
-                    type="file"
-                    id="upload"
-                    placeholder="Gig Image"
-                    autoComplete="off"
-                    style={{ display: "none" }}
-                    onChange={handleFileUpload}
-                    multiple
-                    className="w-full"
-                  />
-                  <BiUpload fontSize={"24px"} /> Select the photos for your room
-                </div>
+                <input
+                  type="file"
+                  id="upload"
+                  placeholder="Gig Image"
+                  autoComplete="off"
+                  style={{ display: "none" }}
+                  onChange={handleFileUpload}
+                  multiple
+                  className="w-full "
+                />
+                <BsImage fontSize={"24px"} /> Click to upload images of your
+                choice
               </label>
             )}
           </div>
