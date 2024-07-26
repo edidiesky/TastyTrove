@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -111,9 +110,9 @@ button:disabled {
   --grey-1: rgb(167, 167, 167);
   --light-grey: #f2f2f2;
   --dark-1: #000000;
-  --primary: #BDA16B;
+  --primary: #bda16b;
   --background_2: #0e0d0c;
-  --red:#c31212;
+  --red: #c31212;
 }
 
 .text-grey {
@@ -146,7 +145,6 @@ textarea {
   overflow: hidden !important;
 }
 
-
 .hide {
   overflow: hidden;
 }
@@ -177,14 +175,12 @@ textarea {
   font-family: "Work Sans", sans-serif;
 }
 
-
 .family6 {
   font-family: "dashboard_bold", sans-serif;
 }
 
-
 .family1 {
-  font-family: "DM Sans", sans-serif;
+  font-family: "Work Sans", sans-serif;
 }
 
 .family2 {
@@ -232,22 +228,23 @@ html.lenis body {
   cursor: pointer;
   transition: all 0.4s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1rem 2rem;
+  padding: 1.5rem 2rem;
   z-index: 300;
   background-color: transparent;
+  border-radius: 40px !important;
 }
 .btn.btn-2 {
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, 0.6);
   color: #fff;
 }
 
 .btn.btn-3 {
- background-color: var(--primary);
+  background-color: var(--primary);
   color: #000;
 }
 
 .btn.btn-4 {
- background-color: #000 !important;
+  background-color: #000 !important;
   color: #fff !important;
   border: none;
 }
@@ -256,7 +253,7 @@ html.lenis body {
   color: #000;
 }
 .btn:hover {
-  transform: scale(.88);
+  transform: scale(0.88);
   background-color: #fff;
   color: #000;
 }
@@ -279,7 +276,6 @@ html.lenis body {
   margin: 0 auto;
 }
 
-
 .tab.active {
-  color: #BDA16B;
+  color: #bda16b;
 }

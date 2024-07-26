@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import { RxCross1 } from "react-icons/rx";
 import { HiBars3BottomLeft } from "react-icons/hi2";
-import { FaBars } from "react-icons/fa6";
+import { FaBars, FaBell } from "react-icons/fa6";
 import { FaRegUser, FaHotel } from "react-icons/fa";
 import { TiHome, TiMessage } from "react-icons/ti";
 // import { usePathname } from "next/navigation";
@@ -13,6 +13,7 @@ import { NavLink } from "react-router-dom";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClearUserInfo } from "@/features/auth/authSlice";
+// import { Bell } from "lucide-react";
 const AdminSidebarData = [
   {
     id: 1,
@@ -56,14 +57,14 @@ const DashboardHeader = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const [bar, setBar] = React.useState(false);
   const [activeindex, setActiveIndex] = useState(0);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   const handleLogOut = () => {
     dispatch(ClearUserInfo("any"));
     window.location.reload();
   };
   return (
-    <HeaderStyles className="w-full z-[3000] bg-[#151515] border-b flex relative items-center justify-center">
+    <HeaderStyles className="w-full z-[3000] py-4 flex relative items-center justify-center">
       <div className="Header_wrapper w-[95%] mx-auto flex items-center justify-between">
         <div className="flex w-full items-center gap-3">
           <div
@@ -79,23 +80,35 @@ const DashboardHeader = () => {
 
           <label
             htmlFor=""
-            className="hidden md:flex text-xl text-dark w-[200px] lg:w-[250px]
-             items-center gap-2 h-12 border rounded-[10px] bg-[#f9f9f9] px-4"
+            className="hidden md:grid grid-cols-custom_2 text-dark w-[200px] lg:w-[350px]
+             items-center min-h-14 py-1 border rounded-[40px] px-4"
           >
-            <div className=" text-dark flex items-center justify-center">
+            <div className="w-12 text-grey text-2xl h-12 bg-[#eee] rounded-full text-dark flex items-center justify-center">
               <BiSearch />
             </div>
             <input
               type="text"
               placeholder="Search"
-              className="bg-transparent font-booking_font4 border-none outline-none text-base text-dark flex-1"
+              className="bg-transparent family1 text-base border-none outline-none text-dark"
             />
           </label>
         </div>
-        <div className="flex w-full auto items-center justify-end gap-1">
-          <div className="flex profile_wrapper relative items-center gap-2">
-            <div className="flex items-center gap-2">
-              {/* <img
+        <div className="flex w-full auto items-center justify-end gap-4">
+          <label
+            htmlFor=""
+            className="hidden md:flex justify-between gap-3 text-dark w-[200px] lg:w-[250px]
+             items-center min-h-14 py-1 border rounded-[40px] px-4"
+          >
+            <div className="w-12 text-grey text-2xl h-12 bg-[#eee] rounded-full text-dark flex items-center justify-center">
+              <FaBell />
+            </div>
+            Notifications
+            <div className="w-8 text-lg h-8 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
+              1
+            </div>
+          </label>
+          <div className="flex items-center gap-2">
+            {/* <img
                 src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                 alt=""
                 className="w-10 rounded-full"
@@ -106,35 +119,27 @@ const DashboardHeader = () => {
                   {currentUser?.email}
                 </span>
               </h4> */}
-              {currentUser?.image ? (
-                <img
-                  src={currentUser?.image}
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              ) : currentUser?.username ? (
-                // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
-                //   {currentUser?.username[0]}{" "}
-                // </div>
-                <img
-                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              ) : (
-                <img
-                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              )}
-              <h4 className="text-base text-dark font-booking_font4 family1">
-                {currentUser?.name}
-                <span className="block font-normal font-booking_font text-xs text-dark">
-                  {currentUser?.email}
-                </span>
-              </h4>
-            </div>
+            {currentUser?.image ? (
+              <img
+                src={currentUser?.image}
+                alt=""
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+              />
+            ) : (
+              <img
+                src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                alt=""
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+              />
+            )}
+            {/* <h4 className="text-base text-dark font-booking_font4 family1">
+              {currentUser?.name}
+              <span className="block font-normal font-booking_font text-xs text-dark">
+                {currentUser?.email}
+              </span>
+            </h4> */}
+          </div>
+          <div className="flex profile_wrapper relative items-center gap-2">
             <div className="profile_dropdown shadow-2xl absolute">
               <div className="w-full flex flex-col">
                 <div className="flex profile_dropdown_bottom flex-col w-full">
@@ -199,7 +204,7 @@ const DashboardHeader = () => {
                 className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
               />
             ) : (
-           ""
+              ""
             )}
             <h4 className="text-base font-booking_font4 text-white">
               {currentUser?.name}
@@ -238,7 +243,6 @@ const DashboardHeader = () => {
 };
 
 export const HeaderStyles = styled.div`
-  padding: 0.5rem 0;
   min-height: 4.8rem;
   width: 100%;
   position: sticky;
