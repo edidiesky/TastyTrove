@@ -71,6 +71,9 @@ const HeroContent = styled.div`
     .HeroRight {
       flex: 1;
       padding: 8rem 0;
+      @media (max-width: 780px) {
+        padding: 6rem 0;
+      }
       background-color: #000;
       .HeroRightC {
         width: 50%;
@@ -85,12 +88,5 @@ const HeroContent = styled.div`
     @media (max-width: 980px) {
       flex-direction: column;
     }
-  }
-
-  .HeroBottom {
-    display: grid;
-    padding-top: 10rem;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 5rem;
   }
 `;
