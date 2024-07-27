@@ -2,7 +2,7 @@ import React from "react";
 import Meta from "@/components/common/Meta";
 import Banner from "@/components/common/Banner";
 import HomeIndex from "../components/saved";
-import Navbar from "@/components/common/navbar";
+import Navbar from "../components/common/navbar";
 const Saved = () => {
   return (
     <div>

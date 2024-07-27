@@ -4,7 +4,7 @@ import { useParams, useSearchParams } from "react-router-dom";
 import Meta from "@/components/common/Meta";
 import { useDispatch, useSelector } from "react-redux";
 import Banner from "@/components/common/Banner";
-import Navbar from "@/components/common/Navbar";
+import Navbar from "../components/common/Navbar";
 import Loader from "@/components/loader";
 import { getAllMenu, getSingleMenu } from "@/features/menu/menuReducer";
 const Single = () => {

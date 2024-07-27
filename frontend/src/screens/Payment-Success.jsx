@@ -1,7 +1,7 @@
 import React from "react";
 import PaymentIndex from "../components/payment-success";
 import Meta from "@/components/common/Meta";
-import Navbar from "@/components/common/navbar";
+import Navbar from "../components/common/navbar";
 const PaymentSuccess = () => {
   return (
     <div>
