@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
