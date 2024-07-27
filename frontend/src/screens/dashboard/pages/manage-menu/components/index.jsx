@@ -7,7 +7,7 @@ import {
   CreateMenu,
   getSingleMenu,
   UpdateMenu,
-} from "@/features/menu/menureducer";
+} from "@/features/menu/menuReducer";
 import Loader from "@/components/home/loader";
 import { useNavigate, useParams } from "react-router-dom";
 import { handleClearMenuAlert } from "@/features/menu/menuSlice";
