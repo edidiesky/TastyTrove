@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState } from "react";
 import { Table } from "@/components/common/styles";
 import TableCard from "@/components/common/TableCard";

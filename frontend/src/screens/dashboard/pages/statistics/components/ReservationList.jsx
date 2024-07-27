@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useEffect, useState } from "react";
 import moment from 'moment'
 import { Table } from "@/components/common/styles";

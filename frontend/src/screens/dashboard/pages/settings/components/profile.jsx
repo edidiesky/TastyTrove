@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useEffect, useState } from "react";
 import { BiCamera, BiLock, BiSearch, BiUser } from "react-icons/bi";
 import { DashboardProfileInputData } from "@/constants/data/formdata";

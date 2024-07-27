@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState, useCallback, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";

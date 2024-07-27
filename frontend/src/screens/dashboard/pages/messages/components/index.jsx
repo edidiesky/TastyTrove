@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState } from "react";
 import Message from "./messages";
 const DashboardIndex = () => {

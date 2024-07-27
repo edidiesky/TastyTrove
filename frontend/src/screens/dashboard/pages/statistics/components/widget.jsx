@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState } from "react";
 import { MdHotel } from "react-icons/md";
 import { MdOutlineArrowOutward } from "react-icons/md";

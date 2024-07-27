@@ -1,4 +1,4 @@
-"use client";
+
 import React, { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import { Table } from "@/components/common/styles";

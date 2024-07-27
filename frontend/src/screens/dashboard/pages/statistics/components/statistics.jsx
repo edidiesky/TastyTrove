@@ -1,4 +1,4 @@
-"use client";
+
 import { GetPaymentHistory } from "@/features/payment/paymentReducer";
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
