@@ -62,11 +62,11 @@ export default function CartHolder({ type }) {
           <div className="w-full flex flex-col gap-6">
             <h4 className="family3 text-2xl uppercase subtotal">
               Subtotal{" "}
-              <span className=" family4  text-xl">${totalShoppingPrice}</span>
+              <span className=" family1  text-xl">${totalShoppingPrice}</span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Shipping{" "}
-              <span className=" family4  text-end text-xl span1">
+              <span className=" family1  text-end text-xl span1">
                 <span className="block pb-3">
                   Flat rate: <br />{" "}
                   <span className="pt-2">${totalShoppingPrice + 20}</span>
@@ -78,14 +78,14 @@ export default function CartHolder({ type }) {
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Total{" "}
-              <span className=" family4 text-xl span1">${totalPrice}</span>
+              <span className=" family1 text-xl span1">${totalPrice}</span>
             </h4>
           </div>
         </div>
         <div className="uppercase flex flex-col gap-4">
           <FlutterPaymentButton totalPrice={totalPrice} />
 
-          <button className="family1 py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base font-bold uppercase">
+          <button className="family1 rounded-[40px] py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base font-semibold uppercase">
             Update Cart
           </button>
         </div>

@@ -20,7 +20,7 @@
       "dest": "index.js"
     },
     {
-      "src": "/api/v1/room/(.*)",
+      "src": "/api/v1/menu/(.*)",
       "dest": "index.js"
     },
 
@@ -41,7 +41,11 @@
       "dest": "index.js"
     },
     {
-      "src": "/api/v1/favourites/(.*)",
+      "src": "/api/v1/notification/(.*)",
+      "dest": "index.js"
+    },
+    {
+      "src": "/api/v1/cart/(.*)",
       "dest": "index.js"
     },
     {
