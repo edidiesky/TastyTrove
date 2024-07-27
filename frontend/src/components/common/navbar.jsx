@@ -24,10 +24,6 @@ const linkData = [
     title: "Bulletin",
     path: "restaurant/menu",
   },
-  // {
-  //   title: "Cart",
-  //   path: "savedhomes",
-  // },
   {
     title: "Reservations",
     path: "restaurant/reservations",
