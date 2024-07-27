@@ -1,6 +1,6 @@
 import React from "react";
 import Meta from "@/components/common/Meta";
-import Navbar from "../components/common/Navbar";
+import Navbar from "../components/common/navbar";
 
 import HomeIndex from "../components/reservations";
 const Trips = () => {
