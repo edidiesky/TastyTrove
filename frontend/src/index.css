@@ -228,10 +228,10 @@ html.lenis body {
   cursor: pointer;
   transition: all 0.4s ease;
   border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1.3rem 2rem;
+  padding: 1rem 2rem;
   z-index: 300;
   background-color: transparent;
-  border-radius: 40px !important;
+  /* border-radius: 10px !important; */
 }
 .btn.btn-2 {
   border: 1px solid rgba(255, 255, 255, 0.6);
@@ -253,7 +253,7 @@ html.lenis body {
   color: #000;
 }
 .btn:hover {
-  transform: scale(0.88);
+  /* transform: scale(0.88); */
   background-color: #fff;
   color: #000;
 }

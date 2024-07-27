@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import Button from "../common/Button";
 
 export default function SingleTakout() {
   const { menus } = useSelector((store) => store.menu);
@@ -23,9 +24,9 @@ export default function SingleTakout() {
           <div className="w-full text-start">
             <Link
               to={`restaurant/takeout/${menus[0]?.id}?category=${menus[0]?.category}`}
-              className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2"
+              className=""
             >
-              View This Menu
+              <Button bgColor={"#fff"} text={"View This Menu"}/>
             </Link>
           </div>
         </div>

@@ -1,6 +1,6 @@
-
 import React from "react";
 import styled from "styled-components";
+import Button from "../common/Button";
 
 export default function Experience() {
   return (
@@ -19,15 +19,15 @@ export default function Experience() {
             <h4 className="text-xl md:text-xl family1 text-light uppercase text-white">
               FINE DINING EXPERIENCE
             </h4>
-            <h1 className="family3 text-6xl leading-[1.5] md:text-7xl text-white">THE BEST TABLE IN TOWN</h1>
+            <h1 className="family3 text-6xl leading-[1.5] md:text-7xl text-white">
+              THE BEST TABLE IN TOWN
+            </h1>
             <h4 className="text-xl md:text-2xl family2 text-light text-white">
               Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
               scelerisque nisi in urna nulla.
             </h4>
             <div className="w-full text-start">
-              <button className="btn text-dark btn-2 family1 uppercase text-white text-light text-16 py-2">
-                Explore the Menu
-              </button>
+              <Button bgColor={'#fff'} text={"Explore the Menu"} />
             </div>
           </div>
         </div>

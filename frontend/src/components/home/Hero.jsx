@@ -1,6 +1,8 @@
-
+import Magnetic from "@/animations/Magnetic";
 import React from "react";
 import styled from "styled-components";
+import Button from "../common/Button";
+import { Link } from "react-router-dom";
 
 export default function Hero() {
   return (
@@ -19,9 +21,9 @@ export default function Hero() {
               scelerisque nisi in urna nulla. Sit tempor a et nisl, ac felis.
             </h4>
             <div className="w-full text-start">
-              <button className="btn text-dark btn-2 family1 uppercase text-white text-light fs-16 py-2">
-                Explore the Menu
-              </button>
+              <Link to={"/restaurant/menu"}>
+                <Button bgColor={"#fff"} text={"Explore the Menu"} />
+              </Link>
             </div>
           </div>
         </div>

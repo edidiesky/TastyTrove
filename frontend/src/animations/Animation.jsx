@@ -5,11 +5,13 @@ import ParallaxContainer from "./ParallaxContainer";
 import AnimatedFooter from "./AnimatedFooter";
 import ParallaxContent from "./ParallaxContent";
 import NavigationMenu from "./NavigationMenu";
+import SideMenu from "./SideMenu";
 // import ReactThreeContent from "./ReactThreeContent";
 const Animation = () => {
   return (
     <div className="w-full flex flex-col">
-      <NavigationMenu/>
+      {/* <NavigationMenu/> */}
+      <SideMenu />
       {/* <TextGradient/> */}
       {/* <HorizontalScroll /> */}
       {/* <Content/>

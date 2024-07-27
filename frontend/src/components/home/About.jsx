@@ -1,20 +1,24 @@
 
 import React from "react";
 import styled from "styled-components";
+import Button from "../common/Button";
 
 const data = [
   {
     id: 1,
+    subText:"Check out Menu",
     title: "The best table in town",
     desc: "Incididunt labore dolore magna aliqua enim veniam quis nostrud ad miniys exercitation ullamco laboris nisiut aliquip.",
   },
   {
     id: 2,
+    subText:"View out Menu",
     title: "Perfect For Groups",
     desc: "Incididunt labore dolore magna aliqua enim veniam quis nostrud ad miniys exercitation ullamco laboris nisiut aliquip.",
   },
   {
     id: 3,
+    subText:"Check out Menu",
     title: "Fresh produce everyday",
     desc: "Incididunt labore dolore magna aliqua enim veniam quis nostrud ad miniys exercitation ullamco laboris nisiut aliquip.",
   },
@@ -23,7 +27,7 @@ const data = [
 export default function About() {
   return (
     <AboutContent className="flex w-full flex-col gap-4">
-      <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-24">
         <div className="w-85 auto wrapper flex gap-20">
           <div className="flex-1 flex flex-col gap-12">
             <h4 className="text-lg md:text-xl family2">
@@ -52,7 +56,7 @@ export default function About() {
                 height={0}
                 loading="lazy"
                 src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/signature.jpg"
-                style={{ width: "20rem" }}
+                style={{ width: "200px" }}
               />
             </div>
           </div>
@@ -86,9 +90,12 @@ export default function About() {
                       {x.desc}
                     </h4>
                     <div className="w-full text-center">
-                      <button className="btn text-dark family1 font-normal text-lg py-1">
-                        Explore the Menu
-                      </button>
+                      <Button
+                        bgColor={"#000"}
+                        text={x?.subText}
+                        type={"dark"}
+                      />
+                      {/* <button className="btn text-dark family1 font-normal text-lg py-1"></button> */}
                     </div>
                   </header>
                 </div>
@@ -120,9 +127,8 @@ const AboutContent = styled.div`
   }
   .aboutBottom {
     display: grid;
-    padding-top: 10rem;
+    padding-top: 5rem;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 5rem;
-    grid-row-gap: 10rem;
   }
 `;

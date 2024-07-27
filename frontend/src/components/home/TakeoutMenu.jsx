@@ -1,6 +1,7 @@
 
 import React from "react";
 import styled from "styled-components";
+import Button from "../common/Button";
 
 export default function TakeoutMenu() {
   return (
@@ -18,15 +19,16 @@ export default function TakeoutMenu() {
             <h4 className="text-lg family1 uppercase text-light text-white">
               ENJOY YOUR MEAL AT HOME
             </h4>
-            <h1 className="family3 leading-[1.6] text-6xl md:text-7xl text-white">TAKEOUT NOW AVAILABLE</h1>
+            <h1 className="family3 leading-[1.6] text-6xl md:text-7xl text-white">
+              TAKEOUT NOW AVAILABLE
+            </h1>
             <h4 className="text-xl md:text-2xl family2 text-light text-white">
               Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
               scelerisque nisi in urna nulla.
             </h4>
             <div className="w-full text-start">
-              <button className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2">
-                View takeout Menu
-              </button>
+              <Button bgColor={"#fff"} text={"View takeout Menu"} />
+              {/* <button className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2"></button> */}
             </div>
           </div>
         </div>
@@ -50,9 +52,15 @@ const TakeoutMenuContent = styled.div`
     .TakeoutMenuRight {
       flex: 0.8;
       padding: 15rem 0;
+      @media (max-width: 780px) {
+        padding: 9rem 0;
+      }
       background-color: #000;
       .TakeoutMenuRightC {
         width: 60%;
+        @media (max-width: 780px) {
+          width: 80%;
+        }
       }
     }
     @media (max-width: 980px) {
