@@ -9,6 +9,7 @@ import { onLoginModal } from "@/features/modals/modalSlice";
 import Loader from "../loader";
 import { CreateCart } from "@/features/cart/cartReducer";
 import { clearCartAlert } from "@/features/cart/cartSlice";
+import Button from "../common/Button";
 
 export default function Top() {
   const { menu, getallMenuisLoading } = useSelector((store) => store.menu);
@@ -98,8 +99,29 @@ export default function Top() {
               </div>
             </div>
             <p className="text-2xl text-white family4">${menu?.price}</p>
-            <div className="w-full gap-4 grid md:grid-cols-2 lg:grid-cols-2 text-start">
-              <button
+            <div className="w-full gap-8 grid md:grid-cols-2 lg:grid-cols-2 text-start">
+              <button onClick={handleReservationBooking}>
+                <Button
+                  type={"white"}
+                  text={
+                    createCartisLoading ? (
+                      <span className="flex items-center justify-center gap-3">
+                        Loading
+                        <Loader type={"dots"} />
+                      </span>
+                    ) : (
+                      <>
+                        {menu?.availabilityCount === 0
+                          ? "UNAVAILABLE"
+                          : "ADD TO CART"}
+                      </>
+                    )
+                  }
+                  bgColor={"var(--primary)"}
+                />
+              </button>
+
+              {/* <button
                 onClick={handleReservationBooking}
                 className={`${
                   menu?.availabilityCount === 0
@@ -120,27 +142,27 @@ export default function Top() {
                       : "ADD TO CART"}
                   </>
                 )}
-              </button>
+              </button> */}
 
               <span className="grid h-[50px] md:h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
                 <button
                   onClick={() => setCount(count - 1)}
                   disabled={count <= 1}
                   className=" h-full w-full flex items-center justify-center border-r
-                   border-[rgba(255,255,255,.6)] text-lg text-white cursor-pointer"
+                   border-[rgba(255,255,255,.6)] text-base text-white cursor-pointer"
                 >
                   <BiMinus />
                 </button>
                 <span
                   className=" h-full family1 w-full flex items-center justify-center 
-                border-r border-[rgba(255,255,255,.6)] text-lg lg:text-xl text-white cursor-pointer"
+                border-r border-[rgba(255,255,255,.6)] text-base lg:text-xl text-white cursor-pointer"
                 >
                   {count}
                 </span>
                 <button
                   onClick={() => setCount(count + 1)}
                   disabled={count === menu?.availabilityCount}
-                  className=" h-full w-full text-lg text-white cursor-pointer flex items-center justify-center "
+                  className=" h-full w-full text-base text-white cursor-pointer flex items-center justify-center "
                 >
                   <BiPlus />
                 </button>
