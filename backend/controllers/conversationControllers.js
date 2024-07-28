@@ -1,10 +1,9 @@
 import asyncHandler from "express-async-handler";
-import { NextFunction, Request as ExpressRequest, Response, Request } from "express";
-import prisma from "../prisma";
+import prisma from "../prisma/index.js";
 // POST
 // Create prisma. 
 //  Public
-const createConversation = asyncHandler(async (rew, res) => {
+const createConversation = asyncHandler(async (req, res) => {
   const { members, isGroup, lastMessage, userId } = req.body
   const senderuserId = req.user?.userId
   // console.log(req.body, senderuserId)
@@ -74,7 +73,7 @@ const createConversation = asyncHandler(async (rew, res) => {
 // GET Review of the user conversation
 //  Public
 // send the conversation Id only
-const getUserConversation = asyncHandler(async (rew, res) => {
+const getUserConversation = asyncHandler(async (req, res) => {
   // get the conversation id form the req params
   const userId = req.params.id
   const currentUserId = req.user?.userId 
@@ -108,7 +107,7 @@ const getUserConversation = asyncHandler(async (rew, res) => {
 
 // GET All Gig
 //  Public
-const DeleteConversation = asyncHandler(async (rew, res) => {
+const DeleteConversation = asyncHandler(async (req, res) => {
 
 
   // get the request body

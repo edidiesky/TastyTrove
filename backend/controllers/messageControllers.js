@@ -1,7 +1,5 @@
 import asyncHandler from "express-async-handler";
-import { NextFunction, Request as ExpressRequest, Response } from "express";
-import prisma from "../prisma";
-
+import prisma from "../prisma/index.js";
 // Create Message
 //  Public
 const createMessage = asyncHandler(async (req, res) => {

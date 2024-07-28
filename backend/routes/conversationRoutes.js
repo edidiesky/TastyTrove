@@ -7,17 +7,15 @@ import {
 } from "../middleware/authentication.js";
 import {
   createConversation,
-  getSingleConversation,
+  getUserConversation,
   DeleteConversation,
-  getAllConversation,
-  UpdateConversation,
 } from "../controllers/conversationControllers.js";
 
 router.route("").post(authMiddleware, createConversation);
 
 router
   .route("/:id")
-  .get(getSingleConversation)
-  .delete(authMiddleware, DeleteConversation)
-  .post(authMiddleware, UpdateConversation);
+  .get(getUserConversation)
+  .delete(authMiddleware, DeleteConversation);
+  // .post(authMiddleware, UpdateConversation);
 export default router;

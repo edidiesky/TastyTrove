@@ -41,6 +41,8 @@ import uploadRoute from "./routes/uploadRoute.js";
 import cartRoute from "./routes/cartRoute.js";
 import orderRoute from "./routes/orderRoutes.js";
 import StatRoute from "./routes/statRoute.js";
+import ConversationRoute from "./routes/conversationRoutes.js";
+import messageRoute from "./routes/messageRoutes.js";
 
 app.use("/api/v1/auth", Auth);
 app.use("/api/v1/user", userAuth);
@@ -51,6 +53,8 @@ app.use("/api/v1/upload", uploadRoute);
 app.use("/api/v1/payment", orderRoute);
 app.use("/api/v1/stat", StatRoute);
 app.use("/api/v1/notification", NotificationRoutes);
+app.use("/api/v1/conversation", ConversationRoute);
+app.use("/api/v1/message", messageRoute);
 // // Middlewares
 app.use(NotFound);
 app.use(errorHandler);
