@@ -10,9 +10,9 @@ const conversation = JSON.parse(
 
 // Define the initial state of the conversation using that type
 const initialState = {
-  conversationDetails: null,
+  conversationDetails: {},
 
-  conversation: conversation ? conversation : [],
+  conversation:[],
 
   conversationisLoading: false,
   conversationisSuccess: false,
