@@ -22,7 +22,9 @@ export default function Hero() {
             </h4>
             <div className="w-full text-start">
               <Link to={"/restaurant/menu"}>
-                <Button bgColor={"#fff"} text={"Explore the Menu"} />
+                <button className="h-[70px] w-[230px] text-lg uppercase">
+                  <Button bgColor={"#fff"} text={"Explore the Menu"} />
+                </button>
               </Link>
             </div>
           </div>

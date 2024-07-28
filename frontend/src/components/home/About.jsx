@@ -90,11 +90,14 @@ export default function About() {
                       {x.desc}
                     </h4>
                     <div className="w-full text-center">
-                      <Button
-                        bgColor={"#000"}
-                        text={x?.subText}
-                        type={"dark"}
-                      />
+                      <button className="h-[70px] w-[230px] text-sm">
+                        <Button
+                          bgColor={"#000"}
+                          text={x?.subText}
+                          type={"dark"}
+                        />
+                      </button>
+
                       {/* <button className="btn text-dark family1 font-normal text-lg py-1"></button> */}
                     </div>
                   </header>

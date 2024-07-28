@@ -100,7 +100,10 @@ export default function Top() {
             </div>
             <p className="text-2xl text-white family4">${menu?.price}</p>
             <div className="w-full gap-8 grid md:grid-cols-2 lg:grid-cols-2 text-start">
-              <button onClick={handleReservationBooking}>
+              <button
+                onClick={handleReservationBooking}
+                className="h-[55px] w-[200px] text-sm"
+              >
                 <Button
                   type={"white"}
                   text={

@@ -27,7 +27,10 @@ export default function TakeoutMenu() {
               scelerisque nisi in urna nulla.
             </h4>
             <div className="w-full text-start">
-              <Button bgColor={"#fff"} text={"View takeout Menu"} />
+              <button className="h-[70px] w-[230px] text-lg uppercase">
+                <Button bgColor={"#fff"} text={"View takeout Menu"} />
+              </button>
+         
               {/* <button className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2"></button> */}
             </div>
           </div>

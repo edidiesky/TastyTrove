@@ -1,6 +1,8 @@
 import React from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
+import Magnetic from "@/animations/Magnetic";
+import Button from "../common/Button";
 
 export default function Bottom() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -15,8 +17,10 @@ export default function Bottom() {
     <div>
       <div className="w-full flex items-start gap-4 justify-between topWrapper">
         <div className="flex flex-col gap-8 flex-1">
-          <h3 className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
-          after:rounded-lg after:absolute text-5xl uppercase text-light text-dark">
+          <h3
+            className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
+          after:rounded-lg after:absolute text-5xl uppercase text-light text-dark"
+          >
             Additional informations
           </h3>
           <h4 className="family2 lg:pl-20 md:pr-8 leading-[1.5] text-xl text-light text-dark">
@@ -68,12 +72,20 @@ export default function Bottom() {
               satisfaction, nothing less! Please free to get in touch, let's
               work
             </span>
-            <div className="w-full flex items-center gap-4">
-              <button className="btn btn-4 family1 mt-3 text-sm py-2 px-4">
-                Check his reviews
+            <div className="w-full mt-3 flex items-center gap-4">
+              <button className="h-[55px] w-[200px] text-sm">
+                <Button
+                  text={`Check his reviews`}
+                  bgColor={"#fff"}
+                  type={"full_dark"}
+                ></Button>
               </button>
-              <button className="btn-1 btn family1 mt-3 text-sm py-2 px-4">
-                Message {menu?.user?.name}
+              <button className="h-[55px] w-[200px] text-sm">
+                <Button
+                  text={`Message ${menu?.user?.name}`}
+                  bgColor={"#000"}
+                  type={"dark"}
+                ></Button>
               </button>
             </div>
           </div>

@@ -26,7 +26,9 @@ export default function SingleTakout() {
               to={`restaurant/takeout/${menus[0]?.id}?category=${menus[0]?.category}`}
               className=""
             >
-              <Button bgColor={"#fff"} text={"View This Menu"}/>
+              <button className="h-[70px] w-[230px] text-lg uppercase">
+                <Button bgColor={"#fff"} text={"View This Menu"} />
+              </button>
             </Link>
           </div>
         </div>

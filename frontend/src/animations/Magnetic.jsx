@@ -13,7 +13,7 @@ const Magnetic = ({ children, bgColor }) => {
         circleRef.current,
         {
           top: "-25%",
-          duration: 0.6,
+          duration: 0.45,
           width: "150%",
           ease: "power3.in",
         },
@@ -23,7 +23,7 @@ const Magnetic = ({ children, bgColor }) => {
         circleRef.current,
         {
           top: "-150%",
-          duration: 0.6,
+          duration: 0.45,
           width: "125%",
         },
         "leave"
@@ -40,7 +40,7 @@ const Magnetic = ({ children, bgColor }) => {
   const handleMouseLeave = () => {
     timelineId = setTimeout(() => {
       timelineRef.current.play();
-    }, 700);
+    }, 500);
   };
   return (
     <div
