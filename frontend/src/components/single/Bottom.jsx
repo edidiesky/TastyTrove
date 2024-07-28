@@ -16,7 +16,7 @@ export default function Bottom() {
   );
 
   const maincourse = menus.filter((data) => data.category === category);
-  const [active, setActive] = useState(false);
+  const [active, setActive] = useState(true);
   return (
     <>
       <AnimatePresence>

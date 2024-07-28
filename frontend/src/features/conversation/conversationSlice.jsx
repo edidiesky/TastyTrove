@@ -4,6 +4,7 @@ import {
   Deleteconversation,
   GetUsersMessageConversation,
 } from "./conversationReducer";
+import toast from "react-hot-toast";
 const conversation = JSON.parse(
   localStorage.getItem("conversation") || "false"
 );
@@ -12,7 +13,7 @@ const conversation = JSON.parse(
 const initialState = {
   conversationDetails: {},
 
-  conversation:[],
+  conversation: [],
 
   conversationisLoading: false,
   conversationisSuccess: false,
@@ -28,7 +29,7 @@ export const conversationSlice = createSlice({
   initialState,
   reducers: {
     clearconversation: (state, action) => {
-      state.conversationDetails = null;
+      state.conversationDetails = {};
       state.conversation = [];
       state.conversationisLoading = false;
       state.isBookMarked = false;
@@ -55,7 +56,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      toast.error(action.payload);
     });
 
     // create user conversation
@@ -76,7 +77,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      toast.error(action.payload);
     });
 
     // Deleteconversation slice
@@ -93,7 +94,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      toast.error(action.payload);
     });
   },
 });

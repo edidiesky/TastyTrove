@@ -43,40 +43,33 @@ const ChatCard = ({ active, setActive }) => {
   const { users, currentUser, userDetails, token } = useSelector(
     (store) => store.auth
   );
-    const { menu } = useSelector(
-      (store) => store.menu
-    );
+  const { menu } = useSelector((store) => store.menu);
 
-  const [message, setMessage] = React.useState([...messages]);
+  const [message, setMessage] = React.useState([]);
+  // const [message, setMessage] = React.useState([...messages]);
   const [body, setBody] = React.useState("");
 
-  // const { conversationDetails } = useSelector((store) => store.conversation);
-const conversationDetails = {
-  id:""
-}
-  // useEffect(() => {
-  //   setMessage([]);
-  //   dispatch(clearconversation("any"));
-  // }, []);
+  const { conversationDetails } = useSelector((store) => store.conversation);
+  // const conversationDetails = {
+  //   id:""
+  // }
+  useEffect(() => {
+    setMessage([]);
+    dispatch(clearconversation());
+  }, []);
 
-  // useEffect(() => {
-  //   if (currentUser?.id !== "" && !conversationDetails) {
-  //     dispatch(
-  //       Createconversation({
-  //         conversationData: { receiverId: "660a143f3d7cbbbe5871bb3f" },
-  //       })
-  //     );
-  //   }
-  // }, [conversationDetails, currentUser?.id]);
+  useEffect(() => {
+    if (currentUser?.id !== "" && !conversationDetails) {
+      dispatch(Createconversation(menu?.user?.id));
+    }
+  }, [conversationDetails, currentUser?.id]);
 
   // get the conversation
-  // useEffect(() => {
-  //   if (currentUser?.id !== "") {
-  //     dispatch(
-  //       GetUsersMessageConversation({ receiverId: "660a143f3d7cbbbe5871bb3f" })
-  //     );
-  //   }
-  // }, [currentUser?.id]);
+  useEffect(() => {
+    if (currentUser?.id !== "") {
+      dispatch(GetUsersMessageConversation(menu?.user?.id));
+    }
+  }, [currentUser?.id]);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
@@ -99,13 +92,13 @@ const conversationDetails = {
     }
   };
 
-  // useEffect(() => {
-  //   if (conversationDetails) {
-  //     handleSingleMessageDetails();
-  //   } else {
-  //     setMessage([]);
-  //   }
-  // }, [setMessage, conversationDetails]);
+  useEffect(() => {
+    if (conversationDetails) {
+      handleSingleMessageDetails();
+    } else {
+      setMessage([]);
+    }
+  }, [setMessage, conversationDetails]);
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
@@ -139,19 +132,19 @@ const conversationDetails = {
     setBody("");
   };
 
-  // React.useEffect(() => {
-  //   socketIo?.emit("addUserId", currentUser?.id);
-  //   socketIo?.on("getAllConnectedUser", (users) => {
-  //     // console.log(users)
-  //   });
-  //   socketIo?.on("getMessage", (message) => {
-  //     setMessage((prev) => [
-  //       ...prev,
-  //       { body: message.text, userId: currentUser?.id },
-  //     ]);
-  //     console.log(message);
-  //   });
-  // }, [socketIo, setMessage]);
+  React.useEffect(() => {
+    socketIo?.emit("addUserId", currentUser?.id);
+    socketIo?.on("getAllConnectedUser", (users) => {
+      // console.log(users)
+    });
+    socketIo?.on("getMessage", (message) => {
+      setMessage((prev) => [
+        ...prev,
+        { body: message.text, userId: currentUser?.id },
+      ]);
+      console.log(message);
+    });
+  }, [socketIo, setMessage]);
 
   return (
     <motion.div
