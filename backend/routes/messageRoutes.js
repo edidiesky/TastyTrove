@@ -12,7 +12,7 @@ import {
   UpdateMessage,
 } from "../controllers/messageControllers.js"
 
-router.route("").post(authMiddleware, createMessage);
+router.route("/:id").post(authMiddleware, createMessage);
 
 router
   .route("/:id")

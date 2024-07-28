@@ -7,7 +7,7 @@ const createMessage = asyncHandler(async (req, res) => {
   const conversationId = req.params.id
   // console.log(conversationId)
   const senderId = req.user?.userId
-  const { body, image, lastMessage } = req.body
+  const { body, image } = req.body
    // create the message
 
   const message = await prisma.message.create({
@@ -32,7 +32,6 @@ const createMessage = asyncHandler(async (req, res) => {
     },
     include: {
       sender: true,
-      seen: true
     }
   })
   //  update the conversation
@@ -42,12 +41,12 @@ const createMessage = asyncHandler(async (req, res) => {
     },
     data: {
       lastMessageAt: new Date(),
-      lastMessage
+      lastMessage: body,
     },
     include: {
       users: true,
-    }
-  })
+    },
+  });
 
 
   //  send the message
