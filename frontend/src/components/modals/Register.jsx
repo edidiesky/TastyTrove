@@ -92,13 +92,13 @@ const RegisterModal = () => {
       >
         <div className="w-full mx-auto h-[550px] flex flex-col">
           <div className="w-full sticky top-0 left-0 p-8 px-8 border-b flex border-[rgba(0,0,0,.2)] items-center justify-between">
-            <h3 className="text-2xl md:text-3xl font-booking_font4">
+            <h3 className="text-2xl md:text-3xl font-bold family1">
               Sign Up
-              <span className="block text-sm font-normal font-booking_font">
+              <span className="block text-sm font-normal family1">
                 Register to your account and check out your bookings
               </span>
             </h3>
-            <div className="cross" onClick={handleClearAlert}>
+            <div className="cross absolute top-2 right-3" onClick={handleClearAlert}>
               <RxCross2 />
             </div>
           </div>
@@ -112,7 +112,7 @@ const RegisterModal = () => {
                   <label
                     key={index}
                     htmlFor={input.label}
-                    className="text-sm font-booking_font rounded-[10px] flex flex-col gap-2 text-dark"
+                    className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                   >
                     <span className="text-dark ">{input.label}</span>
                     <input
@@ -129,10 +129,10 @@ const RegisterModal = () => {
                   </label>
                 );
               })}
-              <div className="w-full flex items-center justify-center flex-col gap-3">
+              <div className="w-full flex mt-4 items-center justify-center flex-col gap-3">
                 <button
                   type="submit"
-                  className="p-4 px-8 flex items-center justify-center w-full cursor-pointer btn bg-[#000] rounded-[40px] font-booking_font_bold font-bold text-white"
+                  className="p-4 px-8 flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
                 >
                   <AnimateText children={"Sign Up"} />
                 </button>
@@ -142,7 +142,7 @@ const RegisterModal = () => {
                     <span
                       onClick={handleLoginModal}
                       style={{ textDecoration: "underline" }}
-                      className="font-bold font-booking_font_bold cursor-pointer"
+                      className="font-bold family1 cursor-pointer"
                       // href={"#"}
                     >
                       Sign In
@@ -153,13 +153,13 @@ const RegisterModal = () => {
               <div className="option text-dark">or</div>
               <div
                 // onClick={() => signIn("google")}
-                className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#fff] rounded-[40px] font-booking_font_bold font-bold border border-[rgba(0,0,0,.9)]"
+                className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#fff] rounded-[40px] family1 font-bold border border-[rgba(0,0,0,.9)]"
               >
                 <FcGoogle fontSize={"24px"} />
                 <AnimateText children={"Continue with Google"} />
                 
               </div>
-              {/* <div className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#000] rounded-[10px] font-booking_font font-bold border border-[rgba(0,0,0,.9)]">
+              {/* <div className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#000] rounded-[10px] family1 font-bold border border-[rgba(0,0,0,.9)]">
                 <FaGithub fontSize={"28px"} />
                 Continue with Github
               </div>{" "} */}
@@ -210,7 +210,7 @@ const RegisterModalStyles = styled(motion.div)`
   }
   .guestModalCard {
     max-width: 400px;
-    min-width: 540px;
+    min-width: 400px;
     display: flex;
     align-items: center;
     justify-content: center;

@@ -7,6 +7,7 @@ import paymentSlice from "./features/payment/paymentSlice";
 import statSlice from "./features/stat/statSlice";
 import cartSlice from "./features/cart/cartSlice";
 import notificationSlice from "./features/notification/notificationSlice";
+import { conversationSlice } from "./features/conversation/conversationSlice";
 export const store = configureStore({
   reducer: {
     menu: menuSlice,
@@ -15,7 +16,8 @@ export const store = configureStore({
     reservation: reservationSlice,
     payment: paymentSlice,
     stat: statSlice,
-    cart:cartSlice,
-       notification: notificationSlice,
+    cart: cartSlice,
+    notification: notificationSlice,
+    conversation: conversationSlice,
   },
 });

@@ -36,8 +36,11 @@ const GetSingleCart = asyncHandler(async (req, res) => {
       id: req.params.id,
     },
     include: {
-      user: true,
-      menu: true,
+      menu: {
+        include: {
+          user: true,
+        },
+      },
     },
   });
   return res.json(availableRooms);
