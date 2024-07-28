@@ -15,7 +15,7 @@ router.route("").post(authMiddleware, createConversation);
 
 router
   .route("/:id")
-  .get(getUserConversation)
+  .get(authMiddleware,getUserConversation)
   .delete(authMiddleware, DeleteConversation);
   // .post(authMiddleware, UpdateConversation);
 export default router;

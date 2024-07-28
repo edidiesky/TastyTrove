@@ -11,7 +11,7 @@ const conversation = JSON.parse(
 
 // Define the initial state of the conversation using that type
 const initialState = {
-  conversationDetails: {},
+  conversationDetails: null,
 
   conversation: [],
 
@@ -29,7 +29,7 @@ export const conversationSlice = createSlice({
   initialState,
   reducers: {
     clearconversation: (state, action) => {
-      state.conversationDetails = {};
+      state.conversationDetails = null;
       state.conversation = [];
       state.conversationisLoading = false;
       state.isBookMarked = false;

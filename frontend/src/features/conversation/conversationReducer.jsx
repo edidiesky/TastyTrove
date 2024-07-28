@@ -14,7 +14,7 @@ export const Createconversation = createAsyncThunk(
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
-        conversationData,
+        { userId: conversationData },
         config
       );
       return response.data.conversation;

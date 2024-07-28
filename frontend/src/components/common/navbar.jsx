@@ -49,8 +49,11 @@ const Navbar = () => {
         <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
         <div className="w-85 auto flex z-[30] items-center gap-4 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">
-            <h3 className="text-3xl md:text-4xl text-white family3">
+            <h3 className="text-3xl hidden md:block md:text-4xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />
+            </h3>
+              <h3 className="text-3xl block md:hidden md:text-4xl text-white family3">
+              <AnimateText children={"TastyTrove"} />
             </h3>
           </Link>
 
@@ -77,7 +80,7 @@ const Navbar = () => {
               end
               to={"/restaurant/cart"}
               className="w-12 tab relative rounded-full cursor-pointer
-               hover:bg-[#18181885] text-[#fff] h-12 hidden lg:flex items-center justify-center text-xl"
+               hover:bg-[#18181885] text-[#fff] h-12 flex items-center justify-center text-xl"
             >
               <IoBag />
               {cart?.length !== 0 && (

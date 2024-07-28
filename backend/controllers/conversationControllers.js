@@ -10,7 +10,7 @@ const createConversation = asyncHandler(async (req, res) => {
  
   try {
     // find conversation
-    const existingConversations = await prisma.conversations.findMany({
+    const existingConversations = await prisma.conversations.findFirst({
       where: {
         OR: [{
           userIds: {
@@ -25,12 +25,12 @@ const createConversation = asyncHandler(async (req, res) => {
         ]
       }
     })
-    // console.log(existingConversations[0])
-    if (existingConversations[0] !== undefined) {
+    // console.log(existingConversations)
+    if (existingConversations !== null) {
       res.setHeader("Content-Type", "text/html");
       res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-      res.status(200).json({ conversation: existingConversations[0] })
+      res.status(200).json({ conversation: existingConversations })
     } else {
       const conversationdata = {
         lastMessage,

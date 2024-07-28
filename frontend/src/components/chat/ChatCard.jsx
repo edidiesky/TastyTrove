@@ -24,8 +24,8 @@ const chatCardVariants = {
   enter: {
     opacity: 1,
     transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
-    width: "400px",
-    height: "550px",
+    width: "auto",
+    height: "auto",
   },
   closed: {
     opacity: 0,
@@ -59,17 +59,17 @@ const ChatCard = ({ active, setActive }) => {
   }, []);
 
   useEffect(() => {
-    if (currentUser?.id !== "" && !conversationDetails) {
+    if (menu?.user?.id !== "" && !conversationDetails) {
       dispatch(Createconversation(menu?.user?.id));
     }
-  }, [conversationDetails, currentUser?.id]);
+  }, [conversationDetails, menu?.user?.id]);
 
   // get the conversation
   useEffect(() => {
-    if (currentUser?.id !== "") {
+    if (menu?.user?.id !== "") {
       dispatch(GetUsersMessageConversation(menu?.user?.id));
     }
-  }, [currentUser?.id]);
+  }, [menu?.user?.id]);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
@@ -152,8 +152,8 @@ const ChatCard = ({ active, setActive }) => {
       initial="initial"
       exit="closed"
       animate={active ? "enter" : "exit"}
-      className="fixed z-[3000000000] bottom-10 left-5 h-[550px] border rounded-2xl
-       overflow-hidden bg-white w-[320px] lg:w-[400px] shadow-2xl"
+      className="fixed z-[3000000000] bottom-10 left-5 h-screen md:h-[550px] border rounded-2xl
+       overflow-hidden bg-white w-screen lg:w-[400px] shadow-2xl"
     >
       <div className="w-full flex h-[90px] items-center border-b">
         <div className="w-full items-center px-8 flex gap-4">
