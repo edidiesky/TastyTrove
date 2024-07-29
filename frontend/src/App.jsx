@@ -4,6 +4,8 @@ import "./index.css";
 import Loader from "./components/home/loader";
 import Layout from "./screens/Layout";
 import DashboardLayout from "./screens/DashboardLayout";
+import io from 'socket.io-client';
+let socketIo = io
 import {
   Statistics,
   Rooms,
@@ -15,6 +17,7 @@ import {
 } from "./screens/dashboard";
 import { ProtectRoute } from "./lib/ProtectRoute";
 import Animation from "./animations/Animation";
+import { useSelector } from "react-redux";
 const HomeWrapper = lazy(() => import("./screens/Home"));
 const SearchWrapper = lazy(() => import("./screens/Search"));
 const SingleWrapper = lazy(() => import("./screens/Single"));
@@ -26,6 +29,16 @@ const PaymentSuccess = lazy(() => import("./screens/Payment-Success"));
 // // PaymentSuccess
 export default function App() {
   const [height, setHeight] = useState(0);
+
+  socketIo = socketIo.connect("http://localhost:4000");
+  const { currentUser } = useSelector((store) => store.auth);
+
+  React.useEffect(() => {
+    socketIo?.emit("addUserId", currentUser?.id);
+    socketIo?.on("getAllConnectedUser", (users) => {
+      console.log(users);
+    });
+  }, []);
 
   return (
     <div className="based" style={{ height }}>

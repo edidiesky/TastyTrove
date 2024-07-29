@@ -4,8 +4,8 @@ const Loader = ({type}) => {
   if(type === 'dots') {
     return (
       <ThreeDots
-        height="20"
-        width="20"
+        height="24"
+        width="24"
         radius="10"
         color={"#000"}
         ariaLabel="three-dots-loading"
