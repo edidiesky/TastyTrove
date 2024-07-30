@@ -1,8 +1,11 @@
 
-import React from "react";
+import React, {useRef} from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
-
+import AnimateTextWord from "@/animations/AnimateTextWord";
+import Word from "@/animations/Word";
+import { motion, useInView } from "framer-motion";
+import { smallslideup2 } from "@/constants/utils/framer";
 const data = [
   {
     id: 1,
@@ -25,25 +28,31 @@ const data = [
 ];
 
 export default function About() {
+
+  const animateAbout = useRef(null);
+  const inView2 = useInView(animateAbout, {
+    margin: "0px 100px -120px 0px",
+  });
   return (
     <AboutContent className="flex w-full flex-col gap-4">
       <div className="w-full flex flex-col gap-24">
         <div className="w-85 auto wrapper flex gap-20">
           <div className="flex-1 flex flex-col gap-12">
-            <h4 className="text-lg md:text-xl family2">
-              HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget
-              tortor, donec amet, blandit. Tristique facilisi faucibus elementum
-              feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet
-              vulputate.
+            <h4 className="text-lg w-full md:text-xl family2">
+              <AnimateTextWord
+                children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
+              />
             </h4>
             <h1 className="family3 text-6xl md:text-7xl leading-[1.5]">
-              food is our common ground, a universal experience.
+              <Word
+                children={"food is our common ground, a universal experience."}
+              />
+              {/* food is our common ground, a universal experience. */}
             </h1>
-            <h4 className="text-lg md:text-xl  family2 font-normal">
-              HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget
-              tortor, donec amet, blandit. Tristique facilisi faucibus elementum
-              feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet
-              vulputate.
+            <h4 className="text-lg w-full md:text-xl family2">
+              <AnimateTextWord
+                children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
+              />
             </h4>
 
             <div className="w-full py-2">
@@ -71,16 +80,17 @@ export default function About() {
           </span>
         </div>
         <div className="w-90 auto">
-          <div className="w-85 auto aboutBottom grid gap-2">
+          <div ref={animateAbout} className="w-85 auto aboutBottom grid gap-2">
             {data.map((x, index) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <div className="w-full " key={index}>
-                  <header
+                <div className="w-full hide" key={index}>
+                  <motion.header
                     key={x.id}
-                    data-aos="fade"
-                    data-aos-duration="1200"
-                    data-aos-delay={index * 300}
+                    variants={smallslideup2}
+                    custom={index}
+                    initial="initial"
+                    animate={inView2 ? "animate" : "exit"}
                     className="flex flex-col gap-4 w-full"
                   >
                     <h3 className="family3 text-center pb-3 text-3xl md:text-4xl font-normal">
@@ -100,7 +110,7 @@ export default function About() {
 
                       {/* <button className="btn text-dark family1 font-normal text-lg py-1"></button> */}
                     </div>
-                  </header>
+                  </motion.header>
                 </div>
               );
             })}

@@ -1,36 +1,37 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
 // POST
-// Create prisma. 
+// Create prisma.
 //  Public
 const createConversation = asyncHandler(async (req, res) => {
-  const { members, isGroup, lastMessage, userId } = req.body
-  const senderuserId = req.user?.userId
+  const { members, isGroup, lastMessage, userId } = req.body;
+  const senderuserId = req.user?.userId;
   // console.log(req.body, senderuserId)
- 
+
   try {
     // find conversation
     const existingConversations = await prisma.conversations.findFirst({
       where: {
-        OR: [{
-          userIds: {
-            equals: [senderuserId, userId]
-          }
-        },
-        {
-          userIds: {
-            equals: [userId, senderuserId]
-          }
-        },
-        ]
-      }
-    })
+        OR: [
+          {
+            userIds: {
+              equals: [senderuserId, userId],
+            },
+          },
+          {
+            userIds: {
+              equals: [userId, senderuserId],
+            },
+          },
+        ],
+      },
+    });
     // console.log(existingConversations)
     if (existingConversations !== null) {
       res.setHeader("Content-Type", "text/html");
       res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-      res.status(200).json({ conversation: existingConversations })
+      res.status(200).json({ conversation: existingConversations });
     } else {
       const conversationdata = {
         lastMessage,
@@ -39,35 +40,32 @@ const createConversation = asyncHandler(async (req, res) => {
           connect: [
             // sender ids tc come first since he is the one sending it
             {
-              id: senderuserId
+              id: senderuserId,
             },
             {
-              id: userId
+              id: userId,
             },
-
-          ]
+          ],
         },
-
-      }
+      };
 
       const newConversation = await prisma.conversations.create({
         data: conversationdata,
         include: {
           users: true,
-        }
-      })
+        },
+      });
 
       res.setHeader("Content-Type", "text/html");
       res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-      res.status(200).json({ conversation: newConversation })
+      res.status(200).json({ conversation: newConversation });
     }
     // return conversation if true
     // create conversation if it doesnt exist
   } catch (error) {
-    res.status(401).json({ message: error?.data })
+    res.status(401).json({ message: error?.data });
   }
-
 });
 
 // GET Review of the user conversation
@@ -75,52 +73,36 @@ const createConversation = asyncHandler(async (req, res) => {
 // send the conversation Id only
 const getUserConversation = asyncHandler(async (req, res) => {
   // get the conversation id form the req params
-  const userId = req.params.id
-  const currentUserId = req.user?.userId 
+  const userId = req.params.id;
+  const senderuserId = req.user?.userId;
   //  find a unique document containiung the convo id
-  const conversation = await prisma.conversations.findMany({
+  const conversation = await prisma.conversations.findFirst({
     where: {
-      OR: [
-        {
-          userIds: {
-            equals: [userId, currentUserId]
-          }
-        },
-        {
-          userIds: {
-            equals: [currentUserId, userId]
-          }
-        },
-      ]
-    }
-  })
+      id: req.params.id,
+    },
+  });
 
-  if (conversation[0] !== undefined) {
-    res.status(200).json({ conversation: conversation[0] })
-
+  if (conversation) {
+    res.status(200).json({ conversation: conversation });
   } else {
-    res.status(200).json({ conversation: null })
+    res.status(200).json({ conversation: null });
   }
-
-
 });
 
 // GET All Gig
 //  Public
 const DeleteConversation = asyncHandler(async (req, res) => {
-
-
   // get the request body
-  const curentUserId = req?.user?.userId
+  const curentUserId = req?.user?.userId;
 
   const conversation = await prisma.conversations.findUnique({
     where: {
-      id: req.params.id
+      id: req.params.id,
     },
     include: {
-      users: true
-    }
-  })
+      users: true,
+    },
+  });
   if (!conversation) {
     res.status(404);
     throw new Error("No such conversation exists");
@@ -130,19 +112,16 @@ const DeleteConversation = asyncHandler(async (req, res) => {
     where: {
       id: req.params.id,
       userIds: {
-        hasSome: [curentUserId]
-      }
+        hasSome: [curentUserId],
+      },
     },
-  })
+  });
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  res.status(200).json({ message: 'Conversation has been successfully deleted' })
+  res
+    .status(200)
+    .json({ message: "Conversation has been successfully deleted" });
 });
 
-
-export {
-  createConversation,
-  getUserConversation,
-  DeleteConversation,
-};
+export { createConversation, getUserConversation, DeleteConversation };

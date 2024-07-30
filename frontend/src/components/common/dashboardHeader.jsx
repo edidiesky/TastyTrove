@@ -100,23 +100,29 @@ const DashboardHeader = () => {
               />
             </label>
           </div>
-          <div className="flex w-full auto items-center justify-end gap-4">
-            <label
+          <div className="flex w-full auto items-center justify-end gap-8">
+            <div
+              onClick={() => setNotificationActiveBar(true)}
+              className="w-12 text-grey text-2xl relative h-12 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center"
+            >
+              <FaBell />
+              <div className="w-6 absolute -top-2 -right-2 text-sm h-6 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
+                1
+              </div>
+            </div>
+
+            {/* <label
               onClick={() => setNotificationActiveBar(true)}
               htmlFor=""
               className="flex cursor-pointer justify-between gap-3 text-dark w-[250px]
              items-center min-h-14 py-1 border rounded-[40px] px-4"
             >
-              <div className="w-12 text-grey text-2xl h-12 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center">
-                <FaBell />
-              </div>
-              Notifications
-              <div className="w-8 text-sm h-8 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
-                1
-              </div>
-            </label>
-            <div className="flex items-center gap-2">
-              {/* <img
+             
+            </label> */}
+
+            <div className="flex profile_wrapper relative items-center gap-2">
+              <div className="flex items-center gap-2">
+                {/* <img
                 src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                 alt=""
                 className="w-10 rounded-full"
@@ -127,27 +133,26 @@ const DashboardHeader = () => {
                   {currentUser?.email}
                 </span>
               </h4> */}
-              {currentUser?.image ? (
-                <img
-                  src={currentUser?.image}
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              ) : (
-                <img
-                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              )}
-              {/* <h4 className="text-base text-dark family1 family1">
+                {currentUser?.image ? (
+                  <img
+                    src={currentUser?.image}
+                    alt=""
+                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                  />
+                ) : (
+                  <img
+                    src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                    alt=""
+                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                  />
+                )}
+                {/* <h4 className="text-base text-dark family1 family1">
               {currentUser?.name}
               <span className="block font-normal family1 text-xs text-dark">
                 {currentUser?.email}
               </span>
             </h4> */}
-            </div>
-            <div className="flex profile_wrapper relative items-center gap-2">
+              </div>
               <div className="profile_dropdown shadow-2xl absolute">
                 <div className="w-full flex flex-col">
                   <div className="flex profile_dropdown_bottom flex-col w-full">

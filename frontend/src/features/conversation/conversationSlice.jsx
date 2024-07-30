@@ -56,7 +56,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      toast.error(action.payload);
+      // toast.error(action.payload);
     });
 
     // create user conversation
@@ -77,7 +77,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      toast.error(action.payload);
+      // toast.error(action.payload);
     });
 
     // Deleteconversation slice
@@ -94,7 +94,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      toast.error(action.payload);
+      // toast.error(action.payload);
     });
   },
 });

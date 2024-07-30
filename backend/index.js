@@ -81,7 +81,8 @@ const getASpecificUser = (userId) => {
   // console.log(users)
 
   // return users?.filter((obj) => obj.userId === userId)
-  return users.find((user) => user.userId === userId);
+  const newuser = users.find((user) => user.userId === userId);
+  return newuser;
 };
 
 io.on("connection", (socket) => {
@@ -99,14 +100,16 @@ io.on("connection", (socket) => {
   // // send message to a speco=ific user
   socket.on("sendMessage", ({ receiverId, senderId, text }) => {
     // get the specific usre u intend to send the message to
-    const user = getASpecificUser(receiverId);
-    // console.log(user, users)
-    // console.log(user?.socketId)
+    const newuser = getASpecificUser(receiverId);
+    // console.log(newuser);
+    // console.log(newuser?.socketId)
     // console.log({ receiverId, senderId, text })
-    io.to(user?.socketId).emit("getMessage", {
-      receiverId: receiverId,
-      text: text,
-    });
+    if (newuser?.socketId) {
+      io.to(newuser?.socketId).emit("getMessage", {
+        receiverId: receiverId,
+        text: text,
+      });
+    }
   });
 
   socket.on("disconnect", () => {

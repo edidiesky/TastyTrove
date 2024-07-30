@@ -4,8 +4,8 @@ import "./index.css";
 import Loader from "./components/home/loader";
 import Layout from "./screens/Layout";
 import DashboardLayout from "./screens/DashboardLayout";
-import io from 'socket.io-client';
-let socketIo = io
+import io from "socket.io-client";
+let socketIo = io;
 import {
   Statistics,
   Rooms,
@@ -34,10 +34,19 @@ export default function App() {
   const { currentUser } = useSelector((store) => store.auth);
 
   React.useEffect(() => {
-    socketIo?.emit("addUserId", currentUser?.id);
-    socketIo?.on("getAllConnectedUser", (users) => {
-      console.log(users);
-    });
+    if (currentUser) {
+      socketIo?.emit("addUserId", currentUser?.id);
+      socketIo?.on("getAllConnectedUser", (users) => {
+        console.log(users);
+      });
+      socketIo?.on("getMessage", (message) => {
+        // setMessage((prev) => [
+        //   ...message,
+        //   { body: message.text, userId: currentUser?.id },
+        // ]);
+        // console.log(message);
+      });
+    }
   }, []);
 
   return (

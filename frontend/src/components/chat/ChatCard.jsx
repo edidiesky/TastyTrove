@@ -58,20 +58,21 @@ const ChatCard = ({ active, setActive }) => {
   useEffect(() => {
     setMessage([]);
     dispatch(clearconversation());
+    dispatch(Createconversation(menu?.user?.id));
   }, []);
 
-  useEffect(() => {
-    if (menu?.user?.id !== "" && !conversationDetails) {
-      dispatch(Createconversation(menu?.user?.id));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (menu?.user?.id !== "" && !conversationDetails) {
+  //     dispatch(Createconversation(menu?.user?.id));
+  //   }
+  // }, []);
 
   // get the conversation
   useEffect(() => {
-    if (menu?.user?.id !== "") {
-      dispatch(GetUsersMessageConversation(menu?.user?.id));
+    if (conversationDetails) {
+      dispatch(GetUsersMessageConversation(conversationDetails?.id));
     }
-  }, [menu?.user?.id]);
+  }, []);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
@@ -129,7 +130,7 @@ const ChatCard = ({ active, setActive }) => {
       ]);
 
       socketIo?.emit("sendMessage", {
-        receiverId: "660a143f3d7cbbbe5871bb3f",
+        receiverId: menu?.user?.id,
         senderId: currentUser?.id,
         text: body,
       });
@@ -148,14 +149,14 @@ const ChatCard = ({ active, setActive }) => {
     });
     socketIo?.on("getMessage", (message) => {
       setMessage((prev) => [
-        ...prev,
+        ...message,
         { body: message.text, userId: currentUser?.id },
       ]);
       console.log(message);
     });
   }, [socketIo, setMessage]);
 
-  console.log(message);
+  // console.log(conversationDetails);
   return (
     <motion.div
       variants={chatCardVariants}

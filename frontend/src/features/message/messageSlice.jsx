@@ -58,7 +58,7 @@ export const messageSlice = createSlice({
       state.messageisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      // state.alertText = action.payload;
     });
 
     // create user message
@@ -79,7 +79,7 @@ export const messageSlice = createSlice({
       state.messageisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      // state.alertText = action.payload;
     });
 
     // get single message slice
@@ -98,7 +98,7 @@ export const messageSlice = createSlice({
       state.messageisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      // state.alertText = action.payload;
     });
 
     // Deletemessage slice
@@ -115,7 +115,7 @@ export const messageSlice = createSlice({
       state.messageisLoading = false;
       state.showAlert = true;
       state.alertType = "danger";
-      state.alertText = action.payload;
+      // state.alertText = action.payload;
     });
   },
 });

@@ -61,7 +61,7 @@ const createMessage = asyncHandler(async (req, res) => {
 const getAllMessageofAConversation = asyncHandler(async (req, res) => {
   
   // get the conversation id form the req params
-  const conversatonId = req.params.conversationid
+  const conversatonId = req.params.id;
   // console.log(conversatonId)
   //  find a unique document containiung the convo id
   const messages = await prisma.message.findMany({

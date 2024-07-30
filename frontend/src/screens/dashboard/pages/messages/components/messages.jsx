@@ -38,17 +38,17 @@ const Nessage = () => {
   }, []);
 
   useEffect(() => {
-    if (tabid !== null && !conversationDetails) {
+    if (tabid) {
       dispatch(Createconversation(tabid));
     }
   }, []);
 
   // get the conversation
   useEffect(() => {
-    if (tabid !== null) {
-      dispatch(GetUsersMessageConversation(tabid));
+    if (conversationDetails) {
+      dispatch(GetUsersMessageConversation(conversationDetails?.id));
     }
-  }, [tabid]);
+  }, []);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
@@ -78,6 +78,7 @@ const Nessage = () => {
       handleSingleMessageDetails();
     } else {
       setMessage([]);
+      dispatch(clearconversation());
     }
   }, [setMessage, conversationDetails]);
   const handleCreateMessage = async (e) => {
@@ -106,7 +107,7 @@ const Nessage = () => {
       ]);
 
       socketIo?.emit("sendMessage", {
-        receiverId: "660a143f3d7cbbbe5871bb3f",
+        receiverId: tabid,
         senderId: currentUser?.id,
         text: body,
       });
@@ -126,15 +127,18 @@ const Nessage = () => {
     socketIo?.on("getMessage", (message) => {
       setMessage((prev) => [
         ...message,
-        { body: message.text, userId: currentUser?.id },
+        { body: message.text, userId: message?.receiverId },
       ]);
       console.log(message);
     });
   }, [socketIo, setMessage]);
 
-  console.log(message);
+  // console.log(message);
+  // find specific user
+  const mainuser = users?.find((user) => user?.id === tabid);
+  // console.log(mainuser);
   return (
-    <div className="w-full h-[520px] border rounded-[20px] grid lg:grid-cols-custom_2 ">
+    <div className="w-full h-[520px] border rounded-[20px] grid md:grid-cols-custom_2 ">
       <div className="w-[340px] h-full border-r flex flex-col">
         <div className="w-full px-6 border-b h-[70px] flex items-center gap-3">
           <h4 className="text-xl lg:text-2xl font-semibold family1">
@@ -208,28 +212,30 @@ const Nessage = () => {
       <div className="w-full flex flex-col">
         {/* TOP BAR */}
         <div className="w-full px-6 border-b h-[70px] flex items-center gap-3">
-          <div className="w-full flex items-center gap-4">
-            {user[0]?.image ? (
-              <img
-                src={user[0]?.image}
-                alt=""
-                className="w-12 h-12 rounded-full"
-              />
-            ) : (
-              <img
-                src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                alt=""
-                className="w-12 h-12 rounded-full"
-              />
-            )}
+          {mainuser && (
+            <div className="w-full flex items-center gap-4">
+              {mainuser?.image ? (
+                <img
+                  src={mainuser?.image}
+                  alt=""
+                  className="w-12 h-12 rounded-full"
+                />
+              ) : (
+                <img
+                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                  alt=""
+                  className="w-12 h-12 rounded-full"
+                />
+              )}
 
-            <h5 className="text-base font-semibold family1">
-              {user[0]?.name}
-              <span className="block font-normal text-xs text-grey">
-                {moment(user[0]?.createdAt).format("DD MMM YYYY")}
-              </span>
-            </h5>
-          </div>
+              <h5 className="text-base font-semibold family1">
+                {mainuser?.name}
+                <span className="block font-normal text-xs text-grey">
+                  {moment(mainuser?.createdAt).format("DD MMM YYYY")}
+                </span>
+              </h5>
+            </div>
+          )}
         </div>
         {/* MESSAGE LIST */}
 
@@ -258,7 +264,7 @@ const Nessage = () => {
                         <div className="w-full flex items-center justify-end">
                           <div className="flex w-full justify-end items-end gap-1">
                             <div className="flex-1 flex items-end flex-col justify-end gap-1">
-                              <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-[12px] md:text-[12px] leading-[1.6] text-white flex items-center bg-[#000] justify-center p-4 px-8">
+                              <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-xs leading-[1.6] text-white flex items-center bg-[#000] justify-center p-3 px-6">
                                 {message?.body}
                               </span>
                               <span className="text-xs family1 text-dark">
@@ -280,7 +286,7 @@ const Nessage = () => {
                                 message?.sender?.username[0]}
                             </div>
                             <div className="flex-1 flex items-start flex-col justify-start gap-1">
-                              <span className="max-w-[200px] md:max-w-[400px] rounded-[30px] family1 text-[12px] md:text-[12px] leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-4 px-8">
+                              <span className="max-w-[200px] md:max-w-[400px] rounded-[30px] family1 text-xs leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-3 px-6">
                                 {message?.body}
                               </span>
                               <span className="text-xs family1 text-dark">
@@ -307,7 +313,10 @@ const Nessage = () => {
             action=""
             className="w-full"
           >
-            <label htmlFor="search" className="flex text-base items-center gap-2">
+            <label
+              htmlFor="search"
+              className="flex text-base items-center gap-2"
+            >
               <div
                 className="w-12 cursor-pointer text-dark text-xl h-12 hover:bg-[#F1F1F1] rounded-full
                text-dark flex items-center justify-center"

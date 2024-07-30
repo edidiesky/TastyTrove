@@ -25,7 +25,7 @@ export default function NotificationSidebar({
     }
     return (
         <div className={`${notificationactivebar ? "right-0" : "-right-[100%]"
-            } transition-all ease duration-700 z-[300000000] w-[320px] md:w-[400px] bg-[#fff] shadow-xl h-screen fixed top-0`}>
+            } transition-all ease duration-700 z-[300000000] w-[320px] md:w-[360px] bg-[#fff] shadow-xl h-screen fixed top-0`}>
             <div
                 onClick={() => setNotificationActiveBar(!notificationactivebar)}
                 style={{ zIndex: "200000", transition: "all .4s ease" }}
@@ -35,7 +35,7 @@ export default function NotificationSidebar({
             <div style={{ zIndex: "250000" }} className="w-full flex flex-col py-8 relative bg-[#fff] h-full">
                 <div className="pb-4 border-b w-full">
                     <div className="w-[85%] max-w-custom_1 flex items-center justify-between mx-auto">
-                        <h4 className="text-2xl md:text-2xl family1 font-awmibold">
+                        <h4 className="text-2xl md:text-2xl family1 font-semibold">
                             Notifications
                         </h4>
                         <div onClick={() => setNotificationActiveBar(false)} className="w-12 hover:bg-[#f7f7f7] cursor-pointer h-12 rounded-full flex items-center justify-center text-lg">
@@ -73,8 +73,8 @@ export default function NotificationSidebar({
                 </div>
                 <div className="sticky pt-4 border-t bottom-0 left-0 w-full">
                     <div className="w-full px-4 flex items-center justify-end gap-4">
-                        <div className="py-3  px-4 bg-[#000] text-[#fff] rounded-full text-sm">Mark All As Read</div>
-                        <div className="py-3 px-4 border rounded-full text-sm">Clear Notification</div>
+                        <div className="py-3  px-4 bg-[#000] text-[#fff] cursor-pointer rounded-full text-sm">Mark All As Read</div>
+                        <div className="py-3 px-4 border cursor-pointer rounded-full text-sm">Clear Notification</div>
                     </div>
                 </div>
             </div>

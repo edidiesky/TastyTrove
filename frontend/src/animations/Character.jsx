@@ -10,12 +10,12 @@ const Character = ({ children }) => {
   });
 
   return (
-    <span ref={text_1_ref}>
+    <span className="flex flex-wrap" ref={text_1_ref}>
       {words.map((word, index) => {
         const start = index / words?.length;
         const end = start + 1 / words?.length;
         return (
-          <span key={index} className="relative w-full">
+          <span key={index} className="relative">
             <Chars
               progress={scrollYProgress}
               range={[start, end]}
@@ -31,7 +31,7 @@ const Character = ({ children }) => {
 const Chars = ({ children, range, progress }) => {
   const chars = children?.split("");
   return (
-    <span>
+    <span className="inline-flex">
       {chars.map((word, index) => {
         let amount = range[1] - range[0];
         let step = amount / chars.length;
@@ -43,10 +43,10 @@ const Chars = ({ children, range, progress }) => {
           [0, 1]
         );
         return (
-          <span key={index} className="relative w-full">
+          <span key={index} className="relative">
             <span className="absolute opacity-[.3]">{word}</span>
             <motion.span style={{ opacity: opacityonScroll }} className="">
-              {word}
+              {word === " " ? "\u00A0" : word}
             </motion.span>
           </span>
         );
