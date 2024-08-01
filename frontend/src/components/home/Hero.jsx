@@ -1,25 +1,91 @@
 import Magnetic from "@/animations/Magnetic";
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
+import SplitType from "split-type";
+import gsap from "gsap";
 import { Link } from "react-router-dom";
 
 export default function Hero() {
+  useEffect(() => {
+    const text1 = new SplitType(".hero_main_text");
+    const text2 = new SplitType(".hero_submain_text");
+    const text3 = new SplitType(".hero_about_text");
+    // hero_text2
+    // gsap.fromto;
+    // gsap.timeline({ defaults: { ease: "SlowMo.easeOut" } });
+    gsap
+      .timeline()
+      .to("body", { css: { visibility: "visible" } })
+      .fromTo(
+        text2?.chars,
+        {
+          y: "100%",
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: { amount: 0.6 },
+          duration: 1,
+          ease: "power4.out",
+        },
+        0.4
+      )
+      .fromTo(
+        text1?.words,
+        {
+          y: "100%",
+          opacity: 0,
+          skew: 7,
+        },
+        {
+          y: 0,
+          skew: 0,
+          opacity: 1,
+          stagger: 0.08,
+          duration: 1.6,
+          ease: "power4.out",
+        },
+        0.8
+      )
+      .fromTo(
+        text3?.lines,
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.05,
+          duration: 1,
+          ease: "power4.out",
+        }
+      );
+  }, []);
+  
   return (
     <HeroContent className="flex w-full flex-col gap-4">
       <div className="w-full exWrapper flex">
         <div className="HeroRight flex items-center justify-center">
           <div className="flex HeroRightC flex-col gap-12 auto">
-            <h4 className="text-lg family1 text-light uppercase text-white">
-              THE BEST RESTAURANTS IN TOWN
-            </h4>
-            <h1 className="hero_main_text family3 text-7xl lg:text-8xl text-white">
-              FINE DINING EXPERIENCE
-            </h1>
-            <h4 className="text-lg md:text-2xl family2 text-light text-white">
-              Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
-              scelerisque nisi in urna nulla. Sit tempor a et nisl, ac felis.
-            </h4>
+            <div className="w-full hide">
+              <h4 className="text-lg hero_submain_text family1 text-light uppercase text-white">
+                THE BEST RESTAURANTS IN TOWN
+              </h4>
+            </div>
+            <div className="w-full hide">
+              <h1 className="hero_main_text family3 text-7xl lg:text-8xl text-white">
+                FINE DINING EXPERIENCE
+              </h1>
+            </div>
+            <div className="w-full overflow-hidden">
+              <h4 className="text-lg w-full hero_about_text md:text-2xl family2 text-light text-white">
+                Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
+                scelerisque nisi in urna nulla. Sit tempor a et nisl, ac felis.
+              </h4>
+            </div>
             <div className="w-full text-start">
               <Link to={"/restaurant/menu"}>
                 <button className="h-[70px] w-[230px] text-lg uppercase">
@@ -78,7 +144,7 @@ const HeroContent = styled.div`
       }
       background-color: #000;
       .HeroRightC {
-        width: 50%;
+        width: 60%;
         @media (max-width: 980px) {
           width: 70%;
         }

@@ -57,7 +57,7 @@ export default function App() {
           <Route
             index
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <HomeWrapper />
               </Suspense>
             }

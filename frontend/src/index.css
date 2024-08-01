@@ -170,7 +170,12 @@ textarea {
   );
   z-index: 300;
 }
-
+.line {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 8px !important;
+  width: fit-content !important;
+}
 .family5 {
   font-family: "Work Sans", sans-serif;
 }

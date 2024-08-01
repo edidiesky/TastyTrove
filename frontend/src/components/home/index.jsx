@@ -9,15 +9,9 @@ import TakeoutList from "./TakeoutList";
 import TakeoutMenu from "./TakeoutMenu";
 import Hero from "./Hero";
 import Footer from "../common/Footer";
-import { useDispatch } from "react-redux";
-import { getAllMenu } from "@/features/menu/menuReducer";
 
 export default function HomeIndex() {
-  const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getAllMenu());
-  }, []);
   return (
     <div>
       <Navbar/>
