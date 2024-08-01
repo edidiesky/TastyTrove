@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const CreateReview = createAsyncThunk(
   "CreateReview",
-  async (name, thunkAPI) => {
+  async (review, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
       const config = {
@@ -11,11 +11,12 @@ export const CreateReview = createAsyncThunk(
           authorization: `Bearer ${state.auth.token}`,
         },
       };
-      const { data } = await axios.get(
+      const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/review`,
+        review,
         config
       );
-      localStorage.setItem("customer", JSON.stringify(data.seller));
+      // localStorage.setItem("customer", JSON.stringify(data.seller));
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -38,7 +39,7 @@ export const GetMenuReviews = createAsyncThunk(
         },
       };
       const { data } = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/review/history/{menuid}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/review/history/${menuid}`,
         config
       );
       return data;

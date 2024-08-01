@@ -34,50 +34,57 @@ const CreateReview = expressAsyncHandler(async (req, res) => {
     throw new Error("You have already reviewed this product");
   } else {
     // create review history for the user
-    const { reviews, seller } = await prisma.$transaction(async (primsa) => {
-      const reviews = await prisma.review.create({
-        data: {
-          review,
-          description,
-          menuid: menuid,
-          userid: userId,
-          sellerId: sellerId,
-        },
-      });
-      const allSellerReview = await prisma.review.findMany({
-        where: {
-          sellerId: sellerId,
-        },
-      });
-      // calculate the total rating
-      const TotalRating = allSellerReview?.reduce(
-        (acc, item) => item.review + acc,
-        0
-      );
-      // console.log(TotalRating / allSellerReview?.length);
-      let totalSellerRating = TotalRating / allSellerReview?.length;
+    // const { reviews } = await prisma.$transaction(async (primsa) => {
+    //   const reviews = await prisma.review.create({
+    //     data: {
+    //       review,
+    //       description,
+    //       menuid: menuid,
+    //       userid: userId,
+    //       sellerId: sellerId,
+    //     },
+    //   });
+    //   // const allSellerReview = await prisma.review.findMany({
+    //   //   where: {
+    //   //     sellerId: sellerId,
+    //   //   },
+    //   // });
+    //   // // calculate the total rating
+    //   // const TotalRating = allSellerReview?.reduce(
+    //   //   (acc, item) => item.review + acc,
+    //   //   0
+    //   // );
+    //   // // console.log(TotalRating / allSellerReview?.length);
+    //   // let totalSellerRating = TotalRating / allSellerReview?.length;
 
-      // console.log(TotalRating);
-      // update the seller review
-      const seller = await prisma.user.update({
-        where: {
-          id: sellerId,
-        },
-        data: {
-          ratings: totalSellerRating,
-        },
-      });
-      return {
-        reviews,
-        seller,
-      };
+    //   // // console.log(TotalRating);
+    //   // // update the seller review
+    //   // const seller = await prisma.user.update({
+    //   //   where: {
+    //   //     id: sellerId,
+    //   //   },
+    //   //   data: {
+    //   //     ratings: totalSellerRating,
+    //   //   },
+    //   // });
+    //   return {
+    //     reviews,
+    //   };
+    // });
+    const reviews = await prisma.review.create({
+      data: {
+        review,
+        description,
+        menuid: menuid,
+        userid: userId,
+        sellerId: sellerId,
+      },
     });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
     res.status(200).json({
       review: reviews,
-      seller,
     });
   }
 });

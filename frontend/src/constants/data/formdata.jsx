@@ -119,3 +119,36 @@ export const DashboardProfileInputData = [
   //   required: false,
   // },
 ];
+
+export const ReviewInputData = [
+  {
+    id: 4,
+    name: "description",
+    type: "name",
+    text: "Description",
+    label: "Description",
+    required: false,
+    inputtype: "textarea",
+  },
+
+  {
+    id: 34,
+    name: "name",
+    placeholder: "Please input your name",
+    type: "text",
+    text: "Name",
+    label: "Name",
+    required: false,
+    inputtype: "input",
+  },
+  {
+    id: 1,
+    name: "email",
+    placeholder: "example@site.com",
+    type: "email",
+    text: "Email",
+    label: "Email",
+    required: false,
+    inputtype: "input",
+  },
+];

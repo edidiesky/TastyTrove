@@ -11,7 +11,8 @@ const initialState = {
 
   createMenuReviewisLoading: false,
   createMenuReviewisSuccess: false,
-  review: [],
+  reviews: [],
+  review: null,
 };
 
 export const reviewSlice = createSlice({
@@ -26,7 +27,7 @@ export const reviewSlice = createSlice({
     builder.addCase(CreateReview.fulfilled, (state, action) => {
       state.createMenuReviewisLoading = false;
       state.createMenuReviewisSuccess = true;
-      state.review = [...state.review, action.payload.review];
+      state.review = action.payload.review;
     });
     builder.addCase(CreateReview.rejected, (state, action) => {
       state.createMenuReviewisLoading = false;
@@ -41,7 +42,7 @@ export const reviewSlice = createSlice({
     builder.addCase(GetMenuReviews.fulfilled, (state, action) => {
       state.getMenuReviewisLoading = false;
       state.getMenuReviewisSuccess = true;
-      state.review = action.payload.review;
+      state.reviews = action.payload.review;
     });
     builder.addCase(GetMenuReviews.rejected, (state, action) => {
       state.getMenuReviewisLoading = false;
@@ -56,7 +57,7 @@ export const reviewSlice = createSlice({
     builder.addCase(GetReviewHistoryForAdmin.fulfilled, (state, action) => {
       state.getMenuReviewisLoading = false;
       state.getMenuReviewisSuccess = true;
-      state.review = action.payload.review;
+      state.reviews = action.payload.review;
     });
     builder.addCase(GetReviewHistoryForAdmin.rejected, (state, action) => {
       state.getMenuReviewisLoading = false;
