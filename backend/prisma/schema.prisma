@@ -42,16 +42,19 @@ model User {
   conversationIds String[]        @db.ObjectId
   conversations   Conversations[] @relation(fields: [conversationIds], references: [id])
 
-  seenMessageIds String[]  @db.ObjectId
-  seenMessages   Message[] @relation("Seen", fields: [seenMessageIds], references: [id])
-
-  messages      Message[]
-  menu          Menu[]
-  cart          Cart[]
-  reservation   Reservations[]
-  payment       Payment[]       @relation("SellerPayments")
-  paymentsMade  Payment[]       @relation("UserPayments")
-  notifications Notifications[]
+  seenMessageIds String[]        @db.ObjectId
+  seenMessages   Message[]       @relation("Seen", fields: [seenMessageIds], references: [id])
+  ratings        Int?
+  messages       Message[]
+  menu           Menu[]
+  cart           Cart[]
+  reservation    Reservations[]
+  payment        Payment[]       @relation("SellerPayments")
+  paymentsMade   Payment[]       @relation("UserPayments")
+  reviews        Review[]        @relation("SellerReviews")
+  reviewsMade    Review[]        @relation("UserReview")
+  notifications  Notifications[]
+  Payment        Payment[]
 }
 
 model Menu {
@@ -68,6 +71,19 @@ model Menu {
   userid            String   @db.ObjectId
   user              User?    @relation(fields: [userid], references: [id], onDelete: Cascade)
   cart              Cart[]
+  Review            Review[]
+}
+
+model Review {
+  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  review      Int
+  description String
+  menuid      String @db.ObjectId
+  menu        Menu?  @relation(fields: [menuid], references: [id], onDelete: Cascade)
+  userid      String @db.ObjectId // Customer ID
+  sellerId    String @db.ObjectId // Seller ID
+  user        User   @relation("UserReview", fields: [userid], references: [id])
+  seller      User   @relation("SellerReviews", fields: [sellerId], references: [id])
 }
 
 model Cart {
@@ -107,6 +123,8 @@ model Payment {
   createdAt DateTime      @default(now())
   updatedAt DateTime      @updatedAt
   cartItems Json?
+  User      User?         @relation(fields: [userId], references: [id])
+  userId    String?       @db.ObjectId
 }
 
 model Notifications {

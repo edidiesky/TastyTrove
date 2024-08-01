@@ -43,6 +43,7 @@ import orderRoute from "./routes/orderRoutes.js";
 import StatRoute from "./routes/statRoute.js";
 import ConversationRoute from "./routes/conversationRoutes.js";
 import messageRoute from "./routes/messageRoutes.js";
+import reviewRoute from "./routes/reviewRoutes.js";
 
 app.use("/api/v1/auth", Auth);
 app.use("/api/v1/user", userAuth);
@@ -55,6 +56,7 @@ app.use("/api/v1/stat", StatRoute);
 app.use("/api/v1/notification", NotificationRoutes);
 app.use("/api/v1/conversation", ConversationRoute);
 app.use("/api/v1/message", messageRoute);
+app.use("/api/v1/review", reviewRoute);
 // // Middlewares
 app.use(NotFound);
 app.use(errorHandler);

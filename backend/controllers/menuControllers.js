@@ -79,10 +79,8 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
   });
 
   if (!Menu) {
-    return NextResponse.json(
-      { message: "No Menu has being found" },
-      { status: 404 }
-    );
+    res.status(404);
+    throw new Error("The Menu does not exist");
   }
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");

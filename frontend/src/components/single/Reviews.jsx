@@ -29,7 +29,7 @@ export default function Reviews() {
         Product Review
       </h3>
       <div className="w-full flex flex-col gap-8">
-        <h4 className="family1 text-lg text-dark">
+        <h4 className="family1 text-base text-dark">
           Your email address will not be published. Required fields are marked *
         </h4>
         <div className="w-full flex items-center flex-wrap gap-4">
@@ -62,7 +62,7 @@ export default function Reviews() {
           <div className="w-full flex flex-col gap-4">
             <label
               htmlFor="review"
-              className="flex w-full flex-col gap-2 text-lg family1 font-normal"
+              className="flex w-full flex-col gap-2 text-base family1 font-normal"
             >
               Your Review
               <textarea
@@ -73,7 +73,7 @@ export default function Reviews() {
             </label>
             <label
               htmlFor="Name"
-              className="flex w-full flex-col gap-2 text-lg family1 font-normal"
+              className="flex w-full flex-col gap-2 text-base family1 font-normal"
             >
               Name
               <input
@@ -84,7 +84,7 @@ export default function Reviews() {
             </label>
             <label
               htmlFor="Email"
-              className="flex w-full flex-col gap-2 text-lg family1 font-normal"
+              className="flex w-full flex-col gap-2 text-base family1 font-normal"
             >
               Email
               <input
