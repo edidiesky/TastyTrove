@@ -106,3 +106,98 @@ const Navlinks = [
     path: "/customers",
   },
 ];
+<Routes>
+  <Route
+    path="/restaurant/takeout/:food"
+    element={
+      <Suspense fallback={<></>}>
+        <SingleWrapper />
+      </Suspense>
+    }
+  />
+  <Route
+    path="/restaurant/cart"
+    element={
+      <Suspense fallback={<></>}>
+        <Cart />
+      </Suspense>
+    }
+  />
+</Routes>;
+
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import useWindowSize from "react-use/lib/useWindowSize";
+import Confetti from "react-confetti";
+
+const PaymentSuccess = () => {
+  const { id } = useParams();
+  const [flutterpaymentsuccess, setFlutterPaymentSuccess] = useState(false);
+  const [updateflutterpaymentloading, setUpdateFlutterPaymentLoading] =
+    useState(false);
+  const UpdatePaymentToSuccess = async () => {
+    try {
+      // set the success state and loading state to false and true respectively
+      setFlutterPaymentSuccess(false);
+      setUpdateFlutterPaymentLoading(true);
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_BASE_URLS}/payment/history/success/${id}`,
+        null
+      );
+      // set the loading state and success state to false and true respectively
+      setUpdateFlutterPaymentLoading(false);
+      setFlutterPaymentSuccess(true);
+      return data;
+    } catch (error) {
+      setUpdateFlutterPaymentLoading(false);
+      setFlutterPaymentSuccess(false);
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+  useEffect(() => {
+    UpdatePaymentToSuccess();
+  }, []);
+  useEffect(() => {
+    if (flutterpaymentsuccess) {
+      const interval = setTimeout(() => {
+        setFlutterPaymentSuccess(false);
+      }, 100);
+      return () => clearTimeout(interval);
+    }
+  }, [flutterpaymentsuccess]);
+  if (updateflutterpaymentloading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <h2 className="text-4xl text-center font-bold">Payment Loading ....</h2>
+      </div>
+    );
+  }
+  return (
+    <>
+      {flutterpaymentsuccess && <Confettis />}
+      <div className="w-full h-screen flex items-center justify-center">
+        <h2 className="text-5xl text-center font-bold">
+          Payment Succesfull
+          <span className="text-lg pt-4 block text-[#777] font-normal">
+            Thank you for the payment!!!!
+          </span>
+        </h2>
+      </div>
+    </>
+  );
+};
+
+const Confettis = () => {
+  const { width, height } = useWindowSize();
+  // console.log(height);
+  return <Confetti style={{ zIndex: "3000000" }} width={width} height={2000} />;
+};
+
+// https://app.flutterwave.com/dashboard/home
+export default PaymentSuccess;
