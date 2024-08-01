@@ -1,19 +1,22 @@
-
 import React, { useState, useCallback, useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 // import ReservationRoomsModal from "@/components/modals/ReservationRoomsModal";
-import RoomsList from "./menu"
+import RoomsList from "./menu";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllMenuForAdmin } from "@/features/menu/menuReducer";
+import Loader from "@/components/loader";
 // import { getAllRoomsForAdmin } from "@/features/menu/roomReducer";
 const DashboardIndex = () => {
   const [roommodal, setRoomModal] = useState(false);
-  const { deleteRoomisSuccess, page } = useSelector((store) => store.menu);
+  const { getallMenuisLoading, page } = useSelector((store) => store.menu);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllMenuForAdmin());
   }, [page]);
+  if (getallMenuisLoading) {
+    return <Loader />;
+  }
   return (
     <div className="w-full">
       <AnimatePresence mode="wait">

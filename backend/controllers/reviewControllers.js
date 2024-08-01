@@ -92,14 +92,12 @@ const CreateReview = expressAsyncHandler(async (req, res) => {
 const GetReviewHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const review = await prisma.review.findMany({
-    include: {
-      user: true,
-    },
     where: {
       sellerId: req.user.userId,
     },
-    orderBy: {
-      createdAt: "desc",
+    include: {
+      user: true,
+      menu: true,
     },
   });
   res.setHeader("Content-Type", "text/html");
