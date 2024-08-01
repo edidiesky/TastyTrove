@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import ReactQuill from "react-quill";
@@ -8,10 +7,6 @@ import Roomfeatures from "./roomfeatures";
 
 const RoomForms = ({
   title,
-  setMenu,
-  menu,
-  setBathRooms,
-  bathrooms,
   setTitle,
   description,
   setDescription,
@@ -38,13 +33,11 @@ const RoomForms = ({
   return (
     <div className="w-full grid lg:grid-cols-custom_1 items-start gap-8">
       <div className="w-full flex bg-[#fdfdfd] border rounded-[20px] py-8  px-4 flex-col gap-8">
-        <div className="w-full flex flex-col gap-8">
+        <div className="w-full flex flex-col gap-4">
           {/* title */}
-          <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-8">
+          <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-4">
             <div className="w-full flex items-center justify-between">
-              <h4 className="text-2xl family1 font-semibold">
-                Name & Description
-              </h4>
+              <h4 className="text-xl family1 font-bold">Name & Description</h4>
               <div className="flex items-center justify-end">
                 <Link
                   to={"/dashboard/menu"}
@@ -54,12 +47,12 @@ const RoomForms = ({
                 </Link>
               </div>
             </div>
-            <div className="pt-4 w-full flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-4">
               <label
                 htmlFor="title"
                 className="text-sm  flex flex-col gap-2 family1"
               >
-                Product Title
+                Menu Title
                 <input
                   name="title"
                   value={title}
@@ -73,7 +66,7 @@ const RoomForms = ({
                 htmlFor="description"
                 className="text-sm h-[300px] flex flex-col gap-2 family1"
               >
-                Product Description
+                Menu Description
                 {/* <textarea
                 name="description"
                 value={description}
@@ -88,6 +81,7 @@ const RoomForms = ({
                   style={{
                     height: "200px",
                     borderRadius: "15px",
+                    fontFamily: "Work Sans",
                   }}
                   value={description}
                   onChange={setDescription}
@@ -96,16 +90,16 @@ const RoomForms = ({
             </div>
           </div>
           {/* price */}
-          <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-8">
+          <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-4">
             <div className="w-full flex items-center justify-between">
-              <h4 className="text-2xl family1">
+              <h4 className="text-lg md:text-xl font-bold family1">
                 Menu Price
-                <span className="font-normal font-booking_font text-base block">
+                <span className="font-normal family1 text-sm block">
                   Share what makes your menu special.
                 </span>
               </h4>
             </div>
-            <div className="pt-2 w-full flex flex-col gap-4">
+            <div className="w-full flex flex-col gap-4">
               <label
                 htmlFor="titlprice"
                 className="text-sm  flex flex-col gap-2 family1"
@@ -120,36 +114,7 @@ const RoomForms = ({
                   className="text-sm w-full input"
                 />
               </label>
-              <div className="w-full grid md:grid-cols-2 gap-4">
-                <label
-                  htmlFor="menu"
-                  className="text-sm  flex flex-col gap-2 family1"
-                >
-                  Menu Count
-                  <input
-                    name="menu"
-                    value={menu}
-                    id="menu"
-                    type="number"
-                    onChange={(e) => setMenu(parseFloat(e.target.value))}
-                    className="text-sm w-full input"
-                  />
-                </label>
-                <label
-                  htmlFor="bathrooms"
-                  className="text-sm  flex flex-col gap-2 family1"
-                >
-                  Bath-Menu Count
-                  <input
-                    name="bathrooms"
-                    value={bathrooms}
-                    id="bathrooms"
-                    type="number"
-                    onChange={(e) => setBathRooms(parseFloat(e.target.value))}
-                    className="text-sm w-full input"
-                  />
-                </label>
-              </div>
+
               <div className="pt-2 w-full flex flex-col gap-4">
                 <div className="w-full grid md:grid-cols-1 gap-4">
                   <label
@@ -171,13 +136,13 @@ const RoomForms = ({
             </div>
           </div>
         </div>
-        {/* Menu Attributes and Features
-      <Roomfeatures
-        features={features}
-        handleFeatureSelection={handleFeatureSelection}
-      /> */}
       </div>
-      <ImageUpload images={images} setImages={setImages} />
+      <ImageUpload
+        setFeatures={setFeatures}
+        features={features}
+        images={images}
+        setImages={setImages}
+      />
     </div>
   );
 };
