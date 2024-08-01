@@ -6,7 +6,6 @@ import { AiOutlineMail } from "react-icons/ai";
 import Top from "./Top";
 import Bottom from "./Bottom";
 import styled from "styled-components";
-import Related from "./Likes";
 
 export default function Details() {
     let [searchParams, setSearchParams] = useSearchParams();
@@ -31,8 +30,9 @@ export default function Details() {
             </div>
           </div>
         </div>
-        <div className="flex flex-col gap-3" style={{ gap: "8rem" }}>
+        <div className="flex flex-col" style={{ gap: "6rem" }}>
           <Top />
+        
           <Bottom />
           {/* <Related /> */}
         </div>

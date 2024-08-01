@@ -2,11 +2,9 @@ import React, {useState} from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
-import { FiMessageSquare } from "react-icons/fi";
-import { BiChevronDown } from "react-icons/bi";
-import Magnetic from "@/animations/Magnetic";
 import Button from "../common/Button";
 import ChatCard from "../chat/ChatCard";
+import Reviews from "./Reviews";
 
 export default function Bottom() {
   let [searchParams, setSearchParams] = useSearchParams();
@@ -16,13 +14,13 @@ export default function Bottom() {
   );
 
   const maincourse = menus.filter((data) => data.category === category);
-  const [active, setActive] = useState(true);
+  const [active, setActive] = useState(false);
   return (
     <>
       <AnimatePresence>
         {active && <ChatCard active={active} setActive={setActive} />}
       </AnimatePresence>
-      <div>
+      <div className="flex flex-col gap-20 pb-20">
         <div className="w-full flex items-start gap-4 justify-between topWrapper">
           <div className="flex flex-col gap-8 flex-1">
             <h3
@@ -60,7 +58,7 @@ export default function Bottom() {
             </div>
           </div>
         </div>
-        <div className="flex py-16 w-full flex-col gap-12">
+        <div className="flex w-full flex-col gap-12">
           <h3 className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] after:rounded-lg after:absolute text-5xl uppercase text-light text-dark">
             About Seller/Chef
           </h3>
@@ -88,7 +86,10 @@ export default function Bottom() {
                     type={"full_dark"}
                   ></Button>
                 </button>
-                <button onClick={()=> setActive(true)} className="h-[55px] w-[200px] text-sm">
+                <button
+                  onClick={() => setActive(true)}
+                  className="h-[55px] w-[200px] text-sm"
+                >
                   <Button
                     text={`Message ${menu?.user?.name}`}
                     bgColor={"#000"}
@@ -99,7 +100,8 @@ export default function Bottom() {
             </div>
           </div>
         </div>
-        <div className="flex py-24 w-full flex-col gap-12">
+        <Reviews />
+        <div className="flex w-full flex-col gap-12">
           <div className="family3 text-5xl uppercase text-light text-dark">
             Related products
           </div>
