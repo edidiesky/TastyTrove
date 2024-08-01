@@ -5,11 +5,12 @@ import toast from "react-hot-toast";
 import moment from "moment";
 import { Link } from "react-router-dom";
 import { MdEdit } from "react-icons/md";
-import { BsTrash } from "react-icons/bs";
+import { BsThreeDots, BsTrash } from "react-icons/bs";
 import DeleteModal from "../modals/DeleteModal";
 
 const TableCard = ({ x, type }) => {
   const [userdeletemodal, setUserDeleteModal] = useState(false);
+  const [menutab, setMenuTab] = useState(false);
 
   const handleDeleteClient = () => {
     setUserDeleteModal(true);
@@ -134,7 +135,7 @@ const TableCard = ({ x, type }) => {
             />
           )}
         </AnimatePresence>
-        <tr key={x?._id}>
+        <tr key={x?.id}>
           <td>
             <div className="flex w-full justify-center items-center gap-4">
               <img
@@ -156,19 +157,34 @@ const TableCard = ({ x, type }) => {
           <td className=" font-normal">{startDate}</td>
 
           <td className=" font-normal">
-            <div className="flex items-center justify-center">
-              <Link
-                to={`/dashboard/menu/${x?.id}`}
-                className="w-12 h-12 rounded-full flex hover:shadow-xs hover:bg-[#ddd] items-center justify-center"
-              >
-                <MdEdit />
-              </Link>
+            <div className="w-full flex items-center justify-center relative">
               <div
-                onClick={handleDeleteClient}
-                className="w-12 h-12 rounded-full flex hover:shadow-xs 
-                hover:bg-[#ddd] items-center justify-center"
+                onClick={() => setMenuTab(true)}
+                className="w-10 z-[25] -ml-4 cursor-pointer h-10 rounded-full hover:bg-[#fff] bg-[#fafafa] flex items-center justify-center"
               >
-                <BsTrash />
+                <BsThreeDots />
+              </div>
+              <div
+                style={{ transition: "all .4s" }}
+                className={`shadow-md z-[25] ${
+                  menutab? "opacity-[1] flex" : "opacity-[0] hidden"
+                } absolute -top-0 left-[30%] items-center flex-col w-[100px] bg-[#fff] justify-center`}
+              >
+                <Link
+                  to={`/dashboard/menu/${x?.id}`}
+                  className="flex cursor-pointer hover:bg-[#eee] w-full p-3 gap-4 text-xs items-center"
+                >
+                  <MdEdit /> Edit
+                </Link>
+                <div
+                  onClick={()=> {
+                    setMenuTab(false)
+                    handleDeleteClient()
+                  }}
+                  className="flex cursor-pointer hover:bg-[#eee] w-full p-3 gap-4 text-xs items-center"
+                >
+                  <BsTrash color={"var(--red"} /> Delete
+                </div>
               </div>
             </div>
           </td>

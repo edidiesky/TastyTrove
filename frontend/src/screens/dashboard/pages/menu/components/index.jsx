@@ -39,7 +39,7 @@ const DashboardIndex = () => {
               className="p-3 btn btn-4 cursor-pointer text-sm px-4 family1 
              rounded-[10px]  text-[#fff]"
             >
-              Add a room
+              Add a menu
             </Link>
           </div>
         </div>

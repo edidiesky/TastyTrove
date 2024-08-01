@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import RoomForms from "./roomsform";
 import RoomDetail from "./roomdetail";
@@ -30,13 +29,14 @@ const DashboardIndex = () => {
     updateMenuisSuccess,
     creatingMenuisSuccess,
     updateMenuisLoading,
+    getsingleMenuisLoading,
     menu,
   } = useSelector((store) => store.menu);
   // get the menu id
   const { id } = useParams();
 
   useEffect(() => {
-     dispatch(handleClearMenuAlert());
+    dispatch(handleClearMenuAlert());
     if (id) {
       dispatch(getSingleMenu(id));
     }
@@ -53,13 +53,13 @@ const DashboardIndex = () => {
       setMenus(menu?.bedroom);
       // dispatch(getSingleMenu(menu));
     } else {
-       setTitle("");
-       setPrice("");
-       setAvailability("");
-       setDescription("");
-       setImages([]);
-       setBathRooms("");
-       setMenus("");
+      setTitle("");
+      setPrice("");
+      setAvailability("");
+      setDescription("");
+      setImages([]);
+      setBathRooms("");
+      setMenus("");
     }
   }, [
     menu,
@@ -93,7 +93,6 @@ const DashboardIndex = () => {
   };
 
   useEffect(() => {
-   
     if (creatingMenuisSuccess) {
       const timeout = setTimeout(() => {
         navigate(`/dashboard/menu`);
@@ -102,16 +101,24 @@ const DashboardIndex = () => {
       return () => clearTimeout(timeout);
     }
   }, [creatingMenuisSuccess, navigate]);
-
+  if (getsingleMenuisLoading) {
+    return <Loader />;
+  }
   return (
     <div className="w-full relative">
       <div className="w-full relative pb-20 flex flex-col gap-12">
         <div className="w-full grid md:grid-cols-2 md:items-center justify-between">
           <h3 className="text-4xl lg:text-5xl family1 font-bold">
-            {menu ? "Update Your menu" : <>Create <br /> Your Menu</>}
+            {menu ? (
+              "Update Your menu"
+            ) : (
+              <>
+                Create <br /> Your Menu
+              </>
+            )}
             <span className="block font-normal text-dark pt-2 text-base family1">
-              When adding your menu product idea, do
-              not forget to fill out the forms else errors are bound to occur
+              When adding your menu product idea, do not forget to fill out the
+              forms else errors are bound to occur
             </span>
           </h3>
           <div className="flex items-center md:justify-end">
@@ -123,10 +130,10 @@ const DashboardIndex = () => {
               {creatingMenuisLoading || updateMenuisLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader type="dots" />
-                  {menu ? " Updating in progress" : "Room Creating"}
+                  {menu ? " Updating in progress" : "Menu Creating"}
                 </span>
               ) : (
-                <>{menu ? "Update Room" : "Create Room"}</>
+                <>{menu ? "Update Menu" : "Create Menu"}</>
               )}
             </button>
           </div>
