@@ -14,6 +14,7 @@ import {
   Orders,
   Settings,
   Messages,
+  Reviews,
 } from "./screens/dashboard";
 import { ProtectRoute } from "./lib/ProtectRoute";
 import Animation from "./animations/Animation";
@@ -134,7 +135,7 @@ export default function App() {
             exact
             path="menu"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <Rooms />
               </Suspense>
             }
@@ -143,7 +144,7 @@ export default function App() {
             exact
             path="menu/:id"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <CreateMenu />
               </Suspense>
             }
@@ -152,7 +153,7 @@ export default function App() {
             exact
             path="customers"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <Customers />
               </Suspense>
             }
@@ -161,7 +162,7 @@ export default function App() {
             exact
             path="profile/:id"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <Settings />
               </Suspense>
             }
@@ -170,18 +171,28 @@ export default function App() {
             exact
             path="message"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <Messages />
               </Suspense>
             }
           />
           {/* Messages */}
+          {/* Reviews */}
           <Route
             exact
             path="orders"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <Orders />
+              </Suspense>
+            }
+          />
+          <Route
+            exact
+            path="review"
+            element={
+              <Suspense fallback={<></>}>
+                <Reviews />
               </Suspense>
             }
           />
@@ -191,7 +202,7 @@ export default function App() {
             exact
             path="menu/create-menu"
             element={
-              <Suspense fallback={<Loader />}>
+              <Suspense fallback={<></>}>
                 <CreateMenu />
               </Suspense>
             }

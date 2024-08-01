@@ -15,7 +15,7 @@ export default function Reviews() {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    if (menu?.id) {
+    if ( currentUser && menu?.id) {
       dispatch(GetMenuReviews(menu?.id));
     }
   }, [review]);
@@ -203,7 +203,7 @@ export default function Reviews() {
                         {review?.user?.name}
                         <span className="flex items-center gap-3">
                           <span className="block font-normal text-sm">
-                            {moment(review?.user?.createdAt).format(
+                            {moment(review?.createdAt).format(
                               "DD MMM YYYY"
                             )}
                           </span>

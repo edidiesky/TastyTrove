@@ -1,18 +1,17 @@
 import styled from "styled-components";
 import { RxCross1 } from "react-icons/rx";
 import { HiBars3BottomLeft } from "react-icons/hi2";
-import { FaBars, FaBell } from "react-icons/fa6";
-import { FaRegUser, FaHotel } from "react-icons/fa";
-import { TiHome, TiMessage } from "react-icons/ti";
-// import { usePathname } from "next/navigation";
-import { RxTimer } from "react-icons/rx";
-import { LuBedDouble } from "react-icons/lu";
+import { FaBell } from "react-icons/fa6";
+import { FaRegUser, FaMoneyBill } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
+import { BiFoodMenu, BiMessage } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
+import { LayoutDashboard } from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClearUserInfo } from "@/features/auth/authSlice";
 import NotificationSidebar from "./NotificationSidebar";
+import { MdRateReview } from "react-icons/md";
 // import { Bell } from "lucide-react";
 const AdminSidebarData = [
   {
@@ -20,32 +19,50 @@ const AdminSidebarData = [
     tab: {
       title: "Dashboard",
       path: "",
-      icon: <TiHome fontSize={"18px"} />,
+      icon: <LayoutDashboard fontSize={"20px"} />,
     },
     list: [],
   },
   {
     id: 61,
     tab: {
-      icon: <FaHotel fontSize={"16px"} />,
-      title: "Rooms",
-      path: "/rooms",
+      icon: <BiFoodMenu fontSize={"20px"} />,
+      title: "Menu",
+      path: "/menu",
     },
     list: [],
   },
   {
     id: 6,
     tab: {
-      icon: <LuBedDouble fontSize={"16px"} />,
-      title: "Reservation",
-      path: "/reservation",
+      icon: <FaMoneyBill fontSize={"20px"} />,
+      title: "Transactions",
+      path: "/orders",
+    },
+    list: [],
+  },
+  {
+    id: 8,
+    tab: {
+      icon: <MdRateReview fontSize={"20px"} />,
+      title: "Reviews",
+      path: "/review",
+    },
+    list: [],
+  },
+  {
+    id: 6,
+    tab: {
+      icon: <BiMessage fontSize={"20px"} />,
+      title: "Messages",
+      path: "/message",
     },
     list: [],
   },
   {
     id: 4,
     tab: {
-      icon: <FaRegUser fontSize={"16px"} />,
+      icon: <FaRegUser fontSize={"18px"} />,
       title: "Clients",
       path: "/customers",
     },
