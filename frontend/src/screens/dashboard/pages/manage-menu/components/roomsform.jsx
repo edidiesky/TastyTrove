@@ -109,7 +109,7 @@ const RoomForms = ({
                   name="price"
                   value={price}
                   id="price"
-                  type="text"
+                  type="number"
                   onChange={(e) => setPrice(e.target.value)}
                   className="text-sm w-full input"
                 />

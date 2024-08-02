@@ -68,7 +68,7 @@ const DashboardIndex = () => {
   //  const [bookingdata, setBookingData] = useState(null);
   const roomData = {
     title: title,
-    price: price,
+    price: Number(price),
     image: images,
     availabilityCount: availability,
     category: features,
@@ -102,7 +102,7 @@ const DashboardIndex = () => {
   return (
     <div className="w-full relative">
       <div className="w-full relative pb-20 flex flex-col gap-12">
-        <div className="w-full grid md:grid-cols-2 md:items-center justify-between">
+        <div className="w-full grid gap-6 md:grid-cols-2 md:items-center justify-between">
           <h3 className="text-3xl lg:text-4xl family1 font-bold">
             {menu ? (
               "Update Your menu"
