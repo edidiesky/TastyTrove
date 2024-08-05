@@ -201,3 +201,370 @@ const Confettis = () => {
 
 // https://app.flutterwave.com/dashboard/home
 export default PaymentSuccess;
+
+import { Link } from "react-router-dom";
+const Home = () => {
+  const [loading, setLoading] = useState(false);
+  const [menu, setMenu] = useState([]);
+  const GetAllMenu = async () => {
+    try {
+      // set the loading state to true
+      setLoading(true);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URLS}/menu`
+      );
+      setLoading(false);
+      setMenu(data);
+    } catch (error) {
+      setLoading(false);
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+  useEffect(() => {
+    GetAllMenu();
+  }, []);
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <h2 className="text-4xl text-center font-bold">
+          Getting all Menu ....
+        </h2>
+      </div>
+    );
+  }
+  return (
+    <>
+      <div className="w-full h-screen flex items-center justify-center">
+        <h2 className="text-5xl text-center font-bold">Menu</h2>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
+          {menu?.map((data) => {
+            return (
+              <Link
+                to={`/restaurant/takeout/${data?.id}`}
+                className="flex w-full group flex-col gap-8"
+              >
+                <div className="w-full h-52">
+                  <img
+                    src={data?.image}
+                    alt=""
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="flex w-full flex-col gap-4">
+                  <div className="flex items-center justify-between w-full">
+                    <h4 className="text-4xl group-hover:text-[var(--primary)] family3">
+                      {data?.title}
+                    </h4>
+                    <h4 className="text-xl font-normal family4">
+                      ${data?.price}
+                    </h4>
+                  </div>
+                  <p className="text-lg leading-[1.5] family4">
+                    {data?.description}
+                  </p>
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+    </>
+  );
+};
+
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { BiMinus, BiPlus } from "react-icons/bi";
+import axios from "axios";
+import toast from "react-hot-toast";
+const Single = () => {
+  const [loading, setLoading] = useState(false);
+  const [cartsuccess, setCartSuccess] = useState(false);
+  const [cartloading, setCartLoading] = useState(false);
+  const [menu, setMenu] = useState(null);
+  const { id } = useParams();
+  const [count, setCount] = useState(1);
+  // get a single menu
+  const GetSingleMenu = async () => {
+    try {
+      // set the loading state to true
+      setLoading(true);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URLS}/menu/${id}`
+      );
+      setLoading(false);
+      setMenu(data);
+    } catch (error) {
+      setLoading(false);
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+  useEffect(() => {
+    // get a single menu and clear the cart success state to false if true
+    GetSingleMenu();
+    setCartSuccess(false);
+  }, []);
+  if (loading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <h2 className="text-4xl text-center font-bold">
+          Getting the Menu ....
+        </h2>
+      </div>
+    );
+  }
+  // initialize the naviaget router
+  const navigate = useNavigate();
+  // get the total price
+  const totalPrice = menu?.price * count;
+  const menudata = {
+    totalCount: count,
+    totalPrice: totalPrice,
+  };
+
+  const handleReservationBooking = async () => {
+    try {
+      // set the cart creation loading state to false
+      setCartLoading(true);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URLS}/cart/${menu?.id}`,
+        menudata
+      );
+      // set the cart creation loading state to false
+      setCartLoading(false);
+      // set cart success to true so it will navigate after 3s
+      setCartSuccess(true);
+      setMenu(data);
+    } catch (error) {
+      setCartLoading(false);
+      setCartSuccess(false);
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+
+  useEffect(() => {
+    // dispatch(clearCartAlert());
+    if (cartsuccess) {
+      const interval = setTimeout(() => {
+        navigate(`/restaurant/cart`);
+      }, 4000);
+      return () => clearTimeout(interval);
+    }
+  }, [cartsuccess]);
+  return (
+    <>
+      <div className="w-full h-screen flex items-center justify-center">
+        <div className="w-[90%] mx-auto">
+          <div className="w-full items-start grid md:grid-cols-2">
+            <div className="w-full h-full">
+              <img
+                loading="lazy"
+                src={menu?.image}
+                className="w-full z-10 h-full object-cover"
+              />
+              <div className="absolute z-20 bottom-10 w-full flex items-center px-12">
+                <p className="text-3xl text-white family4">${menu?.price}</p>
+              </div>
+            </div>
+            <div className="py-24 bg-[#000]">
+              <div className="flex w-[80%] md:w-[65%] mx-auto flex-col gap-8 auto">
+                <div className="family3 text-5xl md:text-6xl text-white">
+                  {menu?.title}
+                </div>
+                <h4 className="text-xl leading-[1.4] family2 text-white">
+                  {menu?.description}
+                </h4>
+                <p className="text-2xl text-white family4">${menu?.price}</p>
+                <div className="w-full gap-8 grid md:grid-cols-2 lg:grid-cols-2 text-start">
+                  <button
+                    onClick={handleReservationBooking}
+                    className="h-[55px] w-[200px] text-sm"
+                  >
+                    ADD TO CART
+                  </button>
+
+                  <span className="grid h-[50px] md:h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
+                    <button
+                      onClick={() => setCount(count - 1)}
+                      disabled={count <= 1}
+                      className=" h-full w-full flex items-center justify-center border-r
+                   border-[rgba(255,255,255,.6)] text-base text-white cursor-pointer"
+                    >
+                      <BiMinus />
+                    </button>
+                    <span
+                      className=" h-full family1 w-full flex items-center justify-center 
+                border-r border-[rgba(255,255,255,.6)] text-base lg:text-xl text-white cursor-pointer"
+                    >
+                      {count}
+                    </span>
+                    <button
+                      onClick={() => setCount(count + 1)}
+                      disabled={count === menu?.availabilityCount}
+                      className=" h-full w-full text-base text-white cursor-pointer flex items-center justify-center "
+                    >
+                      <BiPlus />
+                    </button>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+// import HomeComponents from "../components/home";
+// const Home = () => {
+//   return (
+//     <div className={`w-full`}>
+//       <HomeComponents />
+//     </div>
+//   );
+// };
+
+// import CartComponents from "../components/home";
+const Cart = () => {
+  const [cartloading, setCartLoading] = useState(false);
+  const [cart, setCart] = useState([]);
+  const GetAllCartItem = async () => {
+    try {
+      // set the loading state to true
+      setCartLoading(true);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URLS}/cart`
+      );
+      setCartLoading(false);
+      setCart(data);
+    } catch (error) {
+      setCartLoading(false);
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+  useEffect(() => {
+    GetAllCartItem();
+  }, []);
+
+  if (cartloading) {
+    return (
+      <div className="w-full h-screen flex items-center justify-center">
+        <h2 className="text-4xl text-center font-bold">
+          Getting your Cart Items ....
+        </h2>
+      </div>
+    );
+  }
+  return (
+    <div className={`w-full`}>
+      {cart?.length === 0 ? (
+        // ""
+        // <Message alertText="No items in your cart" alertType={"danger"} />
+        <div className="w-full flex  items-center justify-center flex-col gap-2">
+          <h2 className="text-4xl md:text-5xl text-dark family3">
+            Cart is empty
+          </h2>
+          <Link to={""} className="p-3 border text-lg">
+            Browse Our Menu
+          </Link>
+        </div>
+      ) : (
+        <>
+          <table className="border-collapse table-fixed">
+            <thead>
+              <tr className="p-4">
+                <th className="p-4 text-base text-start font-normal">
+                  Product
+                </th>
+                <th className="p-4 text-base text-start font-normal">Price</th>
+                <th className="p-4 text-base text-start font-normal">
+                  Quantity
+                </th>
+                <th className="p-4 text-base text-start font-normal">
+                  Subtotal
+                </th>
+                <th className="p-4 text-base text-start font-normal"></th>
+              </tr>
+            </thead>
+            <tbody>
+              {cart?.map((x) => {
+                return <Card key={x.id} x={x} />;
+              })}
+            </tbody>
+          </table>
+        </>
+      )}
+    </div>
+  );
+};
+
+const Card = ({ cart }) => {
+  const [cartcount, setCartCount] = useState(0);
+  useEffect(() => {
+    setCartCount(cart?.totalCount);
+  }, [cart, setCartCount]);
+  return (
+    <tr key={cart?.id}>
+      <td className="py-3 px-4 text-base border-b">
+        <div className="flex items-center gap-4">
+          <div className="">
+            <img
+              src={cart?.menu?.image}
+              className="w-[100px] obejct-cover"
+              alt="images"
+            />
+          </div>
+          {cart?.menu?.title}
+        </div>
+      </td>
+      {/* <td className="text-lg">{cart?.price}</td> */}
+      <td className="py-3 px-4 text-base border-b">${cart?.menu?.price}</td>
+      <td className="py-3 px-4 text-base border-b">
+        <div className="w-[120px] h-[45px] flex items-center justify-center border">
+          <button
+            className="h-full flex items-center justify-center border-r"
+            disabled={cartcount >= cart?.menu?.availabilityCount}
+            onClick={() => setCartCount(cartcount + 1)}
+          >
+            <BiPlus fontSize={"14px"} />
+          </button>
+          <span className="border-l text-lg h-full font-bold border-r">
+            {cartcount}
+          </span>
+          <button
+            className="h-full flex items-center justify-center border-l"
+            disabled={cartcount === 1}
+            onClick={() => setCartCount(cartcount - 1)}
+          >
+            <BiMinus fontSize={"14px"} />
+          </button>
+        </div>
+      </td>
+      <td className="py-3 px-4 text-base border-b">
+        ${cart?.menu?.price * cartcount}
+      </td>
+      <td className="py-3 px-4 text-base border-b">
+        <div className="w-12 h-12 rounded-full hover:bg-[#eee] flex items-center justify-center cursor-pointer">
+          <RxCross1 />
+        </div>
+      </td>
+    </tr>
+  );
+};

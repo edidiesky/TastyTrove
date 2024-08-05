@@ -96,10 +96,12 @@ const SalesStat = () => {
   }, []);
   const { payments } = useSelector((store) => store.payment);
   return (
-    <div className="w-full lg:w-[40vw] py-8 flex flex-col gap-4 bg-[#fafafa] rounded-[10px]">
-      <div className="w-full flex flex-col gap-4">
+    <div className="w-full lg:w-[30vw] flex flex-col gap-4 ">
+      <div className="w-full flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
         <div className="w-full px-6 flex items-center justify-between">
-          <h3 className="text-xl lg:text-2xl font-semibold family1">Transaction History</h3>
+          <h3 className="text-xl lg:text-2xl font-semibold family1">
+            Recent Sales
+          </h3>
           <Link
             style={{ textDecoration: "underline" }}
             className="text-sm text-[var(--dark-1)] family1"
@@ -107,6 +109,37 @@ const SalesStat = () => {
           >
             View All
           </Link>
+        </div>
+        <ul className="flex flex-col gap-2 w-full">
+          {payments?.slice(0, 3)?.map((data, index) => {
+            return (
+              <li
+                key={index}
+                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
+              >
+                <div className="flex items-center gap-2">
+                  <div className="w-10 h-10 rounded-full bg-[#000] flex items-center justify-center text-white text-base">
+                    {data?.user?.name[0]}
+                  </div>
+                  <span className="text-base family1 font-semibold">
+                    {data?.user?.name}
+                    <div className="block family1 font-normal text-xs text-grey">
+                      {data?.user?.email}
+                    </div>
+                  </span>
+                </div>
+                <span>+${Number(data?.amount).toLocaleString()}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
+      {/* top selling product */}
+      <div className="w-full flex bg-[#fafafa]  py-8 rounded-[10px] flex-col gap-4">
+        <div className="w-full px-6 flex items-center justify-between">
+          <h3 className="text-xl lg:text-2xl font-semibold family1">
+            Top Selling Product
+          </h3>
         </div>
         <ul className="flex flex-col gap-2 w-full">
           {payments?.slice(0, 3)?.map((data, index) => {

@@ -34,7 +34,7 @@ export default function Card({ x, type }) {
           <td>
             <div className="flex items-center gap-4">
               <div className="imageWrapper">
-                <img src={x?.menu?.image} className='w-[70px]' alt="images" />
+                <img src={x?.menu?.image} className="w-[70px]" alt="images" />
               </div>
               {x?.menu?.title}
             </div>
@@ -42,9 +42,7 @@ export default function Card({ x, type }) {
           {/* <td className="text-lg">{x?.price}</td> */}
           <td>${x?.menu?.price}</td>
           <td>
-            <span className="">
-              {cartcount}
-            </span>
+            <span className="">{cartcount}</span>
           </td>
           <td className="text-xl">${x?.menu?.price * cartcount}</td>
         </tr>
