@@ -47,7 +47,7 @@ const Widget = () => {
             className={`${
               index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#fafafa] text-[#000]"
             } p-6 family1  w-full rounded-[20px] flex-col
-               cursor-pointer flex items-start justify-between gap-4 min-h-40 md:min-h-64`}
+               cursor-pointer flex items-start justify-between gap-4 min-h-48 md:min-h-64`}
           >
             <div className="w-full flex items-center justify-between">
               <div
