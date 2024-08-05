@@ -1,10 +1,10 @@
 
 import React, { useState } from "react";
-import { MdHotel } from "react-icons/md";
+import { MdReviews } from "react-icons/md";
 import { MdOutlineArrowOutward } from "react-icons/md";
-import { LuBedDouble } from "react-icons/lu";
 import { useSelector } from "react-redux";
-
+import { FaRegUser } from "react-icons/fa";
+import { IoFastFood } from "react-icons/io5";
 const Widget = () => {
   const [widgettab, setWidgetTab] = useState(1);
   const { totalOrderAmount, totalOrder, totalReservations, totalRooms } =
@@ -12,38 +12,32 @@ const Widget = () => {
 
   const widgetData = [
     {
-      title: "New Booking",
-      icon: <MdHotel />,
+      title: "Total Sales",
+      icon: <IoFastFood />,
       color: "#5B5DB4",
-      subtitle: `${totalOrder ? "30000" : "30000"}`,
+      subtitle: `${totalOrder ? "10" : "10"}`,
     },
     {
-      title: "Total Rooms",
-      icon: <MdHotel />,
+      title: "Total Menu",
+      icon: <IoFastFood />,
       color: "#FF7F5C",
-      subtitle: `${totalRooms ? "30000" : "30000"}`,
+      subtitle: `${totalRooms ? "10" : "10"}`,
     },
-    // {
-    //   title: " Total Revenue",
-    //   icon: <GiCash />,
-    //   color: "#FF7F5C",
-    //   subtitle: `$${totalOrderAmount}`,
-    // },
     {
-      title: "Total Reserved",
-      icon: <LuBedDouble />,
+      title: "Total Ratings",
+      icon: <MdReviews />,
       color: "#489BC5",
-      subtitle: `${totalReservations ? "30000" : "30000"}`,
+      subtitle: `${totalReservations ? "5" : "5"}`,
     },
     {
       title: "Total Clients",
-      icon: <LuBedDouble />,
+      icon: <FaRegUser />,
       color: "#489BC5",
-      subtitle: "90",
+      subtitle: "4",
     },
   ];
   return (
-    <div className="w-full grid md:grid-cols-2 lg:grid-cols-4 gap-2">
+    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2">
       {widgetData?.map((widget, index) => {
         return (
           <div
@@ -53,30 +47,30 @@ const Widget = () => {
             className={`${
               index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#fafafa] text-[#000]"
             } p-6 family1  w-full rounded-[20px] flex-col
-               cursor-pointer flex items-start justify-between gap-4 min-h-64`}
+               cursor-pointer flex items-start justify-between gap-4 min-h-40 md:min-h-64`}
           >
             <div className="w-full flex items-center justify-between">
               <div
-                className={`w-12 ${
+                className={`w-10 md:w-12 ${
                   index === 0
                     ? "bg-[#fff] text-[#000]"
-                    : "bg-[#c5c5c5] text-[#000]"
-                } text-2xl h-12 rounded-full flex items-center justify-center`}
+                    : "bg-[#ebebeb] text-[#000]"
+                } text-lg md:text-2xl h-10 md:h-12 rounded-full flex items-center justify-center`}
               >
                 {widget?.icon}
               </div>
               <div
-                className={`w-12 ${
+                className={`w-10 md:w-12 ${
                   index === 0
                     ? "border-[rgba(255,255,255,.4)] border text-[#fff]"
                     : "border-[rgba(0,0,0,.4)] border text-[#000]"
-                } text-2xl h-12 rounded-full flex items-center justify-center`}
+                } text-lg md:text-2xl h-10 md:h-12 rounded-full flex items-center justify-center`}
               >
                 <MdOutlineArrowOutward />
               </div>
             </div>
             <div className="flex flex-col">
-              <h3 className="text-5xl font-bold family1">
+              <h3 className="text-4xl md:text-6xl font-semibold family1">
                 {widget?.subtitle}
                 <span className="text-grey pb-2 block family1 text-sm font-normal">
                   {widget?.title}

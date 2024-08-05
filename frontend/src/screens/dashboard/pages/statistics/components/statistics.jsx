@@ -1,4 +1,3 @@
-
 import { GetPaymentHistory } from "@/features/payment/paymentReducer";
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
@@ -7,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Statistics = () => {
   return (
-    <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
+    <div className="w-full grid lg:grid-cols-custom_1 gap-4">
       <div className="flex w-full">
         <GrowthStat />
       </div>
@@ -35,19 +34,33 @@ const GrowthStat = () => {
     dataLabels: {
       enabled: false,
     },
-    colors: ["var(--dark-1)", "#247BA0"],
+    colors: ["#EEEEEE", "#9EEEA7"],
     stroke: {
       curve: "smooth",
     },
     xaxis: {
-      categories: ["Jan", "Febr", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "sept"],
+      categories: [
+        "Jan",
+        "Febr",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "sept",
+      ],
     },
   });
 
   const [series, setSeries] = useState([
     {
       name: "Transactions",
-      data: [10,4,5,670,20,4,5,17,20],
+      data: [10, 4, 5, 670, 20, 4, 5, 17, 20],
+    },
+    {
+      name: "Transactions",
+      data: [10, 4, 5, 670, 20, 4, 5, 17, 20],
     },
   ]);
   // useEffect(() => {
@@ -69,17 +82,17 @@ const GrowthStat = () => {
   //    }
   // }, [totalStatAmount, totalMonth, setSeries, setOptions]);
   return (
-    <div id="chart" className="w-full">
-      <div className="w-full flex flex-col gap-8">
-        <div className="p-6 bg-[#fafafa] w-full px-6 py-12 flex-col rounded-[10px] min-h-[400px] flex gap-4">
+    <div id="chart" className="w-full h-full">
+      <div className="w-full flex flex-col h-full gap-8">
+        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] md:min-h-[100%] flex gap-4">
           <h3 className="text-3xl font-semibold family1">Sales Statistics</h3>
-          <div className="flex w-full flex-col gap-8">
+          <div className="flex h-full w-full flex-col gap-8">
             <Chart
               options={options}
               series={series}
               type="bar"
               width={"100%"}
-              height={340}
+              height={'100%'}
             />
           </div>
         </div>
@@ -95,6 +108,8 @@ const SalesStat = () => {
     dispatch(GetPaymentHistory());
   }, []);
   const { payments } = useSelector((store) => store.payment);
+  const { menus } = useSelector((store) => store.menu);
+  // console.log(menus);
   return (
     <div className="w-full lg:w-[30vw] flex flex-col gap-4 ">
       <div className="w-full flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
@@ -111,7 +126,7 @@ const SalesStat = () => {
           </Link>
         </div>
         <ul className="flex flex-col gap-2 w-full">
-          {payments?.slice(0, 3)?.map((data, index) => {
+          {/* {payments?.slice(0, 3)?.map((data, index) => {
             return (
               <li
                 key={index}
@@ -131,6 +146,25 @@ const SalesStat = () => {
                 <span>+${Number(data?.amount).toLocaleString()}</span>
               </li>
             );
+          })} */}
+          {menus?.slice(0, 3)?.map((data, index) => {
+            return (
+              <li
+                key={index}
+                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
+              >
+                <div className="flex items-center gap-4">
+                  <img src={data?.image} className="w-12  object-cover" />
+                  <span className="text-base family1 font-semibold">
+                    {data?.title}
+                    <div className="block family1 font-normal text-xs text-grey">
+                      {data?.category}
+                    </div>
+                  </span>
+                </div>
+                <span>+$40</span>
+              </li>
+            );
           })}
         </ul>
       </div>
@@ -142,24 +176,22 @@ const SalesStat = () => {
           </h3>
         </div>
         <ul className="flex flex-col gap-2 w-full">
-          {payments?.slice(0, 3)?.map((data, index) => {
+          {menus?.slice(0, 3)?.map((data, index) => {
             return (
               <li
                 key={index}
                 className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
               >
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-[#000] flex items-center justify-center text-white text-base">
-                    {data?.user?.name[0]}
-                  </div>
+                <div className="flex items-center gap-4">
+                  <img src={data?.image} className="w-12  object-cover" />
                   <span className="text-base family1 font-semibold">
-                    {data?.user?.name}
+                    {data?.title}
                     <div className="block family1 font-normal text-xs text-grey">
-                      {data?.user?.email}
+                      {data?.category}
                     </div>
                   </span>
                 </div>
-                <span>+${Number(data?.amount).toLocaleString()}</span>
+                <span>+$40</span>
               </li>
             );
           })}
