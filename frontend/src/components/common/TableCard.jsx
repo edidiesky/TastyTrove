@@ -137,13 +137,13 @@ const TableCard = ({ x, type }) => {
         </AnimatePresence>
         <tr key={x?.id}>
           <td>
-            <div className="flex w-full justify-center items-center gap-4">
+            <div className="flex w-full justify-start items-center gap-4">
               <img
                 src={x?.image}
                 alt=""
-                className="w-20 object-cover rounded-sm"
+                className="w-14 object-cover rounded-sm"
               />
-              <span className="text-base family1 text-center text-dark">
+              <span className="text-sm family1 text-center text-dark">
                 {x?.title}
               </span>
             </div>

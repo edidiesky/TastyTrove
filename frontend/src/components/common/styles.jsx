@@ -71,12 +71,12 @@ export const Table = styled.div`
             background-color: rgba(0, 0, 0, 0.1);
           }
           th {
-            text-align: center;
-            font-size: 15px !important;
+            text-align: start;
+            font-size: 14px !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1.7rem .1rem;
+            padding: 1.7rem;
             font-family: "Work Sans";
-            font-weight: normal !important;
+            font-weight: 500 !important;
           }
         }
       }
@@ -91,9 +91,9 @@ export const Table = styled.div`
             background-color: rgba(0, 0, 0, 0.06);
           }
           td {
-            text-align: center;
-            padding: 1.5rem .1rem !important;
-            font-size: 14px !important;
+            text-align: start;
+            padding: 1.5rem !important;
+            font-size: 13px !important;
             font-weight: normal !important;
             color: #000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.09);

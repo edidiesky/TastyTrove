@@ -34,7 +34,7 @@ const GrowthStat = () => {
     dataLabels: {
       enabled: false,
     },
-    colors: ["#EEEEEE", "#9EEEA7"],
+    colors: ["#EEEEEE", "#000"],
     stroke: {
       curve: "smooth",
     },
@@ -60,7 +60,7 @@ const GrowthStat = () => {
     },
     {
       name: "Transactions",
-      data: [10, 4, 5, 670, 20, 4, 5, 17, 20],
+      data: [20, 40, 15, 70, 20, 4, 5, 17, 20],
     },
   ]);
   // useEffect(() => {
@@ -84,7 +84,7 @@ const GrowthStat = () => {
   return (
     <div id="chart" className="w-full h-full">
       <div className="w-full flex flex-col h-full gap-8">
-        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] lg:min-h-[100%] flex gap-4">
+        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] md:min-h-[600px] flex gap-4">
           <h3 className="text-3xl font-semibold family1">Sales Statistics</h3>
           <div className="flex h-full w-full flex-col gap-8">
             <Chart
@@ -125,7 +125,7 @@ const SalesStat = () => {
             View All
           </Link>
         </div>
-        <ul className="flex flex-col gap-2 w-full">
+        <ul className="flex flex-col w-full">
           {/* {payments?.slice(0, 3)?.map((data, index) => {
             return (
               <li
@@ -147,7 +147,7 @@ const SalesStat = () => {
               </li>
             );
           })} */}
-          {menus?.slice(0, 3)?.map((data, index) => {
+          {menus?.slice(0, 2)?.map((data, index) => {
             return (
               <li
                 key={index}
@@ -175,7 +175,7 @@ const SalesStat = () => {
             Top Selling Product
           </h3>
         </div>
-        <ul className="flex flex-col gap-2 w-full">
+        <ul className="flex flex-col w-full">
           {menus?.slice(0, 3)?.map((data, index) => {
             return (
               <li

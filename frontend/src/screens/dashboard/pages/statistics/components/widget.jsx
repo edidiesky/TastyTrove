@@ -47,7 +47,7 @@ const Widget = () => {
             className={`${
               index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#fafafa] text-[#000]"
             } p-6 family1  w-full rounded-[20px] flex-col
-               cursor-pointer flex items-start justify-between gap-4 min-h-48 md:min-h-64`}
+               cursor-pointer flex items-start justify-between gap-4 min-h-48 md:min-h-56`}
           >
             <div className="w-full flex items-center justify-between">
               <div
@@ -55,7 +55,7 @@ const Widget = () => {
                   index === 0
                     ? "bg-[#fff] text-[#000]"
                     : "bg-[#ebebeb] text-[#000]"
-                } text-lg md:text-2xl h-10 md:h-12 rounded-full flex items-center justify-center`}
+                } text-lg md:text-xl h-10 md:h-12 rounded-full flex items-center justify-center`}
               >
                 {widget?.icon}
               </div>
@@ -70,7 +70,7 @@ const Widget = () => {
               </div>
             </div>
             <div className="flex flex-col">
-              <h3 className="text-4xl md:text-6xl font-semibold family1">
+              <h3 className="text-4xl md:text-5xl font-semibold family1">
                 {widget?.subtitle}
                 <span className="text-grey pb-2 block family1 text-sm font-normal">
                   {widget?.title}

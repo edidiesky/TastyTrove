@@ -259,7 +259,7 @@ const DashboardHeader = () => {
                           {" "}
                           {x.tab.icon}
                         </span>
-                        {<h4>{x.tab?.title}</h4>}
+                        {<h4 className="text-xs">{x.tab?.title}</h4>}
                       </div>
                     </NavLink>
                   </div>

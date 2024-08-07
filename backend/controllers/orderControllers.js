@@ -4,6 +4,48 @@ dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
 
+const CreateSellerCartPayment = async (cartItems, userId, currency) => {
+  //  group the cart Items by the seller Id
+  const sellersCart = cartItems.reduce((acc, item) => {
+    const sellerId = item?.menu?.userid;
+    if (!acc[sellerId]) {
+      acc[sellerId] = [];
+    }
+    acc[sellerId].push(item);
+    return acc;
+  }, {});
+
+  const createSellersPayment = Object.entries(sellersCart).map(
+    async ([sellerId, cart]) => {
+      // get the total price
+      const totalPrice = cart?.reduce((acc, item) => {
+        acc += item?.totalPrice;
+        return acc;
+      }, 0);
+      // create the payment
+      const payment = await prisma.payment.create({
+        data: {
+          amount: totalPrice,
+          currency,
+          userid: userId,
+          sellerId: sellerId,
+          cartItems: cart,
+        },
+        include: {
+          user: true,
+          seller: true,
+        },
+      });
+
+      return payment;
+    }
+  );
+  // Create a payment for the sellers based on their cart items
+  // return sellersCart;
+  // return
+  return Promise.all(createSellersPayment);
+};
+
 // User
 const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
@@ -11,19 +53,20 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
   const { cartItems, amount, currency } = req.body;
 
   // create payment history for the user
-  const payment = await prisma.payment.create({
-    data: {
-      amount,
-      currency,
-      userid: userId,
-      cartItems: cartItems,
-    },
-  });
-
+  // const payment = await prisma.payment.create({
+  //   data: {
+  //     amount,
+  //     currency,
+  //     userid: userId,
+  //     cartItems: cartItems,
+  //   },
+  // });
+  const payment = await CreateSellerCartPayment(cartItems, userId, currency);
+  console.log(payment);
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  res.status(200).json({ payment });
+  // res.status(200).json({ payment });
 });
 
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
@@ -33,7 +76,7 @@ const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
       user: true,
     },
     // where:{
-      
+
     // },
     orderBy: {
       createdAt: "desc",
@@ -109,7 +152,7 @@ const UpdatePaymentToSuccess = expressAsyncHandler(async (req, res) => {
       // will display message in the future
       return payment;
     } else {
-      return {payment};
+      return { payment };
     }
   });
   res.status(200).json(payment);

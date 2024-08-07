@@ -14,7 +14,7 @@ const Reviews = () => {
   );
   return (
     <div className="w-full bg-[#fff] py-6 md:py-12 md:px-8 rounded-[20px]">
-      <div className="w-full grid lg:grid-cols-2 gap-12 md:gap-8">
+      <div className="w-full md:w-[500px] mx-auto grid lg:grid-cols-1 gap-y-12 gap-x-8">
         {reviews?.map((review, index) => {
           return (
             <div key={index} className="w-full flex flex-col gap-4">
@@ -32,7 +32,7 @@ const Reviews = () => {
                     className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
                   />
                 )}
-                <h4 className=" text-base md:text-lg family1 font-bold">
+                <h4 className=" text-base md:text-base family1 font-bold">
                   {review?.user?.name}
                   <span className="flex items-center gap-3">
                     <span className="block font-normal text-xs md:text-sm">
@@ -53,7 +53,7 @@ const Reviews = () => {
                 </h4>
               </div>
               <div className="w-full flex items-start flex-col gap-2">
-                <span className="flex text-sm md:text-base family1 font-normal items-center">
+                <span className="flex max-w-[400px] text-sm md:text-sm family1 font-normal items-center">
                   {review?.description}
                 </span>
                 <span className="flex text-sm family1 font-normal items-center gap-2">

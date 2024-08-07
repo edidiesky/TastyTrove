@@ -15,7 +15,7 @@ export default function Reviews() {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    if ( currentUser && menu?.id) {
+    if (currentUser && menu?.id) {
       dispatch(GetMenuReviews(menu?.id));
     }
   }, [review]);
@@ -143,6 +143,12 @@ export default function Reviews() {
                 e.preventDefault();
                 if (currentUser) {
                   dispatch(CreateReview(reviewData));
+                  setFormData({
+                    description: "",
+                    name: "",
+                    email: "",
+                  });
+                  setTab(null);
                 } else {
                   dispatch(onLoginModal());
                 }
@@ -203,9 +209,7 @@ export default function Reviews() {
                         {review?.user?.name}
                         <span className="flex items-center gap-3">
                           <span className="block font-normal text-sm">
-                            {moment(review?.createdAt).format(
-                              "DD MMM YYYY"
-                            )}
+                            {moment(review?.createdAt).format("DD MMM YYYY")}
                           </span>
                           <span className="flex text-xs items-center">
                             {Array(review?.review)

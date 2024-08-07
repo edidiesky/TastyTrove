@@ -22,7 +22,7 @@ export default function CartContent() {
           </Link>
         </div>
       ) : (
-        <>
+        <div className='max-w-[380px] sm:max-w-[100%] md:w-[750px] lg:w-full md:max-w-full overflow-auto'>
           <table>
             <thead>
               <tr>
@@ -39,7 +39,7 @@ export default function CartContent() {
               })}
             </tbody>
           </table>
-        </>
+        </div>
       )}
     </CartContentContainer>
   );
@@ -63,10 +63,10 @@ export const CartContentContainer = styled.div`
     overflow-x: auto;
     border-collapse: collapse;
     table-layout: fixed;
-    /* @media (max-width: 1080px) {
+    @media (max-width: 1080px) {
         max-width: 900px;
         min-width: 900px;
-      } */
+      }
     @media (max-width: 980px) {
       max-width: 900px;
       min-width: 600px;
@@ -106,6 +106,12 @@ export const CartContentContainer = styled.div`
       justify-content: center;
       margin: 0 auto;
       border: 1px solid rgba(0, 0, 0, 0.2);
+      @media (max-width:480px) {
+        height: 2.5rem;
+        span {
+          font-size: 1rem;
+        }
+      }
       span {
         font-size: 1.2rem;
         font-weight: 600;

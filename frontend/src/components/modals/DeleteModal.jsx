@@ -94,7 +94,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
                 Delete {cartDetails?.menu?.title}?
               </span>
 
-              <span className="block text-xs w-[80%] pt-2 mx-auto capitalize text-center family1">
+              <span className="block text-xs w-[90%] pt-2 mx-auto capitalize text-center family1">
                 By deleting this menu, It cannot be retrieved back if
                 this action you carry has been taken.
               </span>
@@ -158,7 +158,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
           </span>
           <h3 className="text-2xl font-bold text-center family1">
             <span>Delete this menu?</span>
-            <span className="block pt-2 font-normal text-xs w-[80%] mx-auto capitalize text-center family1">
+            <span className="block pt-2 font-normal text-xs w-[90%] mx-auto capitalize text-center family1">
               By deleting this menu, It cannot be retrieved back if this
               action you carry has been taken.
             </span>
@@ -215,13 +215,13 @@ const DeleteContainer = styled(motion.div)`
     border-radius: 10px;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
-    @media (max-width: 980px) {
+    @media (max-width: 990px) {
       max-width: 350px;
       min-width: 350px;
     }
-    @media (max-width: 480px) {
-      max-width: 80%;
-      min-width: 80%;
+    @media (max-width: 490px) {
+      max-width: 90%;
+      min-width: 90%;
     }
     .cross {
       position: absolute;
