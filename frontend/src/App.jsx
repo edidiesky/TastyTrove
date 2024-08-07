@@ -55,14 +55,14 @@ export default function App() {
     <div className="based" style={{ height }}>
       <Routes>
         <Route path={"/"} element={<Layout />}>
-          <Route
-            index
-            element={
-              <Suspense fallback={<></>}>
-                <HomeWrapper />
-              </Suspense>
-            }
-          />
+<Route
+  index
+  element={
+    <Suspense fallback={<></>}>
+      <HomeWrapper />
+    </Suspense>
+  }
+/>
           <Route
             path="/restaurant/takeout/:food"
             element={
@@ -214,3 +214,31 @@ export default function App() {
     // <Animation/>
   );
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Route, Routes } from "react-router-dom";
+// import Home from "./socket/screen/Home";
+// import Login from "./socket/screen/Login";
+// import Register from "./socket/screen/Register";
+
+// export default function App() {
+//   return (
+//     <Routes>
+//       <Route path="/" element={<Home />} />
+//       <Route path="/login" element={<Login />} />
+//       <Route path="/register" element={<Register />} />
+//     </Routes>
+//   );
+// }

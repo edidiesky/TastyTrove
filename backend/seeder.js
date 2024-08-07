@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-import { menudata } from "./data/menudata.js";
+import { user } from "./data/user";
 
 dotenv.config();
 
@@ -22,9 +22,9 @@ mongoose.connection.on("error", (error) =>
 
 const importData = async () => {
   try {
-    // Use Prisma to insert data
-    await prisma.menu.createMany({
-      data: menudata,
+    // Use Prisma to insert our user data
+    await prisma.user.createMany({
+      data: user,
     });
     console.log("Data Imported!");
     process.exit();
@@ -34,20 +34,4 @@ const importData = async () => {
   }
 };
 
-const destroyData = async () => {
-  try {
-    // Use Prisma to delete data
-    await prisma.menu.deleteMany();
-    console.log("Data Destroyed!");
-    process.exit();
-  } catch (error) {
-    console.error("Error destroying data:", error);
-    process.exit(1);
-  }
-};
-
-if (process.argv[2] === "-d") {
-  destroyData();
-} else {
-  importData();
-}
+importData();

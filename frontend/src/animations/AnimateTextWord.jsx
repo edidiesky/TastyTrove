@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { slideup } from "@/constants/utils/framer";
+
 // animattions to staggerText
 const AnimateTextWord = ({ children }) => {
   const AnimateTextRef = useRef(null);

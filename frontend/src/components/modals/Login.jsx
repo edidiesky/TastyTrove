@@ -140,8 +140,8 @@ const LoginModal = () => {
               <div className="w-full flex items-center justify-center flex-col gap-3">
                 <button
                   type="submit"
-                  className="p-4 px-8 btn flex items-center justify-center w-full cursor-pointer 
-                  btn bg-[#000] rounded-[40px] family1 font-bold"
+                  className="p-4 px-8 text-[#fff] hover:opacity-[.8] flex items-center justify-center w-full cursor-pointer 
+                   bg-[#000] rounded-[40px] family1 font-bold"
                 >
                   <AnimateText children={"Sign In"} />
                 </button>

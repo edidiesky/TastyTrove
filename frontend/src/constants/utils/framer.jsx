@@ -13,6 +13,37 @@ export const slideup = {
     y: "50%",
   },
 };
+export const slideLeft = {
+  initial: {
+    opacity: 0,
+    x: "50%",
+  },
+  animate: (i) => ({
+    opacity: 1,
+    x: "0%",
+    transition: { duration: .8 },
+  }),
+  exit: {
+    opacity: 0,
+    x: "50%",
+  },
+};
+
+export const slideRight = {
+  initial: {
+    opacity: 0,
+    x: "-50%",
+  },
+  animate: (i) => ({
+    opacity: 1,
+    x: "0%",
+    transition: { duration: .8 },
+  }),
+  exit: {
+    opacity: 0,
+    x: "-50%",
+  },
+};
 export const smallslideup2 = {
   initial: {
     opacity: 0,
@@ -21,7 +52,7 @@ export const smallslideup2 = {
   animate: (i) => ({
     opacity: 1,
     y: "0",
-    transition: { duration: 0.5, delay: i * 0.005 },
+    transition: { duration: 1, delay: i * 0.3 },
   }),
   exit: {
     opacity: 0,

@@ -12,32 +12,11 @@ import {
 import { IoMdSend } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { RxCross1 } from "react-icons/rx";
-import { messages } from "@/data/message";
 import { BsImage } from "react-icons/bs";
 import Loader from "../loader";
-
-const chatCardVariants = {
-  initial: {
-    opacity: 0,
-    width: "6rem",
-    height: "6rem",
-  },
-  enter: {
-    opacity: 1,
-    transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
-    width: "450px",
-    height: "550px",
-  },
-  closed: {
-    opacity: 0,
-    transition: { duration: 0.6, ease: [0.76, 0, 0.24, 1] },
-    width: "6rem",
-    height: "6rem",
-  },
-};
+import { chatCardVariants } from "@/socket/utils/framer";
 
 const ChatCard = ({ active, setActive }) => {
-  // socketIo = socketIo.connect('https://terratextrading-api.vercel.app');
   socketIo = socketIo.connect("http://localhost:4000");
   const dispatch = useDispatch();
   const [conversationId, setConversationId] = useState("");
