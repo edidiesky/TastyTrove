@@ -1,11 +1,14 @@
 // import Product from "../models/Product.js";
 import dotenv from "dotenv";
+import {v4 as uuidv4} from 'uuid'
 dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
 
 const CreateSellerCartPayment = async (cartItems, userId, currency) => {
   //  group the cart Items by the seller Id
+  // generate a unique Id for a single payment
+  const paymentGroupId = uuidv4();
   const sellersCart = cartItems.reduce((acc, item) => {
     const sellerId = item?.menu?.userid;
     if (!acc[sellerId]) {
@@ -30,10 +33,6 @@ const CreateSellerCartPayment = async (cartItems, userId, currency) => {
           userid: userId,
           sellerId: sellerId,
           cartItems: cart,
-        },
-        include: {
-          user: true,
-          seller: true,
         },
       });
 

@@ -15,7 +15,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-    "@prisma/client": "^5.5.2",
+  "@prisma/client": "^5.5.2",
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
@@ -37,7 +37,8 @@
     "nodemon": "^3.0.1",
     "passport": "^0.6.0",
     "passport-google-oauth20": "^2.0.0",
-    "socket.io": "^4.7.2"
+    "socket.io": "^4.7.2",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "prisma": "^5.5.2"

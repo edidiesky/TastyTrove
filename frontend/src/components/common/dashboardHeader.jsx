@@ -105,22 +105,22 @@ const DashboardHeader = () => {
             <label
               htmlFor=""
               className="hidden md:grid grid-cols-custom_2 text-dark w-[200px] lg:w-[310px]
-             items-center min-h-14 py-1 border rounded-[40px] px-4"
+             items-center min-h-8  border rounded-[40px] px-4"
             >
-              <div className="w-12 text-grey text-2xl h-12 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center">
+              <div className="w-10 text-grey text-lg h-10 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center">
                 <BiSearch />
               </div>
               <input
                 type="text"
                 placeholder="Search"
-                className="bg-transparent family1 text-base border-none outline-none text-dark"
+                className="bg-transparent family1 text-sm border-none outline-none text-dark"
               />
             </label>
           </div>
           <div className="flex w-full auto items-center justify-end gap-8">
             <div
               onClick={() => setNotificationActiveBar(true)}
-              className="w-12 text-grey text-2xl relative h-12 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center"
+              className="w-10 text-grey text-lg relative h-10 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center"
             >
               <FaBell />
               <div className="w-6 absolute -top-2 -right-2 text-sm h-6 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
