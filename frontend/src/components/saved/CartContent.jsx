@@ -92,7 +92,7 @@ export const CartContentContainer = styled.div`
           text-align: start;
           font-size: 30px !important;
           /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-          padding: 1.7rem 1rem;
+          padding: 1rem 1rem;
           font-family: "Bebas Neue";
           font-weight: normal !important;
         }
@@ -157,8 +157,8 @@ export const CartContentContainer = styled.div`
         z-index: 200;
         td {
           text-align: start;
-          padding: 1.2rem 1rem !important;
-          font-size: 18px !important;
+          padding: .8rem 1rem !important;
+          font-size: 16px !important;
           color: #000;
           font-family: "Lora";
 

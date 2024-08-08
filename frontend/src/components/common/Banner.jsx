@@ -64,7 +64,7 @@ const BannerContent = styled.div`
   display: flex;
   align-items: center;
   &.image1 {
-    min-height: 14rem;
+    min-height: 17rem;
   }
   .bannerHeader {
     z-index: 3000;

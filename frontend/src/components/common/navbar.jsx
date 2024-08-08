@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { IoBag } from "react-icons/io5";
 import { HiBars3BottomRight } from "react-icons/hi2";
@@ -7,6 +7,7 @@ import styled from "styled-components";
 import AnimateText from "@/animations/AnimateText";
 import { ClearUserInfo } from "@/features/auth/authSlice";
 import { onLoginModal } from "@/features/modals/modalSlice";
+import { GetUserCart } from "@/features/cart/cartReducer";
 const linkData = [
   {
     title: "Home",
@@ -38,11 +39,21 @@ const Navbar = () => {
   const [bar, setBar] = React.useState(false);
   const { currentUser } = useSelector((store) => store.auth);
   const { cart } = useSelector((store) => store.cart);
+    const { payment, payments, updatepaymentisLoading } = useSelector(
+      (store) => store.payment
+    );
+
   const dispatch = useDispatch();
   const handleLogOut = () => {
     dispatch(ClearUserInfo());
     window.location.reload();
   };
+  useEffect(() => {
+    // fetch the user cart if the user exists
+    if (currentUser) {
+      dispatch(GetUserCart());
+    }
+  }, [payments]);
   return (
     <>
       <div className="py-12 z-[50000] relative flex items-center justify-center">
@@ -52,7 +63,7 @@ const Navbar = () => {
             <h3 className="text-3xl hidden md:block md:text-4xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />
             </h3>
-              <h3 className="text-3xl block md:hidden md:text-4xl text-white family3">
+            <h3 className="text-3xl block md:hidden md:text-4xl text-white family3">
               <AnimateText children={"TastyTrove"} />
             </h3>
           </Link>

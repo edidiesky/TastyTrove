@@ -88,7 +88,7 @@ export const reservationSlice = createSlice({
     builder.addCase(UpdatePaymentToSuccess.fulfilled, (state, action) => {
       state.updatepaymentisLoading = false;
       state.updatepaymentisSuccess = true;
-      state.payment = action.payload.payment;
+      state.payments = action.payload.payment;
     });
     builder.addCase(UpdatePaymentToSuccess.rejected, (state, action) => {
       state.updatepaymentisSuccess = false;

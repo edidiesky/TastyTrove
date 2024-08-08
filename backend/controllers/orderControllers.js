@@ -5,7 +5,7 @@ dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
 const MAX_RETRIES = 3;
-const CreateSellerCartPayment = async (cartItems, userId, currency) => {
+const CreateSellerCartPayment = async (cartItems,amount, userId, currency) => {
   //  group the cart Items by the seller Id
   // generate a unique Id for a single payment
   const paymentGroupId = uuidv4();
@@ -34,6 +34,7 @@ const CreateSellerCartPayment = async (cartItems, userId, currency) => {
           sellerId: sellerId,
           cartItems: cart,
           paymentGroupId: paymentGroupId,
+          salesamount: amount,
         },
       });
 
@@ -51,7 +52,7 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
   const { cartItems, amount, currency } = req.body;
-  const payment = await CreateSellerCartPayment(cartItems, userId, currency);
+  const payment = await CreateSellerCartPayment(cartItems,amount, userId, currency);
   // console.log(payment[0]);
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");

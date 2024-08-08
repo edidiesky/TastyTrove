@@ -18,23 +18,11 @@ export default function Card({ x, type }) {
   if (type === "payment") {
     return (
       <>
-        <AnimatePresence>
-          {deletecartmodal && (
-            <DeleteModal
-              deletecartmodal={deletecartmodal}
-              setModal={setUserDeleteCartModal}
-              type={"menu"}
-              menu={x}
-              id={x?.id}
-            />
-          )}
-        </AnimatePresence>
-
         <tr key={x?.id}>
           <td>
             <div className="flex items-center gap-4">
               <div className="imageWrapper">
-                <img src={x?.menu?.image} className="w-[70px]" alt="images" />
+                <img src={x?.menu?.image} className="w-[100px]" alt="images" />
               </div>
               {x?.menu?.title}
             </div>
@@ -68,7 +56,7 @@ export default function Card({ x, type }) {
         <td>
           <div className="flex items-center gap-4">
             <div className="imageWrapper">
-              <img src={x?.menu?.image} className="w-[100px]" alt="images" />
+              <img src={x?.menu?.image} className="w-[150px]" alt="images" />
             </div>
             {x?.menu?.title}
           </div>

@@ -9,7 +9,7 @@ const MainContent = () => {
     <>
       <div className="w-full relative overflow-hidden min-h-[100vh] flex flex-col">
         <Hero />
-        <RoomLists />
+        <PaymentLists />
       </div>
     </>
   );
@@ -85,9 +85,11 @@ const Hero = () => {
   );
 };
 
-const RoomLists = () => {
+const PaymentLists = () => {
   const { reservations } = useSelector((store) => store.reservation);
-  const { payment, updatedReservation } = useSelector((store) => store.payment);
+  const { payment, payments, updatedReservation } = useSelector(
+    (store) => store.payment
+  );
   const startDate = moment(updatedReservation?.startDate).format(
     "MMMM Do YYYY"
   );
@@ -98,16 +100,18 @@ const RoomLists = () => {
     "days"
   );
 
+  console.log(payments);
+
   const [showconfetti, setShowConfetti] = useState(false);
 
-  useEffect(() => {
-    if (payment) {
-      const interval = setTimeout(() => {
-        setShowConfetti(true);
-      }, 300);
-      return () => clearTimeout(interval);
-    }
-  }, [payment]);
+  // useEffect(() => {
+  //   if (payment) {
+  //     const interval = setTimeout(() => {
+  //       setShowConfetti(true);
+  //     }, 300);
+  //     return () => clearTimeout(interval);
+  //   }
+  // }, [payment]);
   return (
     <div className="overflow-hidden">
       {showconfetti && <Confettis />}

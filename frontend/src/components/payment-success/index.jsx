@@ -14,6 +14,7 @@ import Loader from "../home/loader";
 import Card from "../saved/Card";
 import { CartContentContainer } from "../saved/CartContent";
 import moment from "moment";
+import CartHolder from "../saved/CartHolder";
 const HomeIndex = () => {
   const dispatch = useDispatch();
   let [searchParams, setSearchParams] = useSearchParams();
@@ -50,58 +51,13 @@ const HomeIndex = () => {
 };
 
 const Main = () => {
-  const differenceInDays = 4;
-  const updatedReservation = {
-    id: 3,
-    rooms: {
-      images: [
-        "https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu262x-600x687.jpg",
-      ],
-      title: "Greek Salad",
-      price: 25.5,
-    },
-  };
-  const { payment, updatepaymentisLoading } = useSelector(
-    (store) => store.payment
-  );
   return (
     <div className="w-full py-24">
       <div className="w-85 auto grid grid-cols-1">
-        <div className="w-full pb-12 flex flex-col gap-12 ">
-          <h3
-            className="text-6xl md:text-7xl
-            relative
-          after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px]
-           after:bg-[#eee] after:rounded-lg after:absolute
-          family3 "
-          >
-            Order Details
-          </h3>
-        </div>
-        <div className="w-full grid grid-cols-1 md:items-start flex-col gap-8">
+        <div className="w-full grid md:grid-cols-custom_1 md:items-start flex-col gap-8">
           <Cart />
-          <div className="md:justify-end md:items-end flex flex-col gap-8 ">
-            <div className="w-[400px]">
-              <div className="w-full flex flex-col gap-8">
-                <h3 className="text-4xl  family3">Reservation Details</h3>
-                <ul className="flex flex-col gap-2">
-                  <li className="text-xl flex items-center gap-3 font-booking_font">
-                    <span className="font-normal family3">Order No:</span>
-                    {payment?.id}
-                  </li>
-                  <li className="text-xl flex items-center gap-3 font-booking_font">
-                    <span className="font-normal family3">Order Date:</span>
-                    {moment(payment?.updatedAt).format("DD MMM YYYY")}
-                    {/* {paymentDate} */}
-                  </li>
-                  <li className="text-xl flex items-center gap-3 font-booking_font">
-                    <span className="font-normal family3">Amount Paid:</span>
-
-                    <span>${payment?.amount}</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
+          <div className="md:justify-end w-[400px] md:items-end flex flex-col gap-8 ">
+           <CartHolder type={'payment'}/>
           </div>
         </div>
       </div>
@@ -110,9 +66,10 @@ const Main = () => {
 };
 
 const Cart = () => {
-  const { payment, updatepaymentisLoading } = useSelector(
+  const { payment, payments, updatepaymentisLoading } = useSelector(
     (store) => store.payment
   );
+  // console.log(payments);
   return (
     <CartContentContainer>
       <table>
@@ -122,12 +79,13 @@ const Cart = () => {
             <th>Price</th>
             <th>Quantity</th>
             <th>Subtotal</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
-          {payment?.cartItems?.map((x) => {
-            return <Card type={"payment"} key={x.id} x={x} />;
+          {payments?.map((x) => {
+            return x?.cartItems.map((cart, index) => {
+              return <Card type={"payment"} key={index} x={cart} />;
+            });
           })}
         </tbody>
       </table>
