@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 // import Loader from "..//loader";
 import { handleClearPaymentAlert } from "@/features/payment/paymentSlice";
 import Loader from "../loader";
+import { UpdatePaymentToFailed } from "../../features/payment/paymentReducer";
 const FlutterPaymentButton = ({ totalPrice }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -78,7 +79,9 @@ const FlutterPaymentButton = ({ totalPrice }) => {
           },
           onClose: () => {
             // Handle when the payment modal is closed
-            alert("Payment Modal Closed");
+            // alert("Payment Modal Closed");
+            dispatch(UpdatePaymentToFailed(payment));
+
           },
         });
       }}

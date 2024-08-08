@@ -117,7 +117,7 @@ export const UpdatePaymentToFailed = createAsyncThunk(
           authorization: `Bearer ${state.auth.token}`,
         },
       };
-      const { data } = await axios.post(
+      const { data } = await axios.put(
         `${
           import.meta.env.VITE_API_BASE_URLS
         }/payment/history/failed/${paymentDataId}`,
