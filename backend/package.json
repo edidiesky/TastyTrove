@@ -17,6 +17,7 @@
   "license": "ISC",
   "@prisma/client": "^5.5.2",
   "dependencies": {
+    "@prisma/client": "^5.15.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.2",
     "cloudinary": "^1.40.0",
