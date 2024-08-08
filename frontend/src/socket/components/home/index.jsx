@@ -1,94 +1,37 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import io from "socket.io-client";
-let socketIo = io;
-import moment from "moment";
-import { messages } from "@/data/message";
-import { BsImage } from "react-icons/bs";
-import { IoMdSend } from "react-icons/io";
-import ChatList from "./ChatList";
+import { user } from "@/data/user";
+import React from "react";
+import { Link } from "react-router-dom";
 const HomeIndex = () => {
-  // states
-  const [message, setMessage] = React.useState([...messages]);
-  const [conversation, setConversation] = React.useState([]);
-  const [messageloading, setMessageLoading] = React.useState(false);
-  const [conversationloading, setConversationLoading] = React.useState(false);
-  const [body, setBody] = React.useState("");
-  const [image, setImage] = React.useState("");
-
-  const handleCreateMessage = (e) => {};
-
   return (
-    <div className="w-full h-screen flex items-center justify-center">
-      <div className="bg-white overflow-hidden shadow-xl lg:w-[450px] h-screen md:h-[550px] w-screen border rounded-2xl">
-        {/* top of the chat card */}
-        <div className="w-full flex h-[90px] items-center border-b">
-          <div className="w-full items-center px-8 flex gap-4">
-            <img
-              src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-              alt=""
-              className="w-10 lg:w-12 h-10 lg:h-12 rounded-full"
-            />
-            <h4 className="text-lg font-bold family1">
-              Dampson Jamiu
-              <span className="font-normal block text-sm">Adewale</span>
-            </h4>
-          </div>
-        </div>
-        {/* center of the chat card */}
-        <div className="w-full max-h-[380px] h-[380px] overflow-y-auto p-2 flex flex-col gap-3">
-          {message?.map((message, index) => {
-            const senderMessage =
-              "669938c72dc6dd45026faf28" === message?.sender?.id;
-            const createdAt = moment(message?.createdAt).format(
-              "MMMM Do YYYY, h:mm a"
-            );
-            // console.log(senderMessage)
+    <div className="w-full py-20 pb-40 flex items-center justify-center">
+      <div className=" px-4 md:w-[80%] max-w-[1110px] flex flex-col items-center justify-center gap-20 mx-auto">
+        <h2 className="font-bold text-center family1 text-6xl">
+          Explore Instant <br /> Chat Messaging
+          <span className="block max-w-[700px] pt-2 font-normal text-lg">
+           Select the user you intend to use and chat,  Let us explore the power of instant messaging with socketio
+          </span>
+        </h2>
+        <div className="md:w-[80%] md:px-8 grid md:grid-cols-2 md:justify-center items-center gap-8">
+          {user?.map((user, index) => {
             return (
-              <ChatList
-                key={message?.id}
-                senderMessage={senderMessage}
-                message={message}
-                createdAt={createdAt}
-              />
+              <Link
+                to={`/chat/${user?.id}`}
+                key={index}
+                className="w-full cursor-pointer h-[400px] group overflow-hidden relative"
+              >
+                <div className="absolute rounded-[40px] left-5 family1 bg-[#eee] top-5 px-4 py-3 text-center z-30 text-[#000] text-sm">
+                  {user?.name}
+                </div>
+                <div className="absolute z-[20] h-full w-full bg-[rgba(0,0,0,.4)]"></div>
+                <img
+                  style={{ transition: "all .4s" }}
+                  src={user.image}
+                  alt=""
+                  className="w-full h-full absolute object-cover group-hover:scale-[1.2]"
+                />
+              </Link>
             );
           })}
-        </div>
-
-        {/* bottom of the chat card */}
-        <div className="h-[80px] border-t w-full border-[rgba(0,0,0,.1)] flex items-center justify-center">
-          <form
-            onSubmit={(e) => handleCreateMessage(e)}
-            className="flex w-full px-4 h-full justify-center items-center gap-1"
-          >
-            <label
-              htmlFor="search"
-              className="text-base family1 w-full rounded-[40px] justify-center h-full flex items-center"
-            >
-              <div
-                className="w-12 hover:bg-[#eee] h-12 cursor-pointer flex
-               items-center justify-center rounded-full  text-lg"
-              >
-                <BsImage fontSize={"20px"} />
-              </div>
-              <input
-                value={body}
-                name="body"
-                onChange={(e) => setBody(e.target.value)}
-                id="search"
-                type="text"
-                placeholder="Start a new Message"
-                className="text-sm bg-transparent flex-1"
-              ></input>
-
-              <div
-                // onClick={() => setActive(false)}
-                className="w-12 hover:bg-[#eee] h-12 cursor-pointer flex items-center justify-center rounded-full  text-lg"
-              >
-                <IoMdSend fontSize={"20px"} />
-              </div>
-            </label>
-          </form>
         </div>
       </div>
     </div>

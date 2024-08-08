@@ -215,30 +215,15 @@ export default function App() {
   );
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 // import { Route, Routes } from "react-router-dom";
 // import Home from "./socket/screen/Home";
-// import Login from "./socket/screen/Login";
-// import Register from "./socket/screen/Register";
+// import Chat from "./socket/screen/Chat";
 
 // export default function App() {
 //   return (
 //     <Routes>
 //       <Route path="/" element={<Home />} />
-//       <Route path="/login" element={<Login />} />
-//       <Route path="/register" element={<Register />} />
+//       <Route path="/chat/:id" element={<Chat />} />
 //     </Routes>
 //   );
 // }
