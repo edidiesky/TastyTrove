@@ -16,7 +16,7 @@ export const CreatePayment = createAsyncThunk(
         paymentData,
         config
       );
-      return data.payment;
+      return data.paymentid;
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response && error.response.data.message

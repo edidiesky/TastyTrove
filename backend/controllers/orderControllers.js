@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
-
+const MAX_RETRIES = 3;
 const CreateSellerCartPayment = async (cartItems, userId, currency) => {
   //  group the cart Items by the seller Id
   // generate a unique Id for a single payment
@@ -26,7 +26,7 @@ const CreateSellerCartPayment = async (cartItems, userId, currency) => {
         return acc;
       }, 0);
       // create the payment
-      const payment = await prisma.payment.create({
+      await prisma.payment.create({
         data: {
           amount: totalPrice,
           currency,
@@ -51,22 +51,12 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
   const { cartItems, amount, currency } = req.body;
-
-  // create payment history for the user
-  // const payment = await prisma.payment.create({
-  //   data: {
-  //     amount,
-  //     currency,
-  //     userid: userId,
-  //     cartItems: cartItems,
-  //   },
-  // });
   const payment = await CreateSellerCartPayment(cartItems, userId, currency);
-  console.log(payment);
+  // console.log(payment[0]);
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  // res.status(200).json({ payment });
+  res.status(200).json({ paymentid: payment[0] });
 });
 
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
@@ -130,32 +120,70 @@ const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
 const UpdatePaymentToSuccess = expressAsyncHandler(async (req, res) => {
   const { reservationid, amount, currency } = req.body;
   const paymentId = req.params.id;
+  // let attempt = 0;
+  // // Update the payment status to "CONFIRMED"
+  // while (attempt < MAX_RETRIES) {
+  //   try {
+  //     const payment = await prisma.$transaction(async (prisma) => {
+  //       const payment = await prisma.payment.updateMany({
+  //         where: { paymentGroupId: paymentId },
+  //         data: { status: "CONFIRMED" },
+  //       });
+  //       // check if the user has a cart
+  //       const cart = await prisma.cart.findMany({
+  //         where: { userid: req.user?.userId },
+  //       });
+  //       if (cart?.length > 0) {
+  //         // delete the user cart
+  //         await prisma.cart.deleteMany({
+  //           where: { userid: req.user?.userId },
+  //         });
+  //       }
 
-  // Update the payment status to "CONFIRMED"
-  const payment = await prisma.$transaction(async (prisma) => {
-    const payment = await prisma.payment.update({
-      where: { id: paymentId },
-      data: { status: "CONFIRMED" },
-      include: {
-        user: true,
-      },
-    });
-    // check if the user has a cart
-    const cart = await prisma.cart.findMany({
+  //       return { payment };
+  //     });
+
+  //     res.status(200).json(payment);
+  //   } catch (error) {
+  //     if (
+  //       error.code === "P2034" ||
+  //       error?.message.includes(
+  //         "Transaction failed due to a write conflict or a deadlock"
+  //       )
+  //     ) {
+  //       attempt++;
+  //       if (attempt >= MAX_RETRIES) {
+  //         console.error(
+  //           "Max retries reached. Could not complete the transaction."
+  //         );
+  //         return res.status(500).json({ message: "Internal server error" });
+  //       } else {
+  //         console.error(error);
+  //         return res.status(500).json({ message: "Internal server error" });
+  //       }
+  //     }
+  //   }
+  // }
+  await prisma.payment.updateMany({
+    where: { paymentGroupId: paymentId },
+    data: { status: "CONFIRMED" },
+  });
+  const updatedPaymentRecords = await prisma.payment.findMany({
+    where: { paymentGroupId: paymentId },
+  });
+  // console.log(updatedPaymentRecords);
+  // check if the user has a cart
+  const cart = await prisma.cart.findMany({
+    where: { userid: req.user?.userId },
+  });
+  if (cart?.length > 0) {
+    // delete the user cart
+    await prisma.cart.deleteMany({
       where: { userid: req.user?.userId },
     });
-    if (cart?.length > 0) {
-      // delete the user cart
-      await prisma.cart.deleteMany({
-        where: { userid: req.user?.userId },
-      });
-      // will display message in the future
-      return payment;
-    } else {
-      return { payment };
-    }
-  });
-  res.status(200).json(payment);
+  }
+
+  res.status(200).json({ payment: updatedPaymentRecords });
 });
 
 export {

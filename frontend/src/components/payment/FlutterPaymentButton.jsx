@@ -4,8 +4,9 @@ import { useSelector, useDispatch } from "react-redux";
 import toast from "react-hot-toast";
 import { CreatePayment } from "@/features/payment/paymentReducer";
 import { useNavigate } from "react-router-dom";
-import Loader from "../home/loader";
+// import Loader from "..//loader";
 import { handleClearPaymentAlert } from "@/features/payment/paymentSlice";
+import Loader from "../loader";
 const FlutterPaymentButton = ({ totalPrice }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -45,47 +46,47 @@ const FlutterPaymentButton = ({ totalPrice }) => {
       })
     );
   };
-  // useEffect(() => {
-  //   if (flutterpaymentsuccess) {
-  //     const timer = setTimeout(() => {
-  //       navigate(
-  //         `/payment-success/${payment?.id}`
-  //       );
-  //     }, 300);
+  useEffect(() => {
+    if (flutterpaymentsuccess) {
+      const timer = setTimeout(() => {
+        navigate(
+          `/payment-success/${payment}`
+        );
+      }, 300);
 
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [flutterpaymentsuccess, navigate]);
-  console.log(payment);
+      return () => clearTimeout(timer);
+    }
+  }, [flutterpaymentsuccess, navigate]);
+  // console.log(payment);
   return (
     <button
       disabled={createpaymentisSuccess}
       onClick={() => {
         handleCreateOrderPayment();
-        // handleFlutterwavePayment({
-        //   callback: (response) => {
-        //     // handleCreateOrderPayment();
-        //     // console.log(response);
-        //     if (response.status === "successful") {
-        //       // Handle successful payment here
-        //       setFlutterPaymentSuccess(true);
-        //       toast.success("Payment Successful!! Redirecting Soon...");
-        //     } else {
-        //       toast.error("Payment Failed");
-        //     }
-        //     closePaymentModal(); // Close the modal programmatically
-        //   },
-        //   onClose: () => {
-        //     // Handle when the payment modal is closed
-        //     alert("Payment Modal Closed");
-        //   },
-        // });
+        handleFlutterwavePayment({
+          callback: (response) => {
+            // handleCreateOrderPayment();
+            // console.log(response);
+            if (response.status === "successful") {
+              // Handle successful payment here
+              setFlutterPaymentSuccess(true);
+              toast.success("Payment Successful!! Redirecting Soon...");
+            } else {
+              toast.error("Payment Failed");
+            }
+            closePaymentModal(); // Close the modal programmatically
+          },
+          onClose: () => {
+            // Handle when the payment modal is closed
+            alert("Payment Modal Closed");
+          },
+        });
       }}
       className="family1 py-4 rounded-[40px] hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base font-semibold uppercase"
     >
       {createpaymentisLoading ? (
         <span className="flex items-center justify-center gap-2">
-          <Loader type="dots" />
+          <Loader type="dots" color={'#000'} />
           Creating Payment
         </span>
       ) : (
