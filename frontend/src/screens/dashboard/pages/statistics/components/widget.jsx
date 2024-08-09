@@ -45,7 +45,7 @@ const Widget = () => {
             key={index}
             style={{ transition: "all .3s", gridTemplateColumns: "1fr 50px" }}
             className={`${
-              index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#fafafa] text-[#000]"
+              index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#eee] text-[#000]"
             } p-6 family1  w-full rounded-[20px] flex-col
                cursor-pointer flex items-start justify-between gap-4 min-h-48 md:min-h-56`}
           >
@@ -54,8 +54,8 @@ const Widget = () => {
                 className={`w-10 md:w-12 ${
                   index === 0
                     ? "bg-[#fff] text-[#000]"
-                    : "bg-[#ebebeb] text-[#000]"
-                } text-lg md:text-xl h-10 md:h-12 rounded-full flex items-center justify-center`}
+                    : "bg-[#fafafa] text-[#000]"
+                } text-base md:text-lg h-10 md:h-12 rounded-full flex items-center justify-center`}
               >
                 {widget?.icon}
               </div>
@@ -64,7 +64,7 @@ const Widget = () => {
                   index === 0
                     ? "border-[rgba(255,255,255,.4)] border text-[#fff]"
                     : "border-[rgba(0,0,0,.4)] border text-[#000]"
-                } text-lg md:text-2xl h-10 md:h-12 rounded-full flex items-center justify-center`}
+                } text-base md:text-lg h-10 md:h-12 rounded-full flex items-center justify-center`}
               >
                 <MdOutlineArrowOutward />
               </div>
