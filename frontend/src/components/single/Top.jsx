@@ -70,7 +70,7 @@ export default function Top() {
         </div>
         <div className="topright">
           <div className="flex HeroRightC flex-col gap-8 auto">
-            <div className="family3 text-5xl md:text-6xl text-white">
+            <div className="family3 text-6xl text-white">
               {menu?.title}
             </div>
             <h4 className="text-xl leading-[1.4] family2 text-white">
@@ -99,10 +99,10 @@ export default function Top() {
               </div>
             </div>
             <p className="text-2xl text-white family4">${menu?.price}</p>
-            <div className="w-full gap-8 grid md:grid-cols-2 lg:grid-cols-2 text-start">
+            <div className="w-full gap-4 grid sm:grid-cols-2 text-start">
               <button
                 onClick={handleReservationBooking}
-                className="h-[55px] w-[200px] text-sm"
+                className="h-[55px] w-[100%] lg:w-[100%] text-sm"
               >
                 <Button
                   type={"white"}
@@ -123,29 +123,6 @@ export default function Top() {
                   bgColor={"var(--primary)"}
                 />
               </button>
-
-              {/* <button
-                onClick={handleReservationBooking}
-                className={`${
-                  menu?.availabilityCount === 0
-                    ? "bg-[var(--primary-1)] opacity-[.1] cursor-not-allowed"
-                    : ""
-                } btn text-dark btn-2 family1 uppercase text-white text-sm lg:text-base py-1`}
-                style={{ padding: "1rem" }}
-              >
-                {createCartisLoading ? (
-                  <span className="flex items-center justify-center gap-3">
-                    Loading
-                    <Loader type={"dots"} />
-                  </span>
-                ) : (
-                  <>
-                    {menu?.availabilityCount === 0
-                      ? "UNAVAILABLE"
-                      : "ADD TO CART"}
-                  </>
-                )}
-              </button> */}
 
               <span className="grid h-[50px] md:h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
                 <button

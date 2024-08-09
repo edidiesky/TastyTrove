@@ -324,7 +324,7 @@ const Navbar = () => {
           )}
           <Link
             to={"/"}
-            className=" flex z-[2000000] px-4 items-center gap-1 justify-start"
+            className="py-8 flex z-[2000000] px-4 items-center gap-1 justify-start"
           >
             <h3 className="text-3xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />

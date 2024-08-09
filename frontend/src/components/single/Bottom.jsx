@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { AnimatePresence } from "framer-motion";
@@ -13,7 +13,11 @@ export default function Bottom() {
     (store) => store.menu
   );
 
-  const maincourse = menus.filter((data) => data.category === category);
+  const maincourse = menus.filter(
+    (data) =>
+      data.category === (category === "DRINK " ? "DRINK & COCKTAIL" : category)
+  );
+  // console.log(maincourse, category);
   const [active, setActive] = useState(false);
   return (
     <>
@@ -62,30 +66,30 @@ export default function Bottom() {
           <h3 className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] after:rounded-lg after:absolute text-5xl uppercase text-light text-dark">
             About Seller/Chef
           </h3>
-          <div className="flex md:flex-row flex-col md:items-center gap-4 md:gap-8">
-            <img
-              src={menu?.user?.image}
-              alt=""
-              className="w-40 h-40 object-cover rounded-full"
-            />
+          <div className="flex sm:flex-row flex-col md:items-center gap-4 md:gap-8">
+            {menu?.user?.image ? (
+              <img
+                src={menu?.user?.image}
+                alt=""
+                className="w-32 h-32 object-cover rounded-full"
+              />
+            ) : (
+              <div className="w-28 md:w-32 h-28 md:h-32 flex items-center rounded-full bg-[#000] justify-center text-white text-4xl font-bold family1">
+                {menu?.user?.name?.split("")[0]}
+              </div>
+            )}
+
             <div className="flex flex-col gap-2">
-              <span className=" text-base pb-4 font-normal family1 uppercase">
+              <span className=" text-base md:pb-4 font-normal family1 uppercase">
                 SELLER
               </span>
               <h3 className="text-4xl family3">{menu?.user?.name}</h3>
-              <span className="text-sm lg:w-[350px] family4 font-normal">
+              <span className="text-sm max-w-[300px] family4 font-normal">
                 A Top Class Chef, renowned for his amazing cook I believe in
                 100% satisfaction, nothing less! Please free to get in touch,
                 let's work
               </span>
               <div className="w-full mt-3 flex items-center gap-4">
-                <button className="h-[55px] w-[200px] text-sm">
-                  <Button
-                    text={`Check his reviews`}
-                    bgColor={"#fff"}
-                    type={"full_dark"}
-                  ></Button>
-                </button>
                 <button
                   onClick={() => setActive(true)}
                   className="h-[55px] w-[200px] text-sm"

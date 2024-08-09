@@ -12,7 +12,7 @@ export default function Banner({ type, text, subtext, image }) {
           >
             {subtext}
           </h4>
-          <h1 className="family3 text-6xl md:text-7xl text-light uppercase text-white">
+          <h1 className="family3 text-7xl text-light uppercase text-white">
             {text}
           </h1>
         </div>
@@ -39,7 +39,7 @@ export default function Banner({ type, text, subtext, image }) {
         >
           {subtext}
         </h4>
-        <h1 className="family3 text-6xl md:text-7xl text-light uppercase text-white">
+        <h1 className="family3 text-7xl text-light uppercase text-white">
           {text}
         </h1>
       </div>

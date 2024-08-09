@@ -137,8 +137,8 @@ const DetailsContent = styled.div`
         padding: 2rem 0;
       }
       .HeroRightC {
-        width: 60%;
-        @media (max-width: 980px) {
+        width: 70%;
+        @media (max-width: 1080px) {
           width: 80%;
           padding: 5rem 0;
         }
