@@ -16,7 +16,7 @@ import {
 router.route("/").post(authMiddleware, CreatePayment);
 router.get("/history", authMiddleware,adminMiddleware, GetPaymentHistoryForAdmin);
 router.put("/history/success/:id", authMiddleware, UpdatePaymentToSuccess);
-router.get("/history/failed/:id", authMiddleware, UpdatePaymentToFailed);
+router.put("/history/failed/:id", authMiddleware, UpdatePaymentToFailed);
 router.get("/history/:id", authMiddleware, GetSinglePaymentDetails);
 
 

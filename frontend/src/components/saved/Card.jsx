@@ -28,11 +28,11 @@ export default function Card({ x, type }) {
             </div>
           </td>
           {/* <td className="text-lg">{x?.price}</td> */}
-          <td>${x?.menu?.price}</td>
+          <td>₦{x?.menu?.price}</td>
           <td>
             <span className="">{cartcount}</span>
           </td>
-          <td className="text-xl">${x?.menu?.price * cartcount}</td>
+          <td className="text-xl">₦{x?.menu?.price * cartcount}</td>
         </tr>
       </>
     );
@@ -62,7 +62,7 @@ export default function Card({ x, type }) {
           </div>
         </td>
         {/* <td className="text-lg">{x?.price}</td> */}
-        <td>${x?.menu?.price}</td>
+        <td>₦{x?.menu?.price}</td>
         <td>
           <div className="btnWrapper">
             <button
@@ -84,7 +84,7 @@ export default function Card({ x, type }) {
             </button>
           </div>
         </td>
-        <td className="text-xl">${x?.menu?.price * cartcount}</td>
+        <td className="text-xl">₦{x?.menu?.price * cartcount}</td>
         <td className="svg">
           <div
             className="w-12 h-12 rounded-full hover:bg-[#eee] flex items-center justify-center cursor-pointer"

@@ -36,9 +36,11 @@ const Menulist = () => {
                 </div>
                 <div className="flex w-full flex-col gap-4">
                   <div className="flex items-center justify-between w-full">
-                    <h4 className="text-4xl group-hover:text-[var(--primary)] family3">{data?.title}</h4>
+                    <h4 className="text-4xl group-hover:text-[var(--primary)] family3">
+                      {data?.title}
+                    </h4>
                     <h4 className="text-xl font-normal family4">
-                      ${data?.price}
+                      ₦{data?.price}
                     </h4>
                   </div>
                   <p className="text-lg leading-[1.5] family4">

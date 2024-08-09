@@ -103,57 +103,107 @@ const GetSinglePaymentDetails = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ payment });
 });
 
+// const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
+//   const paymentId = req.params.id;
+//   // update the payment status
+//   // update the menu availability
+//   const payment = await prisma.payment.updateMany({
+//     where: {
+//       paymentGroupId: paymentId,
+//     },
+//     data: {
+//       status: "CANCELLED",
+//     },
+//   });
+//   const updatedPaymentRecords = await prisma.payment.findMany({
+//     where: { paymentGroupId: paymentId },
+//   });
+//   const menu = updatedPaymentRecords?.map(async ({ cartItems }) => {
+//     // return cartItems;
+//     const menuid = cartItems?.menu?.id;
+//     // return cartItems;
+//     const cartid = cartItems?.id;
+//     // find Menu
+//     const menu = await prisma.menu.findUnique({
+//       where: { id: menuid },
+//     });
+//     // find Cart
+//     const carts = await prisma.cart.findUnique({
+//       where: { id: cartid },
+//     });
+//     if (!menu) {
+//       res.status(404);
+//       throw new Error("The menu does not exist");
+//     }
+//     return await prisma.menu.update({
+//       where: { id: menuid },
+//       data: {
+// availabilityCount: menu?.availabilityCount - carts?.totalCount,
+// servedCount: menu?.servedCount - carts?.totalCount,
+//       },
+//     });
+//   });
+
+//   Promise.all(menu);
+//   res.setHeader("Content-Type", "text/html");
+//   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
+//   // res.status(200).json({ message: "Payment Status has been updated!!" });
+
+//   res.json({
+//     menu,
+//     updatedPaymentRecords,
+//   });
+// });
 const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
-  // instantiate the form data from the request body
-  const { userId } = req.body;
   const paymentId = req.params.id;
-  // update the payment status
-  // update the menu availability
+
+  // Update the payment status
   const payment = await prisma.payment.updateMany({
     where: {
-      paymentGroupId: req.params.id,
+      paymentGroupId: paymentId,
     },
     data: {
       status: "CANCELLED",
     },
   });
+
+  // Fetch the updated payment records
   const updatedPaymentRecords = await prisma.payment.findMany({
     where: { paymentGroupId: paymentId },
   });
-  const menu = updatedPaymentRecords?.map(async (cart) => {
-    const menuid = cart?.menu?.id;
-    const cartid = cart?.id;
-    // find Menu
-    const menu = await prisma.menu.findMany({
-      where: { id: menuid },
-    });
-    // find Cart
-    const carts = await prisma.cart.findMany({
-      where: { id: cartid },
-    });
 
-    if (!menu) {
-      res.status(404);
-      throw new Error("The menu does not exist");
-    }
-
-    return await prisma.menu.update({
-      where: { id: menuid },
-      data: {
-        availabilityCount: menu.availabilityCount - carts?.totalCount,
-        servedCount: menu.servedCount - carts?.totalCount,
-      },
+  // Update menu availability and served count
+  const menuUpdates = updatedPaymentRecords.map(async ({ cartItems }) => {
+    const updates = cartItems.map(async ({ menuid, totalCount }) => {
+      // get the menu
+      const menu = await prisma.menu.findFirst({
+        where: { id: menuid },
+      });
+      if (!menu) {
+        res.status(404);
+        throw new Error("Such Menu do not exist");
+      }
+      return await prisma.menu.update({
+        where: { id: menu?.id },
+        data: {
+          availabilityCount: menu?.availabilityCount - totalCount,
+          servedCount: menu?.servedCount - totalCount,
+        },
+      });
     });
+    return Promise.all(updates);
   });
+  const updatedMenus = Promise.all(menuUpdates);
+
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  // res.status(200).json({ message: "Payment Status has been updated!!" });
-  req.json({
-    menu,
-    payment,
+  res.status(200).json({
+    updatedMenus,
   });
 });
+
 const UpdatePaymentToSuccess = expressAsyncHandler(async (req, res) => {
   const paymentId = req.params.id;
   await prisma.payment.updateMany({

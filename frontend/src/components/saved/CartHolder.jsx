@@ -67,7 +67,7 @@ export default function CartHolder({ type }) {
             <div className="w-full flex flex-col gap-6">
               <h4 className="family3 text-2xl uppercase subtotal">
                 Subtotal{" "}
-                <span className=" family1  text-xl">${totalAmount}</span>
+                <span className=" family1  text-xl">₦{totalAmount}</span>
               </h4>
               <h4 className="family3 text-2xl uppercase total">
                 Shipping{" "}
@@ -75,7 +75,7 @@ export default function CartHolder({ type }) {
                   <span className="block pb-3">
                     Flat rate: <br />{" "}
                     <span className="pt-2">
-                      ${totalSalesAmount - totalAmount}
+                     ₦{totalSalesAmount - totalAmount}
                     </span>
                   </span>
                   <span className="text-end">
@@ -93,7 +93,7 @@ export default function CartHolder({ type }) {
               <h4 className="family3 text-2xl uppercase total">
                 Total Payment{" "}
                 <span className=" family1 text-xl span1">
-                  ${totalSalesAmount}
+                 ₦{totalSalesAmount}
                 </span>
               </h4>
             </div>
@@ -123,14 +123,14 @@ export default function CartHolder({ type }) {
           <div className="w-full flex flex-col gap-6">
             <h4 className="family3 text-2xl uppercase subtotal">
               Subtotal{" "}
-              <span className=" family1  text-xl">${totalShoppingPrice}</span>
+              <span className=" family1  text-xl">₦{totalShoppingPrice}</span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Shipping{" "}
               <span className=" family1  text-end text-xl span1">
                 <span className="block pb-3">
                   Flat rate: <br />{" "}
-                  <span className="pt-2">${totalShoppingPrice + 20}</span>
+                  <span className="pt-2">₦{totalShoppingPrice + 20}</span>
                 </span>
                 <span className="text-end">
                   Shipping to <br /> <span className=" text-bold">Nigeria</span>
@@ -139,7 +139,7 @@ export default function CartHolder({ type }) {
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Total{" "}
-              <span className=" family1 text-xl span1">${totalPrice}</span>
+              <span className=" family1 text-xl span1">₦{totalPrice}</span>
             </h4>
           </div>
         </div>
