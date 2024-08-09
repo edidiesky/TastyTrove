@@ -1,6 +1,5 @@
-
 import React, { useEffect, useState } from "react";
-import moment from 'moment'
+import moment from "moment";
 import { Table } from "@/components/common/styles";
 import TableCard from "@/components/common/TableCard";
 import { useDispatch, useSelector } from "react-redux";
@@ -48,18 +47,15 @@ const reservation = [
 
 const ReservationList = () => {
   //   const [roommodal, setRoomModal] = useState(false);
-  const dispatch = useDispatch()
- const { menus, getallRoomisLoading, page } = useSelector(
-   (store) => store.menu
- );
-
- useEffect(() => {
-   dispatch(getAllMenuForAdmin());
- }, [page]);
+  const dispatch = useDispatch();
+  const { menus, getallRoomisLoading, page } = useSelector(
+    (store) => store.menu
+  );
+  const { recentSales, topSaledProduct } = useSelector((store) => store.stat);
   return (
     <div className="p-6 bg-[#fafafa] w-full px-6 py-8 flex-col rounded-[10px] min-h-[400px] flex gap-4">
       <h3 className="text-2xl md:text-3xl font-semibold family1">
-        Recent Product
+        Recent Transaction
       </h3>
       <Table>
         <div className="TableContainer">
@@ -67,18 +63,18 @@ const ReservationList = () => {
             <thead>
               <tr>
                 {/* <th>ID</th> */}
-                <th>Room Name</th>
+                <th>Transaction ID</th>
                 {/* <th>Location</th> */}
-                <th>Category</th>
+                <th>Customer</th>
                 <th>Price</th>
-                <th>Availability</th>
+                <th>Status</th>
                 <th>Date Created</th>
-                <th>Manage Room</th>
+                <th>Currency</th>
               </tr>
             </thead>
             <tbody>
-              {menus?.slice(0, 3).map((x, index) => {
-                return <TableCard x={x} type={"menus"} key={x?.id} />;
+              {recentSales?.slice(0, 3).map((x, index) => {
+                return <TableCard x={x} type={"sales"} key={x?.id} />;
               })}
             </tbody>
           </table>

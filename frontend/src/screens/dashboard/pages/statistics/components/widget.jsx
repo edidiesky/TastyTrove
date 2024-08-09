@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { MdReviews } from "react-icons/md";
 import { MdOutlineArrowOutward } from "react-icons/md";
@@ -7,38 +6,39 @@ import { FaRegUser } from "react-icons/fa";
 import { IoFastFood } from "react-icons/io5";
 const Widget = () => {
   const [widgettab, setWidgetTab] = useState(1);
-  const { totalOrderAmount, totalOrder, totalReservations, totalRooms } =
-    useSelector((store) => store.stat);
+  const { widgetData } = useSelector((store) => store.stat);
 
-  const widgetData = [
+  const widgetDatas = [
     {
       title: "Total Sales",
       icon: <IoFastFood />,
       color: "#5B5DB4",
-      subtitle: `${totalOrder ? "10" : "10"}`,
+      subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "-"}`,
     },
     {
       title: "Total Menu",
       icon: <IoFastFood />,
       color: "#FF7F5C",
-      subtitle: `${totalRooms ? "10" : "10"}`,
+      subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "-"}`,
     },
     {
       title: "Total Ratings",
       icon: <MdReviews />,
       color: "#489BC5",
-      subtitle: `${totalReservations ? "5" : "5"}`,
+      subtitle: `${widgetData?.totalReview ? widgetData?.totalReview : "-"}`,
     },
     {
       title: "Total Clients",
       icon: <FaRegUser />,
       color: "#489BC5",
-      subtitle: "4",
+      subtitle: `${
+        widgetData?.totalClients ? widgetData?.totalClients?.length : "-"
+      }`,
     },
   ];
   return (
     <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2">
-      {widgetData?.map((widget, index) => {
+      {widgetDatas?.map((widget, index) => {
         return (
           <div
             onClick={() => setWidgetTab(index)}

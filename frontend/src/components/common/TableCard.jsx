@@ -54,6 +54,43 @@ const TableCard = ({ x, type }) => {
       </>
     );
   }
+   if (type === "sales") {
+     return (
+       <>
+         {/* <Delete /> */}
+         <tr key={x?.id}>
+           <td>{x?.id}</td>
+           <td>
+             <span className="text-sm font-semibold">
+               {x?.user?.name}
+               <span className="block text-xs text-grey font-normal">
+                 {x?.user?.email}
+               </span>
+             </span>
+           </td>
+           <td>₦{Number(x?.amount).toLocaleString()}</td>
+
+           <td>
+             {/* <span className="p-4">
+              {x?.status}
+            </span> */}
+
+             {x?.status === "CONFIRMED" ? (
+               <span className=" font-normal text-xs family1 text-center success">
+                 {x?.status}
+               </span>
+             ) : (
+               <span className=" font-normal text-xs family1 text-center danger">
+                 {x?.status}
+               </span>
+             )}
+           </td>
+           <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
+           <td>{x?.currency}</td>
+         </tr>
+       </>
+     );
+   }
   if (type === "customerlist") {
     return (
       <>

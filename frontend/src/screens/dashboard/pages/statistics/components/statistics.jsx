@@ -1,7 +1,8 @@
 import { GetPaymentHistory } from "@/features/payment/paymentReducer";
+import moment from "moment";
 import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 const Statistics = () => {
@@ -92,7 +93,7 @@ const GrowthStat = () => {
               series={series}
               type="bar"
               width={"100%"}
-              height={'100%'}
+              height={"100%"}
             />
           </div>
         </div>
@@ -102,14 +103,7 @@ const GrowthStat = () => {
 };
 
 const SalesStat = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(GetPaymentHistory());
-  }, []);
-  const { payments } = useSelector((store) => store.payment);
-  const { menus } = useSelector((store) => store.menu);
-  // console.log(menus);
+  const { recentSales, topSaledProduct } = useSelector((store) => store.stat);
   return (
     <div className="w-full lg:w-[30vw] flex flex-col gap-4 ">
       <div className="w-full flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
@@ -126,43 +120,32 @@ const SalesStat = () => {
           </Link>
         </div>
         <ul className="flex flex-col w-full">
-          {/* {payments?.slice(0, 3)?.map((data, index) => {
-            return (
-              <li
-                key={index}
-                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
-              >
-                <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-[#000] flex items-center justify-center text-white text-base">
-                    {data?.user?.name[0]}
-                  </div>
-                  <span className="text-base family1 font-semibold">
-                    {data?.user?.name}
-                    <div className="block family1 font-normal text-xs text-grey">
-                      {data?.user?.email}
-                    </div>
-                  </span>
-                </div>
-                <span>+${Number(data?.amount).toLocaleString()}</span>
-              </li>
-            );
-          })} */}
-          {menus?.slice(0, 2)?.map((data, index) => {
+          {recentSales?.slice(0, 3)?.map((data, index) => {
             return (
               <li
                 key={index}
                 className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
               >
                 <div className="flex items-center gap-4">
-                  <img src={data?.image} className="w-12  object-cover" />
+                  {data?.user?.image ? (
+                    <img
+                      src={data?.user?.image}
+                      className="w-12 h-12 rounded-full object-cover"
+                    />
+                  ) : (
+                    <div className="w-12 h-12 text-[#fff] flex items-center justify-center rounded-full bg-[#000]">
+                      {data?.user?.name?.slice("")[0]}
+                    </div>
+                  )}
+
                   <span className="text-base family1 font-semibold">
-                    {data?.title}
+                    {data?.user?.name}
                     <div className="block family1 font-normal text-xs text-grey">
-                      {data?.category}
+                      {moment(data?.createdAt).format("DD MMM YYYY")}
                     </div>
                   </span>
                 </div>
-                <span>+$40</span>
+                <span>₦{data?.amount}</span>
               </li>
             );
           })}
@@ -176,7 +159,7 @@ const SalesStat = () => {
           </h3>
         </div>
         <ul className="flex flex-col w-full">
-          {menus?.slice(0, 3)?.map((data, index) => {
+          {topSaledProduct?.slice(0, 3)?.map((data, index) => {
             return (
               <li
                 key={index}
@@ -191,7 +174,7 @@ const SalesStat = () => {
                     </div>
                   </span>
                 </div>
-                <span>+$40</span>
+                <span>{data?.servedCount} Qty</span>
               </li>
             );
           })}

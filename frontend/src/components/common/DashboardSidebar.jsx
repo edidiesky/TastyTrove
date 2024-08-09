@@ -15,14 +15,14 @@ const AdminSidebarData = [
     tab: {
       title: "Dashboard",
       path: "",
-      icon: <LayoutDashboard fontSize={"18px"} />,
+      icon: <LayoutDashboard fontSize={"14px"} />,
     },
     list: [],
   },
   {
     id: 61,
     tab: {
-      icon: <BiFoodMenu fontSize={"18px"} />,
+      icon: <BiFoodMenu fontSize={"16px"} />,
       title: "Menu",
       path: "/menu",
     },
@@ -31,7 +31,7 @@ const AdminSidebarData = [
   {
     id: 6,
     tab: {
-      icon: <FaMoneyBill fontSize={"18px"} />,
+      icon: <FaMoneyBill fontSize={"16px"} />,
       title: "Transactions",
       path: "/orders",
     },
@@ -40,7 +40,7 @@ const AdminSidebarData = [
     {
     id: 8,
     tab: {
-      icon: <MdRateReview fontSize={"18px"} />,
+      icon: <MdRateReview fontSize={"16px"} />,
       title: "Reviews",
       path: "/review",
     },
@@ -49,7 +49,7 @@ const AdminSidebarData = [
   {
     id: 6,
     tab: {
-      icon: <BiMessage fontSize={"18px"} />,
+      icon: <BiMessage fontSize={"16px"} />,
       title: "Messages",
       path: "/message",
     },
@@ -58,7 +58,7 @@ const AdminSidebarData = [
   {
     id: 4,
     tab: {
-      icon: <FaRegUser fontSize={"18px"} />,
+      icon: <FaRegUser fontSize={"16px"} />,
       title: "Clients",
       path: "/customers",
     },
@@ -113,8 +113,8 @@ const DashboardSidebar = () => {
                       text-sm w-[90%] mx-auto`}
                     to={`/dashboard${x.tab.path}`}
                   >
-                    <div className="flex w-full  md:justify-start relative items-center">
-                      <span className="w-12 h-12 text-sm rounded-xl flex items-center text-blue justify-center">
+                    <div className="flex w-full gap-3 md:justify-start relative items-center">
+                      <span className="text-sm rounded-xl flex items-center text-blue justify-center">
                         {" "}
                         {x.tab.icon}
                       </span>
@@ -145,10 +145,10 @@ const DashboardSidebar = () => {
                       relative
                       text-sm w-[90%] mx-auto`}
               >
-                <div className="flex w-full relative items-center">
-                  <span className="w-12 h-12 text-sm rounded-xl flex items-center text-blue justify-center">
+                <div className="flex w-full gap-3 relative items-center">
+                  <span className=" text-sm rounded-xl flex items-center text-blue justify-center">
                     {" "}
-                    <FiSettings fontSize={"24px"} />
+                    <FiSettings fontSize={"16px"} />
                   </span>
                   Settings
                   {/* <div
@@ -224,8 +224,8 @@ export const HeaderStyles = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 2px 6px;
-    gap: 1rem;
+    padding:12px;
+    gap: 2rem;
     position: relative;
     /* background: #fff; */
     .span_details {
