@@ -6,7 +6,7 @@ import { FaRegUser, FaMoneyBill } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 import { BiFoodMenu, BiMessage } from "react-icons/bi";
 import { NavLink } from "react-router-dom";
-import { LayoutDashboard } from "lucide-react";
+import { LayoutDashboard, LogOut } from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ClearUserInfo } from "@/features/auth/authSlice";
@@ -170,28 +170,47 @@ const DashboardHeader = () => {
               </span>
             </h4> */}
               </div>
-              <div className="profile_dropdown shadow-2xl absolute">
+              <div className="profile_dropdown shadow absolute">
                 <div className="w-full flex flex-col">
+                  <div className="p-4 border-b flex items-center gap-4">
+                    {currentUser?.image ? (
+                      <img
+                        src={currentUser?.image}
+                        alt=""
+                        className="w-14 lg:w-14 h-14 lg:h-14 rounded-full"
+                      />
+                    ) : (
+                      <img
+                        src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                        alt=""
+                        className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                      />
+                    )}
+                    <h4 className="text-base text-dark family1 family1">
+                      {currentUser?.name}
+                      <span className="block font-normal family1 text-xs text-dark">
+                        Seller Account
+                      </span>
+                    </h4>
+                  </div>
                   <div className="flex profile_dropdown_bottom flex-col w-full">
                     <NavLink
-                      end
                       to={"/dashboard"}
-                      className="flex items-center font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
+                      className="flex items-center gap-3 font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
                     >
-                      Dashboard
+                      <LayoutDashboard width={'20px'} height={'20px'} fontSize={"10px"} /> Dashboard
                     </NavLink>
                     <NavLink
-                      end
                       to={"/dashboard/settings"}
-                      className="flex items-center font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
+                      className="flex items-center gap-3 font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
                     >
-                      Profile
+                      <FaRegUser fontSize={"15px"} /> Profile
                     </NavLink>
                     <div
                       onClick={handleLogOut}
-                      className="flex items-center font-booking_font_bold hover:bg-[#f7f7f7] text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
+                      className="flex items-center gap-3 border-t font-booking_font_bold hover:bg-[#f7f7f7] text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
                     >
-                      Log Out
+                      <LogOut color="var(--red)" fontSize={"13px"} /> Log Out
                     </div>
                   </div>
                 </div>
@@ -286,7 +305,7 @@ export const HeaderStyles = styled.div`
     visibility: visible;
   }
   .profile_dropdown {
-    width: 130px;
+    width: 260px;
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s;
@@ -325,7 +344,7 @@ export const HeaderStyles = styled.div`
   }
   a,
   .tab {
-    padding: 7px 14px;
+    padding: 10px 14px;
     margin: 0 auto;
     border-radius: 4px;
     width: 100%;

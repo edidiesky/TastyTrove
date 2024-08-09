@@ -25,7 +25,7 @@ export default function NotificationSidebar({
     }
     return (
         <div className={`${notificationactivebar ? "right-0" : "-right-[100%]"
-            } transition-all ease duration-700 z-[300000000] w-[320px] md:w-[360px] bg-[#fff] shadow-xl h-screen fixed top-0`}>
+            } transition-all ease duration-700 z-[300000000] w-[300px] md:w-[360px] bg-[#fff] shadow-xl h-screen fixed top-0`}>
             <div
                 onClick={() => setNotificationActiveBar(!notificationactivebar)}
                 style={{ zIndex: "200000", transition: "all .4s ease" }}

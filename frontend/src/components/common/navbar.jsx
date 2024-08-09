@@ -8,6 +8,8 @@ import AnimateText from "@/animations/AnimateText";
 import { ClearUserInfo } from "@/features/auth/authSlice";
 import { onLoginModal } from "@/features/modals/modalSlice";
 import { GetUserCart } from "@/features/cart/cartReducer";
+import { LayoutDashboard, LogOut } from "lucide-react";
+import { FaRegUser } from "react-icons/fa";
 const linkData = [
   {
     title: "Home",
@@ -39,9 +41,9 @@ const Navbar = () => {
   const [bar, setBar] = React.useState(false);
   const { currentUser } = useSelector((store) => store.auth);
   const { cart } = useSelector((store) => store.cart);
-    const { payment, payments, updatepaymentisLoading } = useSelector(
-      (store) => store.payment
-    );
+  const { payment, payments, updatepaymentisLoading } = useSelector(
+    (store) => store.payment
+  );
 
   const dispatch = useDispatch();
   const handleLogOut = () => {
@@ -107,32 +109,58 @@ const Navbar = () => {
               {currentUser ? (
                 <div className="flex items-center gap-2">
                   <div className="flex profile_wrapper relative items-center justify-end gap-2">
-                    <div className="profile_dropdown shadow-2xl absolute">
+                    <div className="profile_dropdown shadow absolute">
                       <div className="w-full flex flex-col">
+                        <div className="p-4 border-b flex items-center gap-4">
+                          {currentUser?.image ? (
+                            <img
+                              src={currentUser?.image}
+                              alt=""
+                              className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                            />
+                          ) : (
+                            <img
+                              src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                              alt=""
+                              className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                            />
+                          )}
+                          <h4 className="text-base text-dark font-bold family1">
+                            {currentUser?.name}
+                            <span className="block font-normal family1 text-xs text-dark">
+                              {currentUser?.role === "SELLER"?"Seller":"Personal"} Account
+                            </span>
+                          </h4>
+                        </div>
                         {currentUser?.role === "SELLER" ? (
                           <div className="flex profile_dropdown_bottom flex-col w-full">
                             <Link
                               to={"/dashboard"}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
+                              <LayoutDashboard
+                                width={"20px"}
+                                height={"20px"}
+                                fontSize={"10px"}
+                              />{" "}
                               Dashboard
                             </Link>
                             <Link
                               to={"/dashboard/settings"}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                              Account
-                            </Link>
-                            <Link
-                              to={"/trips"}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
-                            >
-                              Orders
+                              <FaRegUser fontSize={"15px"} /> Profile
                             </Link>
                             <div
                               onClick={() => handleLogOut()}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
+                              <LogOut
+                                color="var(--red)"
+                                width={"20px"}
+                                height={"20px"}
+                                fontSize={"10px"}
+                              />{" "}
                               Log Out
                             </div>
                           </div>
@@ -140,19 +168,19 @@ const Navbar = () => {
                           <div className="flex profile_dropdown_bottom flex-col w-full">
                             <Link
                               to={"/trips"}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
                               Orders
                             </Link>
                             <Link
                               to={"/savedhomes"}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
                               Favourites
                             </Link>
                             <div
                               onClick={() => handleLogOut()}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
                               Log Out
                             </div>
@@ -161,13 +189,13 @@ const Navbar = () => {
                           <div className="flex profile_dropdown_bottom flex-col w-full">
                             <div
                               onClick={() => dispatch(onRegisterModal())}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
                               Sign Up
                             </div>
                             <div
                               onClick={() => dispatch(onLoginModal())}
-                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list text-dark block"
+                              className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
                               Sign In
                             </div>
@@ -341,13 +369,12 @@ export const ProfileDropdownStyles = styled.div`
     visibility: visible;
   }
   .profile_dropdown {
-    width: 150px;
+    width: 250px;
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s;
     overflow: hidden;
     visibility: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08), 0 4px 12px rgba(0, 0, 0, 0.08);
     /* z-index: 400000000000; */
     background: #fff;
     top: 100%;
@@ -360,7 +387,7 @@ export const ProfileDropdownStyles = styled.div`
     }
   }
   .profile_list {
-    padding: 10px 2rem;
+    padding: 14px 2rem;
     font-size: 14px;
     transition: all 0.3s;
     cursor: pointer;
