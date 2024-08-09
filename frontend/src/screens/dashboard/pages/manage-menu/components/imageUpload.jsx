@@ -63,7 +63,7 @@ const ImageUpload = ({ images, setImages, setFeatures, features }) => {
     "DRINK & COCKTAIL",
   ];
   return (
-    <div className="w-[400px] flex bg-[#fdfdfd] border py-8 px-4 flex-col gap-8 rounded-[10px]">
+    <div className="w-full md:w-[400px] flex bg-[#fdfdfd] border py-8 px-4 flex-col gap-8 rounded-[10px]">
       {uploading && <Loader />}
       <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-4">
         <div className="w-full flex items-center justify-between">

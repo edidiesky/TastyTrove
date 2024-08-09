@@ -19,7 +19,7 @@ router
   .route("/")
   .get(GetAllMenu)
   .post(authMiddleware, adminMiddleware, CreateMenus);
-router.route("/admin").get(GetAllAdminMenus);
+router.route("/admin").get(authMiddleware, adminMiddleware, GetAllAdminMenus);
 router
   .route("/Menu-reservation-history")
   .get(authMiddleware, adminMiddleware, GetAllMenuAndReservations);

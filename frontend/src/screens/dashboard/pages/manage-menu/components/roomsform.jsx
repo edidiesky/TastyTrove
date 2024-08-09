@@ -36,12 +36,13 @@ const RoomForms = ({
         <div className="w-full flex flex-col gap-4">
           {/* title */}
           <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-4">
-            <div className="w-full flex items-center justify-between">
-              <h4 className="text-xl family1 font-bold">Name & Description</h4>
+            <div className="w-full grid grid-cols-2 items-center justify-between">
+              <h4 className="text-xl font-bold">Name & Description</h4>
               <div className="flex items-center justify-end">
                 <Link
                   to={"/dashboard/menu"}
-                  className="p-2 px-4 cursor-pointer hover:bg-[#fafafa] border border-[rgba(0,0,0,.3)] rounded-[40px] family1 text-sm flex items-center justify-center gap-2"
+                  className="p-2 md:px-4 cursor-pointer hover:bg-[#fafafa] 
+                  border border-[rgba(0,0,0,.3)] rounded-[40px] family1 text-xs md:text-sm flex items-center justify-center gap-2"
                 >
                   Go Back
                 </Link>
@@ -79,7 +80,7 @@ const RoomForms = ({
                   // modules={module}
                   theme="snow"
                   style={{
-                    height: "200px",
+                    height: "150px",
                     borderRadius: "15px",
                     fontFamily: "Work Sans",
                   }}

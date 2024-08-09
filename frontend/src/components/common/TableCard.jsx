@@ -21,8 +21,10 @@ const TableCard = ({ x, type }) => {
         {/* <Delete /> */}
         <tr key={x?.id}>
           <td>
-            <span className="flex items-center justify-center gap-2">
-              Payment Received from{" "}
+            <span className="flex items-center gap-2">
+              {x?.status === "CONFIRMED"
+                ? " Payment Received from"
+                : " Payment Canceled by"}{" "}
               <span className="family1 font-bold text-dark">
                 {x?.user?.name}
               </span>
@@ -31,66 +33,58 @@ const TableCard = ({ x, type }) => {
           <td>₦{Number(x?.amount).toLocaleString()}</td>
           <td>{x?.currency}</td>
           <td>
-            {/* <span className="p-4">
-              {x?.status}
-            </span> */}
-
             {x?.status === "CONFIRMED" ? (
-              <span className=" font-normal text-xs family1 text-center success">
+              <span className="text-xs family1 font-semibold text-center success">
                 {x?.status}
               </span>
             ) : (
-              <span className=" font-normal text-xs family1 text-center danger">
+              <span className="text-xs family1 font-semibold text-center danger">
                 {x?.status}
               </span>
             )}
           </td>
           <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
-
-          {/* <td>
-
-          </td> */}
         </tr>
       </>
     );
   }
-   if (type === "sales") {
-     return (
-       <>
-         {/* <Delete /> */}
-         <tr key={x?.id}>
-           <td>{x?.id}</td>
-           <td>
-             <span className="text-sm font-semibold">
-               {x?.user?.name}
-               <span className="block text-xs text-grey font-normal">
-                 {x?.user?.email}
-               </span>
-             </span>
-           </td>
-           <td>₦{Number(x?.amount).toLocaleString()}</td>
+  if (type === "sales") {
+    return (
+      <>
+        {/* <Delete /> */}
+        <tr key={x?.id}>
+          <td>{x?.id}</td>
+          <td>
+            <span className="text-sm font-semibold">
+              {x?.user?.name}
+              <span className="block text-xs text-grey font-normal">
+                {x?.user?.email}
+              </span>
+            </span>
+          </td>
+          <td>₦{Number(x?.amount).toLocaleString()}</td>
 
-           <td>
-             {/* <span className="p-4">
+          <td>
+            {/* <span className="p-4">
               {x?.status}
             </span> */}
 
-             {x?.status === "CONFIRMED" ? (
-               <span className=" font-normal text-xs family1 text-center success">
-                 {x?.status}
-               </span>
-             ) : (
-               <span className=" font-normal text-xs family1 text-center danger">
-                 {x?.status}
-               </span>
-             )}
-           </td>
-           <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
-           <td>{x?.currency}</td>
-         </tr>
-       </>
-     );
-   }
+            {x?.status === "CONFIRMED" ? (
+              <span className="text-xs family1 font-semibold text-center success">
+                {x?.status}
+              </span>
+            ) : (
+              <span className="text-xs family1 font-semibold text-center danger">
+                {x?.status}
+              </span>
+            )}
+          </td>
+          <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
+          <td>{x?.currency}</td>
+        </tr>
+      </>
+    );
+  }
   if (type === "customerlist") {
     return (
       <>
@@ -187,15 +181,15 @@ const TableCard = ({ x, type }) => {
           </td>
           {/* <td className=" font-normal">{x?.address}</td> */}
 
-          <td className=" font-normal">{x?.category}</td>
+          <td className="hidden lg:table-cell font-normal">{x?.category}</td>
           <td className=" font-normal">₦{Number(x?.price).toLocaleString()}</td>
-          <td>{x?.availabilityCount}</td>
+          <td className="hidden lg:table-cell">{x?.availabilityCount}</td>
 
           <td className=" font-normal">{startDate}</td>
 
           <td className=" font-normal">
-            <div className="w-full flex items-center justify-center relative">
-              <div
+            <div className="w-full flex items-center gap-2 justify-start relative">
+              {/* <div
                 onClick={() => setMenuTab(true)}
                 className="w-10 z-[25] -ml-4 cursor-pointer h-10 rounded-full hover:bg-[#fff] bg-[#fafafa] flex items-center justify-center"
               >
@@ -204,7 +198,7 @@ const TableCard = ({ x, type }) => {
               <div
                 style={{ transition: "all .4s" }}
                 className={`shadow-md z-[25] ${
-                  menutab? "opacity-[1] flex" : "opacity-[0] hidden"
+                  menutab ? "opacity-[1] flex" : "opacity-[0] hidden"
                 } absolute -top-0 left-[30%] items-center flex-col w-[100px] bg-[#fff] justify-center`}
               >
                 <Link
@@ -214,14 +208,28 @@ const TableCard = ({ x, type }) => {
                   <MdEdit /> Edit
                 </Link>
                 <div
-                  onClick={()=> {
-                    setMenuTab(false)
-                    handleDeleteClient()
+                  onClick={() => {
+                    setMenuTab(false);
+                    handleDeleteClient();
                   }}
                   className="flex cursor-pointer hover:bg-[#eee] w-full p-3 gap-4 text-xs items-center"
                 >
                   <BsTrash color={"var(--red"} /> Delete
                 </div>
+              </div> */}
+              <Link
+                to={`/dashboard/menu/${x?.id}`}
+                className="justify-center flex cursor-pointer hover:bg-[#eee] w-[40px] h-[40px] rounded-full bg-[#fff] gap-4 text-xs items-center"
+              >
+                <MdEdit />
+              </Link>
+              <div
+                onClick={() => {
+                  handleDeleteClient();
+                }}
+                className="justify-center flex cursor-pointer hover:bg-[#eee] w-[40px] h-[40px] rounded-full bg-[#fff] gap-4 text-xs items-center"
+              >
+                <BsTrash color={"var(--red"} />
               </div>
             </div>
           </td>

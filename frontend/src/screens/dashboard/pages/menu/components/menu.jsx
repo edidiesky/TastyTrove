@@ -39,9 +39,9 @@ const RoomsList = () => {
                   {/* <th>ID</th> */}
                   <th>Room Name</th>
                   {/* <th>Location</th> */}
-                  <th>Category</th>
+                  <th className="hidden lg:table-cell">Category</th>
                   <th>Price</th>
-                  <th>Availability</th>
+                  <th className="hidden lg:table-cell">Availability</th>
                   <th>Date Created</th>
                   <th>Manage Room</th>
                 </tr>

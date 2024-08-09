@@ -4,7 +4,7 @@ import Meta from "@/components/common/Meta";
 export default function Rooms() {
   return (
     <div className="py-12">
-      <Meta title={"Room Summary of the dashboard"} />
+      <Meta title={"Menu Summary of the dashboard - TastyTrove Restaurant"} />
       <DashboardIndex />
     </div>
   );

@@ -68,12 +68,12 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const payment = await prisma.payment.findMany({
+    where: {
+      sellerId: req.user.userId,
+    },
     include: {
       user: true,
     },
-    // where:{
-
-    // },
     orderBy: {
       createdAt: "desc",
     },

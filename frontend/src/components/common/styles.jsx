@@ -97,6 +97,7 @@ export const Table = styled.div`
             font-weight: normal !important;
             color: #000;
             border-bottom: 1px solid rgba(0, 0, 0, 0.09);
+            line-height: 1.2 !important;
 
             span {
               &.danger {

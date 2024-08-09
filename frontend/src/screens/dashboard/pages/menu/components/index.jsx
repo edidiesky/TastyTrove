@@ -26,8 +26,8 @@ const DashboardIndex = () => {
         )}
       </AnimatePresence>
       <div className="w-full pb-20 flex flex-col gap-12">
-        <div className="w-full grid lg:grid-cols-2 lg:items-center gap-4 justify-between">
-          <h3 className="text-3xl lg:text-4xl font-bold family1">
+        <div className="w-full grid lg:grid-cols-2 lg:items-center gap-8 justify-between">
+          <h3 className="text-4xl font-bold family1">
             Summary of <br /> your Menu
             <span className="block text-sm font-normal">
               Make a review of your menu created either by adding or modifying
@@ -38,7 +38,7 @@ const DashboardIndex = () => {
             <div className="flex items-center md:justify-end">
               <Link
                 to={"/dashboard/menu/create-menu"}
-                className="h-[55px] min-w-[160px] text-sm family1 rounded-[40px]"
+                className="h-[50px]  md:h-[55px] min-w-[120px]  md:min-w-[160px] text-xs md:text-sm family1 rounded-[40px]"
               >
                 <Button
                   type={"full_dark"}

@@ -25,17 +25,23 @@ export const getAllMenuForAdmin = createAsyncThunk(
   async (name, thunkAPI) => {
     try {
       const { page, search, limit } = thunkAPI.getState().menu;
+      const state = thunkAPI.getState();
+      const config = {
+        headers: {
+          authorization: `Bearer ${state.auth.token}`,
+        },
+      };
       let MenuUrl = `${import.meta.env.VITE_API_BASE_URLS}/menu/admin`;
       if (page) {
         MenuUrl = MenuUrl + `?page=${page}`;
-        const { data } = await axios.get(MenuUrl);
+        const { data } = await axios.get(MenuUrl, config);
         return data;
       } else if (search) {
         MenuUrl = MenuUrl + `?search=${search}`;
-        const { data } = await axios.get(MenuUrl);
+        const { data } = await axios.get(MenuUrl, config);
         return data;
       } else {
-        const { data } = await axios.get(MenuUrl);
+        const { data } = await axios.get(MenuUrl, config);
         return data;
       }
     } catch (error) {
