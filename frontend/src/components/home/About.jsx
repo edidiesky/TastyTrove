@@ -6,6 +6,7 @@ import Word from "@/animations/Word";
 
 import { motion, useInView } from "framer-motion";
 import { clipPathLeft, smallslideup2 } from "@/constants/utils/framer";
+import Image from "../common/Image";
 
 const data = [
   {
@@ -40,14 +41,14 @@ export default function About() {
   return (
     <AboutContent className="flex overflow-hidden w-full flex-col gap-4">
       <div className="w-full flex flex-col gap-16">
-        <div className="w-85 auto wrapper flex gap-20">
+        <div className="w-85 auto wrapper flex gap-12 lg:gap-20">
           <div className="flex-1 flex flex-col gap-12">
             <h4 className="text-lg w-full md:text-xl family4">
               <AnimateTextWord
                 children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
               />
             </h4>
-            <h1 className="family3 text-5xl flex flex-col md:text-7xl leading-[1.5]">
+            <h1 className="family3 text-5xl flex flex-col lg:text-7xl leading-[1.5]">
               <Word children={`Food is our common`} />
               <Word children={`ground, a universal`} />
               <Word children={`experience.`} />
@@ -83,12 +84,11 @@ export default function About() {
               variants={clipPathLeft}
               initial="initial"
               animate={inView ? "animate" : "exit"}
-              className="w-full"
+              className="w-full min-h-40"
             >
-              <img
+              <Image
                 src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info22x.jpg"
                 alt=""
-                className="w-full h-full imageWrapper"
               />{" "}
             </motion.div>
           </div>

@@ -5,6 +5,7 @@ import Button from "../common/Button";
 import SplitType from "split-type";
 import gsap from "gsap";
 import { Link } from "react-router-dom";
+import Image from "../common/Image";
 
 export default function Hero() {
   useEffect(() => {
@@ -119,12 +120,12 @@ export default function Hero() {
             </div>
           </div>
         </div>
-        <div className="flex-1 imageContent">
-          <img
+        <div className="flex-1 min-h-40 imageContent">
+          <Image
             height={0}
-            loading="lazy"
+            alt="lazy"
             src="https://avada.website/restaurant/wp-content/uploads/sites/112/2021/04/hero-mobile.jpg"
-            className="w-full h-100 imagewrapper"
+            className="w-full min-h-40 imagewrapper"
           />
         </div>
       </div>

@@ -5,6 +5,7 @@ import { slideRight, slideup } from "@/constants/utils/framer";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Button from "../common/Button";
+import Image from "../common/Image";
 
 export default function SingleTakout() {
   const singleRef = useRef(null);
@@ -25,8 +26,8 @@ export default function SingleTakout() {
       className="w-full overflow-hidden flex items-center justify-center min-h-[100vh] py-40 relative"
     >
       <motion.div style={{ scale }} className="w-full h-full absolute">
-        <img
-          loading="lazy"
+        <Image
+          alt="lazy"
           src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu372x.jpg"
           className="w-full h-full z-20 top-0 absolute object-cover"
         />
