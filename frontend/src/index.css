@@ -98,7 +98,11 @@
   box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
   transition: all 0.4s;
 }
-
+.lazy-load-image-background.blur.lazy-load-image-loaded img {
+  width:100% !important;
+  height:100% !important;
+  object-fit: cover !important;
+}
 .ql-editor,
 .quill,
 .ql-toolbar {

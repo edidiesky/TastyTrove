@@ -2,19 +2,19 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
-
+import Image from "../common/Image";
 export default function TakeoutMenu() {
   return (
     <TakeoutMenuContent className="flex w-full flex-col gap-4">
-      <div className="w-full exWrapper flex">
-        <div className="flex-1 imageContent">
-          <img
+      <div className="w-full exWrapper grid md:grid-cols-custom_1">
+        <div className="flex-1 imageContent h-full">
+          <Image
             loading="lazy"
             src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu252x-1200x1375.jpg"
             className="w-full h-full imagewrapper"
           />
         </div>
-        <div className="TakeoutMenuRight flex items-center justify-center">
+        <div className="TakeoutMenuRight w-full md:w-[40vw] flex items-center justify-center">
           <div className="flex TakeoutMenuRightC flex-col gap-8 auto">
             <h4 className="text-lg family1 uppercase text-light text-white">
               ENJOY YOUR MEAL AT HOME
@@ -30,7 +30,7 @@ export default function TakeoutMenu() {
               <button className="h-[70px] w-[230px] text-lg uppercase">
                 <Button bgColor={"#fff"} text={"View takeout Menu"} />
               </button>
-         
+
               {/* <button className="btn text-dark btn-2 family1 uppercase text-white text-light text-base py-2"></button> */}
             </div>
           </div>
@@ -41,9 +41,8 @@ export default function TakeoutMenu() {
 }
 
 const TakeoutMenuContent = styled.div`
-  padding: 4rem 0;
   .exWrapper {
-    .imageContent {
+    /* .imageContent {
       flex: 1;
       img {
         height: 100%;
@@ -51,10 +50,9 @@ const TakeoutMenuContent = styled.div`
       @media (max-width: 980px) {
         height: 30rem;
       }
-    }
+    } */
     .TakeoutMenuRight {
-      flex: 0.8;
-      padding: 15rem 0;
+      padding: 10rem 0;
       @media (max-width: 780px) {
         padding: 9rem 0;
       }
@@ -69,9 +67,6 @@ const TakeoutMenuContent = styled.div`
     @media (max-width: 980px) {
       flex-direction: column;
     }
-  }
-  .imagewrapper {
-    min-height: 10rem;
   }
 
   .TakeoutMenuBottom {

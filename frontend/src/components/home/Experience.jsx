@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
-
+import Image from "../common/Image";
 export default function Experience() {
   return (
     <ExperienceContent className="flex w-full flex-col gap-4">
-      <div className="w-full experienceWrapper flex">
-        <div className="flex-1 imageContent">
-          <img
+      <div className="w-full experienceWrapper grid md:grid-cols-custom_1">
+        <div className="flex-1 imageContent h-full ">
+          <Image
             alt=""
             loading="lazy"
             src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu252x-1200x1375.jpg"
             className="w-full h-full imagewrapper"
           />
         </div>
-        <div className="experienceRight flex items-center justify-center">
+        <div className="experienceRight md:w-[40vw] flex items-center justify-center">
           <div className="flex experienceRightC flex-col gap-8 auto">
             <h4 className="text-xl md:text-xl family1 text-light uppercase text-white">
               FINE DINING EXPERIENCE

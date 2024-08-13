@@ -13,19 +13,19 @@ const data = [
     id: 1,
     subText: "Check out Menu",
     title: "The best table in town",
-    desc: "Incididunt nostrud ad miniys exercitation ullamco laboris nisiut aliquip.",
+    desc: "Sed aenean egestas ut aliquam turpis mauris, molestie. Vitae tellus tempor sem id tempus neque, tellus turpis turpis. Morbi tortor id gravida aliquet.",
   },
   {
     id: 2,
     subText: "View out Menu",
     title: "Perfect For Groups",
-    desc: "Incididunt nostrud ad miniys exercitation ullamco laboris nisiut aliquip.",
+    desc: "Quam eu proin sit massa condimentum. Volutpat non pulvinar aliquet nunc. Orci elementum in aliquet a gravida vivamus aliquam turpis vitae.",
   },
   {
     id: 3,
     subText: "Check out Menu",
     title: "Fresh produce everyday",
-    desc: "Incididunt nostrud ad miniys exercitation ullamco laboris nisiut aliquip.",
+    desc: "Hendrerit amet, volutpat leo non, commodo maecenas scelerisque tincidunt. Morbi vulputate morbi purus quisque sit sagittis orci elementum gravida.",
   },
 ];
 
@@ -43,17 +43,17 @@ export default function About() {
       <div className="w-full flex flex-col gap-16">
         <div className="w-85 auto wrapper flex gap-12 lg:gap-20">
           <div className="flex-1 flex flex-col gap-12">
-            <h4 className="text-lg w-full md:text-xl family4">
+            <h4 className="text-base max-w-[500px] md:text-xl family4">
               <AnimateTextWord
                 children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
               />
             </h4>
-            <h1 className="family3 text-5xl flex flex-col lg:text-7xl leading-[1.5]">
+            <h1 className="family3 text-6xl flex flex-col sm:text-7xl leading-[1.5]">
               <Word children={`Food is our common`} />
               <Word children={`ground, a universal`} />
               <Word children={`experience.`} />
             </h1>
-            <h4 className="text-lg w-full md:text-xl family4">
+            <h4 className="text-base max-w-[500px] md:text-xl family4">
               <AnimateTextWord
                 children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
               />
@@ -84,7 +84,7 @@ export default function About() {
               variants={clipPathLeft}
               initial="initial"
               animate={inView ? "animate" : "exit"}
-              className="w-full min-h-40"
+              className="w-full h-[40rem]"
             >
               <Image
                 src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info22x.jpg"
@@ -94,7 +94,7 @@ export default function About() {
           </div>
         </div>
         <div className="w-90 auto">
-          <div className="w-85 auto aboutBottom grid gap-2">
+          <div className="md:w-[80%] auto aboutBottom md:grid-cols-3 grid gap-2">
             {data.map((x, index) => {
               return (
                 // eslint-disable-next-line react/jsx-key
@@ -111,14 +111,14 @@ export default function About() {
                     animate={inView2 ? "animate" : "exit"}
                     className="flex flex-col gap-2 w-full"
                   >
-                    <h3 className="family3 text-center pb-3 text-4xl md:text-5xl font-normal">
+                    <h3 className="family3 text-center pb-3 text-4xl md:text-4xl font-normal">
                       {x.title}
                     </h3>
                     <h4 className="family4 text-center text-base md:text-lg font-normal">
                       {x.desc}
                     </h4>
                     <div className="w-full mt-4 text-center">
-                      <button className="h-[70px] w-[230px] text-base">
+                      <button className="h-[60px] w-[200px] text-base">
                         <Button
                           bgColor={"#000"}
                           text={x?.subText}
@@ -159,7 +159,6 @@ const AboutContent = styled.div`
   .aboutBottom {
     display: grid;
     padding-top: 5rem;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     grid-gap: 5rem;
   }
 `;

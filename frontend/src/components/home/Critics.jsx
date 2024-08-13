@@ -1,7 +1,7 @@
 // import Image from "next/image";
 import React from "react";
 import styled from "styled-components";
-
+import Image from "../common/Image";
 export default function Critics() {
   return (
     <CriticsContent className="flex w-full flex-col gap-2">
@@ -19,7 +19,7 @@ export default function Critics() {
         className="w-85 auto exWrapper flex"
       >
         <div className="flex-1 imageContent">
-          <img
+          <Image
             src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu252x-1200x1375.jpg"
             className="w-full h-full imagewrapper1"
             alt=""
@@ -52,7 +52,7 @@ export default function Critics() {
       >
         <div className="CriticsRight1 flex relative py-20 item-center justify-center">
           <div className="gradient2"></div>
-          <img
+          <Image
             src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info52x.jpg"
             alt=""
             className="imagewrapper"
@@ -79,7 +79,7 @@ export default function Critics() {
         </div>{" "}
         <div className="CriticsRight1 flex relative py-20 item-center justify-center">
           <div className="gradient2"></div>
-          <img
+          <Image
             loading="lazy"
             src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info32x.jpg"
             className="imagewrapper"

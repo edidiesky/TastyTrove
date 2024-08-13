@@ -7,10 +7,10 @@ const Image = ({ alt, src }) => (
     alt={alt}
     effect="blur"
     wrapperProps={{
-      style: { transitionDelay: "1s" },
+      style: { transitionDelay: "1s", height: "100%", width: "100%", display:"block" },
     }}
     src={src}
   />
 );
 
-export default Image
+export default Image;
