@@ -5,6 +5,7 @@ import { getAllMenu } from "@/features/menu/menuReducer";
 
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "@/components/loader";
+import Preloader from "@/components/loader/preloader";
 
 const Home = () => {
   const { getallMenuisLoading } = useSelector((store) => store.menu);
@@ -18,6 +19,7 @@ const Home = () => {
   // }
   return (
     <div>
+      <Preloader/>
       <Meta />
       <HomeIndex />
     </div>

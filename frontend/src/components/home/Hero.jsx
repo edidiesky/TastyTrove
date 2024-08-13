@@ -11,12 +11,19 @@ export default function Hero() {
     const text1 = new SplitType(".hero_main_text");
     const text2 = new SplitType(".hero_submain_text");
     const text3 = new SplitType(".hero_about_text");
-    // hero_text2
-    // gsap.fromto;
-    // gsap.timeline({ defaults: { ease: "SlowMo.easeOut" } });
     gsap
       .timeline()
       .to("body", { css: { visibility: "visible" } })
+      .to(
+        ".overlay_1",
+        {
+          height: 0,
+          top: "-100%",
+          ease: "power3.inOut",
+          duration: 2,
+        },
+        11
+      )
       .fromTo(
         text2?.chars,
         {
@@ -30,7 +37,7 @@ export default function Hero() {
           duration: 1,
           ease: "power4.out",
         },
-        0.4
+        11.9
       )
       .fromTo(
         text1?.words,
@@ -43,12 +50,13 @@ export default function Hero() {
           y: 0,
           skew: 0,
           opacity: 1,
-          stagger: 0.08,
+          stagger: { amount: 0.6 },
           duration: 1.6,
           ease: "power4.out",
         },
-        0.8
+        12
       )
+      // hero_btn
       .fromTo(
         text3?.lines,
         {
@@ -58,13 +66,27 @@ export default function Hero() {
         {
           y: 0,
           opacity: 1,
-          stagger: 0.05,
-          duration: 1,
+          stagger: { amount: 0.6 },
+          duration: 0.8,
+          ease: "power4.out",
+        }
+      )
+      .fromTo(
+        ".hero_btn",
+        {
+          y: 50,
+          opacity: 0,
+        },
+        {
+          y: 0,
+          opacity: 1,
+          stagger: { amount: 0.6 },
+          duration: 0.8,
           ease: "power4.out",
         }
       );
   }, []);
-  
+
   return (
     <HeroContent className="flex w-full flex-col gap-4">
       <div className="w-full exWrapper flex">
@@ -76,8 +98,9 @@ export default function Hero() {
               </h4>
             </div>
             <div className="w-full hide">
-              <h1 className="hero_main_text family3 text-7xl lg:text-8xl text-white">
-                FINE DINING EXPERIENCE
+              <h1 className="hero_main_text hide family3 text-7xl lg:text-8xl text-white">
+                <span className="">FINE</span>
+                <br /> <span className="">DINING</span> <br /> <span className="">EXPERIENCE</span>
               </h1>
             </div>
             <div className="w-full overflow-hidden">
@@ -86,8 +109,8 @@ export default function Hero() {
                 scelerisque nisi in urna nulla. Sit tempor a et nisl, ac felis.
               </h4>
             </div>
-            <div className="w-full text-start">
-              <Link to={"/restaurant/menu"}>
+            <div className="w-full hide text-start">
+              <Link className="hero_btn" to={"/restaurant/menu"}>
                 <button className="h-[70px] w-[230px] text-lg uppercase">
                   <Button bgColor={"#fff"} text={"Explore the Menu"} />
                 </button>
