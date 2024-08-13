@@ -5,8 +5,7 @@ import AnimateTextWord from "@/animations/AnimateTextWord";
 import Word from "@/animations/Word";
 
 import { motion, useInView } from "framer-motion";
-import { smallslideup2 } from "@/constants/utils/framer";
-
+import { clipPathLeft, smallslideup2 } from "@/constants/utils/framer";
 
 const data = [
   {
@@ -31,12 +30,16 @@ const data = [
 
 export default function About() {
   const animateAbout = useRef(null);
+  const animateImage = useRef(null);
   const inView2 = useInView(animateAbout, {
     margin: "0px 100px -120px 0px",
   });
+  const inView = useInView(animateImage, {
+    margin: "0px 100px -120px 0px",
+  });
   return (
-    <AboutContent className="flex w-full flex-col gap-4">
-      <div className="w-full flex flex-col gap-24">
+    <AboutContent className="flex overflow-hidden w-full flex-col gap-4">
+      <div className="w-full flex flex-col gap-16">
         <div className="w-85 auto wrapper flex gap-20">
           <div className="flex-1 flex flex-col gap-12">
             <h4 className="text-lg w-full md:text-xl family4">
@@ -44,7 +47,7 @@ export default function About() {
                 children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
               />
             </h4>
-            <h1 className="family3 text-6xl flex flex-col md:text-7xl leading-[1.5]">
+            <h1 className="family3 text-5xl flex flex-col md:text-7xl leading-[1.5]">
               <Word children={`Food is our common`} />
               <Word children={`ground, a universal`} />
               <Word children={`experience.`} />
@@ -64,27 +67,42 @@ export default function About() {
                 sizes="100vw"
                 height={0}
                 loading="lazy"
+                className="w-[150px]"
                 src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/signature.jpg"
-                style={{ width: "200px" }}
+                // style={{ width: "200px" }}
               />
             </div>
           </div>
-          <span className="flex-1 md:flex hidden aboutImageWrapper">
+          <div
+            ref={animateImage}
+            className="flex-1 md:flex hidden aboutImageWrapper"
+          >
             {/* eslint-disable-next-line @next/next/no-img-element,
           @next/next/no-img-element */}
-            <img
-              src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info22x.jpg"
-              alt=""
-              className="w-full h-full imageWrapper"
-            />{" "}
-          </span>
+            <motion.div
+              variants={clipPathLeft}
+              initial="initial"
+              animate={inView ? "animate" : "exit"}
+              className="w-full"
+            >
+              <img
+                src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info22x.jpg"
+                alt=""
+                className="w-full h-full imageWrapper"
+              />{" "}
+            </motion.div>
+          </div>
         </div>
         <div className="w-90 auto">
-          <div ref={animateAbout} className="w-85 auto aboutBottom grid gap-2">
+          <div className="w-85 auto aboutBottom grid gap-2">
             {data.map((x, index) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <div className="w-full hide" key={index}>
+                <div
+                  ref={animateAbout}
+                  className="w-full hide  lg:py-12"
+                  key={index}
+                >
                   <motion.header
                     key={x.id}
                     variants={smallslideup2}

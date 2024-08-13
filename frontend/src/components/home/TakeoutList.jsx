@@ -1,12 +1,18 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
+import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { slideRight } from "@/constants/utils/framer";
 export default function Plans() {
   const { menus } = useSelector((store) => store.menu);
   // Hors d’oeuvres
   // Main Course
   // Gin & Tonic
+  const animateAbout = useRef(null);
+  const inView = useInView(animateAbout, {
+    margin: "0px 100px -120px 0px",
+  });
 
   const maincourse = menus.filter((data) => data.category === "Main Course");
   const houres = menus.filter((data) => data.category === "Hors d’oeuvres");
@@ -31,10 +37,18 @@ export default function Plans() {
   return (
     <PlansContent>
       <div className="w-90 md:w-85 px-16 auto container">
-        <div className="w-full gap-8 md:gap-0 grid md:grid-cols-3">
+        <div
+          ref={animateAbout}
+          className="w-full gap-8 md:gap-0 items-start grid md:grid-cols-3"
+        >
           {plansList?.map((data, index) => {
             return (
-              <div
+              <motion.div
+                key={index}
+                variants={slideRight}
+                custom={index}
+                initial="initial"
+                animate={inView ? "animate" : "exit"}
                 className={`w-full ${
                   index === 1 ? "Card active text-[#fff]" : "Card text-[#000]"
                 } flex-col gap-3`}
@@ -76,7 +90,7 @@ export default function Plans() {
                     })}
                   </div>
                 </div>
-              </div>
+              </motion.div>
             );
           })}
         </div>
@@ -114,10 +128,10 @@ const PlansContent = styled.div`
     padding: 6rem 0;
     gap: 5rem;
     &.active {
-      transform: translateY(-50px);
+      margin-top: -100px;
       background-color: #000;
       @media (max-width: 780px) {
-        transform: translateY(0);
+        margin: 0;
       }
     }
   }
@@ -128,7 +142,6 @@ const PlansContent = styled.div`
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     grid-gap: 0.09rem;
     grid-row-gap: 10rem;
-    place-items: start;
   }
   .container {
     padding: 8rem 0;

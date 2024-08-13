@@ -24,10 +24,7 @@ export default function SingleTakout() {
       ref={containersingleRef}
       className="w-full overflow-hidden flex items-center justify-center min-h-[100vh] py-40 relative"
     >
-      <motion.div
-        style={{ scale, transition: "all .3s ease" }}
-        className="w-full h-full absolute"
-      >
+      <motion.div style={{ scale }} className="w-full h-full absolute">
         <img
           loading="lazy"
           src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/menu372x.jpg"

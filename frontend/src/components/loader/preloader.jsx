@@ -56,60 +56,60 @@ const Preloader = () => {
         <span></span>
         {words[index]}
       </motion.p> */}
-        <div className="h-[30vh] md:h-[50vh] overflow-hidden min-h-[30vh] md:min-h-[50vh]">
+        <div className="h-[20vh] md:h-[50vh] overflow-hidden min-h-[20vh] md:min-h-[50vh]">
           <ul className="counter-list" ref={countRef}>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 0
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 2
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 4
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 6
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 9
               </h3>
             </li>
           </ul>
         </div>
 
-        <div className="h-[30vh] md:h-[50vh] min-h-[30vh] md:min-h-[50vh] overflow-hidden">
+        <div className="h-[20vh] md:h-[50vh] min-h-[20vh] md:min-h-[50vh] overflow-hidden">
           <ul className="counter-list" ref={countRef2}>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 1
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 3
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 5
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 8
               </h3>
             </li>
             <li>
-              <h3 className="md:text-[50vh] md:leading-[50vh] text-[30vh] leading-[30vh] text-[#fff]">
+              <h3 className="md:text-[50vh] md:leading-[50vh] text-[20vh] leading-[20vh] text-[#fff]">
                 9
               </h3>
             </li>

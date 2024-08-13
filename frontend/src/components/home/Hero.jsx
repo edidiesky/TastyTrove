@@ -22,7 +22,7 @@ export default function Hero() {
           ease: "power3.inOut",
           duration: 2,
         },
-        11
+        10
       )
       .fromTo(
         text2?.chars,
@@ -37,7 +37,7 @@ export default function Hero() {
           duration: 1,
           ease: "power4.out",
         },
-        11.9
+        10.9
       )
       .fromTo(
         text1?.words,
@@ -54,7 +54,7 @@ export default function Hero() {
           duration: 1.6,
           ease: "power4.out",
         },
-        12
+        11.4
       )
       // hero_btn
       .fromTo(
@@ -66,10 +66,11 @@ export default function Hero() {
         {
           y: 0,
           opacity: 1,
-          stagger: { amount: 0.6 },
+          stagger: { amount: 0.3 },
           duration: 0.8,
           ease: "power4.out",
-        }
+        },
+        12.9
       )
       .fromTo(
         ".hero_btn",
@@ -80,7 +81,6 @@ export default function Hero() {
         {
           y: 0,
           opacity: 1,
-          stagger: { amount: 0.6 },
           duration: 0.8,
           ease: "power4.out",
         }
@@ -98,13 +98,14 @@ export default function Hero() {
               </h4>
             </div>
             <div className="w-full hide">
-              <h1 className="hero_main_text hide family3 text-7xl lg:text-8xl text-white">
+              <h1 className="hero_main_text hide family3 text-8xl text-white">
                 <span className="">FINE</span>
-                <br /> <span className="">DINING</span> <br /> <span className="">EXPERIENCE</span>
+                <br /> <span className="">DINING</span> <br />{" "}
+                <span className="">EXPERIENCE</span>
               </h1>
             </div>
             <div className="w-full overflow-hidden">
-              <h4 className="text-lg w-full hero_about_text md:text-2xl family2 text-light text-white">
+              <h4 className="text-xl w-full hero_about_text md:text-2xl family2 text-light text-white">
                 Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
                 scelerisque nisi in urna nulla. Sit tempor a et nisl, ac felis.
               </h4>
