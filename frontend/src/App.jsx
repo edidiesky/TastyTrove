@@ -19,7 +19,6 @@ import {
 import { ProtectRoute } from "./lib/ProtectRoute";
 import Animation from "./animations/Animation";
 import { useSelector } from "react-redux";
-import FlutterWavePayment from "./tutorial";
 const HomeWrapper = lazy(() => import("./screens/Home"));
 const SearchWrapper = lazy(() => import("./screens/Search"));
 const SingleWrapper = lazy(() => import("./screens/Single"));
@@ -210,8 +209,6 @@ export default function App() {
         </Route>
       </Routes>
     </div>
-    // <FlutterWavePayment />
-    // <Animation/>
   );
 }
 
