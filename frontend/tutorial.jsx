@@ -568,3 +568,140 @@ const Card = ({ cart }) => {
     </tr>
   );
 };
+import Image from "./Image";
+import { menudata } from "../data";
+const HomeIndex = () => {
+  return (
+    <div className=" w-full flex flex-col">
+      <Banner
+        image={
+          "https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/page22x.jpg"
+        }
+        subtext={"Best Table in Town"}
+        text={"Our Takeout Menu"}
+      />
+      <Menulist />
+    </div>
+  );
+};
+const Menulist = () => {
+  const maincourse = menudata?.filter(
+    (data) => data.category === "Main Course"
+  );
+  const houres = menudata?.filter((data) => data.category === "Hors d’oeuvres");
+  // get desserts collections
+  const desserts = menudata?.filter((data) => data.category === "desserts");
+  const DRINK = menudata?.filter(
+    (data) => data.category === "DRINK & COCKTAIL"
+  );
+  const menuList = [
+    {
+      title: " Main Course",
+      menudata: maincourse,
+    },
+    {
+      title: "Hors d’oeuvres",
+      menudata: houres,
+    },
+    {
+      title: "desserts",
+      menudata: desserts,
+    },
+    {
+      title: "DRINK & COCKTAIL",
+      menudata: DRINK,
+    },
+  ];
+  return (
+    <div className="w-full py-24">
+      <div className="w-[90%] max-w-[1100px] mx-auto flex flex-col gap-20">
+        {menuList?.map((menu, index) => {
+          <div className="w-full flex flex-col gap-16">
+            {index !== 0 && (
+              <div className="w-full py-64 relative">
+                <img
+                  src={menu?.menudata[0]?.image}
+                  alt=""
+                  className="absolute z-10 w-full h-full top-0 left-0 object-cover"
+                />
+                <div
+                  style={{
+                    background: "rgba(0,0,0,.16)",
+                  }}
+                  className="w-full absolute h-full top-0 z-20"
+                ></div>
+                <div className="absolute flex items-center z-40 justify-center w-full bottom-10">
+                  <h4 className="text-center text-xl family4 text-white">
+                    {menu?.menudata[0]?.title} – ₦{menu?.menudata[2]?.price}
+                  </h4>
+                </div>
+              </div>
+            )}
+            <h3 className="text-3xl md:text-5xl family4 italic font-normal">
+              {menu?.title}
+            </h3>
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
+              {menu?.menudata?.map((data) => {
+                return (
+                  <Link
+                    to={`/restaurant/takeout/${data?.id}?category=${data?.category}`}
+                    className="flex w-full group flex-col gap-8"
+                  >
+                    <div className="w-full h-52">
+                      <Image
+                        src={data?.image}
+                        alt=""
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="flex w-full flex-col gap-4">
+                      <div className="flex items-center justify-between w-full">
+                        <h4 className="text-4xl group-hover:text-[var(--primary)] family3">
+                          {data?.title}
+                        </h4>
+                        <h4 className="text-xl font-normal family4">
+                          ₦{data?.price}
+                        </h4>
+                      </div>
+                      <p className="text-lg leading-[1.5] family4">
+                        {data?.description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          </div>;
+        })}
+      </div>
+    </div>
+  );
+};
+const Banner = () => {
+  return (
+    <div className="w-full h-[30rem] relative">
+      <Image
+        alt=""
+        loading="lazy"
+        src={
+          "	https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
+        }
+        className="imagewrapper"
+      />
+      <div className="w- mx-auto flex items-center justify-center">
+        <h4
+          className="text-lg text-light uppercase text-white family1"
+          style={{ letterSpacing: "1.5px", fontWeight: "normal" }}
+        >
+          Best Table in Town
+        </h4>
+        <h1 className="family3 text-7xl text-light uppercase text-white">
+          Our Takeout Menu
+        </h1>
+      </div>
+      <div className="absolute gradient z-[20] h-full w-full"></div>
+    </div>
+  );
+};
+
+// export default HomeIndex

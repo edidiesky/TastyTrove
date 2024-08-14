@@ -6,7 +6,7 @@ import Footer from "@/components/common/Footer";
 const Payment = () => {
   return (
     <div>
-      <Meta title={"Payment for my booked Room"} />
+      <Meta title={"Payment for my booked Menu"} />
       <Navbar />
       <PaymentIndex />
       <Footer />

@@ -5,7 +5,7 @@ import Navbar from "../components/common/navbar";
 const Search = () => {
   return (
     <div>
-      <Meta title={"Search for quality homes"} />
+      <Meta title={"Search for quality Menu - Tastytrove"} />
       <Navbar />
       <HomeIndex />
     </div>
