@@ -6,10 +6,11 @@ import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import AnimateText from "@/animations/AnimateText";
 import { ClearUserInfo } from "@/features/auth/authSlice";
-import { onLoginModal } from "@/features/modals/modalSlice";
+import { onLoginModal, onSellerModal } from "@/features/modals/modalSlice";
 import { GetUserCart } from "@/features/cart/cartReducer";
 import { LayoutDashboard, LogOut } from "lucide-react";
 import { FaRegUser } from "react-icons/fa";
+import Button from "./Button";
 const linkData = [
   {
     title: "Home",
@@ -19,10 +20,10 @@ const linkData = [
     title: "Menu",
     path: "restaurant/menu",
   },
-  {
-    title: "History",
-    path: "restaurant/menu",
-  },
+  // {
+  //   title: "History",
+  //   path: "restaurant/menu",
+  // },
   {
     title: "Bulletin",
     path: "restaurant/menu",
@@ -102,6 +103,15 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
+            <button onClick={()=> {
+              dispatch(onSellerModal());
+            }} className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base">
+              <Button
+                bgColor={"var(--primary)"}
+                text={"Become a Seller"}
+                type={"white"}
+              />
+            </button>
             <ProfileDropdownStyles className="z-[30000000000000] relative flex items-end justify-end gap-4">
               {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full bg-[#000] flex items-center justify-center text-2xl text-white">
                 <BiCart />
@@ -128,7 +138,10 @@ const Navbar = () => {
                           <h4 className="text-base text-dark font-bold family1">
                             {currentUser?.name}
                             <span className="block font-normal family1 text-xs text-dark">
-                              {currentUser?.role === "SELLER"?"Seller":"Personal"} Account
+                              {currentUser?.role === "SELLER"
+                                ? "Seller"
+                                : "Personal"}{" "}
+                              Account
                             </span>
                           </h4>
                         </div>

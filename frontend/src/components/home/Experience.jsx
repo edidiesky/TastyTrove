@@ -27,7 +27,7 @@ export default function Experience() {
               scelerisque nisi in urna nulla.
             </h4>
             <div className="w-full text-start">
-              <button className="h-[70px] w-[230px] text-lg uppercase">
+              <button className="h-[70px] w-[230px] rounded-[40px] overflow-hidden text-lg uppercase">
                 <Button bgColor={"#fff"} text={"Explore the Menu"} />
               </button>
             </div>

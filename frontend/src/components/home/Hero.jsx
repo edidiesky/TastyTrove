@@ -113,8 +113,8 @@ export default function Hero() {
             </div>
             <div className="w-full hide text-start">
               <Link className="hero_btn" to={"/restaurant/menu"}>
-                <button className="h-[70px] w-[230px] text-lg uppercase">
-                  <Button bgColor={"#fff"} text={"Explore the Menu"} />
+                <button className="h-[70px] rounded-[40px] overflow-hidden w-[230px] text-lg uppercase">
+                  <Button bgColor={"rgb(255,255,255"} text={"Explore the Menu"} />
                 </button>
               </Link>
             </div>

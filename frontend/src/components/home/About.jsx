@@ -118,7 +118,7 @@ export default function About() {
                       {x.desc}
                     </h4>
                     <div className="w-full mt-4 text-center">
-                      <button className="h-[60px] w-[200px] text-base">
+                      <button className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base">
                         <Button
                           bgColor={"#000"}
                           text={x?.subText}

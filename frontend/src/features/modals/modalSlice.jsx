@@ -1,10 +1,10 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 const initialState = {
   savedRooms: [],
   loginmodal: false,
   registermodal: false,
+  sellermodal: false,
 };
 
 export const modalSlice = createSlice({
@@ -24,10 +24,23 @@ export const modalSlice = createSlice({
     offRegisterModal: (state, action) => {
       state.registermodal = false;
     },
+
+    onSellerModal: (state, action) => {
+      state.sellermodal = true;
+    },
+    offSellerModal: (state, action) => {
+      state.sellermodal = false;
+    },
   },
 });
 
-export const { onLoginModal, offLoginModal, onRegisterModal, offRegisterModal } =
-  modalSlice.actions;
+export const {
+  onLoginModal,
+  onSellerModal,
+  offSellerModal,
+  offLoginModal,
+  onRegisterModal,
+  offRegisterModal,
+} = modalSlice.actions;
 
 export default modalSlice.reducer;

@@ -7,14 +7,21 @@ import { useSelector } from "react-redux";
 import Copyright from "@/components/common/Copyright";
 import Navbar from "@/components/common/navbar";
 import SmoothScroll from "@/constants/utils/SmoothScroll";
+import BecomeASellerModal from "@/components/modals/BecomeASeller";
 const Layout = () => {
-  const { loginmodal, registermodal } = useSelector((store) => store.modal);
+  const { loginmodal, registermodal, sellermodal } = useSelector(
+    (store) => store.modal
+  );
   return (
     <>
       <AnimatePresence mode="wait">
         {loginmodal && (
           <LoginModal registermodal={registermodal} modal={loginmodal} />
         )}
+      </AnimatePresence>
+
+      <AnimatePresence mode="wait">
+        {sellermodal && <BecomeASellerModal modal={sellermodal} />}
       </AnimatePresence>
       <AnimatePresence mode="wait">
         {registermodal && <RegisterModal modal={registermodal} />}
