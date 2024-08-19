@@ -70,15 +70,14 @@ export default function Top() {
         </div>
         <div className="topright">
           <div className="flex HeroRightC flex-col gap-8 auto">
-            <div className="family3 text-6xl text-white">
-              {menu?.title}
-            </div>
+            <div className="family3 text-6xl text-white">{menu?.title}</div>
             <h4 className="text-xl leading-[1.4] family2 text-white">
               {/* Tristique tempus condimentum diam donec. Condimentum ullamcorper
               sit elementum hendrerit mi nulla in consequat, ut. Metus, nullam
               scelerisque netus viverra dui pretium pulvinar. Commodo morbi
               amet. */}
-              {menu?.description}
+              {/* {menu?.description} */}
+              {menu?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
             </h4>
             <div className="flex flex-col gap-3">
               <p className="text-base md:text-xl text-grey family4">
@@ -102,7 +101,7 @@ export default function Top() {
             <div className="w-full gap-4 grid sm:grid-cols-2 text-start">
               <button
                 onClick={handleReservationBooking}
-                className="h-[55px] w-[100%] lg:w-[100%] text-sm"
+                className="h-[55px] w-[100%] rounded-[40px] text-sm"
               >
                 <Button
                   type={"white"}
@@ -124,7 +123,7 @@ export default function Top() {
                 />
               </button>
 
-              <span className="grid h-[50px] md:h-full  grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
+              <span className="grid h-[50px] md:h-full rounded-[40px] grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
                 <button
                   onClick={() => setCount(count - 1)}
                   disabled={count <= 1}

@@ -34,7 +34,7 @@ const Menulist = () => {
       menudata: DRINK,
     },
   ];
-  console.log(menuList);
+  // console.log(menuList);
   return (
  
     <div className="w-full py-24">
@@ -92,7 +92,7 @@ const Menulist = () => {
                             </h4>
                           </div>
                           <p className="text-lg leading-[1.5] family4">
-                            {data?.description}
+                            {data?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                           </p>
                         </div>
                       </Link>

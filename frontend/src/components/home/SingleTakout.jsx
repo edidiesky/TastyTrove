@@ -45,7 +45,7 @@ export default function SingleTakout() {
             <span className="family1 pt-8 text-xl">₦{menus[0]?.price}</span>
           </h1>
           <h4 className="text-xl md:text-2xl  family2 text-light text-[var(--grey-1)]">
-            {menus[0]?.description}
+            {menus[0]?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
           </h4>
           <div className="w-full text-start">
             <Link

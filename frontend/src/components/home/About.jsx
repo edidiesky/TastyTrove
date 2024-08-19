@@ -92,7 +92,7 @@ export default function About() {
               className="w-full h-[40rem] group relative"
             >
               <Link
-                to={`/restaurant/takeout/{menus[3]?.id}`}
+                to={`/restaurant/takeout/${menus[3]?.id}`}
                 className="w-full h-full relative group-hover:shadow-2xl overflow-hidden"
               >
                 <div className="absolute z-20 w-full h-full bg-[rgba(0,0,0,.5)]"></div>

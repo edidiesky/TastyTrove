@@ -81,7 +81,10 @@ export default function Plans() {
                                 className={`text-dark family2 text-xl`}
                                 // className="family2 text-xl"
                               >
-                                {x?.description}
+                                {x?.description?.replace(
+                                  /<\/?[^>]+(>|$)/g,
+                                  ""
+                                )}
                               </h4>
                             </li>
                           </Link>

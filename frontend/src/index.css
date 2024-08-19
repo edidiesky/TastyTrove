@@ -99,8 +99,8 @@
   transition: all 0.4s;
 }
 .lazy-load-image-background.blur.lazy-load-image-loaded img {
-  width:100% !important;
-  height:100% !important;
+  width: 100% !important;
+  height: 100% !important;
   object-fit: cover !important;
 }
 .ql-editor,
@@ -116,11 +116,15 @@
   transition: all 0.4s;
 }
 
-
 .shadows:hover {
   box-shadow: 4px 4px 60px 0px hsla(233, 28%, 19%, calc(100% - 90%)) !important;
 }
 
+p {
+  font-size: 16px !important;
+  font-family: "Work sans", sans-serif !important;
+  line-height: 1.3 !important;
+}
 
 button:disabled {
   cursor: not-allowed;
