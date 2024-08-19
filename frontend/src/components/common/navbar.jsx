@@ -61,7 +61,7 @@ const Navbar = () => {
     <>
       <div className="py-12 z-[50000] relative flex items-center justify-center">
         <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
-        <div className="w-85 auto flex z-[30] items-center gap-4 justify-between">
+        <div className="w-90 auto flex z-[30] items-center gap-12 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">
             <h3 className="text-3xl hidden md:block md:text-4xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />
@@ -73,8 +73,8 @@ const Navbar = () => {
 
           {/* <img src="/images/TestLogo.png" alt="" className="w-40" /> */}
 
-          <div className="w-full flex items-center justify-end gap-3">
-            <div className="items-center justify-end hidden lg:flex gap-4">
+          <div className="hidden lg:flex items-center justify-center gap-3">
+            <div className="items-center justify-end flex gap-4">
               {linkData?.map((list, index) => {
                 return (
                   <NavLink
@@ -103,15 +103,22 @@ const Navbar = () => {
                 </div>
               )}
             </NavLink>
-            <button onClick={()=> {
-              dispatch(onSellerModal());
-            }} className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base">
-              <Button
-                bgColor={"var(--primary)"}
-                text={"Become a Seller"}
-                type={"white"}
-              />
-            </button>
+          </div>
+          <div className="flex justify-end items-center gap-4">
+            {currentUser?.role !== "SELLER" && (
+              <button
+                onClick={() => {
+                  dispatch(onSellerModal());
+                }}
+                className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base"
+              >
+                <Button
+                  bgColor={"var(--primary)"}
+                  text={"Become a Seller"}
+                  type={"white"}
+                />
+              </button>
+            )}
             <ProfileDropdownStyles className="z-[30000000000000] relative flex items-end justify-end gap-4">
               {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full bg-[#000] flex items-center justify-center text-2xl text-white">
                 <BiCart />
@@ -126,13 +133,13 @@ const Navbar = () => {
                             <img
                               src={currentUser?.image}
                               alt=""
-                              className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                              className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
                             />
                           ) : (
                             <img
                               src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                               alt=""
-                              className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                              className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
                             />
                           )}
                           <h4 className="text-base text-dark font-bold family1">

@@ -167,11 +167,11 @@ export const SellerFormInputData = [
   },
   {
     id: 34,
-    name: "username",
+    name: "country",
     placeholder: "Please input your username",
     type: "text",
-    text: "Username",
-    label: "Username",
+    text: "Country",
+    label: "Country",
     required: true,
   },
 ];

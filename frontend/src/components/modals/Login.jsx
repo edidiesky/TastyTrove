@@ -188,7 +188,7 @@ const LoginModalStyles = styled(motion.div)`
   position: fixed;
   left: 0;
   display: flex;
-  z-index: 4900;
+  z-index: 49000000;
   align-items: center;
   justify-content: center;
   top: 0;

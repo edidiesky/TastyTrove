@@ -8,9 +8,11 @@ import {
 import {
   registerUser,
   LoginUser,
+  BecomeASeller,
 } from "../controllers/authController.js";
 
 router.post("/register", registerUser);
+router.post("/becomeASeller", BecomeASeller);
 router.post("/login", LoginUser);
 
 export default router;

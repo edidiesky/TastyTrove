@@ -35,6 +35,8 @@ model User {
   email           String?         @unique
   emailVerified   DateTime?
   image           String?
+  country         String?
+  city            String?
   role            RoleStatus      @default(USER)
   hashedPassword  String?
   createdAt       DateTime        @default(now())
@@ -100,7 +102,7 @@ model Cart {
 model Payment {
   id             String        @id @default(auto()) @map("_id") @db.ObjectId
   amount         Int?
-  salesamount         Int?
+  salesamount    Int?
   currency       String
   paymentGroupId String?
   status         PaymentStatus @default(PENDING)

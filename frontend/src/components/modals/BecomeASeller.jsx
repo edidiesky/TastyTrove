@@ -7,13 +7,13 @@ import { RxCross2 } from "react-icons/rx";
 import AnimateText from "@/animations/AnimateText";
 import {
   onLoginModal,
-  offRegisterModal,
+  offSellerModal,
   offLoginModal,
 } from "../../features/modals/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../home/loader";
 import { SellerFormInputData } from "@/constants/data/formdata";
-import { RegisterUser } from "@/features/auth/authReducer";
+import { BecomingASeller } from "@/features/auth/authReducer";
 
 const ModalVariants = {
   initial: {
@@ -35,11 +35,11 @@ const ModalVariants = {
 const BecomeASellerModal = () => {
   const dispatch = useDispatch();
   const handleClearAlert = () => {
-    dispatch(offRegisterModal());
+    dispatch(offSellerModal());
   };
-    const [image, setImage] = useState("");
+  const [image, setImage] = useState("");
 
-  const { registerisSuccess, registerisLoading } = useSelector(
+  const {  becomeASellerisSuccess,  becomeASellerisLoading } = useSelector(
     (store) => store.auth
   );
   const { sellermodal } = useSelector((store) => store.modal);
@@ -47,10 +47,12 @@ const BecomeASellerModal = () => {
     name: "",
     username: "",
     email: "",
-    password: "",
+    hashedPassword: "",
+    city: "",
+    country: "",
   });
-
-  const [loading, setLoading] = useState(false);
+  const [uploading, setUploading] = useState(false);
+  const [alert, setAlert] = useState(false);
 
   const handleFormChange = (e) => {
     setFormValue({
@@ -58,31 +60,69 @@ const BecomeASellerModal = () => {
       [e.target.name]: e.target.value,
     });
   };
-  const handleLoginModal = () => {
-    dispatch(offRegisterModal());
-    dispatch(onLoginModal());
-  };
 
   const handleFormSubmision = (e) => {
     e.preventDefault();
-    dispatch(RegisterUser(formvalue));
+    dispatch(
+      BecomingASeller({
+        image,
+        ...formvalue,
+      })
+    );
   };
 
   useEffect(() => {
-    if (registerisSuccess) {
-      dispatch(offRegisterModal());
-      dispatch(onLoginModal());
+    if ( becomeASellerisSuccess) {
+      dispatch(offSellerModal());
     }
-  }, [registerisSuccess]);
+  }, [ becomeASellerisSuccess]);
+
+  const handleFileUpload = async (e) => {
+    // get the file
+    const file = e.target.files;
+    setUploading(true);
+    // create formdata
+    const formData = new FormData();
+    for (let i = 0; i < file.length; i++) {
+      formData.append("files", file[i]);
+    }
+
+    try {
+      const config = {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      };
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URLS}/upload`,
+        formData,
+        config
+      );
+
+      setImage(...data?.urls);
+      setAlert(true);
+      setUploading(false);
+      toast.success("Image uploaded succesfully!!");
+    } catch (error) {
+      setUploading(false);
+      toast.error(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  };
+
   return (
-    <RegisterModalStyles
+    <SellerModalStyles
       className="w-full h-screen"
       as={motion.div}
       initial={{ opacity: 0, visibility: "hidden" }}
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      {registerisLoading && <Loader />}
+      { becomeASellerisLoading && <Loader />}
+      {uploading && <Loader />}
       <motion.div
         variants={ModalVariants}
         initial="initial"
@@ -99,29 +139,29 @@ const BecomeASellerModal = () => {
               </span>
             </h3>
             <div
-              className="cross absolute top-2 right-3"
+              className="cross absolute top-6 right-5"
               onClick={handleClearAlert}
             >
               <RxCross2 />
             </div>
           </div>
-          <div className="w-full  justify-center pb-6 flex">
+          <div className="w-full h-[400px] overflow-auto justify-center pb-6 flex">
             <form
               onSubmit={handleFormSubmision}
-              className="w-[90%] mx-auto overflow-auto  p-4 md:px-8 pb-4 flex flex-col gap-8"
+              className="w-[90%] mx-auto  p-4 md:px-8 pb-4 flex flex-col gap-8"
             >
               <div className="w-24 h-24 relative">
                 {image !== "" ? (
                   <img
                     src={image}
                     alt=""
-                    className="w-24 absolute object-cover h-24 rounded-full"
+                    className="w-24 object-cover h-24 rounded-full"
                   />
                 ) : (
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-24 absolute object-cover h-24 rounded-full"
+                    className="w-24 object-cover h-24 rounded-full"
                   />
                 )}
                 <label htmlFor="upload">
@@ -133,7 +173,7 @@ const BecomeASellerModal = () => {
                       placeholder="Gig Image"
                       autoComplete="off"
                       style={{ display: "none" }}
-                      // onChange={handleFileUpload}
+                      onChange={handleFileUpload}
                       multiple
                       className="w-full"
                     />
@@ -177,10 +217,10 @@ const BecomeASellerModal = () => {
           </div>
         </div>
       </motion.div>
-    </RegisterModalStyles>
+    </SellerModalStyles>
   );
 };
-const RegisterModalStyles = styled(motion.div)`
+const SellerModalStyles = styled(motion.div)`
   /* width: 100vw;
   height: 100vh; */
   position: fixed;

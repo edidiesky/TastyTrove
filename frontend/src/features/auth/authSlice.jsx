@@ -8,6 +8,7 @@ import {
   UpdateSingleUser,
   addListToWish,
   GetSingleUser,
+  BecomingASeller,
 } from "./authReducer";
 const customerData = JSON.parse(localStorage.getItem("customer"));
 const customerToken = localStorage.getItem("customertoken");
@@ -21,6 +22,8 @@ const initialState = {
   alertType: "",
   loginisLoading: false,
   loginisSuccess: false,
+  becomeASellerisLoading: false,
+  becomeASellerisSuccess: false,
   loginisError: false,
 
   registerisLoading: false,
@@ -77,6 +80,22 @@ export const authSlice = createSlice({
     builder.addCase(LoginUser.rejected, (state, action) => {
       state.loginisSuccess = false;
       state.loginisLoading = false;
+      toast.error(action.payload);
+    });
+
+    builder.addCase(BecomingASeller.pending, (state, action) => {
+      state.becomeASellerisLoading = true;
+    });
+    builder.addCase(BecomingASeller.fulfilled, (state, action) => {
+      state.becomeASellerisLoading = false;
+      state.becomeASellerisSuccess = true;
+      state.currentUser = action.payload.user;
+      state.token = action.payload.token;
+      toast.success("BecomingASeller process sucessfully!!!!");
+    });
+    builder.addCase(BecomingASeller.rejected, (state, action) => {
+      state.becomeASellerisSuccess = false;
+      state.becomeASellerisLoading = false;
       toast.error(action.payload);
     });
 
