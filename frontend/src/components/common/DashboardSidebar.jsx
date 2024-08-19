@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import styled from "styled-components";
 import { FiSettings } from "react-icons/fi";
@@ -37,7 +36,7 @@ const AdminSidebarData = [
     },
     list: [],
   },
-    {
+  {
     id: 8,
     tab: {
       icon: <MdRateReview fontSize={"16px"} />,
@@ -220,11 +219,11 @@ export const HeaderStyles = styled.div`
 
   .tab {
     margin: 0 auto;
-    border-radius: 10px;
+    border-radius: 40px;
     width: 100%;
     display: flex;
     align-items: center;
-    padding:12px;
+    padding: 12px 18px;
     gap: 2rem;
     position: relative;
     /* background: #fff; */
@@ -233,11 +232,11 @@ export const HeaderStyles = styled.div`
       transform: scale(0.89);
       transition: all ease 0.4s;
       top: 55%;
-      box-shadow:0 3px 10px rgba(0,0,0,.3);
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
     }
 
     &:hover {
-      background: #000000;
+      background: var(--primary);
       color: #fff;
       .span_details {
         opacity: 1;
@@ -251,14 +250,14 @@ export const HeaderStyles = styled.div`
     }
     &.active {
       position: relative;
-      background: #000;
-      border: 1px solid rgba(0, 0, 0, 0.08);
+      // FD9D2A
+      /* 8bca41 */
+      /* 8F0EBE */
+      /* E3F2FD */
+      background: var(--primary);
       color: #fff;
-
-      span {
-        svg {
-          color: #fff;
-        }
+      svg {
+        color: #fff;
       }
     }
   }

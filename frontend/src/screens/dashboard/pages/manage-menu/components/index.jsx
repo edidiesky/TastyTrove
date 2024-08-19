@@ -16,7 +16,7 @@ const DashboardIndex = () => {
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState(0);
   const [availability, setAvailability] = useState(0);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState('');
   const [features, setFeatures] = useState("");
   const [description, setDescription] = useState("");
 
@@ -53,7 +53,7 @@ const DashboardIndex = () => {
       setPrice("");
       setAvailability("");
       setDescription("");
-      setImages([]);
+      setImages('');
       setFeatures("");
     }
   }, [
@@ -70,7 +70,7 @@ const DashboardIndex = () => {
     title: title,
     price: Number(price),
     image: images,
-    availabilityCount: availability,
+    availabilityCount: Number(availability),
     category: features,
     description: description,
   };

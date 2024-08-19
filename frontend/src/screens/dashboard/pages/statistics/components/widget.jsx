@@ -12,25 +12,25 @@ const Widget = () => {
     {
       title: "Total Sales",
       icon: <IoFastFood />,
-      color: "#5B5DB4",
+      color: "#8F0EBE",
       subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "-"}`,
     },
     {
       title: "Total Menu",
       icon: <IoFastFood />,
-      color: "#FF7F5C",
+      color: "#8bca41",
       subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "-"}`,
     },
     {
       title: "Total Ratings",
       icon: <MdReviews />,
-      color: "#489BC5",
+      color: "#8F0EBE",
       subtitle: `${widgetData?.totalReview ? widgetData?.totalReview : "-"}`,
     },
     {
       title: "Total Clients",
       icon: <FaRegUser />,
-      color: "#489BC5",
+      color: "#FD9D2A",
       subtitle: `${
         widgetData?.totalClients ? widgetData?.totalClients?.length : "-"
       }`,
@@ -43,11 +43,15 @@ const Widget = () => {
           <div
             onClick={() => setWidgetTab(index)}
             key={index}
-            style={{ transition: "all .3s", gridTemplateColumns: "1fr 50px" }}
+            style={{
+              backgroundColor: `#dbe6ee40`,
+              transition: "all .3s",
+              gridTemplateColumns: "1fr 50px",
+            }}
             className={`${
               index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#eee] text-[#000]"
             } p-6 family1  w-full rounded-[20px] flex-col
-               cursor-pointer flex items-start justify-between gap-4 min-h-48 md:min-h-56`}
+               cursor-pointer flex items-start justify-between shadow-sm gap-4 min-h-48 md:min-h-56`}
           >
             <div className="w-full flex items-center justify-between">
               <div
@@ -62,7 +66,7 @@ const Widget = () => {
               <div
                 className={`w-10 md:w-12 ${
                   index === 0
-                    ? "border-[rgba(255,255,255,.4)] border text-[#fff]"
+                    ? "border-[rgba(255,255,255,.4)] border text-[#000]"
                     : "border-[rgba(0,0,0,.4)] border text-[#000]"
                 } text-base md:text-lg h-10 md:h-12 rounded-full flex items-center justify-center`}
               >

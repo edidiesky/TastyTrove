@@ -40,7 +40,7 @@ const ImageUpload = ({ images, setImages, setFeatures, features }) => {
         config
       );
 
-      setImages(data?.urls);
+      setImages(data?.urls[0]);
       setAlert(true);
       setUploading(false);
       toast.success("Image uploaded succesfully!!");

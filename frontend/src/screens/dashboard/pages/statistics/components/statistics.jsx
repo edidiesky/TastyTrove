@@ -120,35 +120,46 @@ const SalesStat = () => {
           </Link>
         </div>
         <ul className="flex flex-col w-full">
-          {recentSales?.slice(0, 3)?.map((data, index) => {
-            return (
-              <li
-                key={index}
-                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
-              >
-                <div className="flex items-center gap-4">
-                  {data?.user?.image ? (
-                    <img
-                      src={data?.user?.image}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-12 h-12 text-[#fff] flex items-center justify-center rounded-full bg-[#000]">
-                      {data?.user?.name?.slice("")[0]}
-                    </div>
-                  )}
+          {recentSales?.length === 0 ? (
+            <span className="text-sm">
+              {" "}
+              <span className="block px-6 text-sm font-normal">
+                You have no recent sales
+              </span>
+            </span>
+          ) : (
+            <>
+              {recentSales?.slice(0, 3)?.map((data, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
+                  >
+                    <div className="flex items-center gap-4">
+                      {data?.user?.image ? (
+                        <img
+                          src={data?.user?.image}
+                          className="w-12 h-12 rounded-full object-cover"
+                        />
+                      ) : (
+                        <div className="w-12 h-12 text-[#fff] flex items-center justify-center rounded-full bg-[#000]">
+                          {data?.user?.name?.slice("")[0]}
+                        </div>
+                      )}
 
-                  <span className="text-base family1 font-semibold">
-                    {data?.user?.name}
-                    <div className="block family1 font-normal text-xs text-grey">
-                      {moment(data?.createdAt).format("DD MMM YYYY")}
+                      <span className="text-base family1 font-semibold">
+                        {data?.user?.name}
+                        <div className="block family1 font-normal text-xs text-grey">
+                          {moment(data?.createdAt).format("DD MMM YYYY")}
+                        </div>
+                      </span>
                     </div>
-                  </span>
-                </div>
-                <span>₦{data?.amount}</span>
-              </li>
-            );
-          })}
+                    <span>₦{data?.amount}</span>
+                  </li>
+                );
+              })}
+            </>
+          )}
         </ul>
       </div>
       {/* top selling product */}
@@ -159,25 +170,35 @@ const SalesStat = () => {
           </h3>
         </div>
         <ul className="flex flex-col w-full">
-          {topSaledProduct?.slice(0, 3)?.map((data, index) => {
-            return (
-              <li
-                key={index}
-                className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
-              >
-                <div className="flex items-center gap-4">
-                  <img src={data?.image} className="w-12  object-cover" />
-                  <span className="text-base family1 font-semibold">
-                    {data?.title}
-                    <div className="block family1 font-normal text-xs text-grey">
-                      {data?.category}
+          {topSaledProduct?.length === 0 ? (
+            <span >
+              <span className="block px-6 text-sm font-normal">
+                You have not sold any product
+              </span>
+            </span>
+          ) : (
+            <>
+              {topSaledProduct?.slice(0, 3)?.map((data, index) => {
+                return (
+                  <li
+                    key={index}
+                    className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
+                  >
+                    <div className="flex items-center gap-4">
+                      <img src={data?.image} className="w-12  object-cover" />
+                      <span className="text-base family1 font-semibold">
+                        {data?.title}
+                        <div className="block family1 font-normal text-xs text-grey">
+                          {data?.category}
+                        </div>
+                      </span>
                     </div>
-                  </span>
-                </div>
-                <span>{data?.servedCount} Qty</span>
-              </li>
-            );
-          })}
+                    <span>{data?.servedCount} Qty</span>
+                  </li>
+                );
+              })}
+            </>
+          )}
         </ul>
       </div>
     </div>

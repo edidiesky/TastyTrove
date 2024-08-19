@@ -108,6 +108,8 @@ export const menuSlice = createSlice({
     });
     builder.addCase(CreateMenu.rejected, (state, action) => {
       state.creatingMenuisSuccess = false;
+      state.creatingMenuisLoading = false;
+
       toast.error(action.payload);
     });
 
