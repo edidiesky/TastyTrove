@@ -1,7 +1,6 @@
-
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { FcGoogle } from "react-icons/fc";
+import { BiCamera } from "react-icons/bi";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { RxCross2 } from "react-icons/rx";
@@ -13,7 +12,7 @@ import {
 } from "../../features/modals/modalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../home/loader";
-import { RegisterFormInputData } from "@/constants/data/formdata";
+import { SellerFormInputData } from "@/constants/data/formdata";
 import { RegisterUser } from "@/features/auth/authReducer";
 
 const ModalVariants = {
@@ -38,6 +37,7 @@ const BecomeASellerModal = () => {
   const handleClearAlert = () => {
     dispatch(offRegisterModal());
   };
+    const [image, setImage] = useState("");
 
   const { registerisSuccess, registerisLoading } = useSelector(
     (store) => store.auth
@@ -95,7 +95,7 @@ const BecomeASellerModal = () => {
             <h3 className="text-2xl md:text-3xl font-bold family1">
               Become a Seller
               <span className="block text-sm font-normal family1">
-               Fill in the form to become a seller!
+                Fill in the form to become a seller!
               </span>
             </h3>
             <div
@@ -105,13 +105,43 @@ const BecomeASellerModal = () => {
               <RxCross2 />
             </div>
           </div>
-          <div className="w-full overflow-auto h-[400px] justify-center pb-6 flex">
+          <div className="w-full  justify-center pb-6 flex">
             <form
               onSubmit={handleFormSubmision}
-              className="w-[90%] mx-auto p-4 md:px-8 pb-4 h-full justify-center flex flex-col gap-8"
+              className="w-[90%] mx-auto overflow-auto  p-4 md:px-8 pb-4 flex flex-col gap-8"
             >
+              <div className="w-24 h-24 relative">
+                {image !== "" ? (
+                  <img
+                    src={image}
+                    alt=""
+                    className="w-24 absolute object-cover h-24 rounded-full"
+                  />
+                ) : (
+                  <img
+                    src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                    alt=""
+                    className="w-24 absolute object-cover h-24 rounded-full"
+                  />
+                )}
+                <label htmlFor="upload">
+                  <div className="absolute cursor-pointer text-white text-2xl rounded-full border-4 border-[rgba(255,255,255,1)] flex items-center justify-center w-12 h-12 bottom-5 -right-5 bg-[#5542F6]">
+                    <BiCamera />
+                    <input
+                      type="file"
+                      id="upload"
+                      placeholder="Gig Image"
+                      autoComplete="off"
+                      style={{ display: "none" }}
+                      // onChange={handleFileUpload}
+                      multiple
+                      className="w-full"
+                    />
+                  </div>
+                </label>
+              </div>
               <div className="grid grid-cols-2 gap-2 w-full">
-                {RegisterFormInputData?.map((input, index) => {
+                {SellerFormInputData?.map((input, index) => {
                   return (
                     <label
                       key={index}

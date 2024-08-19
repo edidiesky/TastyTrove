@@ -120,6 +120,61 @@ export const DashboardProfileInputData = [
   // },
 ];
 
+export const SellerFormInputData = [
+  {
+    id: 4,
+    name: "name",
+    type: "name",
+    text: "Your full Name",
+    label: "Full Name",
+    required: true,
+  },
+  {
+    id: 1,
+    name: "email",
+    placeholder: "example@site.com",
+    type: "email",
+    text: "Email",
+    label: "Email",
+    required: true,
+  },
+  {
+    id: 39,
+    name: "hashedPassword",
+    placeholder: "Please input your hashedPassword",
+    type: "password",
+    text: "Password",
+    label: "Password",
+    required: true,
+  },
+  {
+    id: 34,
+    name: "username",
+    placeholder: "Please input your username",
+    type: "text",
+    text: "Username",
+    label: "Username",
+    required: true,
+  },
+  {
+    id: 39,
+    name: "city",
+    placeholder: "Please input your hashedPassword",
+    type: "text",
+    text: "City",
+    label: "City",
+    required: true,
+  },
+  {
+    id: 34,
+    name: "username",
+    placeholder: "Please input your username",
+    type: "text",
+    text: "Username",
+    label: "Username",
+    required: true,
+  },
+];
 export const ReviewInputData = [
   {
     id: 4,
