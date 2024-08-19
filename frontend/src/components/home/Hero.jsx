@@ -23,7 +23,7 @@ export default function Hero() {
           ease: "power3.inOut",
           duration: 2,
         },
-        10
+        1
       )
       .fromTo(
         text2?.chars,
@@ -38,7 +38,7 @@ export default function Hero() {
           duration: 1,
           ease: "power4.out",
         },
-        10.9
+        1.5
       )
       .fromTo(
         text1?.words,
@@ -55,7 +55,7 @@ export default function Hero() {
           duration: 1.6,
           ease: "power4.out",
         },
-        11.4
+        2
       )
       // hero_btn
       .fromTo(
@@ -71,7 +71,7 @@ export default function Hero() {
           duration: 0.8,
           ease: "power4.out",
         },
-        12.9
+        3
       )
       .fromTo(
         ".hero_btn",
@@ -114,7 +114,10 @@ export default function Hero() {
             <div className="w-full hide text-start">
               <Link className="hero_btn" to={"/restaurant/menu"}>
                 <button className="h-[70px] rounded-[40px] overflow-hidden w-[230px] text-lg uppercase">
-                  <Button bgColor={"rgb(255,255,255"} text={"Explore the Menu"} />
+                  <Button
+                    bgColor={"rgb(255,255,255"}
+                    text={"Explore the Menu"}
+                  />
                 </button>
               </Link>
             </div>

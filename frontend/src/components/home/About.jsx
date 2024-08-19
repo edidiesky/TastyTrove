@@ -3,10 +3,12 @@ import styled from "styled-components";
 import Button from "../common/Button";
 import AnimateTextWord from "@/animations/AnimateTextWord";
 import Word from "@/animations/Word";
+import { useSelector } from "react-redux";
 
 import { motion, useInView } from "framer-motion";
 import { clipPathLeft, smallslideup2 } from "@/constants/utils/framer";
 import Image from "../common/Image";
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -38,10 +40,13 @@ export default function About() {
   const inView = useInView(animateImage, {
     margin: "0px 100px -120px 0px",
   });
+
+  const { menus } = useSelector((store) => store.menu);
+
   return (
     <AboutContent className="flex overflow-hidden w-full flex-col gap-4">
       <div className="w-full flex flex-col gap-16">
-        <div className="w-85 auto wrapper flex gap-12 lg:gap-20">
+        <div className="w-85 md:px-12 auto wrapper flex gap-12 lg:gap-20">
           <div className="flex-1 flex flex-col gap-12">
             <h4 className="text-base max-w-[500px] md:text-xl family4">
               <AnimateTextWord
@@ -84,12 +89,24 @@ export default function About() {
               variants={clipPathLeft}
               initial="initial"
               animate={inView ? "animate" : "exit"}
-              className="w-full h-[40rem]"
+              className="w-full h-[40rem] group relative"
             >
-              <Image
-                src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info22x.jpg"
-                alt=""
-              />{" "}
+              <Link
+                to={`/restaurant/takeout/{menus[3]?.id}`}
+                className="w-full h-full relative group-hover:shadow-2xl overflow-hidden"
+              >
+                <div className="absolute z-20 w-full h-full bg-[rgba(0,0,0,.5)]"></div>
+                <Image
+                  src="https://avada.website/restaurant/wp-content/uploads/sites/112/2019/12/info22x.jpg"
+                  alt=""
+                />{" "}
+                <div className="w-full flex z-30 items-center justify-center left-0 absolute bottom-5">
+                  <h4 className="text-[#fff] text-xl uppercase flex items-center gap-4 family1">
+                    <span className="leading-[1.3]">{menus[3]?.title}</span>-
+                    <span className="family1 text-xl">₦{menus[3]?.price}</span>
+                  </h4>
+                </div>
+              </Link>
             </motion.div>
           </div>
         </div>

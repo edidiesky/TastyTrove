@@ -42,7 +42,7 @@ export default function SingleTakout() {
         >
           <h1 className="family3 flex items-start gap-4 justify-between leading-[1.6] text-6xl md:text-7xl text-white">
             <span className="leading-[1.3]">{menus[0]?.title}</span>
-            <span className="family1 pt-8 text-xl">${menus[0]?.price}</span>
+            <span className="family1 pt-8 text-xl">₦{menus[0]?.price}</span>
           </h1>
           <h4 className="text-xl md:text-2xl  family2 text-light text-[var(--grey-1)]">
             {menus[0]?.description}
@@ -53,7 +53,7 @@ export default function SingleTakout() {
               className=""
             >
               <button className="h-[65px] w-[200px] rounded-[40px] overflow-hidden text-lg uppercase">
-                <Button bgColor={"rgb(255,255,255)"}  text={"View This Menu"} />
+                <Button bgColor={"rgb(255,255,255)"} text={"View This Menu"} />
               </button>
             </Link>
           </div>

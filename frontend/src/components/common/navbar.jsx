@@ -133,13 +133,13 @@ const Navbar = () => {
                             <img
                               src={currentUser?.image}
                               alt=""
-                              className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
+                              className="w-12 lg:w-14 h-12 lg:h-14 rounded-full"
                             />
                           ) : (
                             <img
                               src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                               alt=""
-                              className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
+                              className="w-12 lg:w-14 h-12 lg:h-14 rounded-full"
                             />
                           )}
                           <h4 className="text-base text-dark font-bold family1">
@@ -228,7 +228,7 @@ const Navbar = () => {
                         <img
                           src={currentUser?.image}
                           alt=""
-                          className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                          className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
                         />
                       ) : currentUser?.username ? (
                         // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
@@ -237,13 +237,13 @@ const Navbar = () => {
                         <img
                           src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                           alt=""
-                          className="w-10 lg:w-12 h-10 lg:h-12 rounded-full"
+                          className="w-10 lg:w-16 h-10 lg:h-16 rounded-full"
                         />
                       ) : (
                         <img
                           src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                           alt=""
-                          className="w-10 lg:w-12 h-10 lg:h-12 rounded-full"
+                          className="w-10 lg:w-16 h-10 lg:h-16 rounded-full"
                         />
                       )}
                       {/* {currentUser && (
@@ -389,7 +389,7 @@ export const ProfileDropdownStyles = styled.div`
     visibility: visible;
   }
   .profile_dropdown {
-    width: 250px;
+    width: 220px;
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s;
