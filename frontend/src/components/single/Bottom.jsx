@@ -124,7 +124,7 @@ export default function Bottom() {
                     />
                   </div>
                   <div className="flex w-full flex-col gap-4">
-                    <div className="flex items-center justify-between w-full">
+                    <div className="flex gap-8 items-center justify-between w-full">
                       <h4 className="text-4xl group-hover:text-[var(--primary)] family3">
                         {data?.title}
                       </h4>
@@ -133,7 +133,7 @@ export default function Bottom() {
                       </h4>
                     </div>
                     <p className="text-lg leading-[1.5] family4">
-                      {data?.description}
+                      {data?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                     </p>
                   </div>
                 </Link>

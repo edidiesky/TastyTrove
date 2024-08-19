@@ -49,7 +49,7 @@ const Widget = () => {
               gridTemplateColumns: "1fr 50px",
             }}
             className={`${
-              index === 0 ? "bg-[#000] text-[#fff]" : "bg-[#eee] text-[#000]"
+              index === 0 ? "bg-[#000] text-[#000]" : "bg-[#eee] text-[#000]"
             } p-6 family1  w-full rounded-[20px] flex-col
                cursor-pointer flex items-start justify-between shadow-sm gap-4 min-h-48 md:min-h-56`}
           >

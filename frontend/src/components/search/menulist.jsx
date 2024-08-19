@@ -83,7 +83,7 @@ const Menulist = () => {
                           />
                         </div>
                         <div className="flex w-full flex-col gap-4">
-                          <div className="flex items-center justify-between w-full">
+                          <div className="flex items-center gap-8 justify-between w-full">
                             <h4 className="text-4xl group-hover:text-[var(--primary)] family3">
                               {data?.title}
                             </h4>
