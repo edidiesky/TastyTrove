@@ -53,7 +53,7 @@ export default function Top() {
 
   return (
     <div>
-      <div className="w-full topWrapper items-start grid md:grid-cols-2">
+      <div className="w-full topWrapper items-start grid lg:grid-cols-2">
         <div className="topleft h-full">
           <img
             loading="lazy"
@@ -80,7 +80,7 @@ export default function Top() {
               {menu?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
             </h4>
             <div className="flex flex-col gap-3">
-              <p className="text-base md:text-xl text-grey family4">
+              <p className="text-base lg:text-xl text-grey family4">
                 Number of {menu?.category}
               </p>
               <div className="flex items-center gap-1">
@@ -123,7 +123,7 @@ export default function Top() {
                 />
               </button>
 
-              <span className="grid h-[50px] md:h-full rounded-[40px] grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
+              <span className="grid h-[50px] lg:h-full rounded-[40px] grid-cols-3 border border-[rgba(255,255,255,.6)] items-center justify-between">
                 <button
                   onClick={() => setCount(count - 1)}
                   disabled={count <= 1}

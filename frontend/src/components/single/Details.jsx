@@ -44,14 +44,14 @@ const DetailsContent = styled.div`
   width: 100%;
   padding: 3rem 0;
   .detop {
-    @media (max-width: 680px) {
+    @media (max-width: 880px) {
       flex-direction: column;
       align-items: flex-start;
       gap: 2rem;
     }
   }
   .flex-1 {
-    @media (max-width: 680px) {
+    @media (max-width: 880px) {
       width: 100%;
     }
   }
@@ -113,12 +113,12 @@ const DetailsContent = styled.div`
   }
   .topWrapper {
 
-    @media (max-width: 780px) {
+    @media (max-width: 980px) {
       flex-direction: column;
     }
     .topleft {
       position: relative;
-      @media (max-width: 780px) {
+      @media (max-width: 980px) {
         width: 100%;
         height: 28rem;
       }
