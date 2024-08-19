@@ -9,6 +9,7 @@ import { user } from "@/data/user";
 import io from "socket.io-client";
 import {
   Createconversation,
+  getAllSellerConversationUsers,
   GetUsersMessageConversation,
 } from "@/features/conversation/conversationReducer";
 import { clearconversation } from "@/features/conversation/conversationSlice";
@@ -20,7 +21,7 @@ const Nessage = () => {
   socketIo = socketIo.connect("http://localhost:4000");
   const dispatch = useDispatch();
   const [conversationId, setConversationId] = useState("");
-  const { users, currentUser, getallUserisLoading, userDetails, token } =
+  const { users, currentUser, userDetails, token } =
     useSelector((store) => store.auth);
   const { menu } = useSelector((store) => store.menu);
 
@@ -28,13 +29,16 @@ const Nessage = () => {
   const [tabid, setTabId] = React.useState(null);
   const [messageloading, setMessageLoading] = React.useState(false);
   const [body, setBody] = React.useState("");
-  const { conversationDetails } = useSelector((store) => store.conversation);
+  const { conversationDetails,getUsersInConversationisLoading, usersInconversation } = useSelector(
+    (store) => store.conversation
+  );
   // const conversationDetails = {
   //   id:""
   // }
   useEffect(() => {
     setMessage([]);
     dispatch(clearconversation());
+    dispatch(getAllSellerConversationUsers());
   }, []);
 
   useEffect(() => {
@@ -160,13 +164,13 @@ const Nessage = () => {
           </label> */}
         </div>
 
-        {getallUserisLoading ? (
+        {getUsersInConversationisLoading ? (
           <div className="w-full pt-6 flex justify-center">
             <Loader type={"dots"} />
           </div>
         ) : (
           <div className="w-full flex flex-col">
-            {users?.map((user, index) => {
+            {usersInconversation?.map((user, index) => {
               return (
                 <div
                   onClick={() => setTabId(user?.id)}

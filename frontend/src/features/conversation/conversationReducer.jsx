@@ -30,6 +30,33 @@ export const Createconversation = createAsyncThunk(
   }
 );
 
+export const getAllSellerConversationUsers = createAsyncThunk(
+  "getAllSellerConversationUsers",
+  async (conversationData, { rejectWithValue, getState }) => {
+    try {
+      const { auth } = getState();
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
+        config
+      );
+      return response.data.conversation;
+
+      // console.log(conversationData)
+    } catch (err) {
+      const message =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return rejectWithValue(message);
+    }
+  }
+);
 // Deelete User conversation
 export const Deleteconversation = createAsyncThunk(
   "deleteconversation",
@@ -57,7 +84,6 @@ export const Deleteconversation = createAsyncThunk(
     }
   }
 );
-
 
 // Get User conversation
 export const GetUsersMessageConversation = createAsyncThunk(

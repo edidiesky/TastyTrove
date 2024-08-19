@@ -89,6 +89,30 @@ const getUserConversation = asyncHandler(async (req, res) => {
   }
 });
 
+const getAllUserConversation = asyncHandler(async (req, res) => {
+  // get the conversation id form the req params
+  const senderuserId = req.user?.userId;
+  //  find a unique document containiung the convo id
+  const conversation = await prisma.conversations.findMany({
+    where: {
+      userIds: {
+        has: senderuserId,
+      },
+    },
+    include:{
+      users:true
+    }
+  });
+  const newConversation = conversation?.flatMap((newconversation) => {
+    const filteredUsers = newconversation?.users?.filter(
+      (user) => user?.id !== senderuserId
+    );
+    return filteredUsers;
+  });
+
+  res.status(200).json({ conversation: newConversation });
+});
+
 // GET All Gig
 //  Public
 const DeleteConversation = asyncHandler(async (req, res) => {
@@ -124,4 +148,9 @@ const DeleteConversation = asyncHandler(async (req, res) => {
     .json({ message: "Conversation has been successfully deleted" });
 });
 
-export { createConversation, getUserConversation, DeleteConversation };
+export {
+  getAllUserConversation,
+  createConversation,
+  getUserConversation,
+  DeleteConversation,
+};
