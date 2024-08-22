@@ -4,6 +4,7 @@ import {
   Deleteconversation,
   GetUsersMessageConversation,
   getAllSellerConversationUsers,
+  UserConversationChat,
 } from "./conversationReducer";
 import toast from "react-hot-toast";
 const conversation = JSON.parse(
@@ -13,6 +14,7 @@ const conversation = JSON.parse(
 // Define the initial state of the conversation using that type
 const initialState = {
   conversationDetails: null,
+  userconversationDetails: null,
 
   conversation: [],
   usersInconversation: [],
@@ -63,7 +65,25 @@ export const conversationSlice = createSlice({
       state.alertType = "danger";
       // toast.error(action.payload);
     });
+    // UserConversationChat
+    builder.addCase(UserConversationChat.pending, (state, action) => {
+      state.conversationisLoading = true;
+    });
+    builder.addCase(UserConversationChat.fulfilled, (state, action) => {
+      state.conversationisSuccess = true;
+      state.conversationisLoading = false;
+      state.userconversationDetails = action.payload;
+    });
+    builder.addCase(UserConversationChat.rejected, (state, action) => {
+      state.conversationisSuccess = false;
+      state.conversationisError = true;
+      state.conversationisLoading = false;
+      state.showAlert = true;
+      state.alertType = "danger";
+      // toast.error(action.payload);
+    });
 
+    
     builder.addCase(getAllSellerConversationUsers.pending, (state, action) => {
       state.getUsersInConversationisLoading = true;
     });

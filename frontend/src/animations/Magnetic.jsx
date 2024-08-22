@@ -47,7 +47,7 @@ const Magnetic = ({ children, bgColor }) => {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{ borderRadius: "inherit" }}
-      className="w-full overflow-hidden cursor-pointer  h-full flex items-center justify-center relative"
+      className="w-full overflow-hidden h-full flex items-center justify-center relative"
     >
       <span className="z-20"> {children}</span>
       <div

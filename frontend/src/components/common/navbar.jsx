@@ -24,10 +24,10 @@ const linkData = [
   //   title: "History",
   //   path: "restaurant/menu",
   // },
-  {
-    title: "Bulletin",
-    path: "restaurant/menu",
-  },
+  // {
+  //   title: "Bulletin",
+  //   path: "restaurant/menu",
+  // },
   {
     title: "Reservations",
     path: "restaurant/reservations",
@@ -105,16 +105,29 @@ const Navbar = () => {
             </NavLink>
           </div>
           <div className="flex justify-end items-center gap-4">
+            {!currentUser && (
+              <button
+                onClick={() => {
+                  dispatch(onLoginModal());
+                }}
+                className="h-[60px] w-[120px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
+              >
+                <Button
+                  bgColor={"#fff"}
+                  text={"Sign Up"}
+                />
+              </button>
+            )}
             {currentUser?.role !== "SELLER" && (
               <button
                 onClick={() => {
                   dispatch(onSellerModal());
                 }}
-                className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base"
+                className="h-[60px] w-[120px] rounded-[40px] overflow-hidden text-base"
               >
                 <Button
                   bgColor={"var(--primary)"}
-                  text={"Become a Seller"}
+                  text={"Sell"}
                   type={"white"}
                 />
               </button>
@@ -389,7 +402,7 @@ export const ProfileDropdownStyles = styled.div`
     visibility: visible;
   }
   .profile_dropdown {
-    width: 220px;
+    width: 240px;
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s;

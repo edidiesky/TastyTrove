@@ -55,6 +55,7 @@ export default function Top() {
     <div>
       <div className="w-full topWrapper items-start grid lg:grid-cols-2">
         <div className="topleft h-full">
+          <div className="bg-[rgba(0,0,0,.2)] z-20 absolute w-full h-full"></div>
           <img
             loading="lazy"
             src={
@@ -64,8 +65,8 @@ export default function Top() {
             }
             className="w-full z-10 h-full object-cover"
           />
-          <div className="absolute z-20 bottom-10 w-full flex items-center px-12">
-            <p className="text-3xl text-white family4">${menu?.price}</p>
+          <div className="absolute z-[200000] bottom-10 w-full flex items-center px-12">
+            <h4 className="text-5xl text-white family1">₦{menu?.price}</h4>
           </div>
         </div>
         <div className="topright">
@@ -97,7 +98,7 @@ export default function Top() {
                 </div>
               </div>
             </div>
-            <p className="text-2xl text-white family4">${menu?.price}</p>
+            <p className="text-2xl text-white family4">₦{menu?.price}</p>
             <div className="w-full gap-4 grid sm:grid-cols-2 text-start">
               <button
                 onClick={handleReservationBooking}

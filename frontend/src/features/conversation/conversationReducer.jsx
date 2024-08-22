@@ -111,3 +111,32 @@ export const GetUsersMessageConversation = createAsyncThunk(
     }
   }
 );
+
+
+export const UserConversationChat = createAsyncThunk(
+  "UserConversationChat",
+  async (receiverId, { rejectWithValue, getState }) => {
+    try {
+      const { auth } = getState();
+
+      const config = {
+        headers: {
+          authorization: `Bearer ${auth.token}`,
+        },
+      };
+      const response = await axios.get(
+        `${
+          import.meta.env.VITE_API_BASE_URLS
+        }/conversation/chat?receiverId=${receiverId}`,
+        config
+      );
+      return response.data?.conversation;
+    } catch (err) {
+      const message =
+        err.response && err.response.data.message
+          ? err.response.data.message
+          : err.message;
+      return rejectWithValue(message);
+    }
+  }
+);

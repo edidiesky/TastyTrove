@@ -93,11 +93,11 @@ const LoginModal = () => {
           </div>
           <div className="w-full sticky top-0 left-0 p-6 px-8 border-b flex items-center flex-col justify-between">
             <div className="flex flex-col">
-              <h3 className="text-3xl md:text-4xl family3">
+              <h3 className="text-2xl md:text-3xl family3">
                 {/* <AnimateText children={"TastyTrove Restaurant"} /> */}
                 TastyTrove Restaurant
               </h3>
-              <span className="block text-base text-center -mt-2 font-normal family1">
+              <span className="block text-sm text-center -mt-2 font-normal family1">
                 Login to your account
               </span>
             </div>
@@ -121,7 +121,7 @@ const LoginModal = () => {
                       htmlFor={input.label}
                       className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                     >
-                      <span className="text-dark font-bold">{input.label}</span>
+                      <span className="text-dark font-semibold">{input.label}</span>
                       <input
                         className="w-full input rounded-2xl text-dark
                            font-normal text-sm"
@@ -160,7 +160,7 @@ const LoginModal = () => {
                 </div>
               </div>
 
-              <div className="option text-dark">Or </div>
+              {/* <div className="option text-dark">Or </div>
 
               <div
                 // onClick={() => signIn("google")}
@@ -169,7 +169,7 @@ const LoginModal = () => {
               >
                 <FcGoogle fontSize={"24px"} />
                 <AnimateText children={"Continue with Google"} />
-              </div>
+              </div> */}
 
               {/* <div className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#000] rounded-[10px] font-booking_font font-normal border border-[rgba(0,0,0,.9)]">
                 <FaGithub fontSize={"28px"} />

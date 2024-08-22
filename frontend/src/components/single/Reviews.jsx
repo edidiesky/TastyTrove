@@ -97,7 +97,23 @@ export default function Reviews() {
               );
             })}
           </div>
-          <form className="w-full flex flex-col gap-8">
+          <form
+            onSubmit={(e) => {
+              e.preventDefault();
+              if (currentUser) {
+                dispatch(CreateReview(reviewData));
+                setFormData({
+                  description: "",
+                  name: "",
+                  email: "",
+                });
+                setTab(null);
+              } else {
+                dispatch(onLoginModal());
+              }
+            }}
+            className="w-full flex flex-col gap-8"
+          >
             <div className="w-full flex flex-col gap-4">
               {ReviewInputData?.map((input, index) => {
                 return (
@@ -138,22 +154,14 @@ export default function Reviews() {
               })}
             </div>
             <button
-              disabled={createMenuReviewisLoading}
-              onClick={(e) => {
-                e.preventDefault();
-                if (currentUser) {
-                  dispatch(CreateReview(reviewData));
-                  setFormData({
-                    description: "",
-                    name: "",
-                    email: "",
-                  });
-                  setTab(null);
-                } else {
-                  dispatch(onLoginModal());
-                }
-              }}
-              className="h-[55px] w-[200px] text-sm"
+              type="submit"
+              className={`${
+                createMenuReviewisLoading ||
+                tab === null ||
+                formdata?.description === ""
+                  ? "disabled"
+                  : ""
+              }  h-[55px] w-[200px] text-sm`}
             >
               <Button
                 text={
@@ -166,7 +174,7 @@ export default function Reviews() {
                     `Submit Review`
                   )
                 }
-                bgColor={"#fff"}
+                bgColor={"var(--primary)"}
                 type={"full_dark"}
               ></Button>
             </button>
@@ -205,30 +213,32 @@ export default function Reviews() {
                           className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
                         />
                       )}
-                      <h4 className="text-lg family1 font-bold">
-                        {review?.user?.name}
-                        <span className="flex items-center gap-3">
-                          <span className="block font-normal text-sm">
-                            {moment(review?.createdAt).format("DD MMM YYYY")}
+                      <div className="flex flex-col gap-4">
+                        <h4 className="text-lg family1 font-semibold">
+                          {review?.user?.name}
+                          <span className="flex items-center gap-3">
+                            <span className="block font-normal text-xs">
+                              {moment(review?.createdAt).format("DD MMM YYYY")}
+                            </span>
+                            <span className="flex text-xs items-center">
+                              {Array(review?.review)
+                                .fill("")
+                                .map((x, index) => {
+                                  return (
+                                    <span key={index} className="">
+                                      <BsFillStarFill />
+                                    </span>
+                                  );
+                                })}
+                            </span>
                           </span>
-                          <span className="flex text-xs items-center">
-                            {Array(review?.review)
-                              .fill("")
-                              .map((x, index) => {
-                                return (
-                                  <span key={index} className="">
-                                    <BsFillStarFill />
-                                  </span>
-                                );
-                              })}
+                        </h4>
+                        <div className="w-full flex items-center gap-4">
+                          <span className="flex text-sm family1 font-normal items-center">
+                            {review?.description}
                           </span>
-                        </span>
-                      </h4>
-                    </div>
-                    <div className="w-full flex items-center gap-4">
-                      <span className="flex text-base family1 font-normal items-center">
-                        {review?.description}
-                      </span>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 );

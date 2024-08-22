@@ -10,10 +10,12 @@ import {
   getUserConversation,
   DeleteConversation,
   getAllUserConversation,
+  UserConversations,
 } from "../controllers/conversationControllers.js";
 
 router.route("").post(authMiddleware, createConversation);
 router.route("").get(authMiddleware, getAllUserConversation);
+router.route("/chat").get(authMiddleware, UserConversations);
 
 router
   .route("/:id")

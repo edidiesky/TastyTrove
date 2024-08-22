@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import io from "socket.io-client";
@@ -8,6 +8,7 @@ import { clearconversation } from "@/features/conversation/conversationSlice";
 import {
   Createconversation,
   GetUsersMessageConversation,
+  UserConversationChat,
 } from "@/features/conversation/conversationReducer";
 import { IoMdSend } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
@@ -30,28 +31,27 @@ const ChatCard = ({ active, setActive }) => {
   // const [message, setMessage] = React.useState([...messages]);
   const [body, setBody] = React.useState("");
 
-  const { conversationDetails } = useSelector((store) => store.conversation);
+  const { conversationDetails, userconversationDetails } = useSelector(
+    (store) => store.conversation
+  );
   // const conversationDetails = {
   //   id:""
   // }
-  useEffect(() => {
+  useMemo(() => {
     setMessage([]);
     dispatch(clearconversation());
-    dispatch(Createconversation(menu?.user?.id));
+    dispatch(UserConversationChat(menu?.user?.id));
   }, []);
 
-  // useEffect(() => {
-  //   if (menu?.user?.id !== "" && !conversationDetails) {
-  //     dispatch(Createconversation(menu?.user?.id));
-  //   }
-  // }, []);
+  console.log(userconversationDetails);
 
-  // get the conversation
   useEffect(() => {
-    if (conversationDetails) {
-      dispatch(GetUsersMessageConversation(conversationDetails?.id));
-    }
-  }, []);
+     if (userconversationDetails === null) {
+       dispatch(Createconversation(menu?.user?.id));
+     } else {
+       dispatch(GetUsersMessageConversation(conversationDetails?.id));
+     }
+  }, [userconversationDetails,dispatch]);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
@@ -76,13 +76,13 @@ const ChatCard = ({ active, setActive }) => {
     }
   };
 
-  useEffect(() => {
-    if (conversationDetails) {
-      handleSingleMessageDetails();
-    } else {
-      setMessage([]);
-    }
-  }, [setMessage, conversationDetails]);
+  // useEffect(() => {
+  //   if (conversationDetails) {
+  //     handleSingleMessageDetails();
+  //   } else {
+  //     setMessage([]);
+  //   }
+  // }, [setMessage, conversationDetails]);
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
