@@ -1,8 +1,6 @@
-describe("Tetsing the menu review form fields", () => {
+describe("Testing the menu review form fields", () => {
   beforeEach(() => {
-    cy.visit(
-      "/restaurant/takeout/669a7fb42dfb3b487c102f96?category=Main%20Course"
-    );
+    cy.visit("/restaurant/takeout/669a7fb42dfb3b487c102f9e?category=desserts");
   });
   //  the review component should be mounted
   it("Should Test Subscribe form", () => {
@@ -15,7 +13,7 @@ describe("Tetsing the menu review form fields", () => {
     cy.getDataTest("review_button").should("be.disabled");
   });
   // fill the input fields and select the review tab and check that the button is not disabled
-  it.only("Should fill the input fields and select the review tab and the button should not be diabled", () => {
+  it("Should fill the input fields and select the review tab and the button should not be diabled", () => {
     cy.wait(4000);
     cy.getDataTest("review_tab_4").click();
     cy.getDataTest("description").type("A nice meal");
@@ -34,6 +32,45 @@ describe("Tetsing the menu review form fields", () => {
     cy.wait(4000);
     cy.getDataTest("description").type("A nice meal");
     cy.getDataTest("review_button").should("be.disabled");
+  });
+  // Should display the login modal when the user does not exists
+  it(" Should display the login modal when the user does not exists", () => {
+    cy.wait(4000);
+    cy.getDataTest("review_tab_4").click();
+    cy.getDataTest("description").type("A nice meal");
+    cy.getDataTest("review_button").click();
+    cy.getDataTest("loginmodal").should("be.visible");
+  });
+
+  // Should display the login modal when the user does not exists and sign up
+  it("Should display the login modal when the user does not exists and sign up", () => {
+    cy.wait(4000);
+    cy.getDataTest("review_tab_4").click();
+    cy.getDataTest("description").type("A nice meal");
+    cy.getDataTest("review_button").click();
+    cy.wait(3000);
+    cy.getDataTest("loginmodal_button").click();
+    cy.wait(2000);
+    cy.getDataTest("loginmodal").should("not.exist");
+  });
+  // should fill in the form, sign up, submit the review form, and the review list items should show
+
+  it.only("Should fill in the form, sign up, submit the review form, and the review list items should show", () => {
+    cy.wait(4000);
+    cy.getDataTest("review_tab_4").click();
+    cy.getDataTest("description").type("A nice meal");
+    cy.getDataTest("review_button").click();
+    cy.wait(3000);
+    cy.getDataTest("loginmodal_button").click();
+    cy.wait(2000);
+     cy.getDataTest("review_tab_4").click();
+     cy.getDataTest("description").type("A nice meal");
+    cy.getDataTest("review_button").click();
+    cy.wait(4000);
+    // cy.getDataTest("review_list_content").with(() => {
+    //   // cy.getDataTest(`[data-test^="review_list_content"]`);
+    // });
+    cy.getDataTest("review_list_content").should("exist");
   });
   // submit the form
   // check that the review length is more than 1

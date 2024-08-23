@@ -190,7 +190,10 @@ export default function Reviews() {
       </div>
       {/* reviews on the product */}
       {reviews?.length !== 0 && (
-        <div className="w-full flex flex-col gap-8">
+        <div
+          data-test="review_list_container"
+          className="w-full flex flex-col gap-8"
+        >
           <h3
             className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
           after:rounded-lg after:absolute text-4xl uppercase text-light text-dark"
@@ -202,10 +205,17 @@ export default function Reviews() {
               Your email address will not be published. Required fields are
               marked *
             </h4>
-            <div className="w-full grid lg:grid-cols-2 gap-8">
+            <div
+              data-test={`review_list_content`}
+              className="w-full grid lg:grid-cols-2 gap-8"
+            >
               {reviews?.map((review, index) => {
                 return (
-                  <div key={index} className="w-full flex flex-col gap-4">
+                  <div
+                    data-test={`review_list_item_${index}`}
+                    key={index}
+                    className="w-full flex flex-col gap-4"
+                  >
                     <div className="w-full flex items-center gap-4">
                       {review?.user?.image ? (
                         <img

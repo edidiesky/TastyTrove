@@ -82,7 +82,8 @@ const LoginModal = () => {
         initial="initial"
         animate={loginmodal ? "enter" : "exit"}
         exit="exit"
-        className="guestModalCard"
+        data-test="loginmodal"
+        className="LoginModalCard"
       >
         <div className="w-full mx-auto overflow-hidden flex flex-col">
           <div
@@ -121,7 +122,9 @@ const LoginModal = () => {
                       htmlFor={input.label}
                       className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                     >
-                      <span className="text-dark font-semibold">{input.label}</span>
+                      <span className="text-dark font-semibold">
+                        {input.label}
+                      </span>
                       <input
                         className="w-full input rounded-2xl text-dark
                            font-normal text-sm"
@@ -139,6 +142,7 @@ const LoginModal = () => {
               </div>
               <div className="w-full flex items-center justify-center flex-col gap-3">
                 <button
+                  data-test="loginmodal_button"
                   type="submit"
                   className="p-4 px-8 text-[#fff] hover:opacity-[.8] flex items-center justify-center w-full cursor-pointer 
                    bg-[#000] rounded-[40px] family1 font-bold"
@@ -220,7 +224,7 @@ const LoginModalStyles = styled(motion.div)`
       transform: translateY(-50%);
     }
   }
-  .guestModalCard {
+  .LoginModalCard {
     max-width: 400px;
     min-width: 400px;
     display: flex;
