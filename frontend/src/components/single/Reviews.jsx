@@ -58,7 +58,7 @@ export default function Reviews() {
   };
 
   return (
-    <div className="w-full flex flex-col gap-12">
+    <div data-testid='review_component' className="w-full flex flex-col gap-12">
       <div className="w-full flex flex-col gap-8">
         <h3
           className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
