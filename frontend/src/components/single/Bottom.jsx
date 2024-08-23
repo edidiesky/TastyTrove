@@ -92,10 +92,10 @@ export default function Bottom() {
               <div className="w-full mt-3 flex items-center gap-4">
                 <button
                   onClick={() => setActive(true)}
-                  className="h-[55px] w-[200px] text-sm"
+                  className="h-[55px] w-[170px] text-sm"
                 >
                   <Button
-                    text={`Message ${menu?.user?.name}`}
+                    text={`Chat with seller`}
                     bgColor={"#000"}
                     type={"dark"}
                   ></Button>

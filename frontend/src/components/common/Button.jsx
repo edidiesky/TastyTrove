@@ -41,7 +41,7 @@ const Button = ({ text, bgColor, color, type }) => {
     <button
       style={{ transition: "all .6s" }}
       className={`w-full rounded-[40px]
-              text-dark h-full family1 hover:text-[#000] text-[#fff] text-light`}
+              text-dark h-full family1 bg-[var(--primary)] hover:text-[#000] text-[#fff] text-light`}
     >
       <Magnetic bgColor={bgColor}> {text}</Magnetic>
     </button>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "../common/Footer";
 import { useDispatch } from "react-redux";
 import { GetUserReservations } from "@/features/reservation/reservationReducer";
@@ -19,13 +19,16 @@ const HomeIndex = () => {
           "https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/hero12x.jpg"
         }
       />
-<Main/>
+      <Main />
       <Footer />
     </div>
   );
 };
 
-const Main = ()=>{
+const Main = () => {
+
+  const [firstname, setFirstName] = useState('');
+  const [lastname, setLastName] = useState('');
   return (
     <div className="w-full py-24">
       <div className="w-85 auto grid items-start gap-12 grid-cols-custom_2">
@@ -61,8 +64,28 @@ const Main = ()=>{
               htmlFor="name"
               className="flex flex-col gap-2 text-lg family4"
             >
-              Your Name
-              <input type="text" className="w-full" />
+              First Name
+              <input
+                type="text"
+                name="firstname"
+                value={firstname}
+                onChange={(e) => setFirstName(e.target.value)}
+                className="w-full"
+              />
+            </label>
+
+            <label
+              htmlFor="name"
+              className="flex flex-col gap-2 text-lg family4"
+            >
+              Last Name
+              <input
+                type="text"
+                name="lastname"
+                value={lastname}
+                onChange={(e) => setLastName(e.target.value)}
+                className="w-full"
+              />
             </label>
 
             <label
@@ -109,6 +132,8 @@ const Main = ()=>{
       </div>
     </div>
   );
-}
+};
+
+
 
 export default HomeIndex;

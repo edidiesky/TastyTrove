@@ -61,7 +61,7 @@ const Navbar = () => {
     <>
       <div className="py-12 z-[50000] relative flex items-center justify-center">
         <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
-        <div className="w-90 auto flex z-[30] items-center gap-12 justify-between">
+        <div className="w-90 auto md:px-8 flex z-[30] items-center gap-12 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">
             <h3 className="text-3xl hidden md:block md:text-4xl text-white family3">
               <AnimateText children={"TastyTrove Restaurant"} />
@@ -110,7 +110,7 @@ const Navbar = () => {
                 onClick={() => {
                   dispatch(onLoginModal());
                 }}
-                className="h-[60px] w-[120px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
+                className="h-[55px] w-[120px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
               >
                 <Button
                   bgColor={"#fff"}
@@ -123,11 +123,11 @@ const Navbar = () => {
                 onClick={() => {
                   dispatch(onSellerModal());
                 }}
-                className="h-[60px] w-[120px] rounded-[40px] overflow-hidden text-base"
+                className="h-[55px] w-[120px] md:flex hidden rounded-[40px] overflow-hidden text-base"
               >
                 <Button
                   bgColor={"var(--primary)"}
-                  text={"Sell"}
+                  text={"Sell Now"}
                   type={"white"}
                 />
               </button>
