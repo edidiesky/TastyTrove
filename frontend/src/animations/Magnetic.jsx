@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
 // animattions to staggerText
-const Magnetic = ({ children, bgColor }) => {
+const Magnetic = ({ children, bgColor, disabled }) => {
   const circleRef = useRef(null);
   const timelineRef = useRef(null);
   let timelineId = null;
@@ -50,11 +50,13 @@ const Magnetic = ({ children, bgColor }) => {
       className="w-full overflow-hidden h-full flex items-center justify-center relative"
     >
       <span className="z-20"> {children}</span>
-      <div
-        ref={circleRef}
-        style={{ background: `${bgColor ? bgColor : "#3856E0"}` }}
-        className="absolute z-10 rounded-[50%] top-[100%] w-full h-[150%] "
-      ></div>
+      {!disabled && (
+        <div
+          ref={circleRef}
+          style={{ background: `${bgColor ? bgColor : "#3856E0"}` }}
+          className="absolute z-10 rounded-[50%] top-[100%] w-full h-[150%] "
+        ></div>
+      )}
     </div>
   );
 };

@@ -3,8 +3,6 @@ import React, { useEffect, useState } from "react";
 import { BiMinus, BiPlus } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import toast from "react-hot-toast";
 import { onLoginModal } from "@/features/modals/modalSlice";
 import Loader from "../loader";
 import { CreateCart } from "@/features/cart/cartReducer";
@@ -13,8 +11,6 @@ import Button from "../common/Button";
 
 export default function Top() {
   const { menu, getallMenuisLoading } = useSelector((store) => store.menu);
-  const [bookingloading, setBookingLoading] = useState(false);
-  const [bookingdata, setBookingData] = useState(null);
   const { currentUser, token } = useSelector((store) => store.auth);
   const { createCartisSuccess, cartDetails, createCartisLoading } = useSelector(
     (store) => store.cart
@@ -98,7 +94,7 @@ export default function Top() {
                 </div>
               </div>
             </div>
-            <p className="text-2xl text-white family4">₦{menu?.price}</p>
+            <h4 className="text-3xl md:text-4xl text-white family4">₦{menu?.price}</h4>
             <div className="w-full gap-4 grid sm:grid-cols-2 text-start">
               <button
                 onClick={handleReservationBooking}

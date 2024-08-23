@@ -104,12 +104,12 @@
   object-fit: cover !important;
 }
 
-button.disabled {
+button:disabled {
 
   z-index: 500;
   position: relative;
 }
-button.disabled::after {
+button:disabled::after {
   content: "";
   position: absolute;
   background-color: rgba(0,0,0,.4);

@@ -97,23 +97,7 @@ export default function Reviews() {
               );
             })}
           </div>
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              if (currentUser) {
-                dispatch(CreateReview(reviewData));
-                setFormData({
-                  description: "",
-                  name: "",
-                  email: "",
-                });
-                setTab(null);
-              } else {
-                dispatch(onLoginModal());
-              }
-            }}
-            className="w-full flex flex-col gap-8"
-          >
+          <form className="w-full flex flex-col gap-8">
             <div className="w-full flex flex-col gap-4">
               {ReviewInputData?.map((input, index) => {
                 return (
@@ -154,16 +138,34 @@ export default function Reviews() {
               })}
             </div>
             <button
-              type="submit"
-              className={`${
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentUser) {
+                  dispatch(CreateReview(reviewData));
+                  setFormData({
+                    description: "",
+                    name: "",
+                    email: "",
+                  });
+                  setTab(null);
+                } else {
+                  dispatch(onLoginModal());
+                }
+              }}
+              disabled={
                 createMenuReviewisLoading ||
                 tab === null ||
                 formdata?.description === ""
-                  ? "disabled"
-                  : ""
-              }  h-[55px] w-[200px] text-sm`}
+              }
+              type="submit"
+              className={` h-[55px] w-[200px] text-sm`}
             >
               <Button
+                disabled={
+                  createMenuReviewisLoading ||
+                  tab === null ||
+                  formdata?.description === ""
+                }
                 text={
                   createMenuReviewisLoading ? (
                     <div className="flex justify-center items-center gap-2">
