@@ -2,6 +2,8 @@
 
 TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users to explore various menus, place orders, and leave reviews. Sellers are given the priviledges when authenticated to see foods, manage food items, see reviews, receive payment, see list of customers, and lastly see how their products(food items) has been purchased over a period of time
 
+![Project Screenshot](/Tasttrove_1.png)
+
 ## Table of Contents
 
 - [Technologies Used](#technologies-used)
@@ -171,4 +173,4 @@ The project is hosted on Vercel. You can access it [here](https://tastytrove.ver
 For any questions or suggestions, feel free to reach out:
 
 - Email: [essienedidiong1000@gmail.com](mailto:essienedidiong1000@gmail.com)
-- LinkedIn: [Your LinkedIn Profile](www.linkedin.com/in/victorezekielessien)
+- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/victorezekielessien)
