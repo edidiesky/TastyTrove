@@ -10,8 +10,6 @@ TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users
 - [Backend Overview](#backend-overview)
 - [Frontend Overview](#frontend-overview)
 - [Hosting](#hosting)
-- [Contributing](#contributing)
-- [License](#license)
 - [Contact](#contact)
 
 ## Technologies Used
@@ -47,7 +45,8 @@ TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users
    cd project-name
    ```
 2. ```bash
-    cd backend
+   cd backend
+   npm install
    ```
 
 3. ```bash
@@ -79,7 +78,7 @@ Go to the root directory and install the package.json file. This will run both t
 
 ```bash
 
-   npm install
+npm install
 npm run dev
 ```
 
@@ -88,3 +87,88 @@ Open your browser and navigate to
 ```bash
 http://localhost:5173
 ```
+
+## Backend Overview
+
+### Prisma Setup
+
+Your Prisma schema is configured to use MongoDB as the database provider. Here’s the basic setup:
+
+````prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+
+### Controllers and Routes
+
+Here's an example of how you might set up a route to get all menu items:
+
+```javascript
+import asyncHandler from "express-async-handler";
+import prisma from "../prisma/index.js";
+
+const GetAllMenu = asyncHandler(async (req, res) => {
+  const Menus = await prisma.menu.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+    include: {
+      user: true,
+    },
+  });
+  res.json(Menus);
+});
+````
+
+### Database Schema
+
+The main models in the schema are `User`, `Menu`, `Review`, etc. Here's an example of the `User` model:
+
+```prisma
+model User {
+  id              String   @id @default(auto()) @map("_id") @db.ObjectId
+  name            String
+  username        String
+  email           String?  @unique
+  emailVerified   DateTime?
+  image           String?
+  country         String?
+  city            String?
+  role            RoleStatus @default(USER)
+  hashedPassword  String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+```
+
+## Frontend Overview
+
+### Components
+
+The main components include `Header`, `MenuList`, `ReviewSection`, etc. Each component resides in the `src/components` directory.
+
+### Testing with Cypress
+
+I’ve written end-to-end tests using Cypress. To run the tests:
+
+```bash
+cd frontend
+npx cypress open
+```
+
+## Hosting
+
+The project is hosted on Vercel. You can access it [here](https://tastytrove.vercel.app/).
+
+## Contact
+
+For any questions or suggestions, feel free to reach out:
+
+- Email: [essienedidiong1000@gmail.com](mailto:essienedidiong1000@gmail.com)
+- LinkedIn: [Your LinkedIn Profile](www.linkedin.com/in/victorezekielessien)
