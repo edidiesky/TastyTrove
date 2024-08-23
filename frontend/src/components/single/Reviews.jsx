@@ -58,9 +58,10 @@ export default function Reviews() {
   };
 
   return (
-    <div data-testid='review_component' className="w-full flex flex-col gap-12">
+    <div data-testid="review_component" className="w-full flex flex-col gap-12">
       <div className="w-full flex flex-col gap-8">
         <h3
+          data-test="Review_header"
           className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
           after:rounded-lg after:absolute text-5xl uppercase text-light text-dark"
         >
@@ -75,6 +76,7 @@ export default function Reviews() {
             {reviewTab.map((data, index) => {
               return (
                 <span
+                  data-test={`review_tab_${data?.value}`}
                   onClick={() => setTab(data?.value)}
                   key={index}
                   className={`p-3 ${
@@ -110,6 +112,7 @@ export default function Reviews() {
                         {input.label}
                         <textarea
                           name={input?.name}
+                          data-test={`${input?.name}`}
                           id={input.label}
                           value={formdata[input.name]}
                           type={input.type}
@@ -124,6 +127,7 @@ export default function Reviews() {
                       >
                         {input.label}
                         <input
+                          data-test={`${input?.name}`}
                           name={input?.name}
                           id={input.label}
                           value={formdata[input.name]}
@@ -138,6 +142,7 @@ export default function Reviews() {
               })}
             </div>
             <button
+              data-test="review_button"
               onClick={(e) => {
                 e.preventDefault();
                 if (currentUser) {
