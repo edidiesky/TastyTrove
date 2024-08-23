@@ -50,13 +50,11 @@ const Magnetic = ({ children, bgColor, disabled }) => {
       className="w-full overflow-hidden h-full flex items-center justify-center relative"
     >
       <span className="z-20"> {children}</span>
-      {!disabled && (
-        <div
-          ref={circleRef}
-          style={{ background: `${bgColor ? bgColor : "#3856E0"}` }}
-          className="absolute z-10 rounded-[50%] top-[100%] w-full h-[150%] "
-        ></div>
-      )}
+      <div
+        ref={circleRef}
+        style={{ background: `${bgColor ? bgColor : "#3856E0"}` }}
+        className="absolute z-10 rounded-[50%] top-[100%] w-full h-[150%] "
+      ></div>
     </div>
   );
 };
