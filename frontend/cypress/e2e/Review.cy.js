@@ -62,14 +62,16 @@ describe("Testing the menu review form fields", () => {
     cy.getDataTest("review_button").click();
     cy.wait(3000);
     cy.getDataTest("loginmodal_button").click();
-    cy.wait(2000);
-     cy.getDataTest("review_tab_4").click();
-     cy.getDataTest("description").type("A nice meal");
-    cy.getDataTest("review_button").click();
     cy.wait(4000);
-    // cy.getDataTest("review_list_content").with(() => {
-    //   // cy.getDataTest(`[data-test^="review_list_content"]`);
-    // });
+    cy.getDataTest("review_tab_4").click();
+    cy.getDataTest("description").type("A nice meal");
+    cy.getDataTest("review_button").click();
+    // cy.wait(10000);
+    cy.intercept("POST", "/api/v1/review").as("createReview");
+    cy.wait("@createReview");
+    // // cy.getDataTest("review_list_content").with(() => {
+    // //   // cy.getDataTest(`[data-test^="review_list_content"]`);
+    // // });
     cy.getDataTest("review_list_content").should("exist");
   });
   // submit the form
