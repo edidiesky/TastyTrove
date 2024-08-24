@@ -173,4 +173,4 @@ The project is hosted on Vercel. You can access it [here](https://tastytrove.ver
 For any questions or suggestions, feel free to reach out:
 
 - Email: [essienedidiong1000@gmail.com](mailto:essienedidiong1000@gmail.com)
-- LinkedIn: [Your LinkedIn Profile](https://www.linkedin.com/in/victorezekielessien)
+- LinkedIn: [My LinkedIn Profile](https://www.linkedin.com/in/victorezekielessien)
