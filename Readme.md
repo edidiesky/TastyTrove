@@ -129,7 +129,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
 
 ### Database Schema
 
-The main models in the schema are `User`, `Menu`, `Review`, etc. Here's an example of the `User` model:
+The main models in the schema are `User`, `Menu`, `Review`, `Payment`,`Conversation`,`Message`, etc. Here's an example of the `User` model:
 
 ```prisma
 model User {
@@ -152,7 +152,7 @@ model User {
 
 ### Components
 
-The main components include `Header`, `MenuList`, `ReviewSection`, etc. Each component resides in the `src/components` directory.
+The main components include `home`, `cart`, `singleMenu`, etc. Each component resides in the `src/components` directory.
 
 ### Testing with Cypress
 
