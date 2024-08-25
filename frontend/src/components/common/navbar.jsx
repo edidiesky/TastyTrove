@@ -171,29 +171,20 @@ const Navbar = () => {
                               to={"/dashboard"}
                               className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                              <LayoutDashboard
-                                width={"20px"}
-                                height={"20px"}
-                                fontSize={"10px"}
-                              />{" "}
+                         
                               Dashboard
                             </Link>
                             <Link
                               to={"/dashboard/settings"}
                               className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                              <FaRegUser fontSize={"15px"} /> Profile
+                  Profile
                             </Link>
                             <div
                               onClick={() => handleLogOut()}
                               className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                              <LogOut
-                                color="var(--red)"
-                                width={"20px"}
-                                height={"20px"}
-                                fontSize={"10px"}
-                              />{" "}
+                       
                               Log Out
                             </div>
                           </div>
