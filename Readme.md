@@ -29,7 +29,6 @@ TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users
 - **Payment Integration:** Support for multiple payment statuses.
 - **Review System:** Users can leave reviews and ratings.
 - **Social System:** Users can chat with Sellers.
-- **Social System:** Users can chat with Sellers.
 - **Notification System:** Sellers can receive notifications for every purchase .
 
 ## Getting Started
