@@ -83,9 +83,9 @@ const LoginModal = () => {
         animate={loginmodal ? "enter" : "exit"}
         exit="exit"
         data-test="loginmodal"
-        className="LoginModalCard grid grid-cols-2"
+        className="LoginModalCard grid md:grid-cols-2"
       >
-        <div className="w-full h-full relative">
+        <div className="w-full h-full relative md:block hidden">
           <div className="gradient2 absolute w-full h-full"></div>
           <Image
             alt=""
@@ -242,7 +242,7 @@ const LoginModalStyles = styled(motion.div)`
     height: 500px;
     align-items: center;
     background: #fff;
-    gap: 2rem;
+    /* gap: 2rem; */
     border-radius: 15px;
     overflow: hidden;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);

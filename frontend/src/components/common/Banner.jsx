@@ -6,7 +6,7 @@ export default function Banner({ type, text, subtext, image }) {
   if (type === "type") {
     return (
       <BannerContent className="image1">
-        <div className="w-85 bannerHeader auto flex items-center justify-center flex-col gap-4">
+        <div className="w-[89%] mx-auto max-w-custom bannerHeader auto flex items-center justify-center flex-col gap-4">
           <h4
             className="text-lg text-light uppercase text-white family1"
             style={{ letterSpacing: "1.5px", fontWeight: "normal" }}
@@ -33,7 +33,7 @@ export default function Banner({ type, text, subtext, image }) {
   }
   return (
     <BannerContent className="image1">
-      <div className="w-85 bannerHeader auto flex items-center justify-center flex-col gap-4">
+      <div className="w-[89%] mx-auto max-w-custom bannerHeader auto flex items-center justify-center flex-col gap-4">
         <h4
           className="text-lg text-light uppercase text-white family1"
           style={{ letterSpacing: "1.5px", fontWeight: "normal" }}
