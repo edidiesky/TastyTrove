@@ -86,7 +86,7 @@ const LoginModal = () => {
         className="LoginModalCard grid md:grid-cols-2"
       >
         <div className="w-full h-full relative md:block hidden">
-          <div className="gradient2 absolute w-full h-full"></div>
+          <div className="bg-[rgba(0,0,0,.5)] z-20 absolute w-full h-full"></div>
           <Image
             alt=""
             loading="lazy"
@@ -155,7 +155,7 @@ const LoginModal = () => {
                 <button
                   data-test="loginmodal_button"
                   type="submit"
-                  className="p-4 px-8 text-[#fff] hover:opacity-[.8] flex items-center justify-center w-full cursor-pointer 
+                  className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
                    bg-[#000] rounded-[40px] family1 font-bold"
                 >
                   <AnimateText children={"Sign In"} />
@@ -247,7 +247,7 @@ const LoginModalStyles = styled(motion.div)`
     overflow: hidden;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
-    @media (max-width: 580px) {
+    @media (max-width: 980px) {
       max-width: 90%;
       min-width: 90%;
     }

@@ -91,7 +91,7 @@ const RegisterModal = () => {
         className="guestModalCard grid md:grid-cols-2"
       >
         <div className="w-full h-full relative md:block hidden">
-          <div className="gradient2 absolute w-full h-full"></div>
+          <div className="bg-[rgba(0,0,0,.5)] z-20 absolute w-full h-full"></div>
           <Image
             alt=""
             loading="lazy"
@@ -149,7 +149,7 @@ const RegisterModal = () => {
                 <div className="w-full flex items-center justify-center flex-col gap-3">
                   <button
                     type="submit"
-                    className="p-4 px-8 flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
+                    className="p-4 hover:opacity-[.5] px-8 flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
                   >
                     <AnimateText children={"Sign Up"} />
                   </button>
@@ -233,7 +233,7 @@ const RegisterModalStyles = styled(motion.div)`
     border-radius: 20px;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
-    @media (max-width: 580px) {
+    @media (max-width: 980px) {
       max-width: 90%;
       min-width: 90%;
     }

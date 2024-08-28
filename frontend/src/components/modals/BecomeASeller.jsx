@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "../home/loader";
 import { SellerFormInputData } from "@/constants/data/formdata";
 import { BecomingASeller } from "@/features/auth/authReducer";
+import Image from "../common/Image";
 
 const ModalVariants = {
   initial: {
@@ -39,7 +40,7 @@ const BecomeASellerModal = () => {
   };
   const [image, setImage] = useState("");
 
-  const {  becomeASellerisSuccess,  becomeASellerisLoading } = useSelector(
+  const { becomeASellerisSuccess, becomeASellerisLoading } = useSelector(
     (store) => store.auth
   );
   const { sellermodal } = useSelector((store) => store.modal);
@@ -72,10 +73,10 @@ const BecomeASellerModal = () => {
   };
 
   useEffect(() => {
-    if ( becomeASellerisSuccess) {
+    if (becomeASellerisSuccess) {
       dispatch(offSellerModal());
     }
-  }, [ becomeASellerisSuccess]);
+  }, [becomeASellerisSuccess]);
 
   const handleFileUpload = async (e) => {
     // get the file
@@ -121,17 +122,28 @@ const BecomeASellerModal = () => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      { becomeASellerisLoading && <Loader />}
+      {becomeASellerisLoading && <Loader />}
       {uploading && <Loader />}
       <motion.div
         variants={ModalVariants}
         initial="initial"
         animate={sellermodal ? "enter" : "exit"}
         exit="exit"
-        className="guestModalCard"
+        className="guestModalCard grid md:grid-cols-2"
       >
-        <div className="w-full mx-auto h-[550px] flex flex-col">
-          <div className="w-full sticky top-0 left-0 p-8 px-8 border-b flex border-[rgba(0,0,0,.2)] items-center justify-between">
+        <div className="w-full h-full relative md:block hidden">
+          <div className="bg-[rgba(0,0,0,.5)] z-20 absolute w-full h-full"></div>
+          <Image
+            alt=""
+            loading="lazy"
+            src={
+              "https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/hero12x.jpg"
+            }
+            className=""
+          />
+        </div>
+        <div className="w-full mx-auto flex flex-col">
+          <div className="w-full sticky top-0 left-0 p-4 px-4 border-b flex border-[rgba(0,0,0,.2)] items-center justify-between">
             <h3 className="text-2xl md:text-3xl font-bold family1">
               Become a Seller
               <span className="block text-sm font-normal family1">
@@ -145,27 +157,30 @@ const BecomeASellerModal = () => {
               <RxCross2 />
             </div>
           </div>
-          <div className="w-full h-[400px] overflow-auto justify-center pb-6 flex">
+          <div className="w-full h-[500px] overflow-auto justify-center flex">
             <form
               onSubmit={handleFormSubmision}
-              className="w-[90%] mx-auto  p-4 md:px-8 pb-4 flex flex-col gap-8"
+              className="w-[90%] mx-auto  p-4 pb-4 flex flex-col gap-8"
             >
-              <div className="w-24 h-24 relative">
+              <div className="w-20 h-20 relative">
                 {image !== "" ? (
                   <img
                     src={image}
                     alt=""
-                    className="w-24 object-cover h-24 rounded-full"
+                    className="w-20 object-cover h-20 rounded-full"
                   />
                 ) : (
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-24 object-cover h-24 rounded-full"
+                    className="w-20 object-cover h-20 rounded-full"
                   />
                 )}
                 <label htmlFor="upload">
-                  <div className="absolute cursor-pointer text-white text-2xl rounded-full border-4 border-[rgba(255,255,255,1)] flex items-center justify-center w-12 h-12 bottom-5 -right-5 bg-[#5542F6]">
+                  <div
+                    className="absolute cursor-pointer text-white text-lg rounded-full border-4 border-[rgba(255,255,255,1)] 
+                  flex items-center justify-center w-10 h-10 bottom-5 -right-5 bg-[#5542F6]"
+                  >
                     <BiCamera />
                     <input
                       type="file"
@@ -190,7 +205,7 @@ const BecomeASellerModal = () => {
                     >
                       <span className="text-dark ">{input.label}</span>
                       <input
-                        className="w-full input rounded-2xl text-dark
+                        className="w-full input rounded-md text-dark
                            font-normal text-sm"
                         required={true}
                         name={input?.name}
@@ -208,7 +223,7 @@ const BecomeASellerModal = () => {
               <div className="w-full flex mt-4 items-center justify-center flex-col gap-3">
                 <button
                   type="submit"
-                  className="p-4 px-8 flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
+                  className="p-4 px-8 hover:opacity-[.5] flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
                 >
                   <AnimateText children={"Become a Seller"} />
                 </button>
@@ -259,18 +274,16 @@ const SellerModalStyles = styled(motion.div)`
     }
   }
   .guestModalCard {
-    max-width: 600px;
-    min-width: 600px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    max-width: 1000px;
+    min-width: 900px;
+    overflow: hidden;
     background: #fff;
-    gap: 2rem;
-    border-radius: 20px;
+    /* gap: 2rem; */
+    border-radius: 10px;
+    min-height: 90vh;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
-    @media (max-width: 580px) {
+    @media (max-width: 980px) {
       max-width: 95%;
       min-width: 95%;
     }
