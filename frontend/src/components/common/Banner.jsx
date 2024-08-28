@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import Image from "./Image";
 
 export default function Banner({ type, text, subtext, image }) {
   if (type === "type") {
@@ -17,7 +18,7 @@ export default function Banner({ type, text, subtext, image }) {
           </h1>
         </div>
         <div className="gradient2"></div>
-        <img
+        <Image
           alt=""
           loading="lazy"
           src={
@@ -44,7 +45,7 @@ export default function Banner({ type, text, subtext, image }) {
         </h1>
       </div>
       <div className="gradient2"></div>
-      <img
+      <Image
         alt=""
         loading="lazy"
         src={

@@ -102,7 +102,8 @@ const RegisterModal = () => {
               <RxCross2 />
             </div>
           </div>
-          <div className="w-full overflow-auto h-[400px] pb-6 flex">
+         <div className="w-full overflow-hidden">
+           <div className="w-full overflow-auto h-[600px] pb-6 flex">
             <form
               onSubmit={handleFormSubmision}
               className="w-[90%] mx-auto p-4 md:px-8 pb-4 flex flex-col gap-2"
@@ -116,7 +117,7 @@ const RegisterModal = () => {
                   >
                     <span className="text-dark ">{input.label}</span>
                     <input
-                      className="w-full input rounded-2xl text-dark
+                      className="w-full input rounded-md text-dark
                            font-normal text-sm"
                       required={true}
                       name={input?.name}
@@ -165,6 +166,7 @@ const RegisterModal = () => {
               </div>{" "} */}
             </form>
           </div>
+         </div>
         </div>
       </motion.div>
     </RegisterModalStyles>

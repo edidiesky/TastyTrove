@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
@@ -18,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "@/features/auth/authReducer";
 import AnimateText from "@/animations/AnimateText";
 
+import Image from "../common/Image";
 const ModalVariants = {
   initial: {
     opacity: 0,
@@ -83,8 +83,19 @@ const LoginModal = () => {
         animate={loginmodal ? "enter" : "exit"}
         exit="exit"
         data-test="loginmodal"
-        className="LoginModalCard"
+        className="LoginModalCard grid grid-cols-2"
       >
+        <div className="w-full h-full relative">
+          <div className="gradient2 absolute w-full h-full"></div>
+          <Image
+            alt=""
+            loading="lazy"
+            src={
+              "	https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
+            }
+            className=""
+          />
+        </div>
         <div className="w-full mx-auto overflow-hidden flex flex-col">
           <div
             className="cross absolute z-[30000000000] top-3 right-3"
@@ -126,7 +137,7 @@ const LoginModal = () => {
                         {input.label}
                       </span>
                       <input
-                        className="w-full input rounded-2xl text-dark
+                        className="w-full input rounded-md text-dark
                            font-normal text-sm"
                         required={true}
                         name={input?.name}
@@ -225,16 +236,15 @@ const LoginModalStyles = styled(motion.div)`
     }
   }
   .LoginModalCard {
-    max-width: 400px;
-    min-width: 400px;
+    max-width: 800px;
+    min-width: 700px;
     display: flex;
     height: 500px;
     align-items: center;
-    justify-content: center;
-    flex-direction: column;
     background: #fff;
     gap: 2rem;
-    border-radius: 10px;
+    border-radius: 15px;
+    overflow: hidden;
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
     @media (max-width: 580px) {
