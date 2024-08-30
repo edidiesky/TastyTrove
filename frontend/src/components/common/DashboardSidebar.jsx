@@ -8,66 +8,57 @@ import { BiFoodMenu, BiMessage } from "react-icons/bi";
 import { LayoutDashboard } from "lucide-react";
 import { MdRateReview } from "react-icons/md";
 
-const AdminSidebarData = [
-  {
-    id: 1,
-    tab: {
-      title: "Dashboard",
-      path: "",
-      icon: <LayoutDashboard fontSize={"14px"} />,
-    },
-    list: [],
-  },
-  {
-    id: 61,
-    tab: {
-      icon: <BiFoodMenu fontSize={"16px"} />,
-      title: "Menu",
-      path: "/menu",
-    },
-    list: [],
-  },
-  {
-    id: 6,
-    tab: {
-      icon: <FaMoneyBill fontSize={"16px"} />,
-      title: "Transactions",
-      path: "/orders",
-    },
-    list: [],
-  },
-  {
-    id: 8,
-    tab: {
-      icon: <MdRateReview fontSize={"16px"} />,
-      title: "Reviews",
-      path: "/review",
-    },
-    list: [],
-  },
-  {
-    id: 6,
-    tab: {
-      icon: <BiMessage fontSize={"16px"} />,
-      title: "Messages",
-      path: "/message",
-    },
-    list: [],
-  },
-  {
-    id: 4,
-    tab: {
-      icon: <FaRegUser fontSize={"16px"} />,
-      title: "Clients",
-      path: "/customers",
-    },
-    list: [],
-  },
-];
-
 const DashboardSidebar = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const pathname = true;
+
+  const AdminSidebarData = [
+    {
+      id: 1,
+      tab: {
+        title: "Dashboard",
+        path: "",
+        icon: <LayoutDashboard fontSize={"14px"} />,
+      },
+      list: [],
+    },
+    {
+      id: 61,
+      tab: {
+        icon: <BiFoodMenu fontSize={"16px"} />,
+        title: "Menu",
+        path: "/menu",
+      },
+      list: [],
+    },
+    {
+      id: 6,
+      tab: {
+        icon: <FaMoneyBill fontSize={"16px"} />,
+        title: "Transactions",
+        path: "/orders",
+      },
+      list: [],
+    },
+    {
+      id: 8,
+      tab: {
+        icon: <MdRateReview fontSize={"16px"} />,
+        title: "Reviews",
+        path: "/review",
+      },
+      list: [],
+    },
+    {
+      id: 6,
+      tab: {
+        icon: <BiMessage fontSize={"16px"} />,
+        title: "Messages",
+        path: "/message",
+      },
+      list: [],
+    },
+  ];
   return (
     <HeaderStyles
       className={`w-full hidden px-6 z-[40000] lg:flex column gap-2`}
@@ -131,6 +122,24 @@ const DashboardSidebar = () => {
                 </div>
               );
             })}
+            {currentUser?.role === "ADMIN" && (
+              <NavLink
+                // activeClassName="active"
+                to={`/dashboard/customers`}
+                end
+                className={`group tab
+                      relative
+                      text-sm w-[90%] mx-auto`}
+              >
+                <div className="flex w-full gap-3 relative items-center">
+                  <span className=" text-sm rounded-xl flex items-center text-blue justify-center">
+                    {" "}
+                    <FiSettings fontSize={"16px"} />
+                  </span>
+                  Clients
+                </div>
+              </NavLink>
+            )}
           </div>
         </div>
         <div className="flex flex-col gap-2 w-full items-start justify-between py-1">
