@@ -6,47 +6,38 @@ import prisma from "../prisma/index.js";
 const createConversation = asyncHandler(async (req, res) => {
   const { members, isGroup, lastMessage, userId } = req.body;
   const senderuserId = req.user?.userId;
-  // console.log(req.body, senderuserId)
 
   try {
-    // find conversation
     const existingConversations = await prisma.conversations.findFirst({
       where: {
         OR: [
           {
             userIds: {
-              equals: [senderuserId, userId],
+              has: senderuserId,
+            },
+            userIds: {
+              has: userId,
             },
           },
           {
             userIds: {
-              equals: [userId, senderuserId],
+              has: userId,
+            },
+            userIds: {
+              has: senderuserId,
             },
           },
         ],
       },
     });
-    // console.log(existingConversations)
-    if (existingConversations !== null) {
-      res.setHeader("Content-Type", "text/html");
-      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
+    if (existingConversations) {
       res.status(200).json({ conversation: existingConversations });
     } else {
       const conversationdata = {
         lastMessage,
         isGroup,
-        users: {
-          connect: [
-            // sender ids tc come first since he is the one sending it
-            {
-              id: senderuserId,
-            },
-            {
-              id: userId,
-            },
-          ],
-        },
+        userIds: [senderuserId, userId],
       };
 
       const newConversation = await prisma.conversations.create({
@@ -56,17 +47,13 @@ const createConversation = asyncHandler(async (req, res) => {
         },
       });
 
-      res.setHeader("Content-Type", "text/html");
-      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-
       res.status(200).json({ conversation: newConversation });
     }
-    // return conversation if true
-    // create conversation if it doesnt exist
   } catch (error) {
-    res.status(401).json({ message: error?.data });
+    res.status(401).json({ message: error?.message });
   }
 });
+
 
 // GET Review of the user conversation
 //  Public
@@ -111,13 +98,13 @@ const UserConversations = asyncHandler(async (req, res) => {
       ],
     },
   });
-  console.log(existingConversations);
+  console.log("existingConversations:", existingConversations);
 
-  // if (existingConversations) {
-  //   res.status(200).json({ conversation: existingConversations });
-  // } else {
-  //   res.status(200).json({ conversation: null });
-  // }
+  if (existingConversations) {
+    res.status(200).json({ conversation: existingConversations });
+  } else {
+    res.status(200).json({ conversation: null });
+  }
 });
 
 const getAllUserConversation = asyncHandler(async (req, res) => {

@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 
 const authMiddleware = (req, res, next) => {
   let token = req.cookies.jwt;
-   console.log("Setting cookie with token:", token);
+  //  console.log("Setting cookie with token:", token);
   if (!token) {
     res.status(401);
     throw new Error("User not authorized, No token");

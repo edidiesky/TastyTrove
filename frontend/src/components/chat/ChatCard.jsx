@@ -37,13 +37,22 @@ const ChatCard = ({ active, setActive }) => {
   // const conversationDetails = {
   //   id:""
   // }
-  useLayoutEffect(() => {
-    setMessage([]);
-    dispatch(clearconversation());
-    dispatch(UserConversationChat(menu?.user?.id));
-  }, [dispatch, menu?.user?.id]);
+  // useLayoutEffect(() => {
+  //   setMessage([]);
+  //   dispatch(clearconversation());
+  //   dispatch(UserConversationChat(menu?.user?.id));
+  // }, [dispatch, menu?.user?.id]);
 
-  // console.log(userconversationDetails);
+  //   useEffect(() => {
+  //   // Ensure that conversation details are fetched and created only once
+  //   if (!userconversationDetails) {
+  //     dispatch(UserConversationChat(menu?.user?.id));
+  //   } else {
+  //     dispatch(GetUsersMessageConversation(conversationDetails?.id));
+  //   }
+  // }, [userconversationDetails, dispatch, menu?.user?.id, conversationDetails?.id]);
+
+  // console.log("userconversationDetails:", userconversationDetails);
 
   // useEffect(() => {
   //    if (userconversationDetails === null) {
@@ -51,7 +60,7 @@ const ChatCard = ({ active, setActive }) => {
   //    } else {
   //      dispatch(GetUsersMessageConversation(conversationDetails?.id));
   //    }
-  // }, [userconversationDetails,dispatch]);
+  // }, [userconversationDetails, dispatch, conversationDetails?.id]);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
