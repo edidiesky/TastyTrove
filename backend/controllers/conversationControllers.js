@@ -111,12 +111,13 @@ const UserConversations = asyncHandler(async (req, res) => {
       ],
     },
   });
+  console.log(existingConversations);
 
-  if (existingConversations) {
-    res.status(200).json({ conversation: existingConversations });
-  } else {
-    res.status(200).json({ conversation: null });
-  }
+  // if (existingConversations) {
+  //   res.status(200).json({ conversation: existingConversations });
+  // } else {
+  //   res.status(200).json({ conversation: null });
+  // }
 });
 
 const getAllUserConversation = asyncHandler(async (req, res) => {

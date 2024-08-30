@@ -6,16 +6,12 @@ export const Createconversation = createAsyncThunk(
   async (conversationData, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+  
 
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
         { userId: conversationData },
-        config
+          { withCredentials: true }
       );
       return response.data.conversation;
 
@@ -35,15 +31,11 @@ export const getAllSellerConversationUsers = createAsyncThunk(
   async (conversationData, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+  
 
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
-        config
+          { withCredentials: true }
       );
       return response.data.conversation;
 
@@ -65,14 +57,10 @@ export const Deleteconversation = createAsyncThunk(
       const { auth } = getState();
       // console.log(auth.token)
       // console.log(conversationdata?._id)
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+  
       await axios.delete(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation/${conversationId}`,
-        config
+          { withCredentials: true }
       );
       return conversationId;
     } catch (err) {
@@ -92,14 +80,10 @@ export const GetUsersMessageConversation = createAsyncThunk(
     try {
       const { auth } = getState();
 
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+  
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation/${receiverId}`,
-        config
+          { withCredentials: true }
       );
       return response.data?.conversation;
     } catch (err) {
@@ -119,16 +103,12 @@ export const UserConversationChat = createAsyncThunk(
     try {
       const { auth } = getState();
 
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+  
       const response = await axios.get(
         `${
           import.meta.env.VITE_API_BASE_URLS
         }/conversation/chat?receiverId=${receiverId}`,
-        config
+          { withCredentials: true }
       );
       return response.data?.conversation;
     } catch (err) {

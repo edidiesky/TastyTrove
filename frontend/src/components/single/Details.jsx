@@ -120,7 +120,7 @@ const DetailsContent = styled.div`
       position: relative;
       @media (max-width: 980px) {
         width: 100%;
-        height: 28rem;
+        height: 20rem;
       }
       img {
         height: 100%;

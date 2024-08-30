@@ -67,7 +67,7 @@ export default function Top() {
         </div>
         <div className="topright">
           <div className="flex HeroRightC flex-col gap-8 auto">
-            <div className="family3 text-6xl text-white">{menu?.title}</div>
+            <div className="family3 text-5xl md:text-6xl text-white">{menu?.title}</div>
             <h4 className="text-xl leading-[1.4] family2 text-white">
               {/* Tristique tempus condimentum diam donec. Condimentum ullamcorper
               sit elementum hendrerit mi nulla in consequat, ut. Metus, nullam

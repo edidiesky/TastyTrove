@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import io from "socket.io-client";
@@ -37,21 +37,21 @@ const ChatCard = ({ active, setActive }) => {
   // const conversationDetails = {
   //   id:""
   // }
-  useMemo(() => {
+  useLayoutEffect(() => {
     setMessage([]);
     dispatch(clearconversation());
     dispatch(UserConversationChat(menu?.user?.id));
-  }, []);
+  }, [dispatch, menu?.user?.id]);
 
-  console.log(userconversationDetails);
+  // console.log(userconversationDetails);
 
-  useEffect(() => {
-     if (userconversationDetails === null) {
-       dispatch(Createconversation(menu?.user?.id));
-     } else {
-       dispatch(GetUsersMessageConversation(conversationDetails?.id));
-     }
-  }, [userconversationDetails,dispatch]);
+  // useEffect(() => {
+  //    if (userconversationDetails === null) {
+  //      dispatch(Createconversation(menu?.user?.id));
+  //    } else {
+  //      dispatch(GetUsersMessageConversation(conversationDetails?.id));
+  //    }
+  // }, [userconversationDetails,dispatch]);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
