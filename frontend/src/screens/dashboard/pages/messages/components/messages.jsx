@@ -57,17 +57,13 @@ const Nessage = () => {
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
     try {
-      const config = {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      };
+    
       setMessageLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationDetails?.id
         }`,
-        config
+        { withCredentials: true }
       );
       setMessage(response.data.messages);
       setMessageLoading(false);
@@ -88,11 +84,7 @@ const Nessage = () => {
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
-      const config = {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      };
+    
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationDetails?.id
@@ -101,7 +93,7 @@ const Nessage = () => {
           body,
           userId: currentUser?.id,
         },
-        config
+        { withCredentials: true }
       );
 
       // handleSingleMessageDetails();

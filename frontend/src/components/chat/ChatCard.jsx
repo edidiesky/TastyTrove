@@ -37,45 +37,28 @@ const ChatCard = ({ active, setActive }) => {
   // const conversationDetails = {
   //   id:""
   // }
-  // useLayoutEffect(() => {
-  //   setMessage([]);
-  //   dispatch(clearconversation());
-  //   dispatch(UserConversationChat(menu?.user?.id));
-  // }, [dispatch, menu?.user?.id]);
-
-  //   useEffect(() => {
-  //   // Ensure that conversation details are fetched and created only once
-  //   if (!userconversationDetails) {
-  //     dispatch(UserConversationChat(menu?.user?.id));
-  //   } else {
-  //     dispatch(GetUsersMessageConversation(conversationDetails?.id));
-  //   }
-  // }, [userconversationDetails, dispatch, menu?.user?.id, conversationDetails?.id]);
-
-  // console.log("userconversationDetails:", userconversationDetails);
-
-  // useEffect(() => {
-  //    if (userconversationDetails === null) {
-  //      dispatch(Createconversation(menu?.user?.id));
-  //    } else {
-  //      dispatch(GetUsersMessageConversation(conversationDetails?.id));
-  //    }
-  // }, [userconversationDetails, dispatch, conversationDetails?.id]);
+  useLayoutEffect(() => {
+    setMessage([]);
+    dispatch(clearconversation());
+    dispatch(Createconversation(menu?.user?.id));
+  }, []);
+  // Ensure that conversation details are fetched and created only once
+  useEffect(() => {
+    if (conversationDetails) {
+      dispatch(GetUsersMessageConversation(conversationDetails?.id));
+    }
+  }, [ dispatch]);
 
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
     try {
-      const config = {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      };
+   
       setMessageLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationDetails?.id
         }`,
-        config
+        { withCredentials: true }
       );
       setMessage(response.data.messages);
       setMessageLoading(false);
@@ -85,21 +68,17 @@ const ChatCard = ({ active, setActive }) => {
     }
   };
 
-  // useEffect(() => {
-  //   if (conversationDetails) {
-  //     handleSingleMessageDetails();
-  //   } else {
-  //     setMessage([]);
-  //   }
-  // }, [setMessage, conversationDetails]);
+  useEffect(() => {
+    if (conversationDetails) {
+      handleSingleMessageDetails();
+    } else {
+      setMessage([]);
+    }
+  }, [ conversationDetails]);
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
-      const config = {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-      };
+   
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationDetails?.id
@@ -108,20 +87,21 @@ const ChatCard = ({ active, setActive }) => {
           body,
           userId: currentUser?.id,
         },
-        config
+        { withCredentials: true }
       );
 
       handleSingleMessageDetails();
-      setMessage((prev) => [
-        ...message,
-        { body: data.body, userId: currentUser?.id },
-      ]);
-
+   
       socketIo?.emit("sendMessage", {
         receiverId: menu?.user?.id,
         senderId: currentUser?.id,
         text: body,
       });
+         setMessage((prev) => [
+           ...message,
+           { body: data.body, userId: currentUser?.id },
+         ]);
+
       setBody("");
     } catch (err) {
       console.log(err);

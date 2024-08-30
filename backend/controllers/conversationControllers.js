@@ -6,38 +6,47 @@ import prisma from "../prisma/index.js";
 const createConversation = asyncHandler(async (req, res) => {
   const { members, isGroup, lastMessage, userId } = req.body;
   const senderuserId = req.user?.userId;
+  // console.log(req.body, senderuserId)
 
   try {
+    // find conversation
     const existingConversations = await prisma.conversations.findFirst({
       where: {
         OR: [
           {
             userIds: {
-              has: senderuserId,
-            },
-            userIds: {
-              has: userId,
+              equals: [senderuserId, userId],
             },
           },
           {
             userIds: {
-              has: userId,
-            },
-            userIds: {
-              has: senderuserId,
+              equals: [userId, senderuserId],
             },
           },
         ],
       },
     });
-
+    // console.log("existingConversations:", existingConversations);
     if (existingConversations) {
+      res.setHeader("Content-Type", "text/html");
+      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
       res.status(200).json({ conversation: existingConversations });
     } else {
       const conversationdata = {
         lastMessage,
         isGroup,
-        userIds: [senderuserId, userId],
+        users: {
+          connect: [
+            // sender ids tc come first since he is the one sending it
+            {
+              id: senderuserId,
+            },
+            {
+              id: userId,
+            },
+          ],
+        },
       };
 
       const newConversation = await prisma.conversations.create({
@@ -47,13 +56,17 @@ const createConversation = asyncHandler(async (req, res) => {
         },
       });
 
+      res.setHeader("Content-Type", "text/html");
+      res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
       res.status(200).json({ conversation: newConversation });
     }
+    // return conversation if true
+    // create conversation if it doesnt exist
   } catch (error) {
-    res.status(401).json({ message: error?.message });
+    res.status(401).json({ message: error?.data });
   }
 });
-
 
 // GET Review of the user conversation
 //  Public
