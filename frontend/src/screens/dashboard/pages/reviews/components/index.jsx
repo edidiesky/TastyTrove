@@ -36,12 +36,12 @@ const DashboardIndex = () => {
         </div>
         {reviews?.length === 0 ? (
           <div className="w-full pt-6 flex  items-center justify-center flex-col gap-2">
-            <h2 className="text-5xl md:text-6xl text-dark family3">
+            <h2 className="text-2xl md:text-3xl font-bold text-dark family1">
               Review is empty
             </h2>
             <Link
               to={"/dashboard/menu"}
-              className="h-[55px] w-[200px] text-base"
+              className="h-[50px] w-[200px] text-base"
             >
               <Button text={"Browse your Menu"} type={"dark"} />
             </Link>

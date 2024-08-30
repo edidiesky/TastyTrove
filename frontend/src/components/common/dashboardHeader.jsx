@@ -186,7 +186,7 @@ const DashboardHeader = () => {
                         className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
                       />
                     )}
-                    <h4 className="text-base text-dark family1 family1">
+                    <h4 className="text-base text-dark font-bold family1">
                       {currentUser?.name}
                       <span className="block font-normal family1 text-xs text-dark">
                         Seller Account
@@ -305,7 +305,7 @@ export const HeaderStyles = styled.div`
     visibility: visible;
   }
   .profile_dropdown {
-    width: 220px;
+    width: 240px;
     opacity: 0;
     transform: scale(0.8);
     transition: all 0.3s;
