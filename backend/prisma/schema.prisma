@@ -29,20 +29,24 @@ enum RoleStatus {
 }
 
 model User {
-  id              String          @id @default(auto()) @map("_id") @db.ObjectId
-  name            String
-  username        String
-  email           String?         @unique
-  emailVerified   DateTime?
-  image           String?
-  country         String?
-  city            String?
-  role            RoleStatus      @default(USER)
-  hashedPassword  String?
-  createdAt       DateTime        @default(now())
-  updatedAt       DateTime        @updatedAt
-  conversationIds String[]        @db.ObjectId
-  conversations   Conversations[] @relation(fields: [conversationIds], references: [id])
+  id                     String          @id @default(auto()) @map("_id") @db.ObjectId
+  name                   String
+  username               String
+  email                  String?         @unique
+  emailVerified          Boolean?
+  image                  String?
+  country                String?
+  city                   String?
+  verifiedToken          String?
+  resetPasswordToken     String?
+  role                   RoleStatus      @default(USER)
+  hashedPassword         String?
+  createdAt              DateTime        @default(now())
+  verifiedTokenExpiresAt DateTime?
+  resetPasswordTokenExpiresAt DateTime?
+  updatedAt              DateTime        @updatedAt
+  conversationIds        String[]        @db.ObjectId
+  conversations          Conversations[] @relation(fields: [conversationIds], references: [id])
 
   seenMessageIds String[]        @db.ObjectId
   seenMessages   Message[]       @relation("Seen", fields: [seenMessageIds], references: [id])

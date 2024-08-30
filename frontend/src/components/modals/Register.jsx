@@ -188,8 +188,8 @@ const RegisterModal = () => {
   );
 };
 const RegisterModalStyles = styled(motion.div)`
-  /* width: 100vw;
-  height: 100vh; */
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   left: 0;
   display: flex;
@@ -234,6 +234,10 @@ const RegisterModalStyles = styled(motion.div)`
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
     @media (max-width: 980px) {
+      max-width: 400px;
+      min-width: 400px;
+    }
+    @media (max-width: 480px) {
       max-width: 90%;
       min-width: 90%;
     }

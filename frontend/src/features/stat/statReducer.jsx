@@ -6,15 +6,10 @@ export const getAdminStat = createAsyncThunk(
   "getAdminStat",
   async (name, thunkAPI) => {
     try {
-      const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+ 
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/stat`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {

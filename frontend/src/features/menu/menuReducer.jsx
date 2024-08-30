@@ -26,22 +26,18 @@ export const getAllMenuForAdmin = createAsyncThunk(
     try {
       const { page, search, limit } = thunkAPI.getState().menu;
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       let MenuUrl = `${import.meta.env.VITE_API_BASE_URLS}/menu/admin`;
       if (page) {
         MenuUrl = MenuUrl + `?page=${page}`;
-        const { data } = await axios.get(MenuUrl, config);
+        const { data } = await axios.get(MenuUrl, { withCredentials: true });
         return data;
       } else if (search) {
         MenuUrl = MenuUrl + `?search=${search}`;
-        const { data } = await axios.get(MenuUrl, config);
+        const { data } = await axios.get(MenuUrl, { withCredentials: true });
         return data;
       } else {
-        const { data } = await axios.get(MenuUrl, config);
+        const { data } = await axios.get(MenuUrl, { withCredentials: true });
         return data;
       }
     } catch (error) {
@@ -75,14 +71,10 @@ export const DeleteMenu = createAsyncThunk(
   async (Menudataid, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.delete(
         `${import.meta.env.VITE_API_BASE_URLS}/menu/${Menudataid}`,
-        config
+        { withCredentials: true }
       );
 
       return Menudataid;
@@ -100,15 +92,11 @@ export const CreateMenu = createAsyncThunk(
   async (menudata, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/menu`,
         menudata,
-        config
+        { withCredentials: true }
       );
 
       return data;
@@ -126,15 +114,11 @@ export const UpdateMenu = createAsyncThunk(
   async (menudata, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_BASE_URLS}/menu/${state?.menu?.menu?.id}`,
         menudata,
-        config
+        { withCredentials: true }
       );
 
       return data;

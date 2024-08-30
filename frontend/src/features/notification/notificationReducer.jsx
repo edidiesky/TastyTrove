@@ -9,25 +9,10 @@ export const getAllNotifications = createAsyncThunk(
     try {
       const { page, search, limit } = thunkAPI.getState().notification;
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
-      let roomUrl = `${import.meta.env.VITE_API_BASE_URLS}/notification/admin`;
-      // if (page) {
-      //   roomUrl = roomUrl + `?page=${page}`;
-      //   const { data } = await axios.get(roomUrl, config);
-      //   return data;
-      // } else if (search) {
-      //   roomUrl = roomUrl + `?search=${search}`;
-      //   const { data } = await axios.get(roomUrl, config);
-      //   return data;
-      // } else {
-      //   const { data } = await axios.get(roomUrl, config);
-      //   return data;
-      // }
-      const { data } = await axios.get(roomUrl, config);
+   
+      let URL = `${import.meta.env.VITE_API_BASE_URLS}/notification/admin`;
+
+      const { data } = await axios.get(URL, { withCredentials: true });
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -44,14 +29,10 @@ export const DeleteNotification = createAsyncThunk(
   async (notificationid, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.delete(
         `${import.meta.env.VITE_API_BASE_URLS}/notification/admin/${notificationid}`,
-        config
+        { withCredentials: true }
       );
 
       return notificationid;
@@ -69,15 +50,11 @@ export const CreateNotifications = createAsyncThunk(
   async (roomdata, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/notification`,
         roomdata,
-        config
+        { withCredentials: true }
       );
 
       return data;
@@ -95,17 +72,13 @@ export const UpdateNotification = createAsyncThunk(
   async (notification, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_BASE_URLS}/notification/admin/${notification?.id}`,
         {
           read: notification?.read
         },
-        config
+        { withCredentials: true }
       );
       // console.log(notification)
       return notification;

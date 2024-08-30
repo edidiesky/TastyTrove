@@ -195,7 +195,7 @@ const BecomeASellerModal = () => {
                   </div>
                 </label>
               </div>
-              <div className="grid grid-cols-2 gap-2 w-full">
+              <div className="grid md:grid-cols-2 gap-2 w-full">
                 {SellerFormInputData?.map((input, index) => {
                   return (
                     <label
@@ -280,12 +280,16 @@ const SellerModalStyles = styled(motion.div)`
     background: #fff;
     /* gap: 2rem; */
     border-radius: 10px;
-    min-height: 90vh;
+    /* min-height: 90vh; */
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
     @media (max-width: 980px) {
-      max-width: 95%;
-      min-width: 95%;
+      max-width: 400px;
+      min-width: 400px;
+    }
+    @media (max-width: 480px) {
+      max-width: 90%;
+      min-width: 90%;
     }
     .cross {
       width: 3rem;

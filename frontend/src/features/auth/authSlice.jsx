@@ -11,10 +11,10 @@ import {
   BecomingASeller,
 } from "./authReducer";
 const customerData = JSON.parse(localStorage.getItem("customer"));
-const customerToken = localStorage.getItem("customertoken");
+// const customerToken = localStorage.getItem("customertoken");
 const initialState = {
   users: [],
-  token: customerToken ? customerToken : "",
+  token:  "",
   currentUser: customerData ? customerData : null,
   userInfo: null,
   alertText: "",

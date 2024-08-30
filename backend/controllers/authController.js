@@ -2,6 +2,8 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
+import { generateToken } from "../utils/generateToken.js";
+import { sendVerificationEmail } from "../mailtrap/emails.js";
 
 //register user
 // Not Private
@@ -23,6 +25,11 @@ const registerUser = asyncHandler(async (req, res) => {
     res.status(404);
     throw new Error("The user does exist");
   }
+
+  const verificationToken = Math.floor(9000 * Math.random() + 1000).toString();
+  const verifiedTokenExpiresAt = new Date(Date.now() + 24 * 60 * 60 * 1000);
+  // console.log(verifiedTokenExpiresAt);
+
   const salt = await bcrypt.genSalt(10);
   const hashedpassword = await bcrypt.hash(req.body.hashedPassword, salt);
   const Tempuser = {
@@ -30,27 +37,20 @@ const registerUser = asyncHandler(async (req, res) => {
     hashedPassword: hashedpassword,
     name,
     username,
+    verifiedTokenExpiresAt,
+    verifiedToken: verificationToken,
   };
   const user = await prisma.user.create({
     data: Tempuser,
   });
-  const token = jwt.sign(
-    {
-      userId: user?.id,
-    },
-    process.env.JWT_CODE,
-    { expiresIn: "12d" }
-  );
+  // sendVerificationEmail(email, verificationToken);
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  //  await delete user?.hashedPassword
-  res.cookie("accessToken", token, {
-    httpOnly: true,
-
-    expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
+  const { hashedPassword: _, ...userWithoutPassword } = user;
+  res.status(200).json({
+    user: userWithoutPassword,
   });
-  res.status(200).json({ user, token });
 });
 
 //Login the  user
@@ -81,28 +81,17 @@ const LoginUser = asyncHandler(async (req, res) => {
     throw new Error("Please provide a valid Password!!");
   }
 
-  //
-  const token = jwt.sign(
-    {
-      userId: userExist.id,
-    },
-    process.env.JWT_CODE,
-    { expiresIn: "12d" }
-  );
+  if (userExist) {
+    generateToken(res, userExist?.id);
+  }
+  // sendVerificationEmail(email, verificationToken);
 
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  res.cookie("accessToken", token, {
-    httpOnly: true,
-
-    expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
-    domain: "localhost", // or your specific domain
-    path: "/", // root path
-    secure: false, // if your site uses HTTPS
-
-    // withcredential: true
+  const { hashedPassword: _, ...userWithoutPassword } = userExist;
+  res.status(200).json({
+    user: userWithoutPassword,
   });
-  res.status(200).json({ user: userExist, token });
 });
 
 // Become a seller
@@ -156,24 +145,51 @@ const BecomeASeller = asyncHandler(async (req, res) => {
     const user = await prisma.user.create({
       data: Tempuser,
     });
-    const token = jwt.sign(
-      {
-        userId: user?.id,
-      },
-      process.env.JWT_CODE,
-      { expiresIn: "12d" }
-    );
+
+    generateToken(res, user?.id);
+    // sendVerificationEmail(email, verificationToken);
 
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    //  await delete user?.hashedPassword
-    res.cookie("accessToken", token, {
-      httpOnly: true,
-
-      expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
+    const { hashedPassword: _, ...userWithoutPassword } = user;
+    res.status(200).json({
+      user: userWithoutPassword,
     });
-    res.status(200).json({ user, token });
   }
 });
 
-export { registerUser, LoginUser, BecomeASeller };
+// @description
+//  POST Verify the email of the user
+const VerifyEmail = asyncHandler(async (req, res) => {
+  // get the code
+  const { code } = req.body;
+  // find the user with the code
+  const user = await prisma.user.findUnique({
+    where: {
+      verifiedToken: code,
+      verifiedTokenExpiresAt: { gte: Date.now() },
+    },
+  });
+
+  // check if the code has not been expired
+  if (!user) {
+    res.status(404);
+    throw new Error("The verfication code has been expired");
+  }
+  // update the user
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: user?.id,
+      emailVerified: true,
+      verifiedToken: null,
+      verifiedTokenExpiresAt: null,
+    },
+  });
+
+  res.status(200).json({ user: updatedUser });
+});
+// @description
+//  POST Verify the email of the user
+const ResetPassword = asyncHandler(async (req, res) => {});
+
+export { registerUser, LoginUser, BecomeASeller, ResetPassword, VerifyEmail };

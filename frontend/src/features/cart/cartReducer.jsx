@@ -7,14 +7,10 @@ export const GetSingleCart = createAsyncThunk(
   async (CartId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/cart/${CartId}`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -32,14 +28,10 @@ export const GetAllRoomAndCart = createAsyncThunk(
   async (CartId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/room/room-cart-history`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -56,14 +48,10 @@ export const GetUserCart = createAsyncThunk(
   async (CartId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/cart/user`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -81,14 +69,10 @@ export const GetAllCart = createAsyncThunk(
   async (CartId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/cart/history`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -106,14 +90,10 @@ export const DeleteSingleCart = createAsyncThunk(
   async (CartId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.delete(
         `${import.meta.env.VITE_API_BASE_URLS}/cart/${CartId}`,
-        config
+        { withCredentials: true }
       );
       return CartId;
     } catch (error) {
@@ -131,15 +111,11 @@ export const UpdateCart = createAsyncThunk(
   async ({CartId, cart}, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_BASE_URLS}/cart/${CartId}`,
         cart,
-        config
+        { withCredentials: true }
       );
       return data.cart;
     } catch (error) {
@@ -157,15 +133,11 @@ export const CreateCart = createAsyncThunk(
   async ({ roomId, cart }, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/cart/${roomId}`,
         cart,
-        config
+        { withCredentials: true }
       );
       return data.cart;
     } catch (error) {

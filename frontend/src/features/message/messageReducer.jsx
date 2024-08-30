@@ -28,22 +28,18 @@ export const Createmessage = createAsyncThunk(
   async ({ messageData, conversationId }, { rejectWithValue, getState }) => {
     try {
       const { auth } = getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+
 
       const response2 = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${conversationId}`,
         messageData,
-        config
+        { withCredentials: true }
       );
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationId
         }`,
-        config
+        { withCredentials: true }
       );
       return response.data.messages;
 
@@ -66,14 +62,10 @@ export const Deletemessage = createAsyncThunk(
       const { auth } = getState();
       // console.log(auth.token)
       // console.log(messagedata?._id)
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+
       await axios.delete(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${messageId}`,
-        config
+        { withCredentials: true }
       );
       return messageId;
     } catch (err) {
@@ -94,14 +86,10 @@ export const GetSinglemessageDetails = createAsyncThunk(
     try {
       const { auth } = getState();
 
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${conversationId}`,
-        config
+        { withCredentials: true }
       );
 
       return response.data.messages;
@@ -123,14 +111,10 @@ export const GetUsermessage = createAsyncThunk(
     try {
       const { auth } = getState() 
 
-      const config = {
-        headers: {
-          authorization: `Bearer ${auth.token}`,
-        },
-      };
+
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/message/user/${messageId}`,
-        config
+        { withCredentials: true }
       );
       return response.data.message;
       // console.log(messageId)

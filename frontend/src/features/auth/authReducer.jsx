@@ -29,7 +29,7 @@ export const BecomingASeller = createAsyncThunk(
         userdata
       );
       localStorage.setItem("customer", JSON.stringify(data.user));
-      localStorage.setItem("customertoken", data.token);
+      // localStorage.setItem("customertoken", data.token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -47,7 +47,8 @@ export const LoginUser = createAsyncThunk(
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/auth/login`,
-        userdata
+        userdata,
+        { withCredentials: true }
       );
       localStorage.setItem("customer", JSON.stringify(data.user));
       localStorage.setItem("customertoken", data.token);
@@ -67,14 +68,10 @@ export const GetAllUsers = createAsyncThunk(
   async (userId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/user`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -92,14 +89,10 @@ export const GetSingleUser = createAsyncThunk(
   async (userId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/user/${userId}`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -116,15 +109,10 @@ export const DeleteSingleUser = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
-      await axios.delete(
-        `${import.meta.env.VITE_API_BASE_URLS}/user/${id}`,
-        config
-      );
+
+      await axios.delete(`${import.meta.env.VITE_API_BASE_URLS}/user/${id}`, {
+        withCredentials: true,
+      });
       return id;
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -141,16 +129,12 @@ export const UpdateSingleUser = createAsyncThunk(
   async (user, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+
       // console.log(user);
       const { data } = await axios.put(
         `${import.meta.env.VITE_API_BASE_URLS}/user/${state.auth.userInfo?.id}`,
         user,
-        config
+        { withCredentials: true }
       );
 
       return data.user;
@@ -169,15 +153,11 @@ export const addListToWish = createAsyncThunk(
   async (name, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/favourites/${name}`,
         name,
-        config
+        { withCredentials: true }
       );
       localStorage.setItem("customer", JSON.stringify(data.user));
 

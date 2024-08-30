@@ -6,15 +6,11 @@ export const CreatePayment = createAsyncThunk(
   async (paymentData, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/payment`,
         paymentData,
-        config
+        { withCredentials: true }
       );
       return data.paymentid;
     } catch (error) {
@@ -32,14 +28,10 @@ export const GetPaymentHistory = createAsyncThunk(
   async (paymentData, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/payment/history`,
-        config
+        { withCredentials: true }
       );
       return data.payment;
     } catch (error) {
@@ -57,16 +49,12 @@ export const GetSinglePaymentHistory = createAsyncThunk(
   async (paymentDataId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.get(
         `${
           import.meta.env.VITE_API_BASE_URLS
         }/payment/history/${paymentDataId}`,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -84,17 +72,13 @@ export const UpdatePaymentToSuccess = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.put(
         `${
           import.meta.env.VITE_API_BASE_URLS
         }/payment/history/success/${id}`,
       null,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
@@ -112,17 +96,13 @@ export const UpdatePaymentToFailed = createAsyncThunk(
   async (paymentDataId, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
-      const config = {
-        headers: {
-          authorization: `Bearer ${state.auth.token}`,
-        },
-      };
+   
       const { data } = await axios.put(
         `${
           import.meta.env.VITE_API_BASE_URLS
         }/payment/history/failed/${paymentDataId}`,
         null,
-        config
+        { withCredentials: true }
       );
       return data;
     } catch (error) {
