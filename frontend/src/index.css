@@ -71,7 +71,9 @@
     @apply bg-background text-foreground;
   }
 }
-
+.line {
+  overflow: hidden !important;
+}
 * {
   text-decoration: none;
   margin: 0;

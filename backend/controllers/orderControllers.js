@@ -4,7 +4,8 @@ import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
-const MAX_RETRIES = 3;
+
+
 const CreateSellerCartPayment = async (cartItems, amount, userId, currency) => {
   //  group the cart Items by the seller Id
   // generate a unique Id for a single payment
@@ -103,58 +104,7 @@ const GetSinglePaymentDetails = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ payment });
 });
 
-// const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
-//   const paymentId = req.params.id;
-//   // update the payment status
-//   // update the menu availability
-//   const payment = await prisma.payment.updateMany({
-//     where: {
-//       paymentGroupId: paymentId,
-//     },
-//     data: {
-//       status: "CANCELLED",
-//     },
-//   });
-//   const updatedPaymentRecords = await prisma.payment.findMany({
-//     where: { paymentGroupId: paymentId },
-//   });
-//   const menu = updatedPaymentRecords?.map(async ({ cartItems }) => {
-//     // return cartItems;
-//     const menuid = cartItems?.menu?.id;
-//     // return cartItems;
-//     const cartid = cartItems?.id;
-//     // find Menu
-//     const menu = await prisma.menu.findUnique({
-//       where: { id: menuid },
-//     });
-//     // find Cart
-//     const carts = await prisma.cart.findUnique({
-//       where: { id: cartid },
-//     });
-//     if (!menu) {
-//       res.status(404);
-//       throw new Error("The menu does not exist");
-//     }
-//     return await prisma.menu.update({
-//       where: { id: menuid },
-//       data: {
-// availabilityCount: menu?.availabilityCount - carts?.totalCount,
-// servedCount: menu?.servedCount - carts?.totalCount,
-//       },
-//     });
-//   });
 
-//   Promise.all(menu);
-//   res.setHeader("Content-Type", "text/html");
-//   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-
-//   // res.status(200).json({ message: "Payment Status has been updated!!" });
-
-//   res.json({
-//     menu,
-//     updatedPaymentRecords,
-//   });
-// });
 const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
   const paymentId = req.params.id;
 

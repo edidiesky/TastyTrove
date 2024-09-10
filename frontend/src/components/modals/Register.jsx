@@ -50,6 +50,12 @@ const RegisterModal = () => {
     password: "",
   });
 
+  const noEntry =
+    formvalue.email === "" ||
+    formvalue.password === "" ||
+    formvalue.username === "" ||
+    formvalue.name === "";
+
   const [loading, setLoading] = useState(false);
 
   const handleFormChange = (e) => {
@@ -74,6 +80,7 @@ const RegisterModal = () => {
       dispatch(onLoginModal());
     }
   }, [registerisSuccess]);
+
   return (
     <RegisterModalStyles
       className="w-full h-screen"
@@ -149,6 +156,7 @@ const RegisterModal = () => {
                 <div className="w-full flex items-center justify-center flex-col gap-3">
                   <button
                     type="submit"
+                    disabled={noEntry}
                     className="p-4 hover:opacity-[.5] px-8 flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
                   >
                     <AnimateText children={"Sign Up"} />
