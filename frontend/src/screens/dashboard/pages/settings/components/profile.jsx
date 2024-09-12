@@ -116,7 +116,9 @@ const Profile = () => {
         <div
           onClick={() => setIndex(0)}
           className={`px-6  ${
-            index === 0 ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]" : " bg-[#fafafa] border-0"
+            index === 0
+              ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]"
+              : " bg-[#fafafa] border-0"
           }  text-base family1 cursor-pointer py-4 flex items-center justify-start gap-4`}
         >
           <BiUser /> Profile Settings
@@ -125,7 +127,9 @@ const Profile = () => {
         <div
           onClick={() => setIndex(1)}
           className={`px-6  ${
-            index === 1 ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]" : " bg-[#fafafa] border-0"
+            index === 1
+              ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]"
+              : " bg-[#fafafa] border-0"
           }  text-base family1 cursor-pointer py-4 flex items-center justify-start gap-4`}
         >
           <BiLock /> Password
@@ -169,8 +173,7 @@ const Profile = () => {
                   </div>
                   <div
                     onClick={handleUpdateUser}
-                    style={{ letterSpacing: "2px" }}
-                    className="btn btn-3 text-xs family1 p-2 px-6 uppercase font-normal rounded-[40px]"
+                    className="btn btn-4 text-xs family1 p-2 px-4 uppercase font-normal rounded-[40px]"
                   >
                     Upload Now
                   </div>
@@ -187,19 +190,16 @@ const Profile = () => {
                       <span className="text-dark font-normal">
                         {input.label}
                       </span>
-                      <div className="input flex item-center gap-1">
-                        {/* <MdOutlineMailOutline fontSize={'18px'} className="text-dark" /> */}
-                        <input
-                          className="w-full rounded-2xl text-dark font-normal text-sm"
-                          required={true}
-                          name={input?.name}
-                          id={input.label}
-                          value={formvalue[input.name]}
-                          type={input.type}
-                          placeholder={input.label}
-                          onChange={handleFormChange}
-                        ></input>
-                      </div>
+                      <input
+                        className="w-full rounded-2xl text-dark font-normal text-sm"
+                        required={true}
+                        name={"password"}
+                        id={"password"}
+                        value={password}
+                        type={"password"}
+                        placeholder={"password"}
+                        onChange={(e) => setPassword(e.target.value)}
+                      ></input>
                     </label>
                   );
                 })}
@@ -247,19 +247,16 @@ const Profile = () => {
                   className="text-base family1 rounded-[10px] flex flex-col gap-2 text-dark"
                 >
                   <span className="text-grey font-normal">Password</span>
-                  <div className="input flex item-center gap-1">
-                    {/* <MdOutlineMailOutline fontSize={'18px'} className="text-grey" /> */}
-                    <input
-                      className="w-full rounded-2xl text-dark font-normal text-sm"
-                      required={true}
-                      name={"password"}
-                      id={"password"}
-                      value={password}
-                      type={"password"}
-                      placeholder={"password"}
-                      onChange={(e) => setPassword(e.target.value)}
-                    ></input>
-                  </div>
+                  <input
+                    className="w-full rounded-2xl text-dark font-normal text-sm"
+                    required={true}
+                    name={"password"}
+                    id={"password"}
+                    value={password}
+                    type={"password"}
+                    placeholder={"password"}
+                    onChange={(e) => setPassword(e.target.value)}
+                  ></input>
                 </label>
 
                 <label
@@ -269,19 +266,16 @@ const Profile = () => {
                   <span className="text-grey font-normal">
                     Confirm Password
                   </span>
-                  <div className="input flex item-center gap-1">
-                    {/* <MdOutlineMailOutline fontSize={'18px'} className="text-grey" /> */}
-                    <input
-                      className="w-full rounded-2xl text-dark font-normal text-sm"
-                      required={true}
-                      name={"confirmpassword"}
-                      id={"confirmpassword"}
-                      value={confirmpassword}
-                      type={"password"}
-                      placeholder={"Comfirm your Password"}
-                      onChange={(e) => setConfirmPassword(e.target.value)}
-                    ></input>
-                  </div>
+                  <input
+                    className="w-full rounded-2xl text-dark font-normal text-sm"
+                    required={true}
+                    name={"confirmpassword"}
+                    id={"confirmpassword"}
+                    value={confirmpassword}
+                    type={"password"}
+                    placeholder={"Comfirm your Password"}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  ></input>
                 </label>
 
                 <div className="flex mt-8">
