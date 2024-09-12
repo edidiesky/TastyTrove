@@ -90,7 +90,8 @@ const FlutterPaymentButton = ({ totalPrice }) => {
             },
           });
         }}
-        className="family1 py-4 rounded-[40px] hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer text-dark text-base font-semibold uppercase"
+        className="family1 py-4 rounded-[40px] hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer 
+        text-dark text-base font-normal uppercase"
       >
         {createpaymentisLoading ? (
           <span className="flex items-center justify-center gap-2">

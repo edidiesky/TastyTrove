@@ -146,7 +146,8 @@ export default function CartHolder({ type }) {
         <div className="uppercase flex flex-col gap-4">
           <FlutterPaymentButton totalPrice={totalPrice} />
 
-          <button className="family1 rounded-[40px] py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base font-semibold uppercase">
+          <button className="family1 rounded-[40px] py-4 hover:opacity-[.7] bg-[var(--primary)] text-center
+           w-full cursor-pointer text-dark text-base font-normal uppercase">
             Update Cart
           </button>
         </div>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
+import { Country, State, City } from "country-state-city";
 import { useSelector } from "react-redux";
 import Card from "./Card";
-import Message from "../common/Message";
 import { Link } from "react-router-dom";
-import { countries } from "@/data/countries";
 export default function CartContent() {
   // get the cart content
   const { cart } = useSelector((store) => store.cart);
@@ -24,7 +23,7 @@ export default function CartContent() {
             </Link>
           </div>
         ) : (
-          <div className="max-w-[500px] md:w-[100%] lg:w-full md:max-w-full overflow-auto">
+          <div className="tableWrapper overflow-auto">
             <table>
               <thead>
                 <tr>
@@ -50,21 +49,53 @@ export default function CartContent() {
 }
 
 const ShippingInfo = () => {
-  const [country, setCountry] = React.useState("");
+  // state country and city input
+  const [countryinput, setCountryInput] = React.useState("");
+  const [stateinput, setStateInput] = React.useState("");
+  const [cityinput, setCityInput] = React.useState("");
+
+  // country state and city data
+  const [country, setCountry] = React.useState(null);
+  const [state, setState] = React.useState(null);
+  const [city, setCity] = React.useState(null);
+
+  // statelist, counytylost and cityData
   const [newcountrylist, setNewCountryList] = React.useState([]);
+  const [statelist, setStateList] = React.useState([]);
+
+  // country modal, statemodal and city modal
   const [countrymodal, setCountryModal] = React.useState(false);
+  const [statemodal, setStateModal] = React.useState(false);
+  const [citymodal, setCityModal] = React.useState(false);
+
+  // country, state and city  imported Data
+  const countryList = Country.getAllCountries();
+  const stateList = State.getAllStates();
+
+  // filtering function
   const handleCountryDataFiltering = () => {
-    const filteredCountriedList = countries?.filter((country) =>
-      country?.toLowerCase()?.includes(country?.toLowerCase())
+    // filter the country
+    const filteredCountriedList = countryList?.filter((countries) =>
+      countries?.name?.toLowerCase()?.includes(countryinput?.toLowerCase())
     );
+    // filter the states
+    const filteredStateList = stateList?.filter(
+      (state) => state?.countryCode === country?.isoCode
+    );
+    setStateList(filteredStateList);
     setNewCountryList(filteredCountriedList);
   };
 
   useEffect(() => {
-    if (country) {
+    if (countryinput || country) {
       handleCountryDataFiltering();
     }
-  }, [country, setNewCountryList]);
+  }, [countryinput, setNewCountryList, setStateList, country]);
+
+  // console.log(countryList[0]);
+
+  // console.log(newcountrylist);
+  // console.log(State.getAllStates()[0]);
   return (
     <div
       onClick={() => setCountryModal(false)}
@@ -77,11 +108,11 @@ const ShippingInfo = () => {
       <div className="w-full flex flex-col gap-4">
         <div onClick={() => setCountryModal(true)} className="w-full relative">
           <input
-            value={country}
-            name="country"
+            value={countryinput}
+            name="countryinput"
             onChange={(e) => {
               // handleCountryData(e);
-              setCountry(e.target.value);
+              setCountryInput(e.target.value);
               setCountryModal(true);
             }}
             placeholder="Search for countries"
@@ -89,25 +120,103 @@ const ShippingInfo = () => {
           />
 
           {countrymodal && (
-            <div className="absolute top-[100%] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
+            <div className="absolute top-[100%] z-[500] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
               <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
                 {newcountrylist?.map((data, index) => {
                   return (
                     <span
                       onClick={() => {
                         setCountry(data);
+                        setCountryInput(data?.name);
                         setCountryModal(false);
                       }}
                       key={index}
                       className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
                     >
-                      {data}
+                      {data?.name}
                     </span>
                   );
                 })}
               </div>
             </div>
           )}
+        </div>
+        <div className="w-full grid sm:grid-cols-2 gap-4">
+          {/* state */}
+          <div
+            onClick={() => setCountryModal(true)}
+            className="w-full relative"
+          >
+            <input
+              value={stateinput}
+              name="stateinput"
+              onChange={(e) => {
+                // handleCountryData(e);
+                setStateInput(e.target.value);
+                setStateModal(true);
+              }}
+              placeholder="Search for your State"
+              className="input bg-[#fff] w-full text-base"
+            />
+
+            {statemodal && (
+              <div className="absolute top-[100%] z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
+                <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
+                  {statelist?.map((data, index) => {
+                    return (
+                      <span
+                        onClick={() => {
+                          setState(data);
+                          setCountryInput(data?.name);
+                          setStateModal(false);
+                        }}
+                        key={index}
+                        className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
+                      >
+                        {data?.name}
+                      </span>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+          {/* city */}
+          <div onClick={() => setCityModal(true)} className="w-full relative">
+            <input
+              value={cityinput}
+              name="cityinput"
+              onChange={(e) => {
+                // handleCountryData(e);
+                setCityInput(e.target.value);
+                setCityModal(true);
+              }}
+              placeholder="Search for your City"
+              className="input bg-[#fff] w-full text-base"
+            />
+
+            {citymodal && (
+              <div className="absolute top-[100%] z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
+                <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
+                  {/* {statelist?.map((data, index) => {
+                    return (
+                      <span
+                        onClick={() => {
+                          setState(data);
+                          setCountryInput(data?.name);
+                          setStateModal(false);
+                        }}
+                        key={index}
+                        className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
+                      >
+                        {data?.name}
+                      </span>
+                    );
+                  })} */}
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -119,7 +228,19 @@ export const CartContentContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  .tableWrapper {
+    max-width: 700px;
+    @media (max-width: 680px) {
+      max-width: 560px;
+    }
 
+    @media (max-width: 580px) {
+      max-width: 450px;
+    }
+    @media (max-width: 480px) {
+      max-width: 330px;
+    }
+  }
   h3 {
     /* font-size: 1.8rem; */
     font-weight: normal;
