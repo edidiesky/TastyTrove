@@ -26,7 +26,8 @@ export const BecomingASeller = createAsyncThunk(
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/auth/becomeASeller`,
-        userdata
+        userdata,
+        { withCredentials: true }
       );
       localStorage.setItem("customer", JSON.stringify(data.user));
       // localStorage.setItem("customertoken", data.token);
