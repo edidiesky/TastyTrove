@@ -96,7 +96,7 @@ const LoginModal = () => {
             className=""
           />
         </div>
-        <div className="w-full mx-auto overflow-hidden flex flex-col">
+        <div className="w-full h-[600px] items-center justify-center flex mx-auto overflow-hidden flex-col">
           <div
             className="cross absolute z-[30000000000] top-3 right-3"
             onClick={handleClearAlert}
@@ -120,7 +120,7 @@ const LoginModal = () => {
               </span>
             </h3> */}
           </div>
-          <div className="w-full overflow-auto h-[350px]  flex">
+          <div className="w-full  flex">
             <form
               onSubmit={handleFormSubmision}
               className="w-[100%] mx-auto p-4 md:px-8 pb-8 flex flex-col gap-6"
