@@ -112,7 +112,7 @@ const RegisterModal = () => {
           />
         </div>
         <div className="w-full mx-auto h-[550px] flex flex-col">
-          <div className="w-full sticky top-0 left-0 p-8 px-8 flex items-center justify-between">
+          <div className="w-full sticky top-0 left-0 p-6 px-8 flex items-center justify-between">
             <h3 className="text-2xl md:text-3xl font-bold family1">
               Sign Up
               <span className="block text-sm font-normal family1">
@@ -127,7 +127,7 @@ const RegisterModal = () => {
             </div>
           </div>
           <div className="w-full overflow-hidden">
-            <div className="w-full overflow-auto py-8 items-center justify-center flex">
+            <div className="w-full overflow-auto py-4 items-center justify-center flex">
               <form
                 onSubmit={handleFormSubmision}
                 className="w-[90%] mx-auto p-4 md:px-2 grid items-start md:grid-cols-1 gap-12"
