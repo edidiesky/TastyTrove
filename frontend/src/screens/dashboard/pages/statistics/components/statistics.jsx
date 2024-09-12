@@ -13,7 +13,7 @@ const Statistics = () => {
         <div className="flex w-full">
           <GrowthStat />
         </div>
-        <div className="flex w-full flex-col gap-4 md:w-[360px]">
+        <div className="flex w-full flex-col gap-4 lg:w-[360px]">
           <ProductBreakdown />
         </div>
       </div>
