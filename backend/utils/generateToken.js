@@ -12,7 +12,7 @@ export const generateToken = (res, userid) => {
   res.cookie("jwt", token, {
     httpOnly: true,
     sameSite: "strict",
-    secure: process.env.NODE_ENV === "production",
+    // secure: process.env.NODE_ENV === "production",
     expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
     path: "/",
   });
