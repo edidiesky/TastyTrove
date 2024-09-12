@@ -5,8 +5,23 @@ import prisma from "../prisma/index.js";
 import { generateToken } from "../utils/generateToken.js";
 import { sendVerificationEmail } from "../mailtrap/emails.js";
 
-//register user
-// Not Private
+// @description  Logout a  User
+// @route  POST /auth/logout
+// @access  Public
+const LogoutUser = asyncHandler(async (req, res) => {
+  // console.log(token);
+  res.cookie("jwt", "", {
+    httpOnly: true,
+    sameSite: "strict",
+    secure: process.env.NODE_ENV === "production",
+    expires: new Date(0),
+    path: "/",
+  });
+});
+
+// @description  Register a new User
+// @route  POST /auth/register
+// @access  Public
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, hashedPassword, username } = req.body;
   //
@@ -53,8 +68,9 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 });
 
-//Login the  user
-// Not Private
+// @description  Login a new User
+// @route  POST /auth/login
+// @access  Public
 const LoginUser = asyncHandler(async (req, res) => {
   const { email, hashedPassword } = req.body;
   if (!email || !hashedPassword) {
@@ -192,4 +208,11 @@ const VerifyEmail = asyncHandler(async (req, res) => {
 //  POST Verify the email of the user
 const ResetPassword = asyncHandler(async (req, res) => {});
 
-export { registerUser, LoginUser, BecomeASeller, ResetPassword, VerifyEmail };
+export {
+  registerUser,
+  LoginUser,
+  BecomeASeller,
+  ResetPassword,
+  VerifyEmail,
+  LogoutUser,
+};

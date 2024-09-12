@@ -11,6 +11,7 @@ import { GetUserCart } from "@/features/cart/cartReducer";
 import { LayoutDashboard, LogOut } from "lucide-react";
 import { FaRegUser } from "react-icons/fa";
 import Button from "./Button";
+import { LogoutUser } from "@/features/auth/authReducer";
 const linkData = [
   {
     title: "Home",
@@ -48,8 +49,10 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const handleLogOut = () => {
+    dispatch(LogoutUser());
     dispatch(ClearUserInfo());
-    window.location.reload();
+
+    // window.location.reload();
   };
   useEffect(() => {
     // fetch the user cart if the user exists
@@ -112,10 +115,7 @@ const Navbar = () => {
                 }}
                 className="h-[55px] w-[120px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
               >
-                <Button
-                  bgColor={"#fff"}
-                  text={"Sign Up"}
-                />
+                <Button bgColor={"#fff"} text={"Sign Up"} />
               </button>
             )}
             {currentUser?.role !== "SELLER" && (
@@ -171,20 +171,18 @@ const Navbar = () => {
                               to={"/dashboard"}
                               className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                         
                               Dashboard
                             </Link>
                             <Link
                               to={"/dashboard/settings"}
                               className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                  Profile
+                              Profile
                             </Link>
                             <div
                               onClick={() => handleLogOut()}
                               className="font-booking_font_bold items-center gap-3 text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark flex"
                             >
-                       
                               Log Out
                             </div>
                           </div>

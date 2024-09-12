@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ClearUserInfo } from "@/features/auth/authSlice";
 import NotificationSidebar from "./NotificationSidebar";
 import { MdRateReview } from "react-icons/md";
+import { LogoutUser } from "@/features/auth/authReducer";
 // import { Bell } from "lucide-react";
 const AdminSidebarData = [
   {
@@ -79,6 +80,7 @@ const DashboardHeader = () => {
   const dispatch = useDispatch();
 
   const handleLogOut = () => {
+    dispatch(LogoutUser());
     dispatch(ClearUserInfo("any"));
     window.location.reload();
   };
@@ -198,7 +200,12 @@ const DashboardHeader = () => {
                       to={"/dashboard"}
                       className="flex items-center gap-3 font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
                     >
-                      <LayoutDashboard width={'20px'} height={'20px'} fontSize={"10px"} /> Dashboard
+                      <LayoutDashboard
+                        width={"20px"}
+                        height={"20px"}
+                        fontSize={"10px"}
+                      />{" "}
+                      Dashboard
                     </NavLink>
                     <NavLink
                       to={"/dashboard/settings"}

@@ -20,6 +20,26 @@ export const RegisterUser = createAsyncThunk(
   }
 );
 
+export const LogoutUser = createAsyncThunk(
+  "LogoutUser",
+  async (userdata, thunkAPI) => {
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URLS}/auth/logout`,
+        null,
+        { withCredentials: true }
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
 export const BecomingASeller = createAsyncThunk(
   "BecomeASeller",
   async (userdata, thunkAPI) => {
