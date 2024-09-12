@@ -68,7 +68,7 @@ export default function Reviews() {
 
   return (
     <div data-testid="review_component" className="w-full flex flex-col gap-12">
-      <div className="w-full flex flex-col gap-8">
+      <div className="w-full flex flex-col md:w-[50%] max-w-custom gap-8">
         <h3
           data-test="Review_header"
           className="family3 relative after:w-[100px] after:left-0 after:-bottom-2 after:h-[2px] after:bg-[#eee] 
@@ -90,7 +90,7 @@ export default function Reviews() {
                   key={index}
                   className={`p-3 ${
                     tab === data?.value ? "bg-[#eceece]" : ""
-                  } flex-1 family1 min-w-[200px] rounded-[5px] cursor-pointer font-bold bg-[#F9F9F9] px-4 flex items-center justify-between`}
+                  } flex-1 family1 min-w-[120px] rounded-[5px] cursor-pointer font-bold bg-[#F9F9F9] px-4 flex items-center justify-between`}
                 >
                   {data.value}
                   <span className="flex text-[#777] items-center text-xs">
