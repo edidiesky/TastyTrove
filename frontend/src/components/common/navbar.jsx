@@ -113,7 +113,7 @@ const Navbar = () => {
                 onClick={() => {
                   dispatch(onLoginModal());
                 }}
-                className="h-[55px] w-[120px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
+                className="h-[48px] w-[110px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
               >
                 <Button bgColor={"#fff"} text={"Sign Up"} />
               </button>
@@ -123,7 +123,7 @@ const Navbar = () => {
                 onClick={() => {
                   dispatch(onSellerModal());
                 }}
-                className="h-[55px] w-[120px] md:flex hidden rounded-[40px] overflow-hidden text-base"
+                className="h-[48px] w-[110px] md:flex hidden rounded-[40px] overflow-hidden text-base"
               >
                 <Button
                   bgColor={"var(--primary)"}
@@ -285,102 +285,121 @@ const Navbar = () => {
           </div>
         </div>
       </div>
+      <Sidebar bar={bar} setBar={setBar} />
+    </>
+  );
+};
+
+const Sidebar = ({ bar, setBar }) => {
+  const { currentUser } = useSelector((store) => store.auth);
+  const { cart } = useSelector((store) => store.cart);
+  const { payment, payments, updatepaymentisLoading } = useSelector(
+    (store) => store.payment
+  );
+
+  const dispatch = useDispatch();
+  const handleLogOut = () => {
+    dispatch(LogoutUser());
+    dispatch(ClearUserInfo());
+
+    window.location.reload();
+  };
+  return (
+    <div
+      style={{ zIndex: "400000" }}
+      className={`${
+        bar ? "left-0" : "-left-[100%]"
+      } w-[280px]  sm:w-[300px] h-full transition-all ease duration-700 fixed 
+        flex lg:hidden top-0 bg-[#fff] shadow-2xl column gap-2`}
+    >
       <div
-        style={{ zIndex: "400000" }}
+        onClick={() => setBar(!bar)}
+        style={{ zIndex: "200" }}
         className={`${
           bar ? "left-0" : "-left-[100%]"
-        } w-[280px]  sm:w-[300px] h-full transition-all ease duration-700 fixed 
-        flex lg:hidden top-0 bg-[#fff] shadow-2xl column gap-2`}
-      >
-        <div
-          onClick={() => setBar(!bar)}
-          style={{ zIndex: "200" }}
-          className={`${
-            bar ? "left-0" : "-left-[100%]"
-          } w-full h-full transition-all ease duration-300 fixed flex lg:hidden top-0 bg-[#42424227] column gap-2`}
-        ></div>
+        } w-full h-full transition-all ease duration-300 fixed flex lg:hidden top-0 bg-[#42424227] column gap-2`}
+      ></div>
 
-        <div
-          style={{ zIndex: "200" }}
-          className="w-full Header_wrapper relative h-full bg-white flex item-center flex-col gap-4"
+      <div
+        style={{ zIndex: "200" }}
+        className="w-full Header_wrapper relative h-full bg-white flex item-center flex-col gap-4"
+      >
+        <div className="gradient2 absolute"></div>
+        <img
+          src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
+          alt=""
+          className="absolute w-full h-full object-cover"
+        />
+        {currentUser && (
+          <div className="flex p-4 items-center gap-2">
+            {currentUser?.image ? (
+              <img
+                src={currentUser?.image}
+                alt=""
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+              />
+            ) : currentUser?.username ? (
+              // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
+              //   {currentUser?.username[0]}{" "}
+              // </div>
+              <img
+                src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                alt=""
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+              />
+            ) : (
+              <img
+                src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                alt=""
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+              />
+            )}
+            {currentUser && (
+              <h4 className="text-base font-booking_font4 text-dark family1">
+                {currentUser?.name}
+                <span className="block font-normal font-booking_font text-sm text-grey">
+                  {currentUser?.email}
+                </span>
+              </h4>
+            )}
+          </div>
+        )}
+        <Link
+          to={"/"}
+          className="py-8 flex z-[2000000] px-4 items-center gap-1 justify-start"
         >
-          <div className="gradient2 absolute"></div>
-          <img
-            src="https://avada.website/restaurant/wp-content/uploads/sites/112/2020/04/slider72x-scaled.jpg"
-            alt=""
-            className="absolute w-full h-full object-cover"
-          />
-          {currentUser && (
-            <div className="flex p-4 items-center gap-2">
-              {currentUser?.image ? (
-                <img
-                  src={currentUser?.image}
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              ) : currentUser?.username ? (
-                // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
-                //   {currentUser?.username[0]}{" "}
-                // </div>
-                <img
-                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              ) : (
-                <img
-                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                  alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
-                />
-              )}
-              {currentUser && (
-                <h4 className="text-base font-booking_font4 text-dark family1">
-                  {currentUser?.name}
-                  <span className="block font-normal font-booking_font text-sm text-grey">
-                    {currentUser?.email}
-                  </span>
-                </h4>
-              )}
-            </div>
-          )}
-          <Link
-            to={"/"}
-            className="py-8 flex z-[2000000] px-4 items-center gap-1 justify-start"
-          >
-            <h3 className="text-3xl text-white family3">
-              <AnimateText children={"TastyTrove Restaurant"} />
-            </h3>
-          </Link>
-          <ul className="flex z-[400000] flex-col w-full">
-            {currentUser
-              ? linkData?.slice(0, 6)?.map((x, index) => {
-                  return (
-                    <Link
-                      to={`/${x.path}`}
-                      key={index}
-                      className="text-dark 
+          <h3 className="text-3xl text-white family3">
+            <AnimateText children={"TastyTrove Restaurant"} />
+          </h3>
+        </Link>
+        <ul className="flex z-[400000] flex-col w-full">
+          {currentUser
+            ? linkData?.slice(0, 6)?.map((x, index) => {
+                return (
+                  <Link
+                    to={`/${x.path}`}
+                    key={index}
+                    className="text-dark 
                         hover:bg-[rgba(0,0,0,.3)] tab py-[20px] border-b border-[rgba(255,255,255,.1)] text-lg family1 text-[#fff] px-8"
-                    >
-                      <AnimateText children={x.title} />
-                    </Link>
-                  );
-                })
-              : linkData?.map((x, index) => {
-                  return (
-                    <Link
-                      to={`/${x.path}`}
-                      key={index}
-                      className="text-dark tab hover:bg-[rgba(0,0,0,.3)] border-b border-[rgba(255,255,255,.1)] py-[20px]  text-lg family1 text-[#fff] px-8"
-                    >
-                      <AnimateText children={x.title} />
-                    </Link>
-                  );
-                })}
-          </ul>
-        </div>
+                  >
+                    <AnimateText children={x.title} />
+                  </Link>
+                );
+              })
+            : linkData?.map((x, index) => {
+                return (
+                  <Link
+                    to={`/${x.path}`}
+                    key={index}
+                    className="text-dark tab hover:bg-[rgba(0,0,0,.3)] border-b border-[rgba(255,255,255,.1)] py-[20px]  text-lg family1 text-[#fff] px-8"
+                  >
+                    <AnimateText children={x.title} />
+                  </Link>
+                );
+              })}
+        </ul>
       </div>
-    </>
+    </div>
   );
 };
 
