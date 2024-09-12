@@ -9,12 +9,13 @@ import {
   addListToWish,
   GetSingleUser,
   BecomingASeller,
+  LogoutUser,
 } from "./authReducer";
 const customerData = JSON.parse(localStorage.getItem("customer"));
 // const customerToken = localStorage.getItem("customertoken");
 const initialState = {
   users: [],
-  token:  "",
+  token: "",
   currentUser: customerData ? customerData : null,
   userInfo: null,
   alertText: "",
@@ -74,7 +75,6 @@ export const authSlice = createSlice({
       state.loginisLoading = false;
       state.loginisSuccess = true;
       state.currentUser = action.payload.user;
-      state.token = action.payload.token;
       toast.success("Login process sucessfully!!!!");
     });
     builder.addCase(LoginUser.rejected, (state, action) => {
@@ -82,7 +82,20 @@ export const authSlice = createSlice({
       state.loginisLoading = false;
       toast.error(action.payload);
     });
-
+    // LogoutUser
+    builder.addCase(LogoutUser.pending, (state, action) => {
+      state.loginisLoading = true;
+    });
+    builder.addCase(LogoutUser.fulfilled, (state, action) => {
+      state.loginisLoading = false;
+      state.loginisSuccess = true;
+      state.currentUser = null;
+    });
+    builder.addCase(LogoutUser.rejected, (state, action) => {
+      state.loginisSuccess = false;
+      state.loginisLoading = false;
+      toast.error(action.payload);
+    });
     builder.addCase(BecomingASeller.pending, (state, action) => {
       state.becomeASellerisLoading = true;
     });
