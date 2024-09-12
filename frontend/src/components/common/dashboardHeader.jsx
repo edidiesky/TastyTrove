@@ -91,7 +91,7 @@ const DashboardHeader = () => {
         notificationactivebar={notificationactivebar}
       />
       <HeaderStyles className="w-full z-[3000] py-4 flex relative items-center justify-center">
-        <div className="Header_wrapper w-[95%] mx-auto flex items-center justify-between">
+        <div className="Header_wrapper w-[95%] max-w-custom mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div
               onClick={() => setBar(!bar)}

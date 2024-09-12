@@ -4,15 +4,17 @@ import React, { useState, useEffect } from "react";
 import Chart from "react-apexcharts";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import ProductBreakdown from "./ProductBreakdown";
 
 const Statistics = () => {
   return (
-    <div className="w-full grid lg:grid-cols-custom_1 gap-4">
+    <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
       <div className="flex w-full">
         <GrowthStat />
       </div>
-      <div className="flex w-full">
-        <SalesStat />
+      <div className="flex w-full md:w-[31vw]">
+        <ProductBreakdown/>
+        {/* <SalesStat /> */}
       </div>
     </div>
   );
@@ -93,7 +95,7 @@ const GrowthStat = () => {
               series={series}
               type="bar"
               width={"100%"}
-              height={"100%"}
+              height={"400px"}
             />
           </div>
         </div>
