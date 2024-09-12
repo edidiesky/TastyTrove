@@ -23,8 +23,8 @@ module.exports = {
         custom_2: "auto 1fr",
       },
       maxWidth: {
-        custom: "1204px",
-        custom_1: "1204px",
+        custom: "1304px",
+        custom_1: "1304px",
         custom_2: "1304px",
       },
       fontFamily: {

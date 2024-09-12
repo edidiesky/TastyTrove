@@ -1,49 +1,118 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import Message from "../common/Message";
 import { Link } from "react-router-dom";
+import { countries } from "@/data/countries";
 export default function CartContent() {
   // get the cart content
   const { cart } = useSelector((store) => store.cart);
 
   return (
-    <CartContentContainer>
-      {cart?.length === 0 ? (
-        // ""
-        // <Message alertText="No items in your cart" alertType={"danger"} />
-        <div className="w-full flex  items-center justify-center flex-col gap-2">
-          <h2 className="text-6xl md:text-7xl text-dark family3">
-            Cart is empty
-          </h2>
-          <Link to={"/restaurant/menu"} className="btn btn-1 text-lg">
-            Browse Our Menu
-          </Link>
-        </div>
-      ) : (
-        <div className='max-w-[380px] sm:max-w-[100%] md:w-[750px] lg:w-full md:max-w-full overflow-auto'>
-          <table>
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Subtotal</th>
-                <th></th>
-              </tr>
-            </thead>
-            <tbody>
-              {cart?.map((x) => {
-                return <Card key={x.id} x={x} />;
-              })}
-            </tbody>
-          </table>
-        </div>
-      )}
-    </CartContentContainer>
+    <div className="w-full space-y-12">
+      <CartContentContainer>
+        {cart?.length === 0 ? (
+          // ""
+          // <Message alertText="No items in your cart" alertType={"danger"} />
+          <div className="w-full flex  items-center justify-center flex-col gap-2">
+            <h2 className="text-6xl md:text-7xl text-dark family3">
+              Cart is empty
+            </h2>
+            <Link to={"/restaurant/menu"} className="btn btn-1 text-lg">
+              Browse Our Menu
+            </Link>
+          </div>
+        ) : (
+          <div className="max-w-[500px] md:w-[100%] lg:w-full md:max-w-full overflow-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Price</th>
+                  <th>Quantity</th>
+                  <th>Subtotal</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {cart?.map((x) => {
+                  return <Card key={x.id} x={x} />;
+                })}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </CartContentContainer>
+      <ShippingInfo />
+    </div>
   );
 }
+
+const ShippingInfo = () => {
+  const [country, setCountry] = React.useState("");
+  const [newcountrylist, setNewCountryList] = React.useState([]);
+  const [countrymodal, setCountryModal] = React.useState(false);
+  const handleCountryDataFiltering = () => {
+    const filteredCountriedList = countries?.filter((country) =>
+      country?.toLowerCase()?.includes(country?.toLowerCase())
+    );
+    setNewCountryList(filteredCountriedList);
+  };
+
+  useEffect(() => {
+    if (country) {
+      handleCountryDataFiltering();
+    }
+  }, [country, setNewCountryList]);
+  return (
+    <div
+      onClick={() => setCountryModal(false)}
+      className="w-full md:w-[80%] flex flex-col gap-4"
+    >
+      <h2 className="text-3xl md:text-4xl text-dark family3">
+        Shipping information
+      </h2>
+
+      <div className="w-full flex flex-col gap-4">
+        <div onClick={() => setCountryModal(true)} className="w-full relative">
+          <input
+            value={country}
+            name="country"
+            onChange={(e) => {
+              // handleCountryData(e);
+              setCountry(e.target.value);
+              setCountryModal(true);
+            }}
+            placeholder="Search for countries"
+            className="input bg-[#fff] w-full text-base"
+          />
+
+          {countrymodal && (
+            <div className="absolute top-[100%] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
+              <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
+                {newcountrylist?.map((data, index) => {
+                  return (
+                    <span
+                      onClick={() => {
+                        setCountry(data);
+                        setCountryModal(false);
+                      }}
+                      key={index}
+                      className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
+                    >
+                      {data}
+                    </span>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export const CartContentContainer = styled.div`
   width: 100%;
@@ -55,7 +124,6 @@ export const CartContentContainer = styled.div`
     /* font-size: 1.8rem; */
     font-weight: normal;
     /* border-bottom: 1px solid rgba(0, 0, 0, 0.1); */
-
   }
 
   table {
@@ -64,9 +132,9 @@ export const CartContentContainer = styled.div`
     border-collapse: collapse;
     table-layout: fixed;
     @media (max-width: 1080px) {
-        max-width: 900px;
-        min-width: 900px;
-      }
+      max-width: 900px;
+      min-width: 900px;
+    }
     @media (max-width: 980px) {
       max-width: 900px;
       min-width: 600px;
@@ -84,7 +152,7 @@ export const CartContentContainer = styled.div`
         text-align: start;
         transition: all 0.4s;
         border-radius: 40px;
-        padding: 1rem;
+        padding: 1rem 0;
         /* text-transform: uppercase; */
         font-weight: normal !important;
         th {
@@ -106,7 +174,7 @@ export const CartContentContainer = styled.div`
       justify-content: center;
       margin: 0 auto;
       border: 1px solid rgba(0, 0, 0, 0.2);
-      @media (max-width:480px) {
+      @media (max-width: 480px) {
         height: 2.5rem;
         span {
           font-size: 1rem;
@@ -157,7 +225,7 @@ export const CartContentContainer = styled.div`
         z-index: 200;
         td {
           text-align: start;
-          padding: .8rem 1rem !important;
+          padding: 0.8rem 1rem !important;
           font-size: 16px !important;
           color: #000;
           font-family: "Lora";
