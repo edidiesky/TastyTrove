@@ -32,6 +32,7 @@ export const reviewSlice = createSlice({
       state.createMenuReviewisLoading = false;
       state.createMenuReviewisSuccess = true;
       state.review = action.payload.review;
+      toast.success('Review has been created');
     });
     builder.addCase(CreateReview.rejected, (state, action) => {
       state.createMenuReviewisLoading = false;
