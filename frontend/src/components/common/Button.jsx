@@ -8,7 +8,7 @@ const Button = ({ text, bgColor, color, type, disabled }) => {
         disabled={disabled}
         style={{ transition: "all .6s" }}
         className={`w-full border border-[rgba(0,0,0,.4)] 
-              text-dark h-full rounded-[40px] family1 hover:text-[#fff] text-[ #000] text-light`}
+              text-dark h-full family1 hover:text-[#fff] text-[ #000] text-light`}
       >
         <Magnetic disabled={disabled} bgColor={bgColor}>
           {" "}

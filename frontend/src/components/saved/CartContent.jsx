@@ -4,6 +4,7 @@ import { Country, State, City } from "country-state-city";
 import { useSelector } from "react-redux";
 import Card from "./Card";
 import { Link } from "react-router-dom";
+import Button from "../common/Button";
 export default function CartContent() {
   // get the cart content
   const { cart } = useSelector((store) => store.cart);
@@ -53,6 +54,7 @@ const ShippingInfo = () => {
   const [countryinput, setCountryInput] = React.useState("");
   const [stateinput, setStateInput] = React.useState("");
   const [cityinput, setCityInput] = React.useState("");
+  const [zipcode, setZipCode] = React.useState("");
 
   // country state and city data
   const [country, setCountry] = React.useState(null);
@@ -62,6 +64,7 @@ const ShippingInfo = () => {
   // statelist, counytylost and cityData
   const [newcountrylist, setNewCountryList] = React.useState([]);
   const [statelist, setStateList] = React.useState([]);
+  const [citylist, setCityList] = React.useState([]);
 
   // country modal, statemodal and city modal
   const [countrymodal, setCountryModal] = React.useState(false);
@@ -71,6 +74,7 @@ const ShippingInfo = () => {
   // country, state and city  imported Data
   const countryList = Country.getAllCountries();
   const stateList = State.getAllStates();
+  const cityList = City.getAllCities();
 
   // filtering function
   const handleCountryDataFiltering = () => {
@@ -79,21 +83,49 @@ const ShippingInfo = () => {
       countries?.name?.toLowerCase()?.includes(countryinput?.toLowerCase())
     );
     // filter the states
-    const filteredStateList = stateList?.filter(
+    let filteredStateList = stateList?.filter(
       (state) => state?.countryCode === country?.isoCode
     );
-    setStateList(filteredStateList);
+    // ?.filter((statedata) =>
+    //   statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
+    // );
+
+   const newfilteredStateList = filteredStateList?.filter((statedata) =>
+      statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
+    );
+
+    // filter the states
+    const filteredCityList = cityList?.filter(
+      (stateList) =>
+        stateList?.stateCode === state?.isoCode &&
+        stateList?.countryCode === state?.countryCode
+    );
+
+    // console.log(newfilteredStateList);
+    setCityList(filteredCityList);
+    setStateList(
+      newfilteredStateList ? newfilteredStateList : filteredStateList
+    );
     setNewCountryList(filteredCountriedList);
   };
 
   useEffect(() => {
-    if (countryinput || country) {
+    if (countryinput || country || state) {
       handleCountryDataFiltering();
     }
-  }, [countryinput, setNewCountryList, setStateList, country]);
-
-  // console.log(countryList[0]);
-
+  }, [
+    countryinput,
+    // statelist,
+    setState,
+    setNewCountryList,
+    setStateList,
+    country,
+    setCityList,
+    state,
+  ]);
+  // console.log(citylist);
+  // console.log(City.getAllCities()[0]);
+  console.log(state);
   // console.log(newcountrylist);
   // console.log(State.getAllStates()[0]);
   return (
@@ -105,7 +137,14 @@ const ShippingInfo = () => {
         Shipping information
       </h2>
 
-      <div className="w-full flex flex-col gap-4">
+      <div
+        onClick={() => {
+          setCityModal(false);
+          setStateModal(false);
+          setCountryModal(false);
+        }}
+        className="w-full py-4 flex flex-col gap-4"
+      >
         <div onClick={() => setCountryModal(true)} className="w-full relative">
           <input
             value={countryinput}
@@ -115,7 +154,7 @@ const ShippingInfo = () => {
               setCountryInput(e.target.value);
               setCountryModal(true);
             }}
-            placeholder="Search for countries"
+            placeholder="Search for your country"
             className="input bg-[#fff] w-full text-base"
           />
 
@@ -187,7 +226,6 @@ const ShippingInfo = () => {
               value={cityinput}
               name="cityinput"
               onChange={(e) => {
-                // handleCountryData(e);
                 setCityInput(e.target.value);
                 setCityModal(true);
               }}
@@ -198,13 +236,13 @@ const ShippingInfo = () => {
             {citymodal && (
               <div className="absolute top-[100%] z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
                 <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
-                  {/* {statelist?.map((data, index) => {
+                  {citylist?.map((data, index) => {
                     return (
                       <span
                         onClick={() => {
-                          setState(data);
-                          setCountryInput(data?.name);
-                          setStateModal(false);
+                          setCity(data);
+                          setCityInput(data?.name);
+                          setCityModal(false);
                         }}
                         key={index}
                         className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
@@ -212,10 +250,35 @@ const ShippingInfo = () => {
                         {data?.name}
                       </span>
                     );
-                  })} */}
+                  })}
                 </div>
               </div>
             )}
+          </div>
+        </div>
+        <div className="w-full grid sm:grid-cols-2 gap-4">
+          <input
+            value={zipcode}
+            name="zipcode"
+            onChange={(e) => {
+              setZipCode(e.target.value);
+            }}
+            placeholder="Enter your zipcode"
+            className="input bg-[#fff] w-full text-base"
+          />
+          <div className="w-full flex items-center">
+            <button
+              onClick={() => {
+                // dispatch(onSellerModal());
+              }}
+              className="h-[55px] w-[200px] flex overflow-hidden text-base"
+            >
+              <Button
+                bgColor={"var(--primary)"}
+                text={"Update"}
+                type={"dark"}
+              />
+            </button>
           </div>
         </div>
       </div>
@@ -238,6 +301,10 @@ export const CartContentContainer = styled.div`
       max-width: 450px;
     }
     @media (max-width: 480px) {
+      max-width: 400px;
+    }
+
+    @media (max-width: 400px) {
       max-width: 330px;
     }
   }
