@@ -112,7 +112,7 @@ const RegisterModal = () => {
           />
         </div>
         <div className="w-full mx-auto h-[550px] flex flex-col">
-          <div className="w-full sticky top-0 left-0 p-8 px-8 border-b flex border-[rgba(0,0,0,.2)] items-center justify-between">
+          <div className="w-full sticky top-0 left-0 p-8 px-8 flex items-center justify-between">
             <h3 className="text-2xl md:text-3xl font-bold family1">
               Sign Up
               <span className="block text-sm font-normal family1">

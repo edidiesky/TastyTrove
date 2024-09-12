@@ -103,7 +103,7 @@ const LoginModal = () => {
           >
             <RxCross2 />
           </div>
-          <div className="w-full sticky top-0 left-0 p-6 px-8 border-b flex items-center flex-col justify-between">
+          <div className="w-full sticky top-0 left-0 p-6 px-8 flex items-center flex-col justify-between">
             <div className="flex flex-col">
               <h3 className="text-2xl md:text-3xl family3">
                 {/* <AnimateText children={"TastyTrove Restaurant"} /> */}
