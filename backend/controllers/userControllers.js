@@ -2,7 +2,9 @@ import asyncHandler from "express-async-handler";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import prisma from "../prisma/index.js";
-//PRIVATE/ADMIN
+// @description  Get a single user for the admni
+// @route  POST /user/:id
+// @access  Private
 const GetUserById = asyncHandler(async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.params.id } });
   if (!user) {
@@ -15,9 +17,9 @@ const GetUserById = asyncHandler(async (req, res) => {
   res.status(200).json({ user });
 });
 
-// Private
-// single user
-//PRIVATE/ADMIN
+// @description  Get a single user profile
+// @route  POST /user/:id
+// @access  Public
 const GetUsersProfile = asyncHandler(async (req, res) => {
   const user = await prisma.user.findUnique({ where: { id: req.params.id } });
   if (!user) {
@@ -30,7 +32,9 @@ const GetUsersProfile = asyncHandler(async (req, res) => {
   res.status(200).json({ user });
 });
 
-//PRIVATE/USER
+// @description  Update a single user profile
+// @route  PUT /user/:id
+// @access  Public
 const UpdateUser = asyncHandler(async (req, res) => {
   const updatedUser = await prisma.user.update({
     where: { id: req.params.id },
@@ -42,7 +46,9 @@ const UpdateUser = asyncHandler(async (req, res) => {
   res.status(200).json({ updatedUser });
 });
 
-//PRIVATE/ADMIN
+// @description  Update a single user profile
+// @route  PUT /user/:id
+// @access  Private
 const AdminUpdateUser = asyncHandler(async (req, res) => {
   const { password, ...rest } = req.body;
   let hashedPassword;
@@ -69,7 +75,9 @@ const AdminUpdateUser = asyncHandler(async (req, res) => {
 
   res.status(200).json({ user:updatedUser });
 });
-//PRIVATE/ADMIN
+// @description  Delete a single user profile
+// @route  DELETE /user/:id
+// @access  Private
 const DeleteUser = asyncHandler(async (req, res) => {
   const user = await prisma.user.findUnique({
     where: {
@@ -89,7 +97,9 @@ const DeleteUser = asyncHandler(async (req, res) => {
   res.status(200).json({ msg: "The user has been successfully deleted" });
 });
 
-// PRIVATE/ADMIN
+// @description  GET user profile
+// @route  GET /user/
+// @access  Private
 const GetAllUser = asyncHandler(async (req, res) => {
   const limit = req.query.limit || 5;
   const page = req.query.page || 1;

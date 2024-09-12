@@ -1,6 +1,10 @@
 import asyncHandler from "express-async-handler";
 import { parse, formatISO } from "date-fns";
 import prisma from "../prisma/index.js";
+
+// @description  Get the cart for a user
+// @route  GET /cart
+// @access  Public
 const GetUserCart = asyncHandler(async (req, res) => {
   const availableRooms = await prisma.cart.findMany({
     where: {
@@ -17,6 +21,9 @@ const GetUserCart = asyncHandler(async (req, res) => {
   return res.json(availableRooms);
 });
 
+// @description  Get the cart for a user
+// @route  GET /cart
+// @access  Public
 const GetAllCart = asyncHandler(async (req, res) => {
   const availableRooms = await prisma.cart.findMany({
     include: {
@@ -46,6 +53,9 @@ const GetSingleCart = asyncHandler(async (req, res) => {
   return res.json(availableRooms);
 });
 
+// @description  Create the cart for a user
+// @route  POST /cart
+// @access  Public
 const CreateUserCart = asyncHandler(async (req, res) => {
   const id = req.params.id;
 
@@ -116,6 +126,9 @@ const CreateUserCart = asyncHandler(async (req, res) => {
   return res.json(session);
 });
 
+// @description  Delete the cart for a user
+// @route  DELETE /cart/346464
+// @access  Public
 const DeleteCart = asyncHandler(async (req, res) => {
   const cart = await prisma.cart.findUnique({
     where: {
@@ -136,7 +149,9 @@ const DeleteCart = asyncHandler(async (req, res) => {
 
   res.status(200).json({ msg: "The cart has been successfully deleted" });
 });
-
+// @description  update the cart for a user
+// @route  PUT /cart/4646474
+// @access  Public
 const UpdateCart = asyncHandler(async (req, res) => {
   const cart = await prisma.cart.findUnique({
     where: {

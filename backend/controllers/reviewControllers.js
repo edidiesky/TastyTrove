@@ -4,7 +4,9 @@ dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
 
-// User
+// @description  Create review for the user
+// @route  POST /review
+// @access  Public
 const CreateReview = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
@@ -89,6 +91,9 @@ const CreateReview = expressAsyncHandler(async (req, res) => {
   }
 });
 
+// @description  Get review for the seller
+// @route  POST /review/seller
+// @access  Private
 const GetReviewHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const review = await prisma.review.findMany({
@@ -105,7 +110,9 @@ const GetReviewHistoryForAdmin = expressAsyncHandler(async (req, res) => {
 
   res.status(200).json({ review });
 });
-
+// @description  Get review for a menu
+// @route  GET /review/456474849
+// @access  Public
 const GetMenuReview = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
 
