@@ -57,6 +57,15 @@ export default function Reviews() {
     });
   };
 
+    useEffect(() => {
+      if (currentUser) {
+        setFormData({
+          email: currentUser?.email,
+          name: currentUser?.name,
+        });
+      }
+    }, [currentUser, setFormData]);
+
   return (
     <div data-testid="review_component" className="w-full flex flex-col gap-12">
       <div className="w-full flex flex-col gap-8">
