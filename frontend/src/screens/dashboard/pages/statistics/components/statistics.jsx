@@ -8,14 +8,16 @@ import ProductBreakdown from "./ProductBreakdown";
 
 const Statistics = () => {
   return (
-    <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
-      <div className="flex w-full">
-        <GrowthStat />
+    <div className="w-full flex flex-col gap-12">
+      <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
+        <div className="flex w-full">
+          <GrowthStat />
+        </div>
+        <div className="flex w-full flex-col gap-4 md:w-[360px]">
+          <ProductBreakdown />
+        </div>
       </div>
-      <div className="flex w-full md:w-[31vw]">
-        <ProductBreakdown/>
-        {/* <SalesStat /> */}
-      </div>
+      <SalesStat />
     </div>
   );
 };
@@ -107,7 +109,7 @@ const GrowthStat = () => {
 const SalesStat = () => {
   const { recentSales, topSaledProduct } = useSelector((store) => store.stat);
   return (
-    <div className="w-full lg:w-[30vw] flex flex-col gap-4 ">
+    <div className="w-full grid md:grid-cols-2 items-start gap-4 ">
       <div className="w-full flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
         <div className="w-full px-6 flex items-center justify-between">
           <h3 className="text-xl lg:text-2xl font-semibold family1">
@@ -138,19 +140,13 @@ const SalesStat = () => {
                     className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
                   >
                     <div className="flex items-center gap-4">
-                      {data?.user?.image ? (
-                        <img
-                          src={data?.user?.image}
-                          className="w-12 h-12 rounded-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-12 h-12 text-[#fff] flex items-center justify-center rounded-full bg-[#000]">
-                          {data?.user?.name?.slice("")[0]}
-                        </div>
-                      )}
+                      <img
+                        src={data?.cartItems[0]?.menu?.image}
+                        className="w-20 object-cover"
+                      />
 
                       <span className="text-base family1 font-semibold">
-                        {data?.user?.name}
+                        {data?.cartItems[0]?.menu?.title}
                         <div className="block family1 font-normal text-xs text-grey">
                           {moment(data?.createdAt).format("DD MMM YYYY")}
                         </div>
@@ -173,7 +169,7 @@ const SalesStat = () => {
         </div>
         <ul className="flex flex-col w-full">
           {topSaledProduct?.length === 0 ? (
-            <span >
+            <span>
               <span className="block px-6 text-sm font-normal">
                 You have not sold any product
               </span>
@@ -187,7 +183,7 @@ const SalesStat = () => {
                     className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
                   >
                     <div className="flex items-center gap-4">
-                      <img src={data?.image} className="w-12  object-cover" />
+                      <img src={data?.image} className="w-20  object-cover" />
                       <span className="text-base family1 font-semibold">
                         {data?.title}
                         <div className="block family1 font-normal text-xs text-grey">

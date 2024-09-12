@@ -56,8 +56,8 @@ const ProductBreakdown = () => {
   return (
     <div className="w-full flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
       <div className="w-full px-6 flex items-center justify-between">
-        <h3 className="text-2xl lg:text-3xl font-semibold family1">
-          Food Breakdown
+        <h3 className="text-xl lg:text-2xl font-semibold family1">
+          Menu Breakdown
         </h3>
       </div>
 
