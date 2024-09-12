@@ -80,7 +80,7 @@ const TableCard = ({ x, type }) => {
             )}
           </td>
           <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
-          <td>{x?.currency}</td>
+          <td>NGN</td>
         </tr>
       </>
     );
