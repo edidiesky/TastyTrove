@@ -44,7 +44,7 @@ const Widget = () => {
             onClick={() => setWidgetTab(index)}
             key={index}
             style={{
-              backgroundColor: `#dbe6ee40`,
+              backgroundColor: `#fafafa`,
               transition: "all .3s",
               gridTemplateColumns: "1fr 50px",
             }}
@@ -58,7 +58,7 @@ const Widget = () => {
                 className={`w-10 md:w-12 ${
                   index === 0
                     ? "bg-[#fff] text-[#000]"
-                    : "bg-[#fafafa] text-[#000]"
+                    : "bg-[#fff] text-[#000]"
                 } text-base md:text-lg h-10 md:h-12 rounded-full flex items-center justify-center`}
               >
                 {widget?.icon}
