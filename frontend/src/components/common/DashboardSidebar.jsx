@@ -49,15 +49,15 @@ const DashboardSidebar = () => {
       },
       list: [],
     },
-    {
-      id: 6,
-      tab: {
-        icon: <BiMessage fontSize={"16px"} />,
-        title: "Messages",
-        path: "/message",
-      },
-      list: [],
-    },
+    // {
+    //   id: 6,
+    //   tab: {
+    //     icon: <BiMessage fontSize={"16px"} />,
+    //     title: "Messages",
+    //     path: "/message",
+    //   },
+    //   list: [],
+    // },
   ];
   return (
     <HeaderStyles
