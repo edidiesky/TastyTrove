@@ -1,5 +1,10 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
+
+
+// @description  Get all menu
+// @route  GET /menu
+// @access  Public
 const GetAllMenu = asyncHandler(async (req, res) => {
   const Menus = await prisma.menu.findMany({
     orderBy: {
@@ -15,22 +20,13 @@ const GetAllMenu = asyncHandler(async (req, res) => {
 });
 
 const GetAllMenuAndReservations = asyncHandler(async (req, res) => {
-  const Menus = await prisma.menu.findMany({
-    include: {
-      reservations: {
-        include: {
-          user: true,
-        },
-      },
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  return res.json(Menus);
+
 });
+
+
+// @description  Get a seller menu
+// @route  GET /menu/13344
+// @access  Private
 const GetAllAdminMenus = asyncHandler(async (req, res) => {
   const limit = req.query.limit || 4;
   const page = req.query.page || 1;
@@ -55,6 +51,10 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
 
   res.status(200).json({ Menus, noOfPages, totalMenu });
 });
+
+// @description  Create a menu for the seller
+// @route  POST /menu
+// @access  Private
 const CreateMenus = asyncHandler(async (req, res) => {
   const Menu = await prisma.menu.create({
     data: {
@@ -67,6 +67,9 @@ const CreateMenus = asyncHandler(async (req, res) => {
   return res.json(Menu);
 });
 
+// @description  Get a single menu for the user
+// @route  GET /menu/34545
+// @access  Public
 const GetSingleMenu = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const Menu = await prisma.menu.findUnique({
@@ -86,6 +89,10 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
   return res.json(Menu);
 });
+
+// @description  Update a menu for the seller
+// @route  PUT /menu/4566
+// @access  Private
 const UpdateMenu = asyncHandler(async (req, res) => {
   const updateMenu = await prisma.menu.update({
     where: { id: req.params.id },
@@ -96,6 +103,10 @@ const UpdateMenu = asyncHandler(async (req, res) => {
 
   res.status(200).json({ updateMenu });
 });
+
+// @description  Delete a menu for the seller
+// @route  DELETE /menu/4566
+// @access  Private
 const DeleteMenu = asyncHandler(async (req, res) => {
   const Menus = await prisma.menu.findUnique({
     where: {
@@ -115,7 +126,9 @@ const DeleteMenu = asyncHandler(async (req, res) => {
   res.status(200).json({ msg: "The Menus has been successfully deleted" });
 });
 
-// Get seller Menus
+// @description  Get all menu for the seller
+// @route  PUT /menu/admin
+// @access  Private
 
 const GetSellerMenus = asyncHandler(async (req, res) => {
   const limit = req.query.limit || 3;

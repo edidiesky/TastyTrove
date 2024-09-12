@@ -5,7 +5,9 @@ dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
 
-
+// @description  Distribute the payment to the separate sellers
+// @route  POST /order
+// @access  Public
 const CreateSellerCartPayment = async (cartItems, amount, userId, currency) => {
   //  group the cart Items by the seller Id
   // generate a unique Id for a single payment
@@ -48,7 +50,9 @@ const CreateSellerCartPayment = async (cartItems, amount, userId, currency) => {
   return Promise.all(createSellersPayment);
 };
 
-// User
+// @description  Create the payment to the separate sellers
+// @route  POST /order
+// @access  Public
 const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
@@ -66,6 +70,9 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ paymentid: payment[0] });
 });
 
+// @description  Get a seller order
+// @route  GET /order/history
+// @access  Private
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const payment = await prisma.payment.findMany({
@@ -85,6 +92,9 @@ const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   res.status(200).json({ payment });
 });
 
+// @description  Get a single payment details
+// @route  GET /order/history/46484489
+// @access  Public
 const GetSinglePaymentDetails = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
 
@@ -105,6 +115,9 @@ const GetSinglePaymentDetails = expressAsyncHandler(async (req, res) => {
 });
 
 
+// @description  Update a single payment details to failed when the flutterWave payment is not complete
+// @route  GET /order/history/failed/46484489
+// @access  Public
 const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
   const paymentId = req.params.id;
 
@@ -154,6 +167,10 @@ const UpdatePaymentToFailed = expressAsyncHandler(async (req, res) => {
   });
 });
 
+
+// @description  Update a single payment details to success when the flutterWave payment is completed
+// @route  GET /order/history/success/46484489
+// @access  Public
 const UpdatePaymentToSuccess = expressAsyncHandler(async (req, res) => {
   const paymentId = req.params.id;
   await prisma.payment.updateMany({
