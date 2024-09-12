@@ -11,8 +11,8 @@ export const generateToken = (res, userid) => {
   // console.log(token);
   res.cookie("jwt", token, {
     httpOnly: true,
-    sameSite: "lax",
-    secure: false,
+    // sameSite: "lax",
+    // secure: false,
     expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
     path: "/",
   });
