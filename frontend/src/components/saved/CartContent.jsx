@@ -167,7 +167,7 @@ const ShippingInfo = () => {
                       <span
                         onClick={() => {
                           setState(data);
-                          setCountryInput(data?.name);
+                          setStateInput(data?.name);
                           setStateModal(false);
                         }}
                         key={index}
