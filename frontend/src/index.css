@@ -194,7 +194,6 @@ textarea {
   background-color: var(--light-grey);
   padding: 1rem;
   border: none;
-  outline: none;
 }
 .hide {
   overflow: hidden !important;
