@@ -135,17 +135,15 @@ export default function About() {
                       {x.desc}
                     </h4>
                     <div className="w-full mt-4 text-center">
-                      <Link
-                        to={"/restaurant/menu"}
-                        className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base"
-                      >
-                        <Button
-                          bgColor={"#000"}
-                          text={x?.subText}
-                          type={"dark"}
-                        />
-                      </Link>
-
+                      <button className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base">
+                        <Link to={"/restaurant/menu"}>
+                          <Button
+                            bgColor={"#000"}
+                            text={x?.subText}
+                            type={"dark"}
+                          />
+                        </Link>
+                      </button>{" "}
                       {/* <button className="btn text-dark family1 font-normal text-lg py-1"></button> */}
                     </div>
                   </motion.header>
