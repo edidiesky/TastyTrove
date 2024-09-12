@@ -61,12 +61,9 @@ const GrowthStat = () => {
   const [series, setSeries] = useState([
     {
       name: "Transactions",
-      data: [10, 4, 5, 670, 20, 4, 5, 17, 20],
+      data: [10, 34, 55, 60, 120, 44, 15, 27, 20],
     },
-    {
-      name: "Transactions",
-      data: [20, 40, 15, 70, 20, 4, 5, 17, 20],
-    },
+ 
   ]);
   // useEffect(() => {
   //    if (Array.isArray(totalMonth) && Array.isArray([10,4,5,670,20,4,5,17,20])) {

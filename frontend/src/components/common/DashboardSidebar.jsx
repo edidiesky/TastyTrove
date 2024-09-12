@@ -61,7 +61,7 @@ const DashboardSidebar = () => {
   ];
   return (
     <HeaderStyles
-      className={`w-full hidden px-6 z-[40000] lg:flex column gap-2`}
+      className={`w-full hidden px-4 z-[40000] lg:flex column gap-2`}
     >
       <div className="w-full h-full py-4 justify-between flex items-center flex-col gap-4">
         <div className="w-full h-[90%] flex flex-col gap-8">
@@ -210,7 +210,7 @@ const DashboardSidebar = () => {
 };
 
 export const HeaderStyles = styled.div`
-  width: 320px;
+  width: 300px;
   position: sticky;
   top: 0;
   height: 100vh;

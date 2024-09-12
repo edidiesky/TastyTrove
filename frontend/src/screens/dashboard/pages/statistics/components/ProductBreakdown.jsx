@@ -69,12 +69,12 @@ const ProductBreakdown = () => {
           width={"100%"}
           height={"400px"}
         />
-        <div className="w-full px-4 flex items-center justify-center flex-wrap gap-3">
+        <div className="w-full px-4 flex items-center justify-center flex-wrap gap-2">
           {menuLabels?.map((label, index) => {
             return (
               <span
                 key={index}
-                className="flex items-center gap-3 text-sm family1"
+                className="flex items-center gap-1 text-sm family1"
               >
                 {label?.title}
                 <div
