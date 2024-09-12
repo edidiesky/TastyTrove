@@ -52,7 +52,7 @@ const Navbar = () => {
     dispatch(LogoutUser());
     dispatch(ClearUserInfo());
 
-    // window.location.reload();
+    window.location.reload();
   };
   useEffect(() => {
     // fetch the user cart if the user exists

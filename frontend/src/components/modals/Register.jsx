@@ -47,7 +47,8 @@ const RegisterModal = () => {
     name: "",
     username: "",
     email: "",
-    password: "",
+
+    hashedPassword: "",
   });
 
   const noEntry =
@@ -55,6 +56,8 @@ const RegisterModal = () => {
     formvalue.password === "" ||
     formvalue.username === "" ||
     formvalue.name === "";
+
+    console.log(noEntry, formvalue);
 
   const [loading, setLoading] = useState(false);
 

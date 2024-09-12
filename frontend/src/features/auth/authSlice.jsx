@@ -59,12 +59,8 @@ export const authSlice = createSlice({
       state.deleteUserisSuccess = false;
     },
     ClearUserInfo: (state, action) => {
-      localStorage.removeItem("customertoken");
       localStorage.removeItem("customer");
-      // state.isLoading = false;
-      state.alertType = "";
-      state.showAlert = false;
-      state.alertText = "";
+      state.currentUser = null;
     },
   },
   extraReducers: (builder) => {
