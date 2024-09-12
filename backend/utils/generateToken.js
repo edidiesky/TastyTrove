@@ -9,11 +9,11 @@ export const generateToken = (res, userid) => {
     { expiresIn: "1d" }
   );
   // console.log(token);
-  res.cookie("jwt", token, {
-    httpOnly: true,
-    // sameSite: "lax",
-    // secure: false,
-    expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
-    path: "/",
-  });
+res.cookie("jwt", token, {
+  httpOnly: true,
+  sameSite: "None", // Allows cross-origin requests
+  secure: true, // Ensures the cookie is only sent over HTTPS
+  expires: new Date(Date.now() + 60 * 60 * 24 * 1000), // Adjust expiration time as needed
+  path: "/",
+});
 };
