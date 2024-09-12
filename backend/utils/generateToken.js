@@ -11,7 +11,7 @@ export const generateToken = (res, userid) => {
   // console.log(token);
   res.cookie("jwt", token, {
     httpOnly: true,
-    sameSite: "strict",
+    sameSite: "lax",
     secure: process.env.NODE_ENV === "production",
     expires: new Date(Date.now() + 60 * 60 * 24 * 1000),
     path: "/",
