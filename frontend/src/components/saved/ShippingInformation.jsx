@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Country, State, City } from "country-state-city";
 import Button from "../common/Button";
+import { useDispatch } from "react-redux";
+import { SaveShippingInformation } from "@/features/auth/authSlice";
 
 const ShippingInfo = () => {
+  const dispatch = useDispatch();
   // country, state and city  imported Data
   const countryList = Country.getAllCountries();
   const stateList = State.getAllStates();
@@ -13,6 +16,11 @@ const ShippingInfo = () => {
   const [stateinput, setStateInput] = React.useState("");
   const [cityinput, setCityInput] = React.useState("");
   const [zipcode, setZipCode] = React.useState("");
+  const noEntry =
+    countryinput === "" ||
+    stateinput === "" ||
+    cityinput === "" ||
+    zipcode === "";
 
   // country state and city data
   const [country, setCountry] = React.useState(null);
@@ -95,6 +103,16 @@ const ShippingInfo = () => {
   // console.log(state);
   // console.log(newcountrylist);
   // console.log(State.getAllStates()[0]);
+  const handleShippingInformation = () => {
+    dispatch(
+      SaveShippingInformation({
+        city: city?.name,
+        country: country?.name,
+        state: state?.name,
+        zipcode: zipcode,
+      })
+    );
+  };
   return (
     <div
       //   onClick={() => setCountryModal(false)}
@@ -115,12 +133,12 @@ const ShippingInfo = () => {
         <div className="w-full relative">
           <div
             onClick={() => setCountryModal(!countrymodal)}
-            className="input z-20 py-2 flex items-center cursor-pointer w-full text-base"
+            className="input z-[30000] py-2 flex items-center cursor-pointer w-full text-base"
           >
             {countryinput ? country?.name : "Select your country first"}
           </div>
           {countrymodal && (
-            <div className="absolute py-2 gap-4 top-[100%] z-[500] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
+            <div className="absolute py-2 gap-4 top-[100%] z-[50000000] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
               <input
                 value={countryinput}
                 name="countryinput"
@@ -247,10 +265,9 @@ const ShippingInfo = () => {
           />
           <div className="w-full flex items-center">
             <button
-              onClick={() => {
-                // dispatch(onSellerModal());
-              }}
-              className="h-[55px] w-[200px] flex overflow-hidden text-base"
+              disabled={noEntry}
+              onClick={handleShippingInformation}
+              className="h-[55px] w-[200px] z-10 flex overflow-hidden text-base"
             >
               <Button
                 bgColor={"var(--primary)"}

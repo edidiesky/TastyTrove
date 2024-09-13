@@ -72,7 +72,6 @@ export const LoginUser = createAsyncThunk(
         { withCredentials: true }
       );
       localStorage.setItem("customer", JSON.stringify(data.user));
-      localStorage.setItem("customertoken", data.token);
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(

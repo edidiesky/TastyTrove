@@ -12,12 +12,16 @@ import {
   LogoutUser,
 } from "./authReducer";
 const customerData = JSON.parse(localStorage.getItem("customer"));
+const shippingInformationData = JSON.parse(
+  localStorage.getItem("shippingInformation")
+);
 // const customerToken = localStorage.getItem("customertoken");
 const initialState = {
   users: [],
   token: "",
   currentUser: customerData ? customerData : null,
   userInfo: null,
+  shippingInformation: shippingInformationData ? shippingInformationData : null,
   alertText: "",
   showAlert: false,
   alertType: "",
@@ -66,6 +70,14 @@ export const authSlice = createSlice({
     ClearUserInfo: (state, action) => {
       localStorage.removeItem("customer");
       state.currentUser = null;
+    },
+    SaveShippingInformation: (state, action) => {
+      localStorage.setItem(
+        "shippingInformation",
+        JSON.stringify(action.payload)
+      );
+      state.shippingInformation = action.payload;
+      toast.success("Shipping Information has been saved sucessfully!!!!");
     },
   },
   extraReducers: (builder) => {
@@ -199,6 +211,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { handleClearUserAlert, ClearUserInfo } = authSlice.actions;
+export const { handleClearUserAlert, ClearUserInfo, SaveShippingInformation } =
+  authSlice.actions;
 
 export default authSlice.reducer;
