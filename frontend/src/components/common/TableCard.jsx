@@ -92,6 +92,8 @@ const TableCard = ({ x, type }) => {
           {userdeletemodal && (
             <DeleteModal
               id={x?.id}
+              data={x}
+              type={"user"}
               modal={userdeletemodal}
               setModal={setUserDeleteModal}
             />

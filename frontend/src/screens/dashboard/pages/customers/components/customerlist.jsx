@@ -44,14 +44,14 @@ const RoomsList = () => {
           </table>
         </div>
       </Table>
-      <div className="w-full flex items-center justify-end gap-2">
+      {/* <div className="w-full flex items-center justify-end gap-2">
         <div className="p-4 rounded-2xl text-xs font-bold font-booking_font_bold border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.3)]">
           Previous
         </div>
         <div className="p-4 rounded-2xl text-xs font-bold font-booking_font_bold border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.3)]">
           Next
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

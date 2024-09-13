@@ -6,13 +6,13 @@ import styled from "styled-components";
 import { RxCross2 } from "react-icons/rx";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../home/loader";
-import { DeleteSingleUser } from "@/features/auth/authReducer";
+import { DeleteSingleUser, GetSingleUser } from "@/features/auth/authReducer";
 import { handleClearUserAlert } from "@/features/auth/authSlice";
 import { handleClearMenuAlert } from "@/features/menu/menuSlice";
 import { DeleteMenu } from "@/features/menu/menuReducer";
 import { DeleteSingleCart, GetSingleCart } from "@/features/cart/cartReducer";
 import { clearCartAlert } from "@/features/cart/cartSlice";
-export default function DeleteModal({ type, modal, setModal, menu, id }) {
+export default function DeleteModal({ type, modal, setModal, data, id }) {
   const { deleteRoomisLoading, deleteRoomisSuccess } = useSelector(
     (store) => store.menu
   );
@@ -20,7 +20,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
   const { deleteCartisLoading, cartDetails, deleteCartisSuccess } = useSelector(
     (store) => store.cart
   );
-  const { deleteUserisLoading, deleteUserisSuccess } = useSelector(
+  const { deleteUserisLoading,userInfo, deleteUserisSuccess } = useSelector(
     (store) => store.auth
   );
   const dispatch = useDispatch();
@@ -28,10 +28,10 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
     setModal(false);
   };
   const handleDeleteMenu = useCallback(() => {
-    dispatch(DeleteMenu(menu?.id));
+    dispatch(DeleteMenu(data?.id));
   }, []);
   const handleDeleteCart = useCallback(() => {
-    dispatch(DeleteSingleCart(menu?.id));
+    dispatch(DeleteSingleCart(data?.id));
   }, []);
   const handleDeleteUser = useCallback(() => {
     // console.log(id)
@@ -40,10 +40,13 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
 
   // get singleCart
   useEffect(() => {
+    if (type === "user") {
+      dispatch(GetSingleUser(id))
+    }
     if (id) {
       dispatch(GetSingleCart(id));
     }
-  }, [id]);
+  }, [id, type]);
   // console.log(menu);
   useEffect(() => {
     dispatch(handleClearMenuAlert());
@@ -56,6 +59,7 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
     }
   }, [setModal, deleteRoomisSuccess, deleteUserisSuccess, deleteCartisSuccess]);
 
+  // cart delete modal component
   if (type === "menu") {
     return (
       <DeleteContainer
@@ -91,12 +95,12 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
                 className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
               >
-                Delete {cartDetails?.menu?.title}?
+                Delete {data?.name}?
               </span>
 
-              <span className="block text-xs w-[90%] pt-2 mx-auto capitalize text-center family1">
-                By deleting this menu, It cannot be retrieved back if
-                this action you carry has been taken.
+              <span className="block text-xs w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
+                By deleting this menu, It cannot be retrieved back if this
+                action you carry has been taken.
               </span>
             </h3>
           </div>
@@ -128,6 +132,80 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
       </DeleteContainer>
     );
   }
+  // user delete modal component
+  if (type === "user") {
+    return (
+      <DeleteContainer
+        as={motion.div}
+        initial={{ opacity: 0 }}
+        exit={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+      >
+        {deleteUserisLoading && <Loader />}
+        <motion.div
+          initial={{
+            y: "100vh",
+          }}
+          animate={{
+            y: "0",
+            transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
+          }}
+          exit={{
+            y: "100vh",
+            transition: { duration: 1, ease: [0.76, 0, 0.24, 1] },
+          }}
+          className={"deleteCard"}
+        >
+          <div className="cross" onClick={handleClearAlert}>
+            <RxCross2 />
+          </div>
+          <div className="w-full p-8 px-4 flex items-center justify-center flex-col gap-2">
+            <span className="w-full flex items-center justify-center">
+              <CiWarning fontSize={"55px"} color={"#c31212"} />
+            </span>
+            <h3 className="text-2xl flex-1 font-bold text-center family1">
+              <span
+                className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
+               after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
+              >
+                Delete {userInfo?.name}?
+              </span>
+
+              <span className="block text-xs w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
+                By deleting this User, It cannot be retrieved back if this
+                action you carry has been taken.
+              </span>
+            </h3>
+          </div>
+
+          <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 border-t">
+            <button
+              className="family1 font-booking_font_bold flex items-center justify-center text-sm"
+              onClick={handleClearAlert}
+            >
+              Cancel
+            </button>
+            <button
+              disabled={deleteUserisLoading}
+              onClick={handleDeleteUser}
+              className="deleteBtn family1 font-booking_font_bold flex items-center justify-center text-sm"
+              // onClick={() => dispatch(AdminDeleteUserProfile({ Detailsdata: id }))}
+            >
+              {deleteUserisLoading ? (
+                <span className="flex items-center justify-center gap-2">
+                  <Loader type="dots" />
+                  Deleting in progress
+                </span>
+              ) : (
+                " Delete User"
+              )}
+            </button>
+          </div>
+        </motion.div>
+      </DeleteContainer>
+    );
+  }
+  // menu delete modal component
   return (
     <DeleteContainer
       as={motion.div}
@@ -159,8 +237,8 @@ export default function DeleteModal({ type, modal, setModal, menu, id }) {
           <h3 className="text-2xl font-bold text-center family1">
             <span>Delete this menu?</span>
             <span className="block pt-2 font-normal text-xs w-[90%] mx-auto capitalize text-center family1">
-              By deleting this menu, It cannot be retrieved back if this
-              action you carry has been taken.
+              By deleting this menu, It cannot be retrieved back if this action
+              you carry has been taken.
             </span>
           </h3>
         </div>
