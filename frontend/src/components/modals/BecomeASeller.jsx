@@ -15,6 +15,7 @@ import Loader from "../home/loader";
 import { SellerFormInputData } from "@/constants/data/formdata";
 import { BecomingASeller } from "@/features/auth/authReducer";
 import Image from "../common/Image";
+import toast from "react-hot-toast";
 
 const ModalVariants = {
   initial: {
@@ -243,7 +244,7 @@ const BecomeASellerModal = () => {
                 })}
               </div>
 
-              <div className="w-full flex items-center justify-center flex-col gap-3">
+              <div className="w-full pb-4 flex items-center justify-center flex-col gap-3">
            
 
                  <button
