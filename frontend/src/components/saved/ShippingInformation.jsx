@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Country, State, City } from "country-state-city";
 import Button from "../common/Button";
 
@@ -30,7 +30,7 @@ const ShippingInfo = () => {
   const [citymodal, setCityModal] = React.useState(false);
 
   // filtering function
-  const handleCountryDataFiltering = () => {
+  const handleCountryFiltering = useCallback(() => {
     // filter the country
     const filteredCountriedList = newcountrylist?.filter((countries) =>
       countries?.name?.toLowerCase()?.includes(countryinput?.toLowerCase())
@@ -40,31 +40,41 @@ const ShippingInfo = () => {
       (state) => state?.countryCode === country?.isoCode
     );
 
-    // console.log(filteredStateList);
-
-    const newfilteredStateList = filteredStateList?.filter((statedata) =>
+    setStateList(filteredStateList);
+    setNewCountryList(filteredCountriedList);
+  }, [newcountrylist, stateList, countryinput, country]);
+  const handleStateFiltering = useCallback(() => {
+    const newfilteredStateList = statelist?.filter((statedata) =>
       statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
     );
-
-    // filter the city of the state selected
     const filteredCityList = cityList?.filter(
       (stateList) =>
         stateList?.stateCode === state?.isoCode &&
         stateList?.countryCode === state?.countryCode
     );
-
-    // console.log(newfilteredStateList);
+    // console.log(filteredCityList);
     setCityList(filteredCityList);
-    setStateList(
-      newfilteredStateList ? newfilteredStateList : filteredStateList
+    setStateList(newfilteredStateList);
+  }, [statelist, stateinput, cityList, state]);
+  const handleCityFiltering = useCallback(() => {
+    // filter the city of the state selected
+    const filteredCityList = citylist?.filter((citydata) =>
+      citydata?.name?.toLowerCase()?.includes(cityinput?.toLowerCase())
     );
-    setNewCountryList(filteredCountriedList);
-  };
-  //   console.log(countrymodal);
+    // console.log(filteredCityList);
+
+    setCityList(filteredCityList);
+  }, [citylist, cityinput]);
 
   useEffect(() => {
     if (countryinput || country || state || stateinput) {
-      handleCountryDataFiltering();
+      handleCountryFiltering();
+    }
+    if (stateinput) {
+      handleStateFiltering();
+    }
+    if (cityinput) {
+      handleCityFiltering();
     }
     if (countryinput === "") {
       setNewCountryList([...countryList]);
@@ -72,18 +82,17 @@ const ShippingInfo = () => {
   }, [
     countryinput,
     stateinput,
-    // statelist,
-    setState,
-    setNewCountryList,
-    setStateList,
     country,
-    setCityList,
     state,
+    citylist,
+    handleCountryFiltering,
+    handleStateFiltering,
+    handleCityFiltering,
     // statelist,
   ]);
   // console.log(citylist);
   // console.log(City.getAllCities()[0]);
-    // console.log(state);
+  // console.log(state);
   // console.log(newcountrylist);
   // console.log(State.getAllStates()[0]);
   return (
