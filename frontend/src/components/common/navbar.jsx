@@ -43,9 +43,7 @@ const Navbar = () => {
   const [bar, setBar] = React.useState(false);
   const { currentUser } = useSelector((store) => store.auth);
   const { cart } = useSelector((store) => store.cart);
-  const { payment, payments } = useSelector(
-    (store) => store.payment
-  );
+  const { payment, payments } = useSelector((store) => store.payment);
 
   const dispatch = useDispatch();
   const handleLogOut = () => {
@@ -118,21 +116,21 @@ const Navbar = () => {
                 <Button bgColor={"#fff"} text={"Sign Up"} />
               </button>
             )}
-            {currentUser?.role !== "SELLER" ||
-              (currentUser?.role !== "ADMIN" && (
-                <button
-                  onClick={() => {
-                    dispatch(onSellerModal());
-                  }}
-                  className="h-[48px] w-[110px] md:flex hidden rounded-[40px] overflow-hidden text-base"
-                >
-                  <Button
-                    bgColor={"var(--primary)"}
-                    text={"Sell Now"}
-                    type={"white"}
-                  />
-                </button>
-              ))}
+            {(currentUser?.role !== "SELLER" ||
+              currentUser?.role !== "ADMIN") && (
+              <button
+                onClick={() => {
+                  dispatch(onSellerModal());
+                }}
+                className="h-[48px] w-[110px] md:flex hidden rounded-[40px] overflow-hidden text-base"
+              >
+                <Button
+                  bgColor={"var(--primary)"}
+                  text={"Sell Now"}
+                  type={"white"}
+                />
+              </button>
+            )}
             <ProfileDropdownStyles className="z-[30000000000000] relative flex items-end justify-end gap-4">
               {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full bg-[#000] flex items-center justify-center text-2xl text-white">
                 <BiCart />
