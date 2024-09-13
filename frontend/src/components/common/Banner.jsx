@@ -17,8 +17,8 @@ export default function Banner({ type, text, subtext, image }) {
             {text}
           </h1>
         </div>
-        <div className="gradient2"></div>
-        <div className="imagewrapper">
+        <div className="gradient2 z-20"></div>
+        <div className="imagewrapper z-10">
           <Image
             alt=""
             loading="lazy"
@@ -46,8 +46,8 @@ export default function Banner({ type, text, subtext, image }) {
           {text}
         </h1>
       </div>
-      <div className="gradient2"></div>
-      <div className="imagewrapper">
+      <div className="gradient2 z-20"></div>
+      <div className="imagewrapper z-10">
         <Image
           alt=""
           loading="lazy"
@@ -70,9 +70,6 @@ const BannerContent = styled.div`
   align-items: center;
   &.image1 {
     min-height: 17rem;
-  }
-  .bannerHeader {
-    z-index: 3000;
   }
   .imagewrapper {
     position: absolute;
