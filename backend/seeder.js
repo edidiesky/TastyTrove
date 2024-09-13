@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
-import { user } from "./data/user";
-import { menudata } from "./data/menudata";
+import { user } from "./data/user.js";
+import { menudata } from "./data/menudata.js";
 
 dotenv.config();
 

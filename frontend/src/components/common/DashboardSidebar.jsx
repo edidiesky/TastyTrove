@@ -49,15 +49,15 @@ const DashboardSidebar = () => {
       },
       list: [],
     },
-    {
-      id: 61,
-      tab: {
-        icon: <FaRegUser fontSize={"16px"} />,
-        title: "Customers",
-        path: "/customers",
-      },
-      list: [],
-    },
+    // {
+    //   id: 61,
+    //   tab: {
+    //     icon: <FaRegUser fontSize={"16px"} />,
+    //     title: "Customers",
+    //     path: "/customers",
+    //   },
+    //   list: [],
+    // },
     // {
     //   id: 6,
     //   tab: {
