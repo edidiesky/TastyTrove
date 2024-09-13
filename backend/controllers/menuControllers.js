@@ -1,7 +1,6 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
 
-
 // @description  Get all menu
 // @route  GET /menu
 // @access  Public
@@ -19,10 +18,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
   return res.json(Menus);
 });
 
-const GetAllMenuAndReservations = asyncHandler(async (req, res) => {
-
-});
-
+const GetAllMenuAndReservations = asyncHandler(async (req, res) => {});
 
 // @description  Get a seller menu
 // @route  GET /menu/13344
@@ -56,15 +52,22 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
 // @route  POST /menu
 // @access  Private
 const CreateMenus = asyncHandler(async (req, res) => {
-  const Menu = await prisma.menu.create({
-    data: {
-      userid: req.user?.userId,
-      ...req.body,
-    },
-  });
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  return res.json(Menu);
+  const { title, image, description, price, category } = req.body;
+  // check for empty fields
+  if (!title || !image || !description || !price || !category) {
+    res.status(404);
+    throw new Error("Please provide the necessary menu requirement");
+  } else {
+    const Menu = await prisma.menu.create({
+      data: {
+        userid: req.user?.userId,
+        ...req.body,
+      },
+    });
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.json(Menu);
+  }
 });
 
 // @description  Get a single menu for the user
