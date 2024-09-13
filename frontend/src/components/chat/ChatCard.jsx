@@ -204,7 +204,7 @@ const ChatCard = ({ active, setActive }) => {
                     ) : (
                       <div className="w-full flex items-center justify-start">
                         <div className="flex w-full justify-start items-end gap-1">
-                          <div className="w-12 h-12 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
+                          <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#2f3336]">
                             {message?.sender?.username &&
                               message?.sender?.username[0]}
                           </div>
