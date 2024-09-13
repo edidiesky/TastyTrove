@@ -42,8 +42,8 @@ TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-username/project-name.git
-   cd project-name
+   git clone https://github.com/edidiesky/tastytrove.git
+   cd tastytrove
    ```
 2. ```bash
    cd backend
