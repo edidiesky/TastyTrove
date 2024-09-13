@@ -211,7 +211,6 @@ textarea {
     #000000 40%,
     hsla(0, 0%, 0%, calc(100% - 40%)) 100%
   );
-  z-index: 20;
 }
 .gradient2 {
   position: absolute;
@@ -222,7 +221,6 @@ textarea {
     #000000 12%,
     hsla(0, 0%, 0%, calc(100% - 45%)) 100%
   );
-  z-index: 20;
 }
 .line {
   display: flex !important;

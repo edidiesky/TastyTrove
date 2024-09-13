@@ -62,7 +62,7 @@ const Navbar = () => {
   }, [payments]);
   return (
     <>
-      <div className="py-12 z-[50000] relative flex items-center justify-center">
+      <div className="py-12 z-[50] relative flex items-center justify-center">
         <div className="bg-[#000] z-10 h-full absolute top-0 w-full"></div>
         <div className="w-90 auto md:px-8 flex z-[30] items-center gap-12 justify-between">
           <Link to={"/"} className=" flex items-center gap-1 justify-start">

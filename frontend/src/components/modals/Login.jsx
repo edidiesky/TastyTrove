@@ -99,7 +99,10 @@ const LoginModal = () => {
         <div className="w-full h-[600px] items-center justify-center flex mx-auto overflow-hidden flex-col">
           <div
             className="cross absolute z-[30000000000] top-3 right-3"
-            onClick={handleClearAlert}
+            // onClick={handleClearAlert}
+            onClick={()=> {
+              toast.success('Hello')
+            }}
           >
             <RxCross2 />
           </div>

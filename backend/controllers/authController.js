@@ -110,7 +110,9 @@ const LoginUser = asyncHandler(async (req, res) => {
   });
 });
 
-// Become a seller
+// @description  Set a user role to seller
+// @route  POST /auth/becomeASeller
+// @access  Public
 const BecomeASeller = asyncHandler(async (req, res) => {
   // cehck if the user exists
   //  if he exists just update the role to seller
