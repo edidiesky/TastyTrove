@@ -39,7 +39,7 @@ const GrowthStat = () => {
     dataLabels: {
       enabled: false,
     },
-    colors: ["#EEEEEE", "#000"],
+    colors: ["#000", "#000"],
     stroke: {
       curve: "smooth",
     },

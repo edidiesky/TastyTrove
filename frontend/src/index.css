@@ -180,7 +180,7 @@ input {
   border: none;
   outline: none;
 }
-input:focus {
+.input:focus {
   outline: auto;
 }
 .input {
