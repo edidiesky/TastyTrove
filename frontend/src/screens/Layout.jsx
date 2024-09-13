@@ -6,7 +6,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Copyright from "@/components/common/Copyright";
 import Navbar from "@/components/common/navbar";
-import SmoothScroll from "@/constants/utils/SmoothScroll";
+
 import BecomeASellerModal from "@/components/modals/BecomeASeller";
 const Layout = () => {
   const { loginmodal, registermodal, sellermodal } = useSelector(
@@ -26,11 +26,9 @@ const Layout = () => {
       <AnimatePresence mode="wait">
         {registermodal && <RegisterModal modal={registermodal} />}
       </AnimatePresence>
-      <SmoothScroll>
-        <div className="w-full">
-          <Outlet />
-        </div>
-      </SmoothScroll>
+      <div className="w-full">
+        <Outlet />
+      </div>
     </>
   );
 };

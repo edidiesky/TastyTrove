@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from "react";
 import HomeIndex from "../components/home";
 import Meta from "@/components/common/Meta";
 import { getAllMenu } from "@/features/menu/menuReducer";
-
+import SmoothScroll from "@/constants/utils/SmoothScroll";
 import { useSelector, useDispatch } from "react-redux";
 import Loader from "@/components/loader";
 import Preloader from "@/components/loader/preloader";
@@ -18,11 +18,11 @@ const Home = () => {
   //   return <Loader />;
   // }
   return (
-    <div>
+    <SmoothScroll>
       <Preloader/>
       <Meta />
       <HomeIndex />
-    </div>
+    </SmoothScroll>
   );
 };
 

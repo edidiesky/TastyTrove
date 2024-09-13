@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Banner from "@/components/common/Banner";
 import Navbar from "../components/common/navbar";
 import Loader from "@/components/loader";
+import SmoothScroll from "@/constants/utils/SmoothScroll";
 import { getAllMenu, getSingleMenu } from "@/features/menu/menuReducer";
 const Single = () => {
   const { menu, getallMenuisLoading } = useSelector((store) => store.menu);
@@ -26,7 +27,7 @@ const Single = () => {
 return <Loader />;
   }
     return (
-      <div>
+      <SmoothScroll>
         <Meta
           title={`Details for ${
             menu?.title ? menu?.title : ""
@@ -35,7 +36,7 @@ return <Loader />;
         <Navbar />
         <Banner type={"type"} subtext={"RESTAURANT TAKEOUT"} text={category} />
         <HomeIndex />
-      </div>
+      </SmoothScroll>
     );
 };
 
