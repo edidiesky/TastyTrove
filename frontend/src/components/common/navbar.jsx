@@ -116,7 +116,7 @@ const Navbar = () => {
                 <Button bgColor={"#fff"} text={"Sign Up"} />
               </button>
             )}
-            {(currentUser?.role !== "SELLER" ||
+            {(currentUser?.role !== "SELLER" &&
               currentUser?.role !== "ADMIN") && (
               <button
                 onClick={() => {
@@ -159,6 +159,8 @@ const Navbar = () => {
                             <span className="block font-normal family1 text-xs text-dark">
                               {currentUser?.role === "SELLER"
                                 ? "Seller"
+                                : currentUser?.role === "ADMIN"
+                                ? "Admin"
                                 : "Personal"}{" "}
                               Account
                             </span>

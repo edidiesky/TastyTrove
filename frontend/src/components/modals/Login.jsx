@@ -63,7 +63,9 @@ const LoginModal = () => {
     e.preventDefault();
     dispatch(LoginUser(formvalue));
   };
-
+  useEffect(() => {
+   dispatch(handleClearUserAlert());
+  }, []);
   useEffect(() => {
     if (loginisSuccess) {
       dispatch(offLoginModal());

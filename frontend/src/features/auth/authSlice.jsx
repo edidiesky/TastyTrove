@@ -25,7 +25,6 @@ const initialState = {
   loginisSuccess: false,
   becomeASellerisLoading: false,
   becomeASellerisSuccess: false,
-  loginisError: false,
 
   registerisLoading: false,
   registerisSuccess: false,
@@ -57,6 +56,12 @@ export const authSlice = createSlice({
     handleClearUserAlert: (state, action) => {
       state.deleteUserisLoading = false;
       state.deleteUserisSuccess = false;
+      state.loginisLoading = false;
+      state.loginisSuccess = false;
+      state.registerisLoading = false;
+      state.registerisSuccess = false;
+      state.updateUserisLoading = false;
+      state.updateUserisSuccess = false;
     },
     ClearUserInfo: (state, action) => {
       localStorage.removeItem("customer");
