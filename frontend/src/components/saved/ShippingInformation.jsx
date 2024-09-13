@@ -212,7 +212,7 @@ const ShippingInfo = () => {
             )}
           </div>
           {/* city */}
-          <div className="w-full relative">
+          <div className="w-full z-[40000] relative">
             <div
               onClick={() => setCityModal(!citymodal)}
               className="input flex cursor-pointer items-center py-2 w-full"
@@ -220,7 +220,7 @@ const ShippingInfo = () => {
               {city ? city?.name : "Select your state"}
             </div>
             {citymodal && (
-              <div className="absolute top-[100%] py-2 gap-4 z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
+              <div className="absolute top-[100%] py-2 gap-4 z-[400000000] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
                 <input
                   value={cityinput}
                   name="cityinput"
