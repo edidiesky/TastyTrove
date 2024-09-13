@@ -27,7 +27,7 @@ enum RoleStatus {
   USER
   SELLER
 }
-
+// @description  User model
 model User {
   id                     String          @id @default(auto()) @map("_id") @db.ObjectId
   name                   String
@@ -77,6 +77,21 @@ model Menu {
   cart              Cart[]
   Review            Review[]
 }
+model Payment {
+  id             String        @id @default(auto()) @map("_id") @db.ObjectId
+  amount         Int?
+  salesamount    Int?
+  currency       String
+  paymentGroupId String?
+  status         PaymentStatus @default(PENDING)
+  userid         String?       @db.ObjectId // Customer ID
+  sellerId       String?       @db.ObjectId // Seller ID
+  user           User?         @relation("UserPayments", fields: [userid], references: [id], onDelete: SetNull)
+  seller         User?         @relation("SellerPayments", fields: [sellerId], references: [id], onDelete: SetNull)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  cartItems      Json?
+}
 
 model Review {
   id          String @id @default(auto()) @map("_id") @db.ObjectId
@@ -84,10 +99,10 @@ model Review {
   description String
   menuid      String @db.ObjectId
   menu        Menu?  @relation(fields: [menuid], references: [id], onDelete: Cascade)
-  userid      String @db.ObjectId // Customer ID
-  sellerId    String @db.ObjectId // Seller ID
-  user        User   @relation("UserReview", fields: [userid], references: [id])
-  seller      User   @relation("SellerReviews", fields: [sellerId], references: [id])
+  userid      String? @db.ObjectId // Customer ID
+  sellerId    String? @db.ObjectId // Seller ID
+  user        User?   @relation("UserReview", fields: [userid], references: [id], onDelete: SetNull)
+  seller      User?   @relation("SellerReviews", fields: [sellerId], references: [id], onDelete: SetNull)
 }
 
 model Cart {
@@ -97,27 +112,12 @@ model Cart {
   createdAt  DateTime          @default(now())
   updatedAt  DateTime          @updatedAt
   menuid     String            @db.ObjectId
-  userid     String            @db.ObjectId
+  userid     String?           @db.ObjectId
   status     ReservationStatus @default(PENDING)
   menu       Menu?             @relation(fields: [menuid], references: [id], onDelete: Cascade)
-  user       User?             @relation(fields: [userid], references: [id], onDelete: Cascade)
+  user       User?             @relation(fields: [userid], references: [id], onDelete: SetNull)
 }
 
-model Payment {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  amount         Int?
-  salesamount    Int?
-  currency       String
-  paymentGroupId String?
-  status         PaymentStatus @default(PENDING)
-  userid         String        @db.ObjectId // Customer ID
-  sellerId       String        @db.ObjectId // Seller ID
-  user           User          @relation("UserPayments", fields: [userid], references: [id])
-  seller         User          @relation("SellerPayments", fields: [sellerId], references: [id])
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  cartItems      Json?
-}
 
 model Notifications {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId

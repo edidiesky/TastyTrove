@@ -191,7 +191,7 @@ const Profile = () => {
                         {input.label}
                       </span>
                       <input
-                        className="w-full rounded-2xl text-dark font-normal text-sm"
+                        className="w-full rounded-2xl input text-dark font-normal text-sm"
                         required={true}
                         name={"password"}
                         id={"password"}
@@ -248,7 +248,7 @@ const Profile = () => {
                 >
                   <span className="text-grey font-normal">Password</span>
                   <input
-                    className="w-full rounded-2xl text-dark font-normal text-sm"
+                    className="w-full rounded-2xl input text-dark font-normal text-sm"
                     required={true}
                     name={"password"}
                     id={"password"}
