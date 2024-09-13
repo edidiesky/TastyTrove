@@ -76,7 +76,7 @@ const LoginModal = () => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      {loginisLoading && <Loader />}
+      {/* {loginisLoading && <Loader />} */}
       <motion.div
         variants={ModalVariants}
         initial="initial"
@@ -116,12 +116,6 @@ const LoginModal = () => {
                 Login to your account
               </span>
             </div>
-            {/* <h3 className="text-3xl family4 font-extrabold">
-              Sign In
-              <span className="block text-base font-normal family1">
-                Login to your account
-              </span>
-            </h3> */}
           </div>
           <div className="w-full  flex">
             <form
@@ -161,7 +155,13 @@ const LoginModal = () => {
                   className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
                    bg-[#000] rounded-[40px] family1 font-normal"
                 >
-                  <AnimateText children={"Sign In"} />
+                  {loginisLoading ? (
+                    <div className="w-full flex justify-center items-center gap-4">
+                      <Loader type='dots' /> Login in progress
+                    </div>
+                  ) : (
+                    <AnimateText children={"Sign In"} />
+                  )}
                 </button>
                 <div className="w-full flex items-center justify-start gap-2">
                   <span className="text-sm font-normal text-dark">
