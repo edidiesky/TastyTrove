@@ -165,7 +165,8 @@ const Navbar = () => {
                             </span>
                           </h4>
                         </div>
-                        {currentUser?.role === "SELLER" ? (
+                        {currentUser?.role === "SELLER" ||
+                        currentUser?.role === "ADMIN" ? (
                           <div className="flex profile_dropdown_bottom flex-col w-full">
                             <Link
                               to={"/dashboard"}
