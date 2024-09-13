@@ -44,7 +44,7 @@ export default function CartContent() {
           </div>
         )}
       </CartContentContainer>
-      <ShippingInfo />
+      {cart?.length !== 0 && <ShippingInfo />}
     </div>
   );
 }
@@ -90,7 +90,7 @@ const ShippingInfo = () => {
     //   statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
     // );
 
-   const newfilteredStateList = filteredStateList?.filter((statedata) =>
+    const newfilteredStateList = filteredStateList?.filter((statedata) =>
       statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
     );
 

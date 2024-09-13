@@ -9,6 +9,7 @@ export default function Cartindex() {
   return (
     <CartContainer className="w-full py-20 relative flex gap-2 column">
       <div className="grid w-[95%] max-w-custom relative mx-auto gap-8 lg:grid-cols-custom_1">
+        
         <div className="w-full">
           <CartContent />
         </div>
