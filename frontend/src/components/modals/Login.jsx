@@ -155,12 +155,13 @@ const LoginModal = () => {
                 <button
                   data-test="loginmodal_button"
                   type="submit"
+                  disabled={loginisLoading}
                   className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
                    bg-[#000] rounded-[40px] family1 font-normal"
                 >
                   {loginisLoading ? (
                     <div className="w-full flex justify-center items-center gap-4">
-                      <Loader type='dots' /> Login in progress
+                      <Loader type="dots" /> Login in progress
                     </div>
                   ) : (
                     <AnimateText children={"Sign In"} />

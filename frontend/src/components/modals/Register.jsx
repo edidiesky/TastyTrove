@@ -57,7 +57,7 @@ const RegisterModal = () => {
     formvalue.username === "" ||
     formvalue.name === "";
 
-    console.log(noEntry, formvalue);
+  console.log(noEntry, formvalue);
 
   const [loading, setLoading] = useState(false);
 
@@ -92,7 +92,6 @@ const RegisterModal = () => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      {registerisLoading && <Loader />}
       <motion.div
         variants={ModalVariants}
         initial="initial"
@@ -158,13 +157,19 @@ const RegisterModal = () => {
                 </div>
                 <div className="w-full flex items-center justify-center flex-col gap-3">
                   <button
+                    data-test="loginmodal_button"
                     type="submit"
-                    disabled={noEntry}
-                    className="p-4 hover:opacity-[.5] px-8 flex items-center
-                     justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 
-                     font-normal text-white"
+                    disabled={registerisLoading || noEntry}
+                    className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
+                   bg-[#000] rounded-[40px] family1 font-normal"
                   >
-                    <AnimateText children={"Sign Up"} />
+                    {registerisLoading ? (
+                      <div className="w-full flex justify-center items-center gap-4">
+                        <Loader type="dots" /> Registration in progress
+                      </div>
+                    ) : (
+                      <AnimateText children={"Sign Up"} />
+                    )}
                   </button>
                   <div className="w-full flex items-center justify-start gap-2">
                     <span className="text-sm font-normal text-dark">
