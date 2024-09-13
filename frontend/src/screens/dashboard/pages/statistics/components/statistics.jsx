@@ -86,7 +86,7 @@ const GrowthStat = () => {
   return (
     <div id="chart" className="w-full h-full">
       <div className="w-full flex flex-col h-full gap-8">
-        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] md:min-h-[600px] flex gap-4">
+        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] lg:min-h-[600px] flex gap-4">
           <h3 className="text-3xl font-semibold family1">Sales Statistics</h3>
           <div className="flex h-full w-full flex-col gap-8">
             <Chart
