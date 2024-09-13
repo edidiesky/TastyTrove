@@ -53,7 +53,7 @@ const Button = ({ text, bgColor, color, type, disabled }) => {
     <button
       disabled={disabled}
       style={{ transition: "all .6s" }}
-      className={`w-full rounded-[40px]
+      className={`w-full
               text-dark h-full family1 bg-[var(--primary)] hover:text-[#000] text-[#fff] text-light`}
     >
       <Magnetic disabled={disabled} bgColor={bgColor}>

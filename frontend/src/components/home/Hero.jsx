@@ -113,10 +113,13 @@ export default function Hero() {
             </div>
             <div className="w-full hide text-start">
               <Link className="hero_btn" to={"/restaurant/menu"}>
-                <button className="h-[70px] rounded-[40px] overflow-hidden w-[230px] text-lg uppercase">
+                <button style={{
+                  transition:"all .6s"
+                }} className="h-[70px] overflow-hidden w-[230px] text-white text-lg border hover:text-[#000] uppercase">
                   <Button
-                    bgColor={"rgb(255,255,255"}
+                    bgColor={"var(--primary)"}
                     text={"Explore the Menu"}
+                    type={'dark'}
                   />
                 </button>
               </Link>
