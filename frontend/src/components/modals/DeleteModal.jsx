@@ -46,7 +46,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
     if (type === "cart") {
       dispatch(GetSingleCart(id));
     }
-    if (id) {
+    if (type === '') {
       dispatch(getSingleMenu(id));
     }
   }, [id, type]);
