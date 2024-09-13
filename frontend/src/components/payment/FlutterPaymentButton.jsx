@@ -52,6 +52,7 @@ const FlutterPaymentButton = ({ totalPrice }) => {
         cartItems: cart,
         amount: totalPrice,
         currency: "NGN",
+        ShippingInformation: shippingInformation,
       })
     );
   };

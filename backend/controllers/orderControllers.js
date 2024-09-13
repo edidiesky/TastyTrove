@@ -8,7 +8,13 @@ import expressAsyncHandler from "express-async-handler";
 // @description  Distribute the payment to the separate sellers
 // @route  POST /order
 // @access  Public
-const CreateSellerCartPayment = async (cartItems, amount, userId, currency) => {
+const CreateSellerCartPayment = async (
+  cartItems,
+  amount,
+  userId,
+  currency,
+  ShippingInformation
+) => {
   //  group the cart Items by the seller Id
   // generate a unique Id for a single payment
   const paymentGroupId = uuidv4();
@@ -38,6 +44,7 @@ const CreateSellerCartPayment = async (cartItems, amount, userId, currency) => {
           cartItems: cart,
           paymentGroupId: paymentGroupId,
           salesamount: amount,
+          ShippingInformation: ShippingInformation,
         },
       });
 
@@ -56,12 +63,13 @@ const CreateSellerCartPayment = async (cartItems, amount, userId, currency) => {
 const CreatePayment = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
   const { userId } = req.user;
-  const { cartItems, amount, currency } = req.body;
+  const { cartItems, amount, currency, ShippingInformation } = req.body;
   const payment = await CreateSellerCartPayment(
     cartItems,
     amount,
     userId,
-    currency
+    currency,
+    ShippingInformation
   );
   // console.log(payment[0]);
   res.setHeader("Content-Type", "text/html");

@@ -12,7 +12,7 @@ export default function CartHolder({ type }) {
     (store) => store.payment
   );
   const { shippingInformation } = useSelector((store) => store.auth);
-
+// console.log(shippingInformation);
   const { totalShoppingPrice } = cart?.reduce(
     (acc, total) => {
       const totalPrice = total?.totalPrice;
@@ -84,9 +84,9 @@ export default function CartHolder({ type }) {
                   ) : (
                     <span className="text-end">
                       Shipping to <br />{" "}
-                      <span className=" text-bold">{shippingInformation?.country}</span>
-                      <span className=" text-bold">{shippingInformation?.city}</span>
-                      <span className=" text-bold">{shippingInformation?.state}</span>
+                      <span className=" text-bold">{shippingInformation?.country?.name}</span>
+                      <span className=" text-bold">{shippingInformation?.city?.name}</span>
+                      <span className=" text-bold">{shippingInformation?.state?.name}</span>
                     </span>
                   )}
                 </span>
@@ -137,11 +137,26 @@ export default function CartHolder({ type }) {
               <span className=" family1  text-end text-xl span1">
                 <span className="block pb-3">
                   Flat rate: <br />{" "}
-                  <span className="pt-2">₦{totalShoppingPrice + 20}</span>
+                  <span className="pt-2">
+                    ₦{totalSalesAmount - totalAmount}
+                  </span>
                 </span>
-                <span className="text-end">
-                  Shipping to <br /> <span className=" text-bold">Nigeria</span>
-                </span>
+                {shippingInformation === null ? (
+                  <span className="text-end">No Shipping destination</span>
+                ) : (
+                  <span className="text-end space-x-2">
+                    Shipping to <br />{" "}
+                    <span className=" text-bold">
+                      {shippingInformation?.country?.name}
+                    </span>
+                    <span className=" text-bold">
+                      {shippingInformation?.city?.name}
+                    </span>
+                    <span className=" text-bold">
+                      {shippingInformation?.state?.name}
+                    </span>
+                  </span>
+                )}
               </span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
