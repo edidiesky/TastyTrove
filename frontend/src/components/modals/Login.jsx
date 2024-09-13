@@ -44,7 +44,7 @@ const LoginModal = () => {
     dispatch(offLoginModal());
   };
   const [formvalue, setFormValue] = useState({
-    email: "edidiong1000@gmail.com",
+    email: "victor1000@gmail.com",
     hashedPassword: "12345",
   });
 

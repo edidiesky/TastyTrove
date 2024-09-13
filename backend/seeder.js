@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import { PrismaClient } from "@prisma/client";
 import { user } from "./data/user";
+import { menudata } from "./data/menudata";
 
 dotenv.config();
 
@@ -23,8 +24,8 @@ mongoose.connection.on("error", (error) =>
 const importData = async () => {
   try {
     // Use Prisma to insert our user data
-    await prisma.user.createMany({
-      data: user,
+    await prisma.menu.createMany({
+      data: menudata,
     });
     console.log("Data Imported!");
     process.exit();
