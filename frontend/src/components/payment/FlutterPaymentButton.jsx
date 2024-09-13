@@ -14,10 +14,17 @@ const FlutterPaymentButton = ({ totalPrice }) => {
   useEffect(() => {
     dispatch(handleClearPaymentAlert());
   }, []);
-  const { currentUser } = useSelector((store) => store.auth);
+  const { currentUser, shippingInformation } = useSelector(
+    (store) => store.auth
+  );
   const { cart } = useSelector((store) => store.cart);
-  const { payment,updatepaymentisLoading, createpaymentisSuccess, createpaymentisLoading } =
-    useSelector((store) => store.payment);
+
+  const {
+    payment,
+    updatepaymentisLoading,
+    createpaymentisSuccess,
+    createpaymentisLoading,
+  } = useSelector((store) => store.payment);
   const [flutterpaymentsuccess, setFlutterPaymentSuccess] = useState(false);
   const [flutterpaymentfailed, setFlutterPaymentFailed] = useState(false);
   const config = {
@@ -67,7 +74,7 @@ const FlutterPaymentButton = ({ totalPrice }) => {
     <>
       {updatepaymentisLoading && <Loader />}
       <button
-        disabled={createpaymentisSuccess}
+        disabled={createpaymentisSuccess || shippingInformation === null}
         onClick={() => {
           handleCreateOrderPayment();
           handleFlutterwavePayment({

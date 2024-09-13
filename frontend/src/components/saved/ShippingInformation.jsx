@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Country, State, City } from "country-state-city";
 import Button from "../common/Button";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SaveShippingInformation } from "@/features/auth/authSlice";
 
 const ShippingInfo = () => {
   const dispatch = useDispatch();
   // country, state and city  imported Data
   const countryList = Country.getAllCountries();
+  const { shippingInformation } = useSelector((store) => store.auth);
   const stateList = State.getAllStates();
   const cityList = City.getAllCities();
 
@@ -37,20 +38,20 @@ const ShippingInfo = () => {
   const [statemodal, setStateModal] = React.useState(false);
   const [citymodal, setCityModal] = React.useState(false);
 
-  // filtering function
+  // I made use of useCallback hooks have proper dependencies
+  // I Ensured only necessary dependencies
   const handleCountryFiltering = useCallback(() => {
-    // filter the country
     const filteredCountriedList = newcountrylist?.filter((countries) =>
       countries?.name?.toLowerCase()?.includes(countryinput?.toLowerCase())
     );
-    // filter the states
     let filteredStateList = stateList?.filter(
       (state) => state?.countryCode === country?.isoCode
     );
 
     setStateList(filteredStateList);
     setNewCountryList(filteredCountriedList);
-  }, [newcountrylist, stateList, countryinput, country]);
+  }, [countryinput, country]);
+
   const handleStateFiltering = useCallback(() => {
     const newfilteredStateList = statelist?.filter((statedata) =>
       statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
@@ -60,21 +61,21 @@ const ShippingInfo = () => {
         stateList?.stateCode === state?.isoCode &&
         stateList?.countryCode === state?.countryCode
     );
-    // console.log(filteredCityList);
+
     setCityList(filteredCityList);
     setStateList(newfilteredStateList);
-  }, [statelist, stateinput, cityList, state]);
+  }, [stateinput, state]);
+
   const handleCityFiltering = useCallback(() => {
-    // filter the city of the state selected
     const filteredCityList = citylist?.filter((citydata) =>
       citydata?.name?.toLowerCase()?.includes(cityinput?.toLowerCase())
     );
-    // console.log(filteredCityList);
 
     setCityList(filteredCityList);
-  }, [citylist, cityinput]);
+  }, [cityinput]);
 
   useEffect(() => {
+    // Remove unnecessary dependency variables that cause infinite loops
     if (countryinput || country || state || stateinput) {
       handleCountryFiltering();
     }
@@ -92,23 +93,29 @@ const ShippingInfo = () => {
     stateinput,
     country,
     state,
-    citylist,
     handleCountryFiltering,
     handleStateFiltering,
     handleCityFiltering,
-    // statelist,
   ]);
+  useEffect(() => {
+    if (shippingInformation) {
+      setCountry(shippingInformation?.country);
+      setState(shippingInformation?.state);
+      setCity(shippingInformation?.city);
+      setZipCode(shippingInformation?.zipcode);
+    }
+  }, [shippingInformation, setCity, setState, setCountry, setZipCode]);
   // console.log(citylist);
   // console.log(City.getAllCities()[0]);
-  // console.log(state);
+  // console.log(city);
   // console.log(newcountrylist);
   // console.log(State.getAllStates()[0]);
   const handleShippingInformation = () => {
     dispatch(
       SaveShippingInformation({
-        city: city?.name,
-        country: country?.name,
-        state: state?.name,
+        city: city,
+        country: country,
+        state: state,
         zipcode: zipcode,
       })
     );

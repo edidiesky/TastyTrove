@@ -11,6 +11,7 @@ export default function CartHolder({ type }) {
   const { payment, payments, updatepaymentisLoading } = useSelector(
     (store) => store.payment
   );
+  const { shippingInformation } = useSelector((store) => store.auth);
 
   const { totalShoppingPrice } = cart?.reduce(
     (acc, total) => {
@@ -75,13 +76,19 @@ export default function CartHolder({ type }) {
                   <span className="block pb-3">
                     Flat rate: <br />{" "}
                     <span className="pt-2">
-                     ₦{totalSalesAmount - totalAmount}
+                      ₦{totalSalesAmount - totalAmount}
                     </span>
                   </span>
-                  <span className="text-end">
-                    Shipping to <br />{" "}
-                    <span className=" text-bold">Nigeria</span>
-                  </span>
+                  {shippingInformation === null ? (
+                    <span className="text-end">No Shipping destination</span>
+                  ) : (
+                    <span className="text-end">
+                      Shipping to <br />{" "}
+                      <span className=" text-bold">{shippingInformation?.country}</span>
+                      <span className=" text-bold">{shippingInformation?.city}</span>
+                      <span className=" text-bold">{shippingInformation?.state}</span>
+                    </span>
+                  )}
                 </span>
               </h4>
               <h4 className="family3 text-2xl uppercase total">
@@ -93,7 +100,7 @@ export default function CartHolder({ type }) {
               <h4 className="family3 text-2xl uppercase total">
                 Total Payment{" "}
                 <span className=" family1 text-xl span1">
-                 ₦{totalSalesAmount}
+                  ₦{totalSalesAmount}
                 </span>
               </h4>
             </div>
@@ -146,8 +153,10 @@ export default function CartHolder({ type }) {
         <div className="uppercase flex flex-col gap-4">
           <FlutterPaymentButton totalPrice={totalPrice} />
 
-          <button className="family1 rounded-[40px] py-4 hover:opacity-[.7] bg-[var(--primary)] text-center
-           w-full cursor-pointer text-dark text-base font-normal uppercase">
+          <button
+            className="family1 rounded-[40px] py-4 hover:opacity-[.7] bg-[var(--primary)] text-center
+           w-full cursor-pointer text-dark text-base font-normal uppercase"
+          >
             Update Cart
           </button>
         </div>
