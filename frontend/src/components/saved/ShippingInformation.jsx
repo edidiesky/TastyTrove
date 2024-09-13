@@ -83,7 +83,7 @@ const ShippingInfo = () => {
   ]);
   // console.log(citylist);
   // console.log(City.getAllCities()[0]);
-    console.log(state);
+    // console.log(state);
   // console.log(newcountrylist);
   // console.log(State.getAllStates()[0]);
   return (
@@ -190,7 +190,7 @@ const ShippingInfo = () => {
               onClick={() => setCityModal(!citymodal)}
               className="input flex cursor-pointer items-center py-2 w-full"
             >
-              {stateinput ? state?.name : "Select your state"}
+              {city ? city?.name : "Select your state"}
             </div>
             {citymodal && (
               <div className="absolute top-[100%] py-2 gap-4 z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">

@@ -83,6 +83,7 @@ model Payment {
   salesamount    Int?
   currency       String
   paymentGroupId String?
+  ShippingInformation Json?
   status         PaymentStatus @default(PENDING)
   userid         String?       @db.ObjectId // Customer ID
   sellerId       String?       @db.ObjectId // Seller ID
