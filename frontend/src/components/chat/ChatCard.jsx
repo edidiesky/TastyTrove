@@ -186,14 +186,15 @@ const ChatCard = ({ active, setActive }) => {
                       <div className="w-full flex items-center justify-end">
                         <div className="flex w-full justify-end items-end gap-1">
                           <div className="flex-1 flex items-end flex-col justify-end gap-1">
-                            <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-[12px] md:text-[12px] leading-[1.6] text-white flex items-center bg-[#000] justify-center p-4 px-8">
+                            <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-sm md:text-sm leading-[1.6]
+                             text-white flex items-center bg-[#1d9bf0] justify-center p-3 px-4">
                               {message?.body}
                             </span>
                             <span className="text-xs family1 text-dark">
                               {createdAt}
                             </span>
                           </div>
-                          <div className="w-12 h-12 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
+                          <div className="w-10 h-10 rounded-full family1 flex items-center uppercase justify-center text-lg text-white bg-[#000]">
                             {message?.sender?.username &&
                               message?.sender?.username[0]}
                           </div>
