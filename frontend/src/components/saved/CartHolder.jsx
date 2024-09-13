@@ -82,11 +82,17 @@ export default function CartHolder({ type }) {
                   {shippingInformation === null ? (
                     <span className="text-end">No Shipping destination</span>
                   ) : (
-                    <span className="text-end">
+                    <span className="text-end space-x-2">
                       Shipping to <br />{" "}
-                      <span className=" text-bold">{shippingInformation?.country?.name}</span>
-                      <span className=" text-bold">{shippingInformation?.city?.name}</span>
-                      <span className=" text-bold">{shippingInformation?.state?.name}</span>
+                      <span className=" text-bold">
+                        {shippingInformation?.country?.name}
+                      </span>
+                      <span className=" text-bold">
+                        {shippingInformation?.city?.name}
+                      </span>
+                      <span className=" text-bold">
+                        {shippingInformation?.state?.name}
+                      </span>
                     </span>
                   )}
                 </span>

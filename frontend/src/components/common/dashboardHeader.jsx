@@ -1,4 +1,4 @@
-reimport styled from "styled-components";
+import styled from "styled-components";
 import { RxCross1 } from "react-icons/rx";
 import { HiBars3BottomLeft } from "react-icons/hi2";
 import { FaBell } from "react-icons/fa6";
