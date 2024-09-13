@@ -172,7 +172,7 @@ export default function Reviews() {
                 formdata?.description === ""
               }
               type="submit"
-              className={` h-[55px] w-[200px] text-sm`}
+              className={`h-[55px] w-[200px] text-sm`}
             >
               <Button
                 disabled={
@@ -191,7 +191,7 @@ export default function Reviews() {
                   )
                 }
                 bgColor={"var(--primary)"}
-                type={"full_dark"}
+                type={"dark"}
               ></Button>
             </button>
           </form>
