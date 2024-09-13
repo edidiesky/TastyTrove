@@ -45,7 +45,7 @@ export default function Card({ x, type }) {
           <DeleteModal
             deletecartmodal={deletecartmodal}
             setModal={setUserDeleteCartModal}
-            type={"menu"}
+            type={"cart"}
             menu={x}
             id={x?.id}
           />

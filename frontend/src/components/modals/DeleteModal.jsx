@@ -20,7 +20,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
   const { deleteCartisLoading, cartDetails, deleteCartisSuccess } = useSelector(
     (store) => store.cart
   );
-  const { deleteUserisLoading,userInfo, deleteUserisSuccess } = useSelector(
+  const { deleteUserisLoading, userInfo, deleteUserisSuccess } = useSelector(
     (store) => store.auth
   );
   const dispatch = useDispatch();
@@ -28,20 +28,23 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
     setModal(false);
   };
   const handleDeleteMenu = useCallback(() => {
-    dispatch(DeleteMenu(data?.id));
+    dispatch(DeleteMenu(id));
   }, []);
   const handleDeleteCart = useCallback(() => {
-    dispatch(DeleteSingleCart(data?.id));
+    dispatch(DeleteSingleCart(id));
   }, []);
   const handleDeleteUser = useCallback(() => {
     // console.log(id)
     dispatch(DeleteSingleUser(id));
   }, []);
-
-  // get singleCart
+// console.log(cartDetails);
+  // get singleCart singleUser singleMenu
   useEffect(() => {
     if (type === "user") {
-      dispatch(GetSingleUser(id))
+      dispatch(GetSingleUser(id));
+    }
+    if (type === "cart") {
+      dispatch(GetSingleCart(id));
     }
     if (id) {
       dispatch(GetSingleCart(id));
@@ -60,7 +63,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
   }, [setModal, deleteRoomisSuccess, deleteUserisSuccess, deleteCartisSuccess]);
 
   // cart delete modal component
-  if (type === "menu") {
+  if (type === "cart") {
     return (
       <DeleteContainer
         as={motion.div}
@@ -95,11 +98,11 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
                 className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
               >
-                Delete {data?.name}?
+                Delete {cartDetails?.menu?.title}?
               </span>
 
               <span className="block text-xs w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
-                By deleting this menu, It cannot be retrieved back if this
+                By deleting this cart item, It cannot be retrieved back if this
                 action you carry has been taken.
               </span>
             </h3>
@@ -124,7 +127,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
                   Deleting in progress
                 </span>
               ) : (
-                " Delete Menu"
+                " Delete Cart"
               )}
             </button>
           </div>
