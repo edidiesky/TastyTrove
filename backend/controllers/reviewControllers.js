@@ -92,7 +92,7 @@ const CreateReview = expressAsyncHandler(async (req, res) => {
 });
 
 // @description  Get review for the seller
-// @route  POST /review/seller
+// @route  GET /review/seller
 // @access  Private
 const GetReviewHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   // instantiate the form data from the request body
