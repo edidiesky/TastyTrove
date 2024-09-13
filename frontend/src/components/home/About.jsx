@@ -117,7 +117,7 @@ export default function About() {
                 // eslint-disable-next-line react/jsx-key
                 <div
                   ref={animateAbout}
-                  className="w-full hide  lg:py-12"
+                  className="w-full lg:py-12"
                   key={index}
                 >
                   <motion.header
@@ -135,7 +135,7 @@ export default function About() {
                       {x.desc}
                     </h4>
                     <div className="w-full mt-4 text-center">
-                      <button className="h-[60px] w-[200px] rounded-[40px] overflow-hidden text-base">
+                      <button className="h-[60px] w-[200px]  overflow-hidden text-base">
                         <Link to={"/restaurant/menu"}>
                           <Button
                             bgColor={"#000"}
