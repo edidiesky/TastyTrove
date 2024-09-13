@@ -5,6 +5,7 @@ import { useSelector } from "react-redux";
 import Card from "./Card";
 import { Link } from "react-router-dom";
 import Button from "../common/Button";
+import ShippingInfo from "./ShippingInformation";
 export default function CartContent() {
   // get the cart content
   const { cart } = useSelector((store) => store.cart);
@@ -19,8 +20,15 @@ export default function CartContent() {
             <h2 className="text-6xl md:text-7xl text-dark family3">
               Cart is empty
             </h2>
-            <Link to={"/restaurant/menu"} className="h-[55px] w-[250px] text-lg">
-              <Button type='dark' bgColor={'var(--primary)'} text={'Browse Our Menu'}></Button>
+            <Link
+              to={"/restaurant/menu"}
+              className="h-[55px] w-[250px] text-lg"
+            >
+              <Button
+                type="dark"
+                bgColor={"var(--primary)"}
+                text={"Browse Our Menu"}
+              ></Button>
             </Link>
           </div>
         ) : (
@@ -48,243 +56,6 @@ export default function CartContent() {
     </div>
   );
 }
-
-const ShippingInfo = () => {
-  // state country and city input
-  const [countryinput, setCountryInput] = React.useState("");
-  const [stateinput, setStateInput] = React.useState("");
-  const [cityinput, setCityInput] = React.useState("");
-  const [zipcode, setZipCode] = React.useState("");
-
-  // country state and city data
-  const [country, setCountry] = React.useState(null);
-  const [state, setState] = React.useState(null);
-  const [city, setCity] = React.useState(null);
-
-  // statelist, counytylost and cityData
-  const [newcountrylist, setNewCountryList] = React.useState([]);
-  const [statelist, setStateList] = React.useState([]);
-  const [citylist, setCityList] = React.useState([]);
-
-  // country modal, statemodal and city modal
-  const [countrymodal, setCountryModal] = React.useState(false);
-  const [statemodal, setStateModal] = React.useState(false);
-  const [citymodal, setCityModal] = React.useState(false);
-
-  // country, state and city  imported Data
-  const countryList = Country.getAllCountries();
-  const stateList = State.getAllStates();
-  const cityList = City.getAllCities();
-
-  // filtering function
-  const handleCountryDataFiltering = () => {
-    // filter the country
-    const filteredCountriedList = countryList?.filter((countries) =>
-      countries?.name?.toLowerCase()?.includes(countryinput?.toLowerCase())
-    );
-    // filter the states
-    let filteredStateList = stateList?.filter(
-      (state) => state?.countryCode === country?.isoCode
-    );
-    // ?.filter((statedata) =>
-    //   statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
-    // );
-
-    const newfilteredStateList = filteredStateList?.filter((statedata) =>
-      statedata?.name?.toLowerCase()?.includes(stateinput?.toLowerCase())
-    );
-
-    // filter the states
-    const filteredCityList = cityList?.filter(
-      (stateList) =>
-        stateList?.stateCode === state?.isoCode &&
-        stateList?.countryCode === state?.countryCode
-    );
-
-    // console.log(newfilteredStateList);
-    setCityList(filteredCityList);
-    setStateList(
-      newfilteredStateList ? newfilteredStateList : filteredStateList
-    );
-    setNewCountryList(filteredCountriedList);
-  };
-
-  useEffect(() => {
-    if (countryinput || country || state) {
-      handleCountryDataFiltering();
-    }
-  }, [
-    countryinput,
-    // statelist,
-    setState,
-    setNewCountryList,
-    setStateList,
-    country,
-    setCityList,
-    state,
-  ]);
-  // console.log(citylist);
-  // console.log(City.getAllCities()[0]);
-  console.log(state);
-  // console.log(newcountrylist);
-  // console.log(State.getAllStates()[0]);
-  return (
-    <div
-      onClick={() => setCountryModal(false)}
-      className="w-full md:w-[80%] flex flex-col gap-4"
-    >
-      <h2 className="text-3xl md:text-4xl text-dark family3">
-        Shipping information
-      </h2>
-
-      <div
-        onClick={() => {
-          setCityModal(false);
-          setStateModal(false);
-          setCountryModal(false);
-        }}
-        className="w-full py-4 flex flex-col gap-4"
-      >
-        <div onClick={() => setCountryModal(true)} className="w-full relative">
-          <input
-            value={countryinput}
-            name="countryinput"
-            onChange={(e) => {
-              // handleCountryData(e);
-              setCountryInput(e.target.value);
-              setCountryModal(true);
-            }}
-            placeholder="Search for your country"
-            className="input bg-[#fff] w-full text-base"
-          />
-
-          {countrymodal && (
-            <div className="absolute top-[100%] z-[500] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
-              <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
-                {newcountrylist?.map((data, index) => {
-                  return (
-                    <span
-                      onClick={() => {
-                        setCountry(data);
-                        setCountryInput(data?.name);
-                        setCountryModal(false);
-                      }}
-                      key={index}
-                      className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
-                    >
-                      {data?.name}
-                    </span>
-                  );
-                })}
-              </div>
-            </div>
-          )}
-        </div>
-        <div className="w-full grid sm:grid-cols-2 gap-4">
-          {/* state */}
-          <div
-            onClick={() => setCountryModal(true)}
-            className="w-full relative"
-          >
-            <input
-              value={stateinput}
-              name="stateinput"
-              onChange={(e) => {
-                // handleCountryData(e);
-                setStateInput(e.target.value);
-                setStateModal(true);
-              }}
-              placeholder="Search for your State"
-              className="input bg-[#fff] w-full text-base"
-            />
-
-            {statemodal && (
-              <div className="absolute top-[100%] z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
-                <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
-                  {statelist?.map((data, index) => {
-                    return (
-                      <span
-                        onClick={() => {
-                          setState(data);
-                          setStateInput(data?.name);
-                          setStateModal(false);
-                        }}
-                        key={index}
-                        className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
-                      >
-                        {data?.name}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-          {/* city */}
-          <div onClick={() => setCityModal(true)} className="w-full relative">
-            <input
-              value={cityinput}
-              name="cityinput"
-              onChange={(e) => {
-                setCityInput(e.target.value);
-                setCityModal(true);
-              }}
-              placeholder="Search for your City"
-              className="input bg-[#fff] w-full text-base"
-            />
-
-            {citymodal && (
-              <div className="absolute top-[100%] z-[400] w-full overflow-hidden border flex flex-col bg-[var(--light-grey)]">
-                <div className="flex max-h-[250px] bg-[var(--light-grey)] overflow-auto w-full  flex-col ">
-                  {citylist?.map((data, index) => {
-                    return (
-                      <span
-                        onClick={() => {
-                          setCity(data);
-                          setCityInput(data?.name);
-                          setCityModal(false);
-                        }}
-                        key={index}
-                        className="text-base cursor-pointer font-normal py-3 hover:text-white px-4 hover:bg-[#0073aa]"
-                      >
-                        {data?.name}
-                      </span>
-                    );
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-        <div className="w-full grid sm:grid-cols-2 gap-4">
-          <input
-            value={zipcode}
-            name="zipcode"
-            onChange={(e) => {
-              setZipCode(e.target.value);
-            }}
-            placeholder="Enter your zipcode"
-            className="input bg-[#fff] w-full text-base"
-          />
-          <div className="w-full flex items-center">
-            <button
-              onClick={() => {
-                // dispatch(onSellerModal());
-              }}
-              className="h-[55px] w-[200px] flex overflow-hidden text-base"
-            >
-              <Button
-                bgColor={"var(--primary)"}
-                text={"Update"}
-                type={"dark"}
-              />
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export const CartContentContainer = styled.div`
   width: 100%;
