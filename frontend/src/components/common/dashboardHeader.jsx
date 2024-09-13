@@ -269,7 +269,7 @@ const DashboardHeader = () => {
                 </span>
               </h4>
             </div>
-            <div className="w-full my-4 flex flex-col">
+            <div className="w-full my-12 flex flex-col">
               {AdminSidebarData?.map((x, index) => {
                 return (
                   <div key={index} className="w-full mx-auto">
