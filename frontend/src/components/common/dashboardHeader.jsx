@@ -208,7 +208,7 @@ const DashboardHeader = () => {
                       Dashboard
                     </NavLink>
                     <NavLink
-                      to={"/dashboard/settings"}
+                      to={`/dashboard/profile/${currentUser?.id}`}
                       className="flex items-center gap-3 font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
                     >
                       <FaRegUser fontSize={"15px"} /> Profile
