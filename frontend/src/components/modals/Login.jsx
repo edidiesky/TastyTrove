@@ -99,16 +99,16 @@ const LoginModal = () => {
         <div className="w-full h-[600px] items-center justify-center flex mx-auto overflow-hidden flex-col">
           <div
             className="cross absolute z-[30000000000] top-3 right-3"
-            // onClick={handleClearAlert}
-            onClick={()=> {
-              toast.success('Hello')
-            }}
+            onClick={handleClearAlert}
+            // onClick={()=> {
+            //   toast.success('Hello')
+            // }}
           >
             <RxCross2 />
           </div>
           <div className="w-full sticky top-0 left-0 p-6 px-8 flex items-center flex-col justify-between">
             <div className="flex flex-col">
-              <h3 className="text-2xl md:text-3xl family3">
+              <h3 className="text-3xl md:text-4xl family3">
                 {/* <AnimateText children={"TastyTrove Restaurant"} /> */}
                 TastyTrove Restaurant
               </h3>
@@ -159,7 +159,7 @@ const LoginModal = () => {
                   data-test="loginmodal_button"
                   type="submit"
                   className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
-                   bg-[#000] rounded-[40px] family1 font-bold"
+                   bg-[#000] rounded-[40px] family1 font-normal"
                 >
                   <AnimateText children={"Sign In"} />
                 </button>

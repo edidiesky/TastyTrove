@@ -160,7 +160,9 @@ const RegisterModal = () => {
                   <button
                     type="submit"
                     disabled={noEntry}
-                    className="p-4 hover:opacity-[.5] px-8 flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
+                    className="p-4 hover:opacity-[.5] px-8 flex items-center
+                     justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 
+                     font-normal text-white"
                   >
                     <AnimateText children={"Sign Up"} />
                   </button>
