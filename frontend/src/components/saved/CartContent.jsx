@@ -19,8 +19,8 @@ export default function CartContent() {
             <h2 className="text-6xl md:text-7xl text-dark family3">
               Cart is empty
             </h2>
-            <Link to={"/restaurant/menu"} className="btn btn-1 text-lg">
-              Browse Our Menu
+            <Link to={"/restaurant/menu"} className="h-[55px] w-[250px] text-lg">
+              <Button type='dark' bgColor={'var(--primary)'} text={'Browse Our Menu'}></Button>
             </Link>
           </div>
         ) : (
