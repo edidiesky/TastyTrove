@@ -40,9 +40,8 @@ const BecomeASellerModal = () => {
   };
   const [image, setImage] = useState("");
 
-  const { becomeASellerisSuccess, becomeASellerisLoading } = useSelector(
-    (store) => store.auth
-  );
+  const { becomeASellerisSuccess, currentUser, becomeASellerisLoading } =
+    useSelector((store) => store.auth);
   const { sellermodal } = useSelector((store) => store.modal);
   const [formvalue, setFormValue] = useState({
     name: "",
@@ -52,6 +51,16 @@ const BecomeASellerModal = () => {
     city: "",
     country: "",
   });
+
+  const noEntry =
+    formvalue.email === "" ||
+    formvalue.hashedPassword === "" ||
+    formvalue.username === "" ||
+    formvalue.city === "" ||
+    formvalue.country === "" ||
+    image === "" ||
+    formvalue.name === "";
+
   const [uploading, setUploading] = useState(false);
   const [alert, setAlert] = useState(false);
 
@@ -114,6 +123,20 @@ const BecomeASellerModal = () => {
     }
   };
 
+  useEffect(() => {
+    if (currentUser) {
+      setFormValue({
+        name: currentUser?.name,
+        username: currentUser?.username,
+        email: currentUser?.email,
+        city: currentUser?.city,
+        country: currentUser?.country,
+        // role: currentUser?.isAdmin,
+      });
+      setImage(currentUser?.image ? currentUser?.image : "");
+    }
+  }, [setFormValue, currentUser, setImage]);
+
   return (
     <SellerModalStyles
       className="w-full h-screen"
@@ -122,7 +145,7 @@ const BecomeASellerModal = () => {
       exit={{ opacity: 0, visibility: "hidden" }}
       animate={{ opacity: 1, visibility: "visible" }}
     >
-      {becomeASellerisLoading && <Loader />}
+      {/* {becomeASellerisLoading && <Loader />} */}
       {uploading && <Loader />}
       <motion.div
         variants={ModalVariants}
@@ -221,12 +244,23 @@ const BecomeASellerModal = () => {
               </div>
 
               <div className="w-full flex items-center justify-center flex-col gap-3">
-                <button
-                  type="submit"
-                  className="p-4 px-8 hover:opacity-[.5] flex items-center justify-center w-full cursor-pointer btn btn-4 rounded-[40px] family1 font-bold text-white"
-                >
-                  <AnimateText children={"Become a Seller"} />
-                </button>
+           
+
+                 <button
+                    data-test="becomingASellerModalButton"
+                    type="submit"
+                    disabled={becomeASellerisLoading || noEntry}
+                    className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
+                   bg-[#000] rounded-[40px] family1 font-normal"
+                  >
+                    {becomeASellerisLoading ? (
+                      <div className="w-full flex justify-center items-center gap-4">
+                        <Loader type="dots" /> Becoming a seller in progress
+                      </div>
+                    ) : (
+                      <AnimateText children={"Become a seller"} />
+                    )}
+                  </button>
               </div>
             </form>
           </div>
@@ -241,7 +275,7 @@ const SellerModalStyles = styled(motion.div)`
   position: fixed;
   left: 0;
   display: flex;
-  z-index: 4000900;
+  z-index: 60;
   align-items: center;
   justify-content: center;
   top: 0;

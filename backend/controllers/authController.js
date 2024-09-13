@@ -144,9 +144,11 @@ const BecomeASeller = asyncHandler(async (req, res) => {
       where: { id: userExist?.id },
       data: { role: "SELLER" },
     });
+      const { hashedPassword: _, ...userWithoutPassword } = user;
+    generateToken(res, user?.id);
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    res.status(200).json({ user, token });
+    res.status(200).json({ user: userWithoutPassword });
   } else {
     const salt = await bcrypt.genSalt(10);
     const hashedpassword = await bcrypt.hash(req.body.hashedPassword, salt);

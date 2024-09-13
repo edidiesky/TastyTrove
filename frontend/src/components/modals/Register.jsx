@@ -53,7 +53,7 @@ const RegisterModal = () => {
 
   const noEntry =
     formvalue.email === "" ||
-    formvalue.password === "" ||
+    formvalue.hashedPassword === "" ||
     formvalue.username === "" ||
     formvalue.name === "";
 
@@ -157,7 +157,7 @@ const RegisterModal = () => {
                 </div>
                 <div className="w-full flex items-center justify-center flex-col gap-3">
                   <button
-                    data-test="loginmodal_button"
+                    data-test="registermodal_button"
                     type="submit"
                     disabled={registerisLoading || noEntry}
                     className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
