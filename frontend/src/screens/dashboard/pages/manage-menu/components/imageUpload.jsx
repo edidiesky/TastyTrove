@@ -79,7 +79,7 @@ const ImageUpload = ({ images, setImages, setFeatures, features }) => {
             {images?.length > 0 ? (
               <div className="flex flex-col gap-2">
                 <span>Photos</span>
-                <div className="w-full h-56 relative">
+                <div className="w-full h-56 md:h-72 relative">
                   <img
                     alt="Cotion"
                     loading="lazy"
