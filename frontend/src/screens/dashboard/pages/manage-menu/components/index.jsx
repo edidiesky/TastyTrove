@@ -20,6 +20,8 @@ const DashboardIndex = () => {
   const [features, setFeatures] = useState("");
   const [description, setDescription] = useState("");
 
+  const noEntry =
+    title === "" || price === "" || availability === "" || images === "" || description === "";
   const dispatch = useDispatch();
   const {
     creatingMenuisLoading,
@@ -118,7 +120,7 @@ const DashboardIndex = () => {
           </h3>
           <div className="flex items-center md:justify-end">
             <button
-              disabled={creatingMenuisLoading || updateMenuisLoading}
+              disabled={creatingMenuisLoading || updateMenuisLoading || noEntry}
               onClick={handleRoomCreation}
               className="h-[50px]  md:h-[55px] min-w-[150px]  md:min-w-[190px] text-sm family1 rounded-[40px]"
             >
