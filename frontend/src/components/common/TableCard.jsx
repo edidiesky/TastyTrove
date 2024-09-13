@@ -161,8 +161,7 @@ const TableCard = ({ x, type }) => {
         <AnimatePresence>
           {userdeletemodal && (
             <DeleteModal
-              type="rooms"
-              room={x}
+              id={x?.id}
               modal={userdeletemodal}
               setModal={setUserDeleteModal}
             />

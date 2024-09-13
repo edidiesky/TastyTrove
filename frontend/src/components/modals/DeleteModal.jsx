@@ -9,11 +9,11 @@ import Loader from "../home/loader";
 import { DeleteSingleUser, GetSingleUser } from "@/features/auth/authReducer";
 import { handleClearUserAlert } from "@/features/auth/authSlice";
 import { handleClearMenuAlert } from "@/features/menu/menuSlice";
-import { DeleteMenu } from "@/features/menu/menuReducer";
+import { DeleteMenu, getSingleMenu } from "@/features/menu/menuReducer";
 import { DeleteSingleCart, GetSingleCart } from "@/features/cart/cartReducer";
 import { clearCartAlert } from "@/features/cart/cartSlice";
 export default function DeleteModal({ type, modal, setModal, data, id }) {
-  const { deleteRoomisLoading, deleteRoomisSuccess } = useSelector(
+  const { deleteMenuisLoading, deleteMenuisSuccess } = useSelector(
     (store) => store.menu
   );
 
@@ -47,20 +47,20 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
       dispatch(GetSingleCart(id));
     }
     if (id) {
-      dispatch(GetSingleCart(id));
+      dispatch(getSingleMenu(id));
     }
   }, [id, type]);
   // console.log(menu);
   useEffect(() => {
     dispatch(handleClearMenuAlert());
     dispatch(handleClearUserAlert());
-    if (deleteRoomisSuccess || deleteUserisSuccess || deleteCartisSuccess) {
+    if (deleteMenuisSuccess || deleteUserisSuccess || deleteCartisSuccess) {
       setModal(false);
       dispatch(handleClearMenuAlert());
       dispatch(handleClearUserAlert());
       dispatch(clearCartAlert());
     }
-  }, [setModal, deleteRoomisSuccess, deleteUserisSuccess, deleteCartisSuccess]);
+  }, [setModal, deleteMenuisSuccess, deleteUserisSuccess, deleteCartisSuccess]);
 
   // cart delete modal component
   if (type === "cart") {
@@ -116,12 +116,12 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
               Cancel
             </button>
             <button
-              disabled={deleteRoomisLoading}
+              disabled={deleteMenuisLoading}
               onClick={handleDeleteCart}
               className="deleteBtn family1 font-booking_font_bold flex items-center justify-center text-sm"
               // onClick={() => dispatch(AdminDeleteUserProfile({ Detailsdata: id }))}
             >
-              {deleteRoomisLoading ? (
+              {deleteMenuisLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader type="dots" />
                   Deleting in progress
@@ -254,12 +254,12 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
             Cancel
           </button>
           <button
-            disabled={deleteRoomisLoading}
+            disabled={deleteMenuisLoading}
             onClick={handleDeleteMenu}
             className="deleteBtn family1 font-booking_font_bold flex items-center justify-center text-sm"
             // onClick={() => dispatch(AdminDeleteUserProfile({ Detailsdata: id }))}
           >
-            {deleteRoomisLoading ? (
+            {deleteMenuisLoading ? (
               <span className="flex items-center justify-center gap-2">
                 <Loader type="dots" />
                 Deleting in progress
