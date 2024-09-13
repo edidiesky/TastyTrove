@@ -18,6 +18,7 @@ import { LoginUser } from "@/features/auth/authReducer";
 import AnimateText from "@/animations/AnimateText";
 
 import Image from "../common/Image";
+import { handleClearUserAlert } from "@/features/auth/authSlice";
 const ModalVariants = {
   initial: {
     opacity: 0,
