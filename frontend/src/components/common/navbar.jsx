@@ -43,7 +43,7 @@ const Navbar = () => {
   const [bar, setBar] = React.useState(false);
   const { currentUser } = useSelector((store) => store.auth);
   const { cart } = useSelector((store) => store.cart);
-  const { payment, payments, updatepaymentisLoading } = useSelector(
+  const { payment, payments } = useSelector(
     (store) => store.payment
   );
 
@@ -52,7 +52,7 @@ const Navbar = () => {
     dispatch(LogoutUser());
     dispatch(ClearUserInfo());
 
-    window.location.reload();
+    // window.location.reload();
   };
   useEffect(() => {
     // fetch the user cart if the user exists
