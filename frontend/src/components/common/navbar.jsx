@@ -190,7 +190,7 @@ const Navbar = () => {
                           </div>
                         ) : currentUser?.email ? (
                           <div className="flex profile_dropdown_bottom flex-col w-full">
-                            <Link
+                            {/* <Link
                               to={"/trips"}
                               className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
@@ -201,7 +201,7 @@ const Navbar = () => {
                               className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
                             >
                               Favourites
-                            </Link>
+                            </Link> */}
                             <div
                               onClick={() => handleLogOut()}
                               className="font-booking_font_bold text-xl font-semibold p-2 family1 w-full profile_list border-b text-dark block"
