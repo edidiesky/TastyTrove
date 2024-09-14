@@ -36,6 +36,10 @@ export const reservationSlice = createSlice({
   reducers: {
     handleClearPayment: (state, action) => {
       state.payment = null;
+      state.createpaymentisSuccess = false;
+      state.updatepaymentisSuccess = false;
+      state.updatepaymentToDeliveredisSuccess = false;
+      state.updatepaymentToDeliveredisLoading = false;
     },
     handleClearPaymentAlert: (state, action) => {
       state.createpaymentisSuccess = false;
