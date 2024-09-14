@@ -9,7 +9,7 @@ import Loader from "../loader";
 import { UpdatePaymentToDelivered } from "@/features/payment/paymentReducer";
 export default function CartHolder({ type }) {
   const dispatch = useDispatch();
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const { cart } = useSelector((store) => store.cart);
   const {
     payment,
@@ -45,15 +45,15 @@ export default function CartHolder({ type }) {
     { totalSalesAmount: 0, totalAmount: 0 }
   );
 
-    useEffect(() => {
-      if (updatepaymentToDeliveredisSuccess) {
-        const timer = setTimeout(() => {
-          navigate(`/dashboard/orders`);
-        }, 500);
+  useEffect(() => {
+    if (updatepaymentToDeliveredisSuccess) {
+      const timer = setTimeout(() => {
+        navigate(`/dashboard/orders`);
+      }, 500);
 
-        return () => clearTimeout(timer);
-      }
-    }, [updatepaymentToDeliveredisSuccess, navigate]);
+      return () => clearTimeout(timer);
+    }
+  }, [updatepaymentToDeliveredisSuccess, navigate]);
   // console.log(totalSalesAmount);
   // UpdatePaymentToDelivered
   if (type === "code") {
@@ -132,7 +132,11 @@ export default function CartHolder({ type }) {
 
               <h4 className="family3 text-2xl uppercase total">
                 Order Status{" "}
-                <span className=" family1 text-lg span1">Not Delivered</span>
+                {payments[0]?.deliverystatus === "DELIVERED" ? (
+                  <span className=" family1 text-lg span1">Delivered</span>
+                ) : (
+                  <span className=" family1 text-lg span1">Not Delivered</span>
+                )}
               </h4>
             </div>
           </div>
@@ -140,7 +144,11 @@ export default function CartHolder({ type }) {
             {currentUser?.role === "SELLER" ||
               (currentUser?.role === "ADMIN" && (
                 <span
-                  onClick={() => dispatch(UpdatePaymentToDelivered(payments[0]?.paymentGroupId))}
+                  onClick={() =>
+                    dispatch(
+                      UpdatePaymentToDelivered(payments[0]?.paymentGroupId)
+                    )
+                  }
                   className="family1 h-[55px] bg-[#fff] text-center w-full
                  cursor-pointer text-base font-normal uppercase"
                 >
