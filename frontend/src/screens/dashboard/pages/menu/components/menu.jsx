@@ -39,7 +39,7 @@ const RoomsList = () => {
                       <th>Price</th>
                       <th className="hidden lg:table-cell">Availability</th>
                       <th>Date Created</th>
-                      <th>Manage Room</th>
+                      <th>Manage Menu</th>
                     </tr>
                   </thead>
                   <tbody>
