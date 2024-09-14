@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { handleClearPaymentAlert } from "@/features/payment/paymentSlice";
 import Loader from "../loader";
 import { UpdatePaymentToFailed } from "../../features/payment/paymentReducer";
+import { onLoginModal } from "@/features/modals/modalSlice";
 const FlutterPaymentButton = ({ totalPrice }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,14 +48,19 @@ const FlutterPaymentButton = ({ totalPrice }) => {
 
   const handleFlutterwavePayment = useFlutterwave(config);
   const handleCreateOrderPayment = () => {
-    dispatch(
-      CreatePayment({
-        cartItems: cart,
-        amount: totalPrice,
-        currency: "NGN",
-        ShippingInformation: shippingInformation,
-      })
-    );
+    if (!currentUser) {
+      dispatch(onLoginModal())
+    } else {
+     dispatch(
+       CreatePayment({
+         cartItems: cart,
+         amount: totalPrice,
+         currency: "NGN",
+         ShippingInformation: shippingInformation,
+       })
+     );
+    }
+ 
   };
   useEffect(() => {
     if (flutterpaymentsuccess) {
