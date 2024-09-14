@@ -21,10 +21,12 @@ const TableCard = ({ x, type }) => {
         {/* <Delete /> */}
         <tr key={x?.id}>
           <td>
-            <span className="flex items-center gap-2">
-              {x?.status === "CONFIRMED"
-                ? " Payment made from"
-                : " Payment Canceled by"}{" "}
+            <span className="">
+              <span>
+                {x?.status === "CONFIRMED"
+                  ? " Payment made by"
+                  : " Payment Canceled by"}
+              </span>{" "}
               <span className="family1 font-bold text-dark">
                 {x?.user?.name}
               </span>
