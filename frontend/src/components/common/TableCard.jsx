@@ -23,7 +23,7 @@ const TableCard = ({ x, type }) => {
           <td>
             <span className="flex items-center gap-2">
               {x?.status === "CONFIRMED"
-                ? " Payment Received from"
+                ? " Payment made from"
                 : " Payment Canceled by"}{" "}
               <span className="family1 font-bold text-dark">
                 {x?.user?.name}
@@ -40,6 +40,17 @@ const TableCard = ({ x, type }) => {
             ) : (
               <span className="text-xs family1 font-semibold text-center danger">
                 {x?.status}
+              </span>
+            )}
+          </td>
+          <td>
+            {x?.deliverystatus === "DELIVERED" ? (
+              <span className="text-xs family1 font-semibold text-center success">
+                {x?.deliverystatus}
+              </span>
+            ) : (
+              <span className="text-xs family1 font-semibold text-center danger">
+                {x?.deliverystatus}
               </span>
             )}
           </td>
@@ -87,8 +98,19 @@ const TableCard = ({ x, type }) => {
               </span>
             )}
           </td>
+          <td>
+            {x?.deliverystatus === "DELIVERED" ? (
+              <span className="text-xs family1 font-semibold text-center success">
+                {x?.deliverystatus}
+              </span>
+            ) : (
+              <span className="text-xs family1 font-semibold text-center danger">
+                {x?.deliverystatus}
+              </span>
+            )}
+          </td>
           <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
-          <td>NGN</td>
+          {/* <td>NGN</td> */}
         </tr>
       </>
     );

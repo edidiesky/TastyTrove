@@ -5,11 +5,12 @@ import {
   GetPaymentHistory,
   GetSinglePaymentHistory,
   UpdatePaymentToSuccess,
+  UpdatePaymentToDelivered,
   UpdatePaymentToFailed,
 } from "./paymentReducer";
 const initialState = {
   payment: null,
-  updatedReservation:null,
+  updatedReservation: null,
   payments: [],
   alertText: "",
   showAlert: false,
@@ -24,7 +25,9 @@ const initialState = {
 
   updatepaymentisLoading: false,
   updatepaymentisSuccess: false,
-  updatepaymentisError: false,
+
+  updatepaymentToDeliveredisLoading: false,
+  updatepaymentToDeliveredisSuccess: false,
 };
 
 export const reservationSlice = createSlice({
@@ -37,6 +40,8 @@ export const reservationSlice = createSlice({
     handleClearPaymentAlert: (state, action) => {
       state.createpaymentisSuccess = false;
       state.updatepaymentisSuccess = false;
+      state.updatepaymentToDeliveredisSuccess = false;
+      state.updatepaymentToDeliveredisLoading = false;
     },
   },
   extraReducers: (builder) => {
@@ -81,6 +86,20 @@ export const reservationSlice = createSlice({
       state.getpaymentisLoading = false;
       toast.error(action.payload);
     });
+    // UpdatePaymentToDelivered
+    builder.addCase(UpdatePaymentToDelivered.pending, (state, action) => {
+      state.updatepaymentToDeliveredisLoading = true;
+    });
+    builder.addCase(UpdatePaymentToDelivered.fulfilled, (state, action) => {
+      state.updatepaymentToDeliveredisLoading = false;
+      state.updatepaymentToDeliveredisSuccess = true;
+      toast.success("Payment Updated to delivered");
+    });
+    builder.addCase(UpdatePaymentToDelivered.rejected, (state, action) => {
+      state.updatepaymentToDeliveredisSuccess = false;
+      state.updatepaymentToDeliveredisLoading = false;
+      toast.error(action.payload);
+    });
 
     builder.addCase(UpdatePaymentToSuccess.pending, (state, action) => {
       state.updatepaymentisLoading = true;
@@ -111,5 +130,6 @@ export const reservationSlice = createSlice({
     });
   },
 });
-export const { handleClearPayment,handleClearPaymentAlert } = reservationSlice.actions;
+export const { handleClearPayment, handleClearPaymentAlert } =
+  reservationSlice.actions;
 export default reservationSlice.reducer;

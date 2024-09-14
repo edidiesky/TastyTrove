@@ -75,8 +75,9 @@ const ReservationList = () => {
                   <th>Customer</th>
                   <th>Price</th>
                   <th>Status</th>
+                  <th>Delivered</th>
                   <th>Date Created</th>
-                  <th>Currency</th>
+                  {/* <th>Currency</th> */}
                 </tr>
               </thead>
               <tbody>

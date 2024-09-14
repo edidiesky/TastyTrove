@@ -2,17 +2,26 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import styled from "styled-components";
-// import { calculateBagItem } from "../../Features/cart/cartSlice";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FlutterPaymentButton from "../payment/FlutterPaymentButton";
+import Button from "../common/Button";
+import Loader from "../loader";
+import { UpdatePaymentToDelivered } from "@/features/payment/paymentReducer";
 export default function CartHolder({ type }) {
   const dispatch = useDispatch();
+    const navigate = useNavigate();
   const { cart } = useSelector((store) => store.cart);
-  const { payment, payments, updatepaymentisLoading } = useSelector(
-    (store) => store.payment
+  const {
+    payment,
+    payments,
+    updatepaymentisLoading,
+    updatepaymentToDeliveredisSuccess,
+    updatepaymentToDeliveredisLoading,
+  } = useSelector((store) => store.payment);
+  const { shippingInformation, currentUser } = useSelector(
+    (store) => store.auth
   );
-  const { shippingInformation } = useSelector((store) => store.auth);
-// console.log(shippingInformation);
+  // console.log(shippingInformation);
   const { totalShoppingPrice } = cart?.reduce(
     (acc, total) => {
       const totalPrice = total?.totalPrice;
@@ -35,7 +44,18 @@ export default function CartHolder({ type }) {
     },
     { totalSalesAmount: 0, totalAmount: 0 }
   );
+
+    useEffect(() => {
+      if (updatepaymentToDeliveredisSuccess) {
+        const timer = setTimeout(() => {
+          navigate(`/dashboard/orders`);
+        }, 500);
+
+        return () => clearTimeout(timer);
+      }
+    }, [updatepaymentToDeliveredisSuccess, navigate]);
   // console.log(totalSalesAmount);
+  // UpdatePaymentToDelivered
   if (type === "code") {
     return (
       <CartHolderContainer>
@@ -43,7 +63,7 @@ export default function CartHolder({ type }) {
         <div className="w-full flex gap-2">
           <input type="text" className="input flex-1" />
           <div className="uppercase flex-1">
-            <div className="family1 uppercase btn text-dark text-xl">
+            <div className="family1 uppercase btn text-dark text-lg">
               Apply Coupon
             </div>
           </div>
@@ -68,11 +88,11 @@ export default function CartHolder({ type }) {
             <div className="w-full flex flex-col gap-6">
               <h4 className="family3 text-2xl uppercase subtotal">
                 Subtotal{" "}
-                <span className=" family1  text-xl">₦{totalAmount}</span>
+                <span className=" family1  text-lg">₦{totalAmount}</span>
               </h4>
               <h4 className="family3 text-2xl uppercase total">
                 Shipping{" "}
-                <span className=" family1  text-end text-xl span1">
+                <span className=" family1  text-end text-lg span1">
                   <span className="block pb-3">
                     Flat rate: <br />{" "}
                     <span className="pt-2">
@@ -99,22 +119,50 @@ export default function CartHolder({ type }) {
               </h4>
               <h4 className="family3 text-2xl uppercase total">
                 Date Created{" "}
-                <span className=" family1  text-end text-xl span1">
+                <span className=" family1  text-end text-lg span1">
                   {moment(payments[0]?.createdAt).format("DD MMM YYYY")}
                 </span>
               </h4>
               <h4 className="family3 text-2xl uppercase total">
                 Total Payment{" "}
-                <span className=" family1 text-xl span1">
+                <span className=" family1 text-lg span1">
                   ₦{totalSalesAmount}
                 </span>
+              </h4>
+
+              <h4 className="family3 text-2xl uppercase total">
+                Order Status{" "}
+                <span className=" family1 text-lg span1">Not Delivered</span>
               </h4>
             </div>
           </div>
           <div className="uppercase flex flex-col gap-4">
-            {/* <button className="family1 rounded-[40px] py-4 hover:opacity-[.7] bg-[var(--primary)] text-center w-full cursor-pointer text-dark text-base font-semibold uppercase">
-             Update Cart
-           </button> */}
+            {currentUser?.role === "SELLER" ||
+              (currentUser?.role === "ADMIN" && (
+                <span
+                  onClick={() => dispatch(UpdatePaymentToDelivered(payments[0]?.paymentGroupId))}
+                  className="family1 h-[55px] bg-[#fff] text-center w-full
+                 cursor-pointer text-base font-normal uppercase"
+                >
+                  <Button
+                    bgColor={"var(--primary)"}
+                    type={"dark"}
+                    text={
+                      updatepaymentToDeliveredisLoading ? (
+                        <div className="full flex items-center justify-center gap-3">
+                          Updating <Loader type={"dots"} />
+                        </div>
+                      ) : (
+                        <>
+                          <div className="full flex items-center justify-center gap-3">
+                            Update Order To Delivered
+                          </div>
+                        </>
+                      )
+                    }
+                  ></Button>
+                </span>
+              ))}
           </div>
         </div>
       </CartHolderContainer>
@@ -136,11 +184,11 @@ export default function CartHolder({ type }) {
           <div className="w-full flex flex-col gap-6">
             <h4 className="family3 text-2xl uppercase subtotal">
               Subtotal{" "}
-              <span className=" family1  text-xl">₦{totalShoppingPrice}</span>
+              <span className=" family1  text-lg">₦{totalShoppingPrice}</span>
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Shipping{" "}
-              <span className=" family1  text-end text-xl span1">
+              <span className=" family1  text-end text-lg span1">
                 <span className="block pb-3">
                   Flat rate: <br />{" "}
                   <span className="pt-2">
@@ -167,7 +215,7 @@ export default function CartHolder({ type }) {
             </h4>
             <h4 className="family3 text-2xl uppercase total">
               Total{" "}
-              <span className=" family1 text-xl span1">₦{totalPrice}</span>
+              <span className=" family1 text-lg span1">₦{totalPrice}</span>
             </h4>
           </div>
         </div>

@@ -6,6 +6,7 @@ import {
   UpdatePaymentToFailed,
   GetSinglePaymentDetails,
   UpdatePaymentToSuccess,
+  UpdatePaymentToDelivered,
 } from "../controllers/orderControllers.js";
 import {
     adminMiddleware,
@@ -16,6 +17,11 @@ import {
 router.route("/").post(authMiddleware, CreatePayment);
 router.get("/history", authMiddleware,adminMiddleware, GetPaymentHistoryForAdmin);
 router.put("/history/success/:id", authMiddleware, UpdatePaymentToSuccess);
+router.put(
+  "/history/delivery/success/:id",
+  authMiddleware,
+  UpdatePaymentToDelivered
+);
 router.put("/history/failed/:id", authMiddleware, UpdatePaymentToFailed);
 router.get("/history/:id", authMiddleware, GetSinglePaymentDetails);
 

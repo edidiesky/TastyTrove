@@ -31,6 +31,7 @@ const OrderList = () => {
                     <th>Amount</th>
                     <th>Currency</th>
                     <th>Status</th>
+                    <th>Delivered</th>
                     {/* <th className=''>Location</th> */}
                     <th>Date Created</th>
                     <th>View Details</th>

@@ -91,6 +91,31 @@ export const UpdatePaymentToSuccess = createAsyncThunk(
   }
 );
 
+export const UpdatePaymentToDelivered = createAsyncThunk(
+  "UpdatePaymentToDelivered",
+  async (id, thunkAPI) => {
+    try {
+      const state = thunkAPI.getState();
+
+      const { data } = await axios.put(
+        `${
+          import.meta.env.VITE_API_BASE_URLS
+        }/payment/history/delivery/success/${id}`,
+        null,
+        { withCredentials: true }
+      );
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(
+        error.response && error.response.data.message
+          ? error.response.data.message
+          : error.message
+      );
+    }
+  }
+);
+
+
 export const UpdatePaymentToFailed = createAsyncThunk(
   "UpdatePaymentToFailed",
   async (paymentDataId, thunkAPI) => {

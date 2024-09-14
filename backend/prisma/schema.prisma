@@ -22,6 +22,11 @@ enum PaymentStatus {
   CANCELLED
 }
 
+enum DeliveryStatus {
+  PENDING
+  DELIVERED
+}
+
 enum RoleStatus {
   ADMIN
   USER
@@ -85,6 +90,8 @@ model Payment {
   paymentGroupId String?
   ShippingInformation Json?
   status         PaymentStatus @default(PENDING)
+  deliverystatus         DeliveryStatus @default(PENDING)
+  // DeliveryStatus
   userid         String?       @db.ObjectId // Customer ID
   sellerId       String?       @db.ObjectId // Seller ID
   user           User?         @relation("UserPayments", fields: [userid], references: [id], onDelete: SetNull)
