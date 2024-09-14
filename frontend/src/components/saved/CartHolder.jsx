@@ -85,13 +85,13 @@ export default function CartHolder({ type }) {
                     <span className="text-end space-x-2">
                       Shipping to <br />{" "}
                       <span className=" text-bold">
-                        {shippingInformation?.country?.name}
-                      </span>
-                      <span className=" text-bold">
-                        {shippingInformation?.city?.name}
+                        {shippingInformation?.city?.name},
                       </span>
                       <span className=" text-bold">
                         {shippingInformation?.state?.name}
+                      </span>
+                      <span className=" text-bold">
+                        {shippingInformation?.country?.name}
                       </span>
                     </span>
                   )}
@@ -153,13 +153,13 @@ export default function CartHolder({ type }) {
                   <span className="text-end space-x-2">
                     Shipping to <br />{" "}
                     <span className=" text-bold">
-                      {shippingInformation?.country?.name}
-                    </span>
-                    <span className=" text-bold">
-                      {shippingInformation?.city?.name}
+                      {shippingInformation?.city?.name},
                     </span>
                     <span className=" text-bold">
                       {shippingInformation?.state?.name}
+                    </span>
+                    <span className=" text-bold">
+                      {shippingInformation?.country?.name}
                     </span>
                   </span>
                 )}

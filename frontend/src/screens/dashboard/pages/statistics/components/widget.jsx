@@ -13,26 +13,26 @@ const Widget = () => {
       title: "Total Sales",
       icon: <IoFastFood />,
       color: "#8F0EBE",
-      subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "-"}`,
+      subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "0"}`,
     },
     {
       title: "Total Menu",
       icon: <IoFastFood />,
       color: "#8bca41",
-      subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "-"}`,
+      subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "0"}`,
     },
     {
       title: "Total Ratings",
       icon: <MdReviews />,
       color: "#8F0EBE",
-      subtitle: `${widgetData?.totalReview ? widgetData?.totalReview : "-"}`,
+      subtitle: `${widgetData?.totalReview ? widgetData?.totalReview : "0"}`,
     },
     {
       title: "Total Clients",
       icon: <FaRegUser />,
       color: "#FD9D2A",
       subtitle: `${
-        widgetData?.totalClients ? widgetData?.totalClients?.length : "-"
+        widgetData?.totalClients ? widgetData?.totalClients?.length : "0"
       }`,
     },
   ];
