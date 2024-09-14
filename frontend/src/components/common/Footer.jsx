@@ -20,16 +20,24 @@ export default function Footer() {
             nunc. Quam eu proin sit massa condimentum.
           </h4>
           <div className="w-full flex items-center justify-center gap-4">
-            <div className="icon flex items-center justify-center">
+            <div style={{
+              transition:"all .4s"
+            }} className="icon hover:text-[#fff] cursor-pointer bg-[#fff] hover:bg-[var(--primary)] hover:translate-y-3 flex items-center justify-center">
               <ImFacebook fontSize={"18px"} />
             </div>
-            <div className="icon flex items-center justify-center">
+            <div style={{
+              transition:"all .4s"
+            }} className="icon hover:text-[#fff] cursor-pointer bg-[#fff] hover:bg-[var(--primary)] hover:translate-y-3 flex items-center justify-center">
               <FaTwitter fontSize={"18px"} />
             </div>
-            <div className="icon flex items-center justify-center">
+            <div style={{
+              transition:"all .4s"
+            }} className="icon hover:text-[#fff] cursor-pointer bg-[#fff] hover:bg-[var(--primary)] hover:translate-y-3 flex items-center justify-center">
               <AiOutlineInstagram fontSize={"18px"} />
             </div>
-            <div className="icon flex items-center justify-center">
+            <div style={{
+              transition:"all .4s"
+            }} className="icon hover:text-[#fff] cursor-pointer bg-[#fff] hover:bg-[var(--primary)] hover:translate-y-3 flex items-center justify-center">
               <AiOutlineYoutube fontSize={"18px"} />
             </div>
           </div>
@@ -50,7 +58,6 @@ const FooterContainer = styled.div`
     url(https://avada.website/restaurant/wp-content/uploads/sites/112/2020/01/slider52x-1200x1107.jpg);
 
   .icon {
-    background: #fff;
     border-radius: 50%;
     width: 60px;
     height: 60px;
