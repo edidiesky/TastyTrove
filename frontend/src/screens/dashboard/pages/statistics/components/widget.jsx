@@ -7,6 +7,10 @@ import { IoFastFood } from "react-icons/io5";
 const Widget = () => {
   const [widgettab, setWidgetTab] = useState(1);
   const { widgetData } = useSelector((store) => store.stat);
+  const totalReview = widgetData?.totalReview?.reduce((acc, total) => {
+    acc += total?.review;
+    return acc;
+  }, 0);
 
   const widgetDatas = [
     {
@@ -25,7 +29,9 @@ const Widget = () => {
       title: "Total Ratings",
       icon: <MdReviews />,
       color: "#8F0EBE",
-      subtitle: `${widgetData?.totalReview ? widgetData?.totalReview : "0"}`,
+      subtitle: `${
+        totalReview ? totalReview / widgetData?.totalReview?.length : 0
+      }`,
     },
     {
       title: "Total Clients",

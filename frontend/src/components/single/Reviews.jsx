@@ -8,6 +8,7 @@ import { ReviewInputData } from "@/constants/data/formdata";
 import { onLoginModal } from "@/features/modals/modalSlice";
 import Loader from "../loader";
 export default function Reviews() {
+  const [showreview, setShowReview] = useState(false);
   const { menu } = useSelector((store) => store.menu);
   const { currentUser } = useSelector((store) => store.auth);
   const { reviews, review, createMenuReviewisLoading } = useSelector(
@@ -57,14 +58,14 @@ export default function Reviews() {
     });
   };
 
-    useEffect(() => {
-      if (currentUser) {
-        setFormData({
-          email: currentUser?.email,
-          name: currentUser?.name,
-        });
-      }
-    }, [currentUser, setFormData]);
+  useEffect(() => {
+    if (currentUser) {
+      setFormData({
+        email: currentUser?.email,
+        name: currentUser?.name,
+      });
+    }
+  }, [currentUser, setFormData]);
 
   return (
     <div data-testid="review_component" className="w-full flex flex-col gap-12">
@@ -225,7 +226,7 @@ export default function Reviews() {
                     key={index}
                     className="w-full flex flex-col gap-4"
                   >
-                    <div className="w-full flex items-center gap-4">
+                    <div className="w-full flex items-start gap-4">
                       {review?.user?.image ? (
                         <img
                           src={review?.user?.image}
@@ -259,10 +260,26 @@ export default function Reviews() {
                             </span>
                           </span>
                         </h4>
-                        <div className="w-full flex items-center gap-4">
+                        <div className="w-full gap-2">
                           <span className="flex text-sm family1 font-normal items-center">
-                            {review?.description}
+                            {review?.description?.length > 200 ? (
+                              <>
+                                {showreview
+                                  ? review?.description
+                                  : `${review?.description?.slice(0, 200)} ...`}
+                              </>
+                            ) : (
+                              <>{review?.description}</>
+                            )}
                           </span>
+                          {review?.description?.length > 200 && (
+                            <span
+                              onClick={() => setShowReview(!showreview)}
+                              className="text-sm cursor-pointer family1 font-bold underline"
+                            >
+                              {showreview ? "Read Less" : "Read More"}
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>

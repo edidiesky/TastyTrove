@@ -46,7 +46,7 @@ const SellerWidgetData = async (sellerid, payment) => {
   const widgetData = {
     totalSales: recentsales?.length,
     totalMenu: menu?.length,
-    totalReview: reviews?.length,
+    totalReview: reviews,
     totalClients: clients,
   };
   return widgetData;
