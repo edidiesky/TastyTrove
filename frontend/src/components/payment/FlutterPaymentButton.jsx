@@ -48,19 +48,18 @@ const FlutterPaymentButton = ({ totalPrice }) => {
 
   const handleFlutterwavePayment = useFlutterwave(config);
   const handleCreateOrderPayment = () => {
-    if (!currentUser) {
-      dispatch(onLoginModal())
+    if (currentUser === null) {
+      dispatch(onLoginModal());
     } else {
-     dispatch(
-       CreatePayment({
-         cartItems: cart,
-         amount: totalPrice,
-         currency: "NGN",
-         ShippingInformation: shippingInformation,
-       })
-     );
+      dispatch(
+        CreatePayment({
+          cartItems: cart,
+          amount: totalPrice,
+          currency: "NGN",
+          ShippingInformation: shippingInformation,
+        })
+      );
     }
- 
   };
   useEffect(() => {
     if (flutterpaymentsuccess) {
@@ -84,25 +83,28 @@ const FlutterPaymentButton = ({ totalPrice }) => {
         disabled={createpaymentisSuccess || shippingInformation === null}
         onClick={() => {
           handleCreateOrderPayment();
-          handleFlutterwavePayment({
-            callback: (response) => {
-              // handleCreateOrderPayment();
-              // console.log(response);
-              if (response.status === "successful") {
-                // Handle successful payment here
-                setFlutterPaymentSuccess(true);
-                toast.success("Payment Successful!! Redirecting Soon...");
-              } else {
-                toast.error("Payment Failed");
-              }
-              closePaymentModal(); // Close the modal programmatically
-            },
-            onClose: () => {
-              // Handle when the payment modal is closed
-              // alert("Payment Modal Closed");
-              setFlutterPaymentFailed(true);
-            },
-          });
+          {
+            currentUser !== null &&
+              handleFlutterwavePayment({
+                callback: (response) => {
+                  // handleCreateOrderPayment();
+                  // console.log(response);
+                  if (response.status === "successful") {
+                    // Handle successful payment here
+                    setFlutterPaymentSuccess(true);
+                    toast.success("Payment Successful!! Redirecting Soon...");
+                  } else {
+                    toast.error("Payment Failed");
+                  }
+                  closePaymentModal(); // Close the modal programmatically
+                },
+                onClose: () => {
+                  // Handle when the payment modal is closed
+                  // alert("Payment Modal Closed");
+                  setFlutterPaymentFailed(true);
+                },
+              });
+          }
         }}
         className="family1 py-4 rounded-[40px] hover:opacity-[.7] bg-[#fff] text-center w-full cursor-pointer 
         text-dark text-base font-normal uppercase"

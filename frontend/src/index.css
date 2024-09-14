@@ -178,6 +178,7 @@ input {
   padding: 0 1rem;
   border: none;
   outline: none;
+  color:var(--dark-1) !important;
 }
 .input:focus {
   outline: auto;

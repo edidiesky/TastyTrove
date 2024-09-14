@@ -100,18 +100,18 @@ const PaymentLists = () => {
     "days"
   );
 
-  console.log(payments);
+  // console.log(payments);
 
   const [showconfetti, setShowConfetti] = useState(false);
 
-  // useEffect(() => {
-  //   if (payment) {
-  //     const interval = setTimeout(() => {
-  //       setShowConfetti(true);
-  //     }, 300);
-  //     return () => clearTimeout(interval);
-  //   }
-  // }, [payment]);
+  useEffect(() => {
+    if (payment) {
+      const interval = setTimeout(() => {
+        setShowConfetti(true);
+      }, 300);
+      return () => clearTimeout(interval);
+    }
+  }, [payment]);
   return (
     <div className="overflow-hidden">
       {showconfetti && <Confettis />}
