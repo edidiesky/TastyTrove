@@ -33,7 +33,7 @@ const OrderList = () => {
                     <th>Status</th>
                     {/* <th className=''>Location</th> */}
                     <th>Date Created</th>
-                    {/* <th>View Details</th> */}
+                    <th>View Details</th>
                   </tr>
                 </thead>
                 <tbody>

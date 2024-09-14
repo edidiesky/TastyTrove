@@ -44,6 +44,14 @@ const TableCard = ({ x, type }) => {
             )}
           </td>
           <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
+          <td>
+            <Link
+              to={`/payment-success/${x?.paymentGroupId}`}
+              className="py-2 px-4 w-fit bg-[#eee] text-xs rounded-lg"
+            >
+              View
+            </Link>
+          </td>
         </tr>
       </>
     );
