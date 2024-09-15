@@ -18,15 +18,13 @@ const DashboardIndex = () => {
   return (
     <div className="w-full">
       <div className="w-full flex flex-col gap-12">
-        <h2 className="text-4xl lg:text-5xl font-bold family1">
-          Your Growth <br /> Analytics
-          <span className="text-sm pt-3 block text-dark family1 font-semibold family1">
-            <span className="font-normal family1 text-sm text-dark">
-              Welcome back,
-            </span>{" "}
-            {currentUser?.name}
+       
+        <h3 className="text-4xl block lg:text-5xl family1 font-bold">
+          Welcome {currentUser?.username}
+          <span className="block text-base font-normal">
+            Explore information and activity about your property
           </span>
-        </h2>
+        </h3>
         <div className="flex flex-col gap-20">
           <Widget />
           <Statistics />
