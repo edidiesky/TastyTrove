@@ -241,7 +241,7 @@ const DashboardHeader = () => {
           {/* <div className="w-full h-full absolute bg-[#fff] z-[24] object-cover" /> */}
           <div
             style={{ zIndex: "200" }}
-            className="w-full h-full bg-[#fafafa] Header_wrapper py-4 flex items-start flex-col gap-2"
+            className="w-full h-full bg-[#fff] Header_wrapper py-4 flex items-start flex-col gap-2"
           >
             <div className="flex px-3 items-center gap-2">
               {currentUser?.image ? (
