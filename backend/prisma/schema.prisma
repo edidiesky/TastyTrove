@@ -83,6 +83,8 @@ model Menu {
   user              User?    @relation(fields: [userid], references: [id], onDelete: Cascade)
   cart              Cart[]
   Review            Review[]
+
+  @@index([userid])
 }
 
 model Payment {
@@ -102,6 +104,11 @@ model Payment {
   createdAt           DateTime       @default(now())
   updatedAt           DateTime       @updatedAt
   cartItems           Json?
+
+  @@index([createdAt])
+  @@index([status])
+  @@index([userid])
+  @@index([sellerId])
 }
 
 model Review {

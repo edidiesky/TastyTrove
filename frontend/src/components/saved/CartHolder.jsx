@@ -140,38 +140,40 @@ export default function CartHolder({ type }) {
               </h4>
             </div>
           </div>
-          <div className="uppercase flex flex-col gap-4">
-            {currentUser?.role === "SELLER" ||
-              (currentUser?.role === "ADMIN" && (
-                <span
-                  onClick={() =>
-                    dispatch(
-                      UpdatePaymentToDelivered(payments[0]?.paymentGroupId)
-                    )
-                  }
-                  className="family1 h-[55px] bg-[#fff] text-center w-full
-                 cursor-pointer text-base font-normal uppercase"
-                >
-                  <Button
-                    bgColor={"var(--primary)"}
-                    type={"dark"}
-                    text={
-                      updatepaymentToDeliveredisLoading ? (
-                        <div className="full flex items-center justify-center gap-3">
-                          Updating <Loader type={"dots"} />
-                        </div>
-                      ) : (
-                        <>
-                          <div className="full flex items-center justify-center gap-3">
-                            Update Order To Delivered
-                          </div>
-                        </>
+          {payments[0]?.deliverystatus !== "DELIVERED" && (
+            <div className="uppercase flex flex-col gap-4">
+              {currentUser?.role === "SELLER" ||
+                (currentUser?.role === "ADMIN" && (
+                  <span
+                    onClick={() =>
+                      dispatch(
+                        UpdatePaymentToDelivered(payments[0]?.paymentGroupId)
                       )
                     }
-                  ></Button>
-                </span>
-              ))}
-          </div>
+                    className="family1 h-[55px] bg-[#fff] text-center w-full
+                 cursor-pointer text-base font-normal uppercase"
+                  >
+                    <Button
+                      bgColor={"var(--primary)"}
+                      type={"dark"}
+                      text={
+                        updatepaymentToDeliveredisLoading ? (
+                          <div className="full flex items-center justify-center gap-3">
+                            Updating <Loader type={"dots"} />
+                          </div>
+                        ) : (
+                          <>
+                            <div className="full flex items-center justify-center gap-3">
+                              Update Order To Delivered
+                            </div>
+                          </>
+                        )
+                      }
+                    ></Button>
+                  </span>
+                ))}
+            </div>
+          )}
         </div>
       </CartHolderContainer>
     );
