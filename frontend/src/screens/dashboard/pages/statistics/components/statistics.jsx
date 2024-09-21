@@ -23,11 +23,13 @@ const Statistics = () => {
 };
 
 const GrowthStat = () => {
-  const { totalStatAmount, totalMonth } = useSelector((store) => store.stat);
+  const { totalMonthSalesAmount, totalMonth, totalMonthRevenue } = useSelector(
+    (store) => store.stat
+  );
   const [options, setOptions] = useState({
     chart: {
       height: 350,
-      type: "bar",
+      type: "line",
       fontFamily: "Work Sans",
       foreColor: "#333",
       fontSize: "30px",
@@ -39,50 +41,67 @@ const GrowthStat = () => {
     dataLabels: {
       enabled: false,
     },
-    colors: ["#000", "#000"],
+    colors: ["#000", "var(--primary)"],
     stroke: {
       curve: "smooth",
     },
     xaxis: {
-      categories: [
-        "Jan",
-        "Febr",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "sept",
-      ],
+      categories: totalMonth,
+      // categories: [
+      //   "Jan",
+      //   "Febr",
+      //   "Mar",
+      //   "Apr",
+      //   "May",
+      //   "Jun",
+      //   "Jul",
+      //   "Aug",
+      //   "sept",
+      // ],
     },
   });
 
   const [series, setSeries] = useState([
     {
-      name: "Transactions",
-      data: [10, 34, 55, 60, 120, 44, 15, 27, 20],
+      name: "Revenue",
+      data: totalMonthRevenue,
     },
- 
+    // {
+    //   name: "Sales",
+    //   data: totalMonthSalesAmount,
+    // },
   ]);
-  // useEffect(() => {
-  //    if (Array.isArray(totalMonth) && Array.isArray([10,4,5,670,20,4,5,17,20])) {
-  //      if (totalMonth.length !== 0 || totalStatAmount.length !== 0) {
-  //        setOptions((prevOptions) => ({
-  //          ...prevOptions,
-  //          xaxis: {
-  //            categories: totalMonth,
-  //          },
-  //        }));
-  //        setSeries([
-  //          {
-  //            name: "Transactions",
-  //            data: totalStatAmount,
-  //          },
-  //        ]);
-  //      }
-  //    }
-  // }, [totalStatAmount, totalMonth, setSeries, setOptions]);
+  useEffect(() => {
+    if (
+      Array.isArray(totalMonth) &&
+      Array.isArray(totalMonthRevenue) &&
+      Array.isArray(totalMonthSalesAmount)
+    ) {
+      if (
+        totalMonth.length !== 0 ||
+        totalMonthSalesAmount.length !== 0 ||
+        totalMonthRevenue.length !== 0
+      ) {
+        setOptions((prevOptions) => ({
+          ...prevOptions,
+          xaxis: {
+            categories: totalMonth,
+          },
+        }));
+        setSeries([
+          {
+            name: "Revenue",
+            data: totalMonthRevenue,
+          },
+          // {
+          //   name: "Sales",
+          //   data: totalMonthSalesAmount,
+          // },
+        ]);
+      }
+    }
+  }, [totalMonthSalesAmount, totalMonthRevenue, totalMonth]);
+
   return (
     <div id="chart" className="w-full h-full">
       <div className="w-full flex flex-col h-full gap-8">
@@ -92,7 +111,7 @@ const GrowthStat = () => {
             <Chart
               options={options}
               series={series}
-              type="bar"
+              type="line"
               width={"100%"}
               height={"400px"}
             />

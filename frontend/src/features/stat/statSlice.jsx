@@ -8,10 +8,12 @@ const initialState = {
   totalRooms: 0,
   getStatisLoading: false,
   getStatisSuccess: false,
-  totalMonth: [],
   topSaledProduct: [],
   recentSales: [],
   widgetData: null,
+  totalMonthRevenue: [],
+  totalMonthSalesAmount: [],
+  totalMonth: [],
 };
 
 export const statSlice = createSlice({
@@ -28,6 +30,16 @@ export const statSlice = createSlice({
       state.recentSales = action.payload.recentsales;
       state.widgetData = action.payload.widgetData;
       state.topSaledProduct = action.payload.topproduct;
+
+      state.totalMonth = action.payload?.orderHistory
+        .map((data) => `${data?.date}`)
+        .slice(0, 6);
+      state.totalMonthSalesAmount = action.payload?.orderHistory
+        .map((data) => data.salesAmount)
+        .slice(0, 6);
+      state.totalMonthRevenue = action.payload?.orderHistory
+        .map((data) => Number(data.totalRevenue))
+        .slice(0, 6);
     });
     builder.addCase(getAdminStat.rejected, (state, action) => {
       state.getStatisLoading = false;
