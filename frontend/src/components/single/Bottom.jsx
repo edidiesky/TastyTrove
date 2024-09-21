@@ -113,7 +113,7 @@ export default function Bottom() {
             {maincourse?.slice(0, 3).map((data) => {
               return (
                 <Link
-                  to={`/restaurant/takeout/${data?.title}?category=${data?.category}`}
+                  to={`/restaurant/takeout/${data?.id}?category=${data?.category}`}
                   className="flex group w-full flex-col gap-8"
                 >
                   <div className="w-full h-52">

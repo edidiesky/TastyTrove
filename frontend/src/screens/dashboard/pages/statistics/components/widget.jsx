@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdReviews } from "react-icons/md";
 import { MdOutlineArrowOutward } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaMoneyBill } from "react-icons/fa";
 import { IoFastFood } from "react-icons/io5";
 const Widget = () => {
   const [widgettab, setWidgetTab] = useState(1);
@@ -15,11 +15,15 @@ const Widget = () => {
   const widgetDatas = [
     {
       title: "Total Revenue",
-      icon: <FaRegUser />,
+      icon: <FaMoneyBill />,
       color: "#FD9D2A",
       subtitle: `₦${
         widgetData?.totalRevenue
-          ? Number(widgetData?.totalRevenue).toLocaleString()
+          ? widgetData?.totalRevenue >= 1000
+            ? (widgetData.totalRevenue / 1000).toFixed(1) + "K"
+            : widgetData?.totalRevenue >= 1000000
+            ? (widgetData.totalRevenue / 1000000).toFixed(1) + "M"
+            : Number(widgetData.totalRevenue).toLocaleString()
           : "0"
       }`,
     },
