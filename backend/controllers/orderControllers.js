@@ -100,10 +100,11 @@ const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
     },
   });
   const totalPayment = await prisma.payment.count({});
+  const noOfPages = Math.ceil(totalPayment / limit)
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  res.status(200).json({ payment });
+  res.status(200).json({ payment, noOfPages, totalPayment });
 });
 
 // @description  Get a single payment details
