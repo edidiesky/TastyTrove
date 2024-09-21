@@ -14,6 +14,16 @@ const Widget = () => {
 
   const widgetDatas = [
     {
+      title: "Total Revenue",
+      icon: <FaRegUser />,
+      color: "#FD9D2A",
+      subtitle: `₦${
+        widgetData?.totalRevenue
+          ? Number(widgetData?.totalRevenue).toLocaleString()
+          : "0"
+      }`,
+    },
+    {
       title: "Total Sales",
       icon: <IoFastFood />,
       color: "#8F0EBE",
@@ -31,14 +41,6 @@ const Widget = () => {
       color: "#8F0EBE",
       subtitle: `${
         totalReview ? totalReview / widgetData?.totalReview?.length : 0
-      }`,
-    },
-    {
-      title: "Total Clients",
-      icon: <FaRegUser />,
-      color: "#FD9D2A",
-      subtitle: `${
-        widgetData?.totalClients ? widgetData?.totalClients?.length : "0"
       }`,
     },
   ];
