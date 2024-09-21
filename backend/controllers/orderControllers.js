@@ -82,11 +82,16 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
 // @route  GET /order/history
 // @access  Private
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
+  const { limit = 12, page = 1 } = req.query;
+  // calculate the pagination
+  const skip = (page - 1) * limit;
   // instantiate the form data from the request body
   const payment = await prisma.payment.findMany({
     where: {
       sellerId: req.user.userId,
     },
+    skip: parseInt(skip),
+    take: parseInt(limit),
     include: {
       user: true,
     },

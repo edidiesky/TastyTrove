@@ -2,24 +2,6 @@ import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
 import { format } from "date-fns";
 import moment from "moment";
-const TopSellingProduct = async (sellerid) => {
-  const topProduct = await prisma.menu.findMany({
-    where: { userid: sellerid },
-    orderBy: {
-      servedCount: "desc", // Order by servedCount in descending order
-    },
-    take: 5,
-  });
-  return topProduct;
-};
-const SellerRecentSales = async (sellerid) => {
-  const recentsales = await prisma.payment.findMany({
-    where: { sellerId: sellerid },
-    include: { user: true },
-    take: 4,
-  });
-  return recentsales;
-};
 
 const SellerWidgetData = async (sellerid, payment) => {
   // get total clients
@@ -51,32 +33,42 @@ const SellerWidgetData = async (sellerid, payment) => {
   };
   return widgetData;
 };
-
-const fetchRecentSales = async (sellerid) => {
-  const recentsales = await prisma.payment.findMany({
-    where: { sellerId: sellerid },
-    include: {
-      user: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-
-  return recentsales;
-};
-
 const GetStatisticsDataForAdmin = asyncHandler(async (req, res) => {
   const sellerid = req?.user?.userId;
-  const topproduct = await TopSellingProduct(sellerid);
-  const recentsales = await SellerRecentSales(sellerid);
-
-  const recentPayment = await fetchRecentSales(sellerid);
-  const widgetData = await SellerWidgetData(sellerid, recentPayment);
+  const start = performance.now();
+  const [topproduct, recentsales] = await Promise.all([
+    await prisma.menu.findMany({
+      where: { userid: sellerid },
+      orderBy: {
+        servedCount: "desc", // Order by servedCount in descending order
+      },
+      take: 5,
+    }),
+    await prisma.payment.findMany({
+      where: { sellerId: sellerid },
+      include: { user: true },
+      orderBy: {
+        createdAt: "desc",
+      },
+      take: 4,
+    }),
+    await prisma.payment.findMany({
+      where: { sellerId: sellerid },
+      include: {
+        user: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    }),
+    // await SellerWidgetData(sellerid),
+  ]);
+  const end = performance.now();
   res.status(200).json({
     topproduct,
     recentsales,
-    widgetData,
+    // widgetData,
+    latency: `Total Latency - ${(end - start) / 1000} seconds`,
   });
 });
 
