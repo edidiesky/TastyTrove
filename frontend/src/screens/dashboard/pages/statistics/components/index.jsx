@@ -18,10 +18,9 @@ const DashboardIndex = () => {
   return (
     <div className="w-full">
       <div className="w-full flex flex-col gap-12">
-       
         <h3 className="text-4xl block lg:text-5xl family1 font-bold">
-          Welcome {currentUser?.username}
-          <span className="block text-base font-normal">
+          Welcome 👋
+          <span className="block pt-3 text-base font-normal">
             Explore information and activity about your property
           </span>
         </h3>

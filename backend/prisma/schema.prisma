@@ -25,6 +25,7 @@ enum PaymentStatus {
 enum DeliveryStatus {
   PENDING
   DELIVERED
+  TRANSIT
 }
 
 enum RoleStatus {
@@ -32,26 +33,27 @@ enum RoleStatus {
   USER
   SELLER
 }
+
 // @description  User model
 model User {
-  id                     String          @id @default(auto()) @map("_id") @db.ObjectId
-  name                   String
-  username               String
-  email                  String?         @unique
-  emailVerified          Boolean?
-  image                  String?
-  country                String?
-  city                   String?
-  verifiedToken          String?
-  resetPasswordToken     String?
-  role                   RoleStatus      @default(USER)
-  hashedPassword         String?
-  createdAt              DateTime        @default(now())
-  verifiedTokenExpiresAt DateTime?
+  id                          String          @id @default(auto()) @map("_id") @db.ObjectId
+  name                        String
+  username                    String
+  email                       String?         @unique
+  emailVerified               Boolean?
+  image                       String?
+  country                     String?
+  city                        String?
+  verifiedToken               String?
+  resetPasswordToken          String?
+  role                        RoleStatus      @default(USER)
+  hashedPassword              String?
+  createdAt                   DateTime        @default(now())
+  verifiedTokenExpiresAt      DateTime?
   resetPasswordTokenExpiresAt DateTime?
-  updatedAt              DateTime        @updatedAt
-  conversationIds        String[]        @db.ObjectId
-  conversations          Conversations[] @relation(fields: [conversationIds], references: [id])
+  updatedAt                   DateTime        @updatedAt
+  conversationIds             String[]        @db.ObjectId
+  conversations               Conversations[] @relation(fields: [conversationIds], references: [id])
 
   seenMessageIds String[]        @db.ObjectId
   seenMessages   Message[]       @relation("Seen", fields: [seenMessageIds], references: [id])
@@ -82,31 +84,32 @@ model Menu {
   cart              Cart[]
   Review            Review[]
 }
+
 model Payment {
-  id             String        @id @default(auto()) @map("_id") @db.ObjectId
-  amount         Int?
-  salesamount    Int?
-  currency       String
-  paymentGroupId String?
+  id                  String         @id @default(auto()) @map("_id") @db.ObjectId
+  amount              Int?
+  salesamount         Int?
+  currency            String
+  paymentGroupId      String?
   ShippingInformation Json?
-  status         PaymentStatus @default(PENDING)
-  deliverystatus         DeliveryStatus @default(PENDING)
+  status              PaymentStatus  @default(PENDING)
+  deliverystatus      DeliveryStatus @default(PENDING)
   // DeliveryStatus
-  userid         String?       @db.ObjectId // Customer ID
-  sellerId       String?       @db.ObjectId // Seller ID
-  user           User?         @relation("UserPayments", fields: [userid], references: [id], onDelete: SetNull)
-  seller         User?         @relation("SellerPayments", fields: [sellerId], references: [id], onDelete: SetNull)
-  createdAt      DateTime      @default(now())
-  updatedAt      DateTime      @updatedAt
-  cartItems      Json?
+  userid              String?        @db.ObjectId // Customer ID
+  sellerId            String?        @db.ObjectId // Seller ID
+  user                User?          @relation("UserPayments", fields: [userid], references: [id], onDelete: SetNull)
+  seller              User?          @relation("SellerPayments", fields: [sellerId], references: [id], onDelete: SetNull)
+  createdAt           DateTime       @default(now())
+  updatedAt           DateTime       @updatedAt
+  cartItems           Json?
 }
 
 model Review {
-  id          String @id @default(auto()) @map("_id") @db.ObjectId
+  id          String  @id @default(auto()) @map("_id") @db.ObjectId
   review      Int
   description String
-  menuid      String @db.ObjectId
-  menu        Menu?  @relation(fields: [menuid], references: [id], onDelete: Cascade)
+  menuid      String  @db.ObjectId
+  menu        Menu?   @relation(fields: [menuid], references: [id], onDelete: Cascade)
   userid      String? @db.ObjectId // Customer ID
   sellerId    String? @db.ObjectId // Seller ID
   user        User?   @relation("UserReview", fields: [userid], references: [id], onDelete: SetNull)
@@ -125,7 +128,6 @@ model Cart {
   menu       Menu?             @relation(fields: [menuid], references: [id], onDelete: Cascade)
   user       User?             @relation(fields: [userid], references: [id], onDelete: SetNull)
 }
-
 
 model Notifications {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId

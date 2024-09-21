@@ -57,9 +57,7 @@ const RegisterModal = () => {
     formvalue.username === "" ||
     formvalue.name === "";
 
-  console.log(noEntry, formvalue);
-
-  const [loading, setLoading] = useState(false);
+  // console.log(noEntry, formvalue);
 
   const handleFormChange = (e) => {
     setFormValue({
