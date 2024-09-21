@@ -185,7 +185,7 @@ const DashboardSidebar = () => {
                   <img
                     src={currentUser?.image}
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                   />
                 ) : currentUser?.username ? (
                   // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
@@ -194,13 +194,13 @@ const DashboardSidebar = () => {
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                   />
                 ) : (
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                   />
                 )}
                 <h4 className="text-base font-bold family5">
