@@ -33,13 +33,13 @@ export const statSlice = createSlice({
 
       state.totalMonth = action.payload?.orderHistory
         .map((data) => `${data?.date}`)
-        .slice(0, 6);
+        .slice(0, 8);
       state.totalMonthSalesAmount = action.payload?.orderHistory
         .map((data) => data.salesAmount)
-        .slice(0, 6);
+        .slice(0, 8);
       state.totalMonthRevenue = action.payload?.orderHistory
         .map((data) => Number(data.totalRevenue))
-        .slice(0, 6);
+        .slice(0, 8);
     });
     builder.addCase(getAdminStat.rejected, (state, action) => {
       state.getStatisLoading = false;

@@ -32,7 +32,7 @@ const GetStatisticsDataForAdmin = asyncHandler(async (req, res) => {
         where: { sellerId: sellerid, status: "CONFIRMED" },
         include: { user: true },
         orderBy: {
-          createdAt: "desc",
+          createdAt: "asc",
         },
       }),
       // await SellerWidgetData(sellerid),

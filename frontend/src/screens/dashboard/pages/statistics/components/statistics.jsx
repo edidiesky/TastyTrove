@@ -9,20 +9,23 @@ import ProductBreakdown from "./ProductBreakdown";
 const Statistics = () => {
   return (
     <div className="w-full flex flex-col gap-12">
-      <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
+      {/* <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
         <div className="flex w-full">
-          <GrowthStat />
+          <MonthlyRevenue />
         </div>
         <div className="flex w-full flex-col gap-4 lg:w-[360px]">
           <ProductBreakdown />
         </div>
+      </div> */}
+      <div className="flex w-full">
+        <MonthlyRevenue />
       </div>
       <SalesStat />
     </div>
   );
 };
 
-const GrowthStat = () => {
+const MonthlyRevenue = () => {
   const { totalMonthSalesAmount, totalMonth, totalMonthRevenue } = useSelector(
     (store) => store.stat
   );
@@ -122,62 +125,150 @@ const GrowthStat = () => {
   );
 };
 
+const MonthlySales = () => {
+  const { totalMonthSalesAmount, totalMonth, totalMonthRevenue } = useSelector(
+    (store) => store.stat
+  );
+  const [options, setOptions] = useState({
+    chart: {
+      height: 350,
+      type: "line",
+      fontFamily: "Work Sans",
+      foreColor: "#333",
+      fontSize: "30px",
+      textTransform: "capitalize",
+      zoom: {
+        enabled: false,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    colors: ["#000", "var(--primary)"],
+    stroke: {
+      curve: "smooth",
+    },
+    xaxis: {
+      categories: totalMonth,
+      // categories: [
+      //   "Jan",
+      //   "Febr",
+      //   "Mar",
+      //   "Apr",
+      //   "May",
+      //   "Jun",
+      //   "Jul",
+      //   "Aug",
+      //   "sept",
+      // ],
+    },
+  });
+
+  const [series, setSeries] = useState([
+    {
+      name: "Sales",
+      data: totalMonthSalesAmount,
+    },
+  ]);
+  useEffect(() => {
+    if (Array.isArray(totalMonth) && Array.isArray(totalMonthSalesAmount)) {
+      if (totalMonth.length !== 0 || totalMonthSalesAmount.length !== 0) {
+        setOptions((prevOptions) => ({
+          ...prevOptions,
+          xaxis: {
+            categories: totalMonth,
+          },
+        }));
+        setSeries([
+          {
+            name: "Sales",
+            data: totalMonthSalesAmount,
+          },
+        ]);
+      }
+    }
+  }, [totalMonthSalesAmount, totalMonth]);
+
+  return (
+    <div id="chart" className="w-full h-full">
+      <div className="w-full flex flex-col h-full gap-8">
+        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] flex gap-4">
+          <h3 className="text-3xl font-semibold family1">Sales Count</h3>
+          <div className="flex h-full w-full flex-col gap-8">
+            <Chart
+              options={options}
+              series={series}
+              type="line"
+              width={"100%"}
+              height={"350px"}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 const SalesStat = () => {
   const { recentSales, topSaledProduct } = useSelector((store) => store.stat);
   return (
-    <div className="w-full grid md:grid-cols-2 items-start gap-4 ">
-      <div className="w-full flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
-        <div className="w-full px-6 flex items-center justify-between">
-          <h3 className="text-xl lg:text-2xl font-semibold family1">
-            Recent Sales
-          </h3>
-          <Link
-            style={{ textDecoration: "underline" }}
-            className="text-sm text-[var(--dark-1)] family1"
-            to={"/dashboard/orders"}
-          >
-            View All
-          </Link>
-        </div>
-        <ul className="flex flex-col w-full">
-          {recentSales?.length === 0 ? (
-            <span className="text-sm">
-              {" "}
-              <span className="block px-6 text-sm font-normal">
-                You have no recent sales
+    <div className="w-full">
+      <div className="w-full grid md:grid-cols-custom_2 items-start gap-4 ">
+        {/* top selling product */}
+        <div className="w-full md:w-[350px] flex flex-col  py-8 bg-[#fafafa] rounded-[10px] gap-4">
+          <div className="w-full px-6 flex items-center justify-between">
+            <h3 className="text-xl lg:text-2xl font-semibold family1">
+              Recent Sales
+            </h3>
+            <Link
+              style={{ textDecoration: "underline" }}
+              className="text-sm text-[var(--dark-1)] family1"
+              to={"/dashboard/orders"}
+            >
+              View All
+            </Link>
+          </div>
+          <ul className="flex flex-col w-full">
+            {recentSales?.length === 0 ? (
+              <span className="text-sm">
+                {" "}
+                <span className="block px-6 text-sm font-normal">
+                  You have no recent sales
+                </span>
               </span>
-            </span>
-          ) : (
-            <>
-              {recentSales?.slice(0, 3)?.map((data, index) => {
-                return (
-                  <li
-                    key={index}
-                    className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
-                  >
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={data?.cartItems[0]?.menu?.image}
-                        className="w-20 object-cover"
-                      />
+            ) : (
+              <>
+                {recentSales?.slice(0, 3)?.map((data, index) => {
+                  return (
+                    <li
+                      key={index}
+                      className="text-base py-2 px-6 cursor-pointer hover:bg-[#fafafa] family1 flex items-center justify-between w-full"
+                    >
+                      <div className="flex items-center gap-4">
+                        <img
+                          src={data?.cartItems[0]?.menu?.image}
+                          className="w-20 object-cover"
+                        />
 
-                      <span className="text-base family1 font-semibold">
-                        {data?.cartItems[0]?.menu?.title}
-                        <div className="block family1 font-normal text-xs text-grey">
-                          {moment(data?.createdAt).format("DD MMM YYYY")}
-                        </div>
-                      </span>
-                    </div>
-                    <span>₦{data?.amount}</span>
-                  </li>
-                );
-              })}
-            </>
-          )}
-        </ul>
-      </div>
-      {/* top selling product */}
-      <div className="w-full flex bg-[#fafafa]  py-8 rounded-[10px] flex-col gap-4">
+                        <span className="text-base family1 font-semibold">
+                          {data?.cartItems[0]?.menu?.title}
+                          <div className="block family1 font-normal text-xs text-grey">
+                            {moment(data?.createdAt).format("DD MMM YYYY")}
+                          </div>
+                        </span>
+                      </div>
+                      <span>₦{data?.amount}</span>
+                    </li>
+                  );
+                })}
+              </>
+            )}
+          </ul>
+        </div>
+        <div className="w-full">
+          <MonthlySales />
+        </div>
+        {/* <div className="w-full flex bg-[#fafafa]  py-8 rounded-[10px] flex-col gap-4">
         <div className="w-full px-6 flex items-center justify-between">
           <h3 className="text-xl lg:text-2xl font-semibold family1">
             Top Selling Product
@@ -214,6 +305,7 @@ const SalesStat = () => {
             </>
           )}
         </ul>
+      </div> */}
       </div>
     </div>
   );
