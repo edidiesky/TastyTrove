@@ -82,7 +82,7 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
 // @route  GET /order/history
 // @access  Private
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
-  const { limit = 12, page = 1 } = req.query;
+  const { limit = 6, page = 1 } = req.query;
   // calculate the pagination
   const skip = (page - 1) * limit;
   // instantiate the form data from the request body
@@ -99,6 +99,7 @@ const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
       createdAt: "desc",
     },
   });
+  const totalPayment = await prisma.payment.count({});
   res.setHeader("Content-Type", "text/html");
   res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
