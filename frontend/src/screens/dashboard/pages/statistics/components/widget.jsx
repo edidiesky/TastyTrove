@@ -43,7 +43,7 @@ const Widget = () => {
     },
   ];
   return (
-    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-2">
+    <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8">
       {widgetDatas?.map((widget, index) => {
         return (
           <div
