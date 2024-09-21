@@ -156,13 +156,13 @@ const DashboardHeader = () => {
                   <img
                     src={currentUser?.image}
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                   />
                 ) : (
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                   />
                 )}
                 {/* <h4 className="text-base text-dark family1 family1">
@@ -185,7 +185,7 @@ const DashboardHeader = () => {
                       <img
                         src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                         alt=""
-                        className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                        className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                       />
                     )}
                     <h4 className="text-base text-dark font-bold family1">
@@ -248,7 +248,7 @@ const DashboardHeader = () => {
                 <img
                   src={currentUser?.image}
                   alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                  className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                 />
               ) : currentUser?.username ? (
                 // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
@@ -257,12 +257,12 @@ const DashboardHeader = () => {
                 <img
                   src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                   alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                  className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
                 />
               ) : (
                 ""
               )}
-              <h4 className="text-base family1 text-[#000]">
+              <h4 className="text-lg font-bold family1 text-[#000]">
                 {currentUser?.name}
                 <span className="block font-normal family1 text-xs text-[#000]">
                   {currentUser?.email}
@@ -285,7 +285,7 @@ const DashboardHeader = () => {
                           {" "}
                           {x.tab.icon}
                         </span>
-                        {<h4 className="text-xs">{x.tab?.title}</h4>}
+                        {<h4 className="text-base">{x.tab?.title}</h4>}
                       </div>
                     </NavLink>
                   </div>
