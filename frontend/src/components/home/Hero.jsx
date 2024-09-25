@@ -23,7 +23,7 @@ export default function Hero() {
           ease: "power3.inOut",
           duration: 2,
         },
-        1
+        .8
       )
       .fromTo(
         text2?.chars,
@@ -38,7 +38,7 @@ export default function Hero() {
           duration: 1,
           ease: "power4.out",
         },
-        1.5
+        1.2
       )
       .fromTo(
         text1?.words,
@@ -55,7 +55,7 @@ export default function Hero() {
           duration: 1.6,
           ease: "power4.out",
         },
-        2
+        1.6
       )
       // hero_btn
       .fromTo(
@@ -71,7 +71,7 @@ export default function Hero() {
           duration: 0.8,
           ease: "power4.out",
         },
-        3
+        1.8
       )
       .fromTo(
         ".hero_btn",

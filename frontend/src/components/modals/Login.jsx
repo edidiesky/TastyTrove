@@ -171,6 +171,7 @@ const LoginModal = () => {
                   <span className="text-sm font-normal text-dark">
                     Not yet a Member?{" "}
                     <span
+                      data-test="toggle_button"
                       onClick={handleLoginModal}
                       style={{ textDecoration: "underline" }}
                       className="font-bold family1 cursor-pointer"

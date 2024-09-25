@@ -93,6 +93,7 @@ const RegisterModal = () => {
       <motion.div
         variants={ModalVariants}
         initial="initial"
+        data-test="registerModal"
         animate={registermodal ? "enter" : "exit"}
         exit="exit"
         className="guestModalCard grid md:grid-cols-2"
@@ -139,9 +140,9 @@ const RegisterModal = () => {
                       >
                         <span className="text-dark ">{input.label}</span>
                         <input
-                          className="w-full input rounded-md text-dark
-                           font-normal text-sm"
+                          className="w-full input rounded-md text-dark font-normal text-sm"
                           required={true}
+                          data-test={`register_input_${input?.name}`}
                           name={input?.name}
                           id={input.label}
                           value={formvalue[input.name]}
@@ -155,7 +156,7 @@ const RegisterModal = () => {
                 </div>
                 <div className="w-full flex items-center justify-center flex-col gap-3">
                   <button
-                    data-test="registermodal_button"
+                    data-test="registration_button"
                     type="submit"
                     disabled={registerisLoading || noEntry}
                     className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
@@ -173,6 +174,7 @@ const RegisterModal = () => {
                     <span className="text-sm font-normal text-dark">
                       Already a Member?{" "}
                       <span
+                        data-test="toggle_button"
                         onClick={handleLoginModal}
                         style={{ textDecoration: "underline" }}
                         className="font-bold family1 cursor-pointer"
@@ -183,18 +185,6 @@ const RegisterModal = () => {
                     </span>
                   </div>
                 </div>
-                {/* <div className="option text-dark">or</div> */}
-                {/* <div
-                  // onClick={() => signIn("google")}
-                  className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#fff] rounded-[40px] family1 font-bold border border-[rgba(0,0,0,.9)]"
-                >
-                  <FcGoogle fontSize={"24px"} />
-                  <AnimateText children={"Continue with Google"} />
-                </div> */}
-                {/* <div className="p-4 px-8 items-center flex justify-center gap-4 w-full cursor-pointer btn text-[#000] rounded-[10px] family1 font-bold border border-[rgba(0,0,0,.9)]">
-                <FaGithub fontSize={"28px"} />
-                Continue with Github
-              </div>{" "} */}
               </form>
             </div>
           </div>
