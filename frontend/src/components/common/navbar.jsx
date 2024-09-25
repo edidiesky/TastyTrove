@@ -94,12 +94,12 @@ const Navbar = () => {
             <NavLink
               end
               to={"/restaurant/cart"}
-              className="w-12 tab relative rounded-full cursor-pointer
+              className="w-12 tab relative rounded-full object-cover cursor-pointer
                hover:bg-[#18181885] text-[#fff] h-12 flex items-center justify-center text-xl"
             >
               <IoBag />
               {cart?.length !== 0 && (
-                <div className="w-6 h-6 absolute bg-[var(--red)] -top-1 right-6 text-[#fff] text-xs rounded-full flex items-center justify-center">
+                <div className="w-6 h-6 absolute bg-[var(--red)] -top-1 right-6 text-[#fff] text-xs rounded-full object-cover flex items-center justify-center">
                   {cart?.length}
                 </div>
               )}
@@ -134,7 +134,7 @@ const Navbar = () => {
                 </button>
               )}
             <ProfileDropdownStyles className="z-[30000000000000] relative flex items-end justify-end gap-4">
-              {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full bg-[#000] flex items-center justify-center text-2xl text-white">
+              {/* <div className="w-12 lg:w-12 h-12 lg:h-12 rounded-full object-cover bg-[#000] flex items-center justify-center text-2xl text-white">
                 <BiCart />
               </div> */}
               {currentUser ? (
@@ -147,13 +147,13 @@ const Navbar = () => {
                             <img
                               src={currentUser?.image}
                               alt=""
-                              className="w-12 lg:w-14 h-12 lg:h-14 rounded-full"
+                              className="w-12 lg:w-14 h-12 lg:h-14 rounded-full object-cover"
                             />
                           ) : (
                             <img
                               src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                               alt=""
-                              className="w-12 lg:w-14 h-12 lg:h-14 rounded-full"
+                              className="w-12 lg:w-14 h-12 lg:h-14 rounded-full object-cover"
                             />
                           )}
                           <h4 className="text-base text-dark font-bold family1">
@@ -234,22 +234,22 @@ const Navbar = () => {
                         <img
                           src={currentUser?.image}
                           alt=""
-                          className="w-12 lg:w-16 h-12 lg:h-16 rounded-full"
+                          className="w-12 lg:w-16 h-12 lg:h-16 rounded-full object-cover"
                         />
                       ) : currentUser?.username ? (
-                        // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
+                        // <div className="w-12 h-12 text-white rounded-full object-cover bg-[#000] text-2xl flex items-center justify-center ">
                         //   {currentUser?.username[0]}{" "}
                         // </div>
                         <img
                           src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                           alt=""
-                          className="w-10 lg:w-16 h-10 lg:h-16 rounded-full"
+                          className="w-10 lg:w-16 h-10 lg:h-16 rounded-full object-cover"
                         />
                       ) : (
                         <img
                           src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                           alt=""
-                          className="w-10 lg:w-16 h-10 lg:h-16 rounded-full"
+                          className="w-10 lg:w-16 h-10 lg:h-16 rounded-full object-cover"
                         />
                       )}
                       {/* {currentUser && (
@@ -340,22 +340,22 @@ const Sidebar = ({ bar, setBar }) => {
               <img
                 src={currentUser?.image}
                 alt=""
-                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full object-cover"
               />
             ) : currentUser?.username ? (
-              // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
+              // <div className="w-12 h-12 text-white rounded-full object-cover bg-[#000] text-2xl flex items-center justify-center ">
               //   {currentUser?.username[0]}{" "}
               // </div>
               <img
                 src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                 alt=""
-                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full object-cover"
               />
             ) : (
               <img
                 src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                 alt=""
-                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full"
+                className="w-12 lg:w-12 h-12 lg:h-12 rounded-full object-cover"
               />
             )}
             {currentUser && (
