@@ -64,7 +64,7 @@ describe("Testing the registration process for Tastytrove", () => {
     cy.getDataTest("register_input_username").should("exist").type("Cynthia");
     cy.getDataTest("registration_button").click();
 
-    cy.wait("@registerUser", { timeout: 10000 });
+    cy.wait("@registerUser", );
     // cy.get('div[role="status"]').should("exist");
     cy.getDataTest("loginmodal").should("exist");
   });

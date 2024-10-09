@@ -197,7 +197,7 @@ const UpdatePaymentToSuccess = expressAsyncHandler(async (req, res) => {
   // check if the user has a cart
   const cart = await prisma.cart.findMany({
     where: { userid: req.user?.userId },
-  });
+  }); 
   if (cart?.length > 0) {
     // delete the user cart
     await prisma.cart.deleteMany({
