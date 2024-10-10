@@ -27,7 +27,7 @@ const DashboardIndex = () => {
       </AnimatePresence>
       <div className="w-full pb-20 flex flex-col gap-12">
         <div className="w-full grid lg:grid-cols-2 lg:items-center gap-8 justify-between">
-          <h3 className="text-4xl font-bold family1">
+          <h3 className="text-3xl block lg:text-4xl family1 font-semibold">
             Summary of <br /> your Menu
             <span className="block text-sm font-normal">
               Make a review of your menu created either by adding or modifying

@@ -86,7 +86,7 @@ const Widget = () => {
               </div>
             </div>
             <div className="flex flex-col">
-              <h3 className="text-4xl md:text-5xl font-semibold family1">
+              <h3 className="text-3xl md:text-4xl font-semibold family1">
                 {widget?.subtitle}
                 <span className="text-grey pb-2 block family1 text-sm font-normal">
                   {widget?.title}

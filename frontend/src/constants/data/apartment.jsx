@@ -244,3 +244,13 @@ export const apartmentDataList = [
     price: "70",
   },
 ];
+
+
+
+setInterval(() => {
+  console.log("How do I work???");
+}, 2000);
+
+setTimeout(() => {
+  console.log("How do I also work??");
+}, 2000);
