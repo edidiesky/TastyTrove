@@ -48,19 +48,19 @@ export default function About() {
       <div className="w-full flex flex-col gap-16">
         <div className="w-85 md:px-12 auto wrapper flex gap-12 lg:gap-20">
           <div className="flex-1 flex flex-col gap-12">
-            <h4 className="text-base max-w-[500px] md:text-xl family4">
+            <h4 className="text-base max-w-[500px] md:text-xl family1 leading-[1.4]">
               <AnimateTextWord
                 children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
               />
             </h4>
             <h1 className="family3 text-6xl flex flex-col sm:text-7xl leading-[1.5]">
-              <Word children={`Food is our common`} />
-              <Word children={`ground, a universal`} />
-              <Word children={`experience.`} />
+              <Word
+                children={`Food is our common ground, a universal experience`}
+              />
             </h1>
-            <h4 className="text-base max-w-[500px] md:text-xl family4">
+            <h4 className="text-base max-w-[500px] md:text-xl family1 leading-[1.4]">
               <AnimateTextWord
-                children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
+                children={`Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
               />
             </h4>
 
@@ -115,11 +115,7 @@ export default function About() {
             {data.map((x, index) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <div
-                  ref={animateAbout}
-                  className="w-full lg:py-12"
-                  key={index}
-                >
+                <div ref={animateAbout} className="w-full lg:py-12" key={index}>
                   <motion.header
                     key={x.id}
                     variants={smallslideup2}
@@ -130,8 +126,8 @@ export default function About() {
                   >
                     <h3 className="family3 text-center pb-3 text-4xl md:text-4xl font-normal">
                       {x.title}
-                    </h3>
-                    <h4 className="family4 text-center text-base md:text-lg font-normal">
+                    </h3> 
+                    <h4 className="family1 text-center text-base md:text-lg font-normal">
                       {x.desc}
                     </h4>
                     <div className="w-full mt-4 text-center">
