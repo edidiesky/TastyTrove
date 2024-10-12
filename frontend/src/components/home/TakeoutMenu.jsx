@@ -22,7 +22,9 @@ export default function TakeoutMenu() {
               <AnimateTextWord> ENJOY YOUR MEAL AT HOME</AnimateTextWord>
             </h4>
             <h1 className="family3 leading-[1.6] text-6xl md:text-7xl text-white">
-              <AnimateTextWord>TAKEOUT NOW AVAILABLE</AnimateTextWord>
+              <AnimateTextWord type="bigtext">
+                TAKEOUT NOW AVAILABLE
+              </AnimateTextWord>
             </h1>
             <h4 className="text-xl md:text-2xl family2 text-light text-white">
               <Word>

@@ -21,7 +21,7 @@ export default function Experience() {
               FINE DINING EXPERIENCE
             </h4>
             <h1 className="family3 text-6xl leading-[1.5] md:text-7xl text-white">
-              <AnimateTextWord>THE BEST TABLE IN TOWN</AnimateTextWord>
+              <AnimateTextWord type="bigtext">THE BEST TABLE IN TOWN</AnimateTextWord>
             </h1>
             <h4 className="text-xl md:text-2xl family2 text-light text-white">
               <AnimateTextWord>

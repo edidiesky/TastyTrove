@@ -33,7 +33,7 @@ export default function Critics() {
               <AnimateTextWord>MEGGY STEWART</AnimateTextWord>
             </h4>
             <h2 className="family3 text-6xl text-white">
-              <AnimateTextWord> NEW YORK TIMES</AnimateTextWord>
+              <AnimateTextWord type="bigtext"> NEW YORK TIMES</AnimateTextWord>
             </h2>
             <h4 className="text-lg md:text-xl family1 text-light text-white">
               <Word>
