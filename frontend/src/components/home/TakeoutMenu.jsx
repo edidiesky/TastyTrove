@@ -31,7 +31,7 @@ export default function TakeoutMenu() {
               </Word>
             </h4>
             <div className="w-full text-start">
-              <button className="h-[70px] w-[230px] text-lg uppercase">
+              <button className="h-[60px] w-[230px] text-lg uppercase">
                 <Button bgColor={"#fff"} text={"View takeout Menu"} />
               </button>
 

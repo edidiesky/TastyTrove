@@ -31,7 +31,7 @@ export default function Experience() {
               </AnimateTextWord>
             </h4>
             <div className="w-full text-start">
-              <button className="h-[70px] w-[230px] rounded-[40px] overflow-hidden text-lg uppercase">
+              <button className="h-[60px] w-[230px] overflow-hidden text-lg uppercase">
                 <Button bgColor={"#fff"} text={"Explore the Menu"} />
               </button>
             </div>
