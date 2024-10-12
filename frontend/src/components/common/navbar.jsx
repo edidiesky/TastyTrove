@@ -83,7 +83,7 @@ const Navbar = () => {
                     to={`/${list.path}`}
                     key={index}
                     style={{ letterSpacing: "2px" }}
-                    className={`text-base tab md:text-base hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-1 rounded-[40px]`}
+                    className={`text-base tab md:text-base hover:text-grey family1 text-[var(--grey-1)] uppercase flex items-center gap-2 p-3 px-1`}
                   >
                     {/* <img src={list?.icon} className="w-4" alt="" /> */}
                     <AnimateText children={list?.title} />
@@ -112,7 +112,7 @@ const Navbar = () => {
                 onClick={() => {
                   dispatch(onLoginModal());
                 }}
-                className="h-[48px] w-[110px] rounded-[40px] bg-[var(--primary)] overflow-hidden text-base"
+                className="h-[45px] w-[110px] bg-[var(--primary)] overflow-hidden text-base"
               >
                 <Button bgColor={"#fff"} text={"Sign Up"} />
               </button>
@@ -124,7 +124,7 @@ const Navbar = () => {
                   onClick={() => {
                     dispatch(onSellerModal());
                   }}
-                  className="h-[48px] w-[110px] md:flex hidden rounded-[40px] overflow-hidden text-base"
+                  className="h-[45px] w-[110px] md:flex hidden overflow-hidden text-base"
                 >
                   <Button
                     bgColor={"var(--primary)"}
@@ -273,7 +273,7 @@ const Navbar = () => {
                 <span className="flex items-center gap-4">
                   {/* <div
                     onClick={() => dispatch(onLoginModal())}
-                    className="btn text-xs text-center p-4 font-booking_font4 text-white px-6 rounded-[40px]"
+                    className="btn text-xs text-center p-4 font-booking_font4 text-white px-6"
                   >
                     <AnimateText children={" Book Your Stay"} />
                   </div> */}

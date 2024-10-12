@@ -219,7 +219,7 @@ const DashboardSidebar = () => {
 };
 
 export const HeaderStyles = styled.div`
-  width: 300px;
+  width: 290px;
   position: sticky;
   top: 0;
   height: 100vh;
@@ -241,7 +241,7 @@ export const HeaderStyles = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 12px 18px;
+    padding: 10px 20px;
     gap: 2rem;
     position: relative;
     /* background: #fff; */
