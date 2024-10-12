@@ -112,7 +112,7 @@ const Navbar = () => {
                 onClick={() => {
                   dispatch(onLoginModal());
                 }}
-                className="h-[45px] w-[110px] bg-[var(--primary)] overflow-hidden text-base"
+                className="h-[45px] w-[110px] rounded-full bg-[var(--primary)] overflow-hidden text-base"
               >
                 <Button bgColor={"#fff"} text={"Sign Up"} />
               </button>
