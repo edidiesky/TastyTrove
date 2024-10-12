@@ -25,7 +25,7 @@ const DashboardSidebar = () => {
     {
       id: 61,
       tab: {
-        icon: <BiFoodMenu fontSize={"16px"} />,
+        icon: <BiFoodMenu fontSize={"14px"} />,
         title: "Menu",
         path: "/menu",
       },
@@ -34,7 +34,7 @@ const DashboardSidebar = () => {
     {
       id: 6,
       tab: {
-        icon: <FaMoneyBill fontSize={"16px"} />,
+        icon: <FaMoneyBill fontSize={"14px"} />,
         title: "Transactions",
         path: "/orders",
       },
@@ -43,7 +43,7 @@ const DashboardSidebar = () => {
     {
       id: 8,
       tab: {
-        icon: <MdRateReview fontSize={"16px"} />,
+        icon: <MdRateReview fontSize={"14px"} />,
         title: "Reviews",
         path: "/review",
       },
@@ -52,7 +52,7 @@ const DashboardSidebar = () => {
     // {
     //   id: 61,
     //   tab: {
-    //     icon: <FaRegUser fontSize={"16px"} />,
+    //     icon: <FaRegUser fontSize={"14px"} />,
     //     title: "Customers",
     //     path: "/customers",
     //   },
@@ -61,7 +61,7 @@ const DashboardSidebar = () => {
     // {
     //   id: 6,
     //   tab: {
-    //     icon: <BiMessage fontSize={"16px"} />,
+    //     icon: <BiMessage fontSize={"14px"} />,
     //     title: "Messages",
     //     path: "/message",
     //   },
@@ -241,7 +241,7 @@ export const HeaderStyles = styled.div`
     width: 100%;
     display: flex;
     align-items: center;
-    padding: 10px 20px;
+    padding: 15px 20px;
     gap: 2rem;
     position: relative;
     /* background: #fff; */
