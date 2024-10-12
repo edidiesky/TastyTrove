@@ -3,6 +3,8 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import Image from "../common/Image";
+import AnimateTextWord from "@/animations/AnimateTextWord";
+import Word from "@/animations/Word";
 export default function TakeoutMenu() {
   return (
     <TakeoutMenuContent className="flex w-full flex-col gap-4">
@@ -17,14 +19,16 @@ export default function TakeoutMenu() {
         <div className="TakeoutMenuRight w-full md:w-[40vw] flex items-center justify-center">
           <div className="flex TakeoutMenuRightC flex-col gap-8 auto">
             <h4 className="text-lg family1 uppercase text-light text-white">
-              ENJOY YOUR MEAL AT HOME
+              <AnimateTextWord> ENJOY YOUR MEAL AT HOME</AnimateTextWord>
             </h4>
             <h1 className="family3 leading-[1.6] text-6xl md:text-7xl text-white">
-              TAKEOUT NOW AVAILABLE
+              <AnimateTextWord>TAKEOUT NOW AVAILABLE</AnimateTextWord>
             </h1>
             <h4 className="text-xl md:text-2xl family2 text-light text-white">
-              Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
-              scelerisque nisi in urna nulla.
+              <Word>
+                Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
+                scelerisque nisi in urna nulla.
+              </Word>
             </h4>
             <div className="w-full text-start">
               <button className="h-[70px] w-[230px] text-lg uppercase">

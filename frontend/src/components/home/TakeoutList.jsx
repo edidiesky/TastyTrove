@@ -4,6 +4,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { slideRight } from "@/constants/utils/framer";
+import AnimateTextWord from "@/animations/AnimateTextWord";
 export default function Plans() {
   const { menus } = useSelector((store) => store.menu);
   // Hors d’oeuvres
@@ -45,16 +46,13 @@ export default function Plans() {
             return (
               <motion.div
                 key={index}
-                variants={slideRight}
-                custom={index}
-                initial="initial"
-                animate={inView ? "animate" : "exit"}
                 className={`w-full ${
                   index === 1 ? "Card active text-[#fff]" : "Card text-[#000]"
                 } flex-col gap-3`}
               >
                 <div className="w-85 auto px-8 flex flex-col gap-12">
                   <h2 className={` family3 text-5xl uppercase text-start`}>
+            
                     {data?.title}
                   </h2>
                   <div className="w-full flex flex-col gap-4">
@@ -70,7 +68,7 @@ export default function Plans() {
                               <div className="flex w-full items-center gap-2 justify-space">
                                 <div className="flex w-full justify-between gap-4 items-center">
                                   <h3 className={`family3 text-4xl text-dark`}>
-                                    {x?.title}
+                                {x?.title}
                                   </h3>
                                   <span className={`text-xl text-dark`}>
                                     ${x?.price}
@@ -81,10 +79,7 @@ export default function Plans() {
                                 className={`text-dark family2 text-xl`}
                                 // className="family2 text-xl"
                               >
-                                {x?.description?.replace(
-                                  /<\/?[^>]+(>|$)/g,
-                                  ""
-                                )}
+                                {x?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                               </h4>
                             </li>
                           </Link>

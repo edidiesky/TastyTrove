@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../common/Button";
 import Image from "../common/Image";
+import AnimateTextWord from "@/animations/AnimateTextWord";
 export default function Experience() {
   return (
     <ExperienceContent className="flex w-full flex-col gap-4">
@@ -20,11 +21,14 @@ export default function Experience() {
               FINE DINING EXPERIENCE
             </h4>
             <h1 className="family3 text-6xl leading-[1.5] md:text-7xl text-white">
-              THE BEST TABLE IN TOWN
+              <AnimateTextWord>THE BEST TABLE IN TOWN</AnimateTextWord>
             </h1>
             <h4 className="text-xl md:text-2xl family2 text-light text-white">
-              Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
-              scelerisque nisi in urna nulla.
+              <AnimateTextWord>
+                Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
+                scelerisque nisi in urna nulla. viverra risus, sagittis.
+                Venenatis ridiculus
+              </AnimateTextWord>
             </h4>
             <div className="w-full text-start">
               <button className="h-[70px] w-[230px] rounded-[40px] overflow-hidden text-lg uppercase">

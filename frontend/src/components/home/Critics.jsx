@@ -2,6 +2,8 @@
 import React from "react";
 import styled from "styled-components";
 import Image from "../common/Image";
+import AnimateTextWord from "@/animations/AnimateTextWord";
+import Word from "@/animations/Word";
 export default function Critics() {
   return (
     <CriticsContent className="flex w-full flex-col gap-2">
@@ -9,9 +11,9 @@ export default function Critics() {
         data-aos="fade"
         data-aos-duration="1200"
         // style={{fontStyle:"italic"}}
-        className="text-5xl italic w-full text-center family4 text-dark"
+        className="text-5xl italic w-full flex items-center justify-center family4 text-dark"
       >
-        What critics are saying about us
+     What critics are saying about us
       </h2>
       <div
         data-aos="fade"
@@ -28,16 +30,18 @@ export default function Critics() {
         <div className="CriticsRight flex item-center justify-center">
           <div className="flex CriticsRightC flex-col gap-8 auto">
             <h4 className="text-xl family1 uppercase text-white">
-              MEGGY STEWART
+              <AnimateTextWord>MEGGY STEWART</AnimateTextWord>
             </h4>
-            <h2 className="family3 text-6xl text-white">NEW YORK TIMES</h2>
-            <h4 className="text-lg md:text-2xl family2 text-light text-white">
-              Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
-              scelerisque nisi in urna nulla.
-            </h4>
-            <h4 className="text-lg md:text-2xl family2 text-light text-white">
-              Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
-              scelerisque nisi in urna nulla.
+            <h2 className="family3 text-6xl text-white">
+              <AnimateTextWord> NEW YORK TIMES</AnimateTextWord>
+            </h2>
+            <h4 className="text-lg md:text-xl family1 text-light text-white">
+              <Word>
+                Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
+                scelerisque nisi in urna nulla. Pellentesque vitae viverra
+                risus, sagittis. Venenatis ridiculus scelerisque nisi in urna
+                nulla.
+              </Word>
             </h4>
             <div className="w-full text-start">
               <button className="btn text-dark btn-2 family1 uppercase text-white text-light fs-16 py-2">

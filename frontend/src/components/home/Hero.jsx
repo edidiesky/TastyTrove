@@ -106,7 +106,7 @@ export default function Hero() {
               </h1>
             </div>
             <div className="w-full overflow-hidden">
-              <h4 className="text-xl w-full hero_about_text md:text-2xl family2 text-light text-white">
+              <h4 className="text-xl w-full hero_about_text max-w-[500px] md:text-2xl family2 text-light text-white">
                 Pellentesque vitae viverra risus, sagittis. Venenatis ridiculus
                 scelerisque nisi in urna nulla. Sit tempor a et nisl, ac felis.
               </h4>

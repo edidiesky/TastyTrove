@@ -49,19 +49,23 @@ export default function About() {
         <div className="w-85 md:px-12 auto wrapper flex gap-12 lg:gap-20">
           <div className="flex-1 flex flex-col gap-12">
             <h4 className="text-base max-w-[500px] md:text-xl family1 leading-[1.4]">
-              <AnimateTextWord
-                children={`HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
-              />
+              <AnimateTextWord>
+                HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper
+                eget tortor, donec amet, blandit. Tristique facilisi faucibus
+                elementum feugiat in nam in feugiat. Ipsum odio etiam duis
+                facilisis amet vulputate.
+              </AnimateTextWord>
             </h4>
             <h1 className="family3 text-6xl flex flex-col sm:text-7xl leading-[1.5]">
-              <Word
-                children={`Food is our common ground, a universal experience`}
-              />
+              <Word>Food is our common ground, a universal experience</Word>
             </h1>
             <h4 className="text-base max-w-[500px] md:text-xl family1 leading-[1.4]">
-              <AnimateTextWord
-                children={`Eget euismod semper eget tortor, donec amet, blandit. Tristique facilisi faucibus elementum feugiat in nam in feugiat. Ipsum odio etiam duis facilisis amet vulputate.`}
-              />
+              <AnimateTextWord>
+                HAC TELLUS, FELIS RISUS AT mattis mattis. Eget euismod semper
+                eget tortor, donec amet, blandit. Tristique facilisi faucibus
+                elementum feugiat in nam in feugiat. Ipsum odio etiam duis
+                facilisis amet vulputate.
+              </AnimateTextWord>
             </h4>
 
             <div className="w-full py-2">
@@ -126,7 +130,7 @@ export default function About() {
                   >
                     <h3 className="family3 text-center pb-3 text-4xl md:text-4xl font-normal">
                       {x.title}
-                    </h3> 
+                    </h3>
                     <h4 className="family1 text-center text-base md:text-lg font-normal">
                       {x.desc}
                     </h4>
