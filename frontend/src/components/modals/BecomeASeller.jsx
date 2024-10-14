@@ -166,9 +166,9 @@ const BecomeASellerModal = () => {
             className=""
           />
         </div>
-        <div className="w-full mx-auto flex flex-col">
+        <div className="w-full mx-auto py-2 flex flex-col">
           <div className="w-full sticky top-0 left-0 p-6 px-4 flex items-center justify-between">
-            <h3 className="text-2xl md:text-3xl font-semibold family1">
+            <h3 className="text-2xl md:text-3xl px-2 font-semibold family6">
               Become a Seller
               <span className="block text-sm font-normal family1">
                 Fill in the form to become a seller!
@@ -184,26 +184,26 @@ const BecomeASellerModal = () => {
           <div className="w-full h-[500px] overflow-auto justify-center flex">
             <form
               onSubmit={handleFormSubmision}
-              className="w-[90%] mx-auto  p-4 pb-4 flex flex-col gap-8"
+              className="w-[90%] mx-auto  p-2 pb-4 flex flex-col gap-8"
             >
-              <div className="w-20 h-20 relative">
+              <div className="w-16 h-16 relative">
                 {image !== "" ? (
                   <img
                     src={image}
                     alt=""
-                    className="w-20 object-cover h-20 rounded-full"
+                    className="w-16 object-cover h-16 rounded-full"
                   />
                 ) : (
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-20 object-cover h-20 rounded-full"
+                    className="w-16 object-cover h-16 rounded-full"
                   />
                 )}
                 <label htmlFor="upload">
                   <div
                     className="absolute cursor-pointer text-white text-lg rounded-full border-4 border-[rgba(255,255,255,1)] 
-                  flex items-center justify-center w-10 h-10 bottom-5 -right-5 bg-[#5542F6]"
+                  flex items-center justify-center w-8 h-8 bottom-5 -right-5 bg-[#5542F6]"
                   >
                     <BiCamera />
                     <input
