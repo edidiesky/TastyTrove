@@ -226,76 +226,76 @@ const DashboardHeader = () => {
             </div>
           </div>
         </div>
+      </HeaderStyles>
+      <div
+        style={{ zIndex: "200" }}
+        className={`${
+          bar ? "left-0" : "-left-[100%]"
+        } w-[300px] bg-[#fff] border-r shadow-2xl  h-full transition-all ease duration-700 fixed flex lg:hidden top-0 flex-col gap-2`}
+      >
         <div
+          onClick={() => setBar(!bar)}
           style={{ zIndex: "200" }}
           className={`${
             bar ? "left-0" : "-left-[100%]"
-          } w-[300px] bg-[#fff] border-r shadow-2xl  h-full transition-all ease duration-700 fixed flex lg:hidden top-0 flex-col gap-2`}
+          } w-full h-full transition-all ease duration-300 fixed flex lg:hidden top-0 bg-[#42424227] flex-col gap-2`}
+        ></div>
+        {/* <div className="w-full h-full absolute bg-[#fff] z-[24] object-cover" /> */}
+        <div
+          style={{ zIndex: "200" }}
+          className="w-full h-full bg-[#fff] Header_wrapper py-4 flex items-start flex-col gap-2"
         >
-          <div
-            onClick={() => setBar(!bar)}
-            style={{ zIndex: "200" }}
-            className={`${
-              bar ? "left-0" : "-left-[100%]"
-            } w-full h-full transition-all ease duration-300 fixed flex lg:hidden top-0 bg-[#42424227] flex-col gap-2`}
-          ></div>
-          {/* <div className="w-full h-full absolute bg-[#fff] z-[24] object-cover" /> */}
-          <div
-            style={{ zIndex: "200" }}
-            className="w-full h-full bg-[#fff] Header_wrapper py-4 flex items-start flex-col gap-2"
-          >
-            <div className="flex px-3 items-center gap-2">
-              {currentUser?.image ? (
-                <img
-                  src={currentUser?.image}
-                  alt=""
-                  className="w-12 h-12 object-cover rounded-full"
-                />
-              ) : currentUser?.username ? (
-                // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
-                //   {currentUser?.username[0]}{" "}
-                // </div>
-                <img
-                  src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                  alt=""
-                  className="w-12 h-12 object-cover rounded-full"
-                />
-              ) : (
-                ""
-              )}
-              <h4 className="text-lg font-bold family1 text-[#000]">
-                {currentUser?.name}
-                <span className="block font-normal family1 text-xs text-[#000]">
-                  {currentUser?.email}
-                </span>
-              </h4>
-            </div>
-            <div className="w-full my-12 flex flex-col">
-              {AdminSidebarData?.map((x, index) => {
-                return (
-                  <div key={index} className="w-full mx-auto">
-                    <NavLink
-                      onClick={() => setBar(!bar)}
-                      end
-                      className={`
+          <div className="flex px-3 items-center gap-2">
+            {currentUser?.image ? (
+              <img
+                src={currentUser?.image}
+                alt=""
+                className="w-12 h-12 object-cover rounded-full"
+              />
+            ) : currentUser?.username ? (
+              // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
+              //   {currentUser?.username[0]}{" "}
+              // </div>
+              <img
+                src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                alt=""
+                className="w-12 h-12 object-cover rounded-full"
+              />
+            ) : (
+              ""
+            )}
+            <h4 className="text-lg font-bold family1 text-[#000]">
+              {currentUser?.name}
+              <span className="block font-normal family1 text-xs text-[#000]">
+                {currentUser?.email}
+              </span>
+            </h4>
+          </div>
+          <div className="w-full my-12 flex flex-col">
+            {AdminSidebarData?.map((x, index) => {
+              return (
+                <div key={index} className="w-full mx-auto">
+                  <NavLink
+                    onClick={() => setBar(!bar)}
+                    end
+                    className={`
                       text-xm w-[90%] mx-auto text-[#000] family1`}
-                      to={`/dashboard${x.tab.path}`}
-                    >
-                      <div className="flex items-center">
-                        <span className="w-12 h-12 text-lg rounded-xl flex items-center text-[#00] justify-center">
-                          {" "}
-                          {x.tab.icon}
-                        </span>
-                        {<h4 className="text-base">{x.tab?.title}</h4>}
-                      </div>
-                    </NavLink>
-                  </div>
-                );
-              })}
-            </div>
+                    to={`/dashboard${x.tab.path}`}
+                  >
+                    <div className="flex items-center">
+                      <span className="w-12 h-12 text-lg rounded-xl flex items-center text-[#00] justify-center">
+                        {" "}
+                        {x.tab.icon}
+                      </span>
+                      {<h4 className="text-base">{x.tab?.title}</h4>}
+                    </div>
+                  </NavLink>
+                </div>
+              );
+            })}
           </div>
         </div>
-      </HeaderStyles>
+      </div>
     </>
   );
 };

@@ -50,7 +50,7 @@ const RoomsList = () => {
                 </table>
               </div>
             </Table>
-            <div className="w-full family1 flex items-center justify-end gap-4">
+            {/* <div className="w-full family1 flex items-center justify-end gap-4">
               <div
                 onClick={() => dispatch(handlePage("prev"))}
                 className="p-2 rounded-md text-lg font-semibold family1 px-2 border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.2)]"
@@ -65,7 +65,7 @@ const RoomsList = () => {
                 {" "}
                 <BiChevronRight />
               </div>
-            </div>
+            </div> */}
           </div>
         )}
       </div>

@@ -112,14 +112,14 @@ const Profile = () => {
   return (
     <div className="w-full lg:grid-cols-custom_2 relative items-start gap-8 grid">
       {(updateUserisLoading || getallUserisLoading || uploading) && <Loader />}
-      <div className="w-full lg:w-[340px] lg:sticky top-[10%] py-8 bg-[#fafafa] rounded-[10px]">
+      <div className="w-full lg:w-[300px] lg:sticky top-[10%] flex md:flex-col flex-row md:items-start items-center">
         <div
           onClick={() => setIndex(0)}
           className={`px-6  ${
             index === 0
-              ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]"
+              ? "bg-[#eee] border-b-4 md:border-b-0 md:border-r-4 border-[rgba(0,0,0,1)]"
               : " bg-[#fafafa] border-0"
-          }  text-base family1 cursor-pointer py-4 flex items-center justify-start gap-4`}
+          }  text-base family1 w-full cursor-pointer py-4 flex items-center justify-start gap-4`}
         >
           <BiUser /> Profile Settings
         </div>
@@ -128,9 +128,9 @@ const Profile = () => {
           onClick={() => setIndex(1)}
           className={`px-6  ${
             index === 1
-              ? "bg-[#eee] border-r-4 border-[rgba(0,0,0,1)]"
+              ? "bg-[#eee] border-b-4 md:border-b-0 md:border-r-4 border-[rgba(0,0,0,1)]"
               : " bg-[#fafafa] border-0"
-          }  text-base family1 cursor-pointer py-4 flex items-center justify-start gap-4`}
+          }  text-base family1 cursor-pointer py-4 w-full flex items-center justify-start gap-4`}
         >
           <BiLock /> Password
         </div>
@@ -191,7 +191,7 @@ const Profile = () => {
                         {input.label}
                       </span>
                       <input
-                        className="w-full rounded-2xl input text-dark font-normal text-sm"
+                        className="w-full input text-dark font-normal text-sm"
                         required={true}
                         name={"password"}
                         id={"password"}
@@ -239,16 +239,16 @@ const Profile = () => {
           <div className="w-full p-8 px-6 bg-white border rounded-[20px]">
             <div className="w-full flex flex-col gap-8">
               <div className="w-full flex items-center gap-8">
-                <h4 className="text-xl family1">Change Password</h4>
+                <h4 className="text-xl family6">Change Password</h4>
               </div>
               <form className="w-full grid grid-cols-1 gap-4">
                 <label
                   htmlFor={"password"}
-                  className="text-base family1 rounded-[10px] flex flex-col gap-2 text-dark"
+                  className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                 >
-                  <span className="text-grey font-normal">Password</span>
+                  <span className="text-dark font-normal">Password</span>
                   <input
-                    className="w-full rounded-2xl input text-dark font-normal text-sm"
+                    className="w-full input text-dark font-normal text-sm"
                     required={true}
                     name={"password"}
                     id={"password"}
@@ -261,13 +261,13 @@ const Profile = () => {
 
                 <label
                   htmlFor={"confirmpassword"}
-                  className="text-base family1 rounded-[10px] flex flex-col gap-2 text-dark"
+                  className="text-sm family1 rounded-[10px] flex flex-col gap-2 text-dark"
                 >
-                  <span className="text-grey font-normal">
+                  <span className="text-dark font-normal">
                     Confirm Password
                   </span>
                   <input
-                    className="w-full rounded-2xl text-dark font-normal text-sm"
+                    className="w-full text-dark font-normal text-sm"
                     required={true}
                     name={"confirmpassword"}
                     id={"confirmpassword"}

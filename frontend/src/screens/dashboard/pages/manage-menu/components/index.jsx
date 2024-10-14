@@ -105,7 +105,7 @@ const DashboardIndex = () => {
     <div className="w-full relative">
       <div className="w-full relative pb-20 flex flex-col gap-12">
         <div className="w-full grid gap-6 md:grid-cols-2 md:items-center justify-between">
-          <h3 className="text-3xl block lg:text-4xl family1 font-semibold">
+          <h3 className="text-2xl block lg:text-3xl family6 font-bold">
             {menu ? (
               "Update Your menu"
             ) : (
@@ -122,7 +122,7 @@ const DashboardIndex = () => {
             <button
               disabled={creatingMenuisLoading || updateMenuisLoading || noEntry}
               onClick={handleRoomCreation}
-              className="h-[50px]  md:h-[55px] min-w-[150px]  md:min-w-[190px] text-sm family1 rounded-[40px]"
+              className="h-[50px]  md:h-[55px] min-w-[150px]  md:min-w-[150px] text-sm family1 rounded-[40px]"
             >
               <Button
                 type={"dark"}

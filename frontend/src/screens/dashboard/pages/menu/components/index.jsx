@@ -28,8 +28,8 @@ const DashboardIndex = () => {
       <div className="w-full pb-20 flex flex-col gap-4">
         <div className="w-full grid lg:grid-cols-2 lg:items-center gap-8 justify-between">
           <h3 className="text-3xl block lg:text-4xl family6">
-            Summary of your Menu
-            <span className="block family1 text-sm font-normal">
+            Menu Summary
+            <span className="block pt-3 family1 text-sm font-normal">
               Make a review of your menu created either by adding or modifying
               their content
             </span>
@@ -38,11 +38,11 @@ const DashboardIndex = () => {
             <div className="flex items-center md:justify-end">
               <Link
                 to={"/dashboard/menu/create-menu"}
-                className="h-[50px]  md:h-[53px] min-w-[100px]  md:min-w-[140px] text-xs md:text-sm family1 rounded-[40px]"
+                className="h-[50px] border md:h-[53px] min-w-[100px] hover:text-white md:min-w-[140px] text-xs md:text-sm family1 rounded-[40px]"
               >
                 <Button
-                  type={"full_dark"}
-                  bgColor={"#fff"}
+                  type={"white"}
+                  bgColor={"#000"}
                   text={"Add a menu"}
                 />
               </Link>

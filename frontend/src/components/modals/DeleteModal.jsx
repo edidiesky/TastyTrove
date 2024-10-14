@@ -93,7 +93,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
             <span className="w-full flex items-center justify-center">
               <CiWarning fontSize={"55px"} color={"#c31212"} />
             </span>
-            <h3 className="text-2xl font-bold text-center family1">
+            <h3 className="text-2xl font-bold text-center family6">
               <span
                 className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
@@ -237,7 +237,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
           <span className="w-full flex items-center justify-center">
             <CiWarning fontSize={"45px"} color={"#c31212"} />
           </span>
-          <h3 className="text-2xl font-bold text-center family1">
+          <h3 className="text-2xl font-bold text-center family6">
             <span>Delete this menu?</span>
             <span className="block pt-2 font-normal text-xs w-[90%] mx-auto capitalize text-center family1">
               By deleting this menu, It cannot be retrieved back if this action

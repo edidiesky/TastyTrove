@@ -37,7 +37,7 @@ const RoomForms = ({
           {/* title */}
           <div className="w-[95%] md:w-[90%] mx-auto flex flex-col gap-4">
             <div className="w-full grid grid-cols-2 items-center justify-between">
-              <h4 className="text-xl font-bold">Name & Description</h4>
+              <h4 className="text-xl family6 font-bold">Name & Description</h4>
               <div className="flex items-center justify-end">
                 <Link
                   to={"/dashboard/menu"}
