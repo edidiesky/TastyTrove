@@ -18,15 +18,19 @@ const DashboardIndex = () => {
   return (
     <div className="w-full">
       <div className="w-full flex flex-col gap-12">
-        <h3 className="text-3xl block lg:text-4xl family1 font-semibold">
+        <h3 className="text-2xl block lg:text-3xl family6">
           Welcome 👋
-          <span className="block pt-3 text-base font-normal">
+          <span className="block pt-3 text-base family1 font-normal">
             Explore information and activity about your property
           </span>
         </h3>
         <div className="flex flex-col gap-20">
-          <Widget />
-          <Statistics />
+          <div className="w-full grid gap-12 lg:gap-4 lg:grid-cols-1">
+            <Widget />
+            <div className="w-full flex flex-col gap-12">
+              <Statistics />
+            </div>
+          </div>
           <ReservationList />
         </div>
       </div>

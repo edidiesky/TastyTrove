@@ -20,7 +20,7 @@ const TableCard = ({ x, type }) => {
       <>
         {/* <Delete /> */}
         <tr key={x?.id}>
-          <td>
+          <td className="text-sm font-normal">
             <span className="">
               <span>
                 {x?.status === "CONFIRMED"
@@ -32,9 +32,9 @@ const TableCard = ({ x, type }) => {
               </span>
             </span>
           </td>
-          <td>₦{Number(x?.amount).toLocaleString()}</td>
-          <td>{x?.currency}</td>
-          <td>
+          <td className="text-sm font-normal">₦{Number(x?.amount).toLocaleString()}</td>
+          <td className="text-sm font-normal">{x?.currency}</td>
+          <td className="text-sm font-normal">
             {x?.status === "CONFIRMED" ? (
               <span className="text-xs family1 font-semibold text-center success">
                 {x?.status}
@@ -45,7 +45,7 @@ const TableCard = ({ x, type }) => {
               </span>
             )}
           </td>
-          <td>
+          <td className="text-sm font-normal">
             {x?.deliverystatus === "DELIVERED" ? (
               <span className="text-xs family1 font-semibold text-center success">
                 {x?.deliverystatus}
@@ -56,8 +56,8 @@ const TableCard = ({ x, type }) => {
               </span>
             )}
           </td>
-          <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
-          <td>
+          <td className="text-sm font-normal">{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
+          <td className="text-sm font-normal">
             <Link
               to={`/payment-success/${x?.paymentGroupId}`}
               className="py-2 px-4 w-fit bg-[#eee] text-xs rounded-lg"
@@ -74,8 +74,8 @@ const TableCard = ({ x, type }) => {
       <>
         {/* <Delete /> */}
         <tr key={x?.id}>
-          <td>{x?.id}</td>
-          <td>
+          <td className="text-sm font-normal">{x?.id}</td>
+          <td className="text-sm font-normal">
             <span className="text-sm font-semibold">
               {x?.user?.name}
               <span className="block text-xs text-grey font-normal">
@@ -83,9 +83,9 @@ const TableCard = ({ x, type }) => {
               </span>
             </span>
           </td>
-          <td>₦{Number(x?.amount).toLocaleString()}</td>
+          <td className="text-sm font-normal">₦{Number(x?.amount).toLocaleString()}</td>
 
-          <td>
+          <td className="text-sm font-normal">
             {/* <span className="p-4">
               {x?.status}
             </span> */}
@@ -100,7 +100,7 @@ const TableCard = ({ x, type }) => {
               </span>
             )}
           </td>
-          <td>
+          <td className="text-sm font-normal">
             {x?.deliverystatus === "DELIVERED" ? (
               <span className="text-xs family1 font-semibold text-center success">
                 {x?.deliverystatus}
@@ -111,7 +111,7 @@ const TableCard = ({ x, type }) => {
               </span>
             )}
           </td>
-          <td>{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
+          <td className="text-sm font-normal">{moment(x?.createdAt).format("DD MMMM YYYY")}</td>
           {/* <td>NGN</td> */}
         </tr>
       </>
@@ -133,7 +133,7 @@ const TableCard = ({ x, type }) => {
         </AnimatePresence>
         {/* <Delete /> */}
         <tr key={x?._id}>
-          <td>
+          <td className="text-sm font-normal">
             <div className="flex flex-col">
               <span className=" font-normal text-dark text-bold">
                 {x?.name}
@@ -141,10 +141,10 @@ const TableCard = ({ x, type }) => {
               {/* <span className=" font-normal family1 text-dark">{x?.email}</span> */}
             </div>
           </td>
-          <td>
+          <td className="text-sm font-normal">
             <span className=" font-normal family1  text-dark">{x?.email}</span>
           </td>
-          <td>
+          <td className="text-sm font-normal">
             {x?.role === "ADMIN" ? (
               <span className=" font-normal text-xs family1 text-center success">
                 Admin
@@ -160,12 +160,12 @@ const TableCard = ({ x, type }) => {
             )}
           </td>
 
-          <td>
+          <td className="text-sm font-normal">
             <span className="text-dark  font-normal family1 text-light">
               {moment(x?.createdAt).format("DD MMM YYYY")}
             </span>
           </td>
-          <td>
+          <td className="text-sm font-normal">
             <div className="flex items-center justify-center">
               <Link
                 to={`/dashboard/profile/${x?.id}`}
@@ -200,7 +200,7 @@ const TableCard = ({ x, type }) => {
           )}
         </AnimatePresence>
         <tr key={x?.id}>
-          <td>
+          <td className="text-sm font-normal">
             <div className="flex w-full justify-start items-center gap-4">
               <img
                 src={x?.image}
@@ -212,15 +212,15 @@ const TableCard = ({ x, type }) => {
               </span>
             </div>
           </td>
-          {/* <td className=" font-normal">{x?.address}</td> */}
+          {/* <td>{x?.address}</td> */}
 
-          <td className="hidden lg:table-cell font-normal">{x?.category}</td>
-          <td className=" font-normal">₦{Number(x?.price).toLocaleString()}</td>
-          <td className="hidden lg:table-cell">{x?.availabilityCount}</td>
+          <td className="text-sm font-normal hidden lg:table-cell">{x?.category}</td>
+          <td className="text-sm font-normal">₦{Number(x?.price).toLocaleString()}</td>
+          <td className="text-sm font-normal hidden lg:table-cell">{x?.availabilityCount}</td>
 
-          <td className=" font-normal">{startDate}</td>
+          <td className="text-sm font-normal">{startDate}</td>
 
-          <td className=" font-normal">
+          <td className="text-sm font-normal">
             <div className="w-full flex items-center gap-2 justify-start relative">
               {/* <div
                 onClick={() => setMenuTab(true)}
@@ -276,8 +276,8 @@ const TableCard = ({ x, type }) => {
     return (
       <>
         <tr key={x?.id}>
-          <td className=" font-normal">{x?.rooms?.title}</td>
-          <td>
+          <td className="text-sm font-normal">{x?.rooms?.title}</td>
+          <td className="text-sm font-normal">
             {/* <span className="p-4">
               {x?.status}
             </span> */}
@@ -292,19 +292,19 @@ const TableCard = ({ x, type }) => {
               </span>
             )}
           </td>
-          <td className=" font-normal">
+          <td className="text-sm font-normal">
             <span>₦{Number(x?.totalPrice).toLocaleString()}</span>
           </td>
-          <td className=" font-normal">
+          <td className="text-sm font-normal">
             <span>{x?.rooms?.city}</span>
           </td>
-          <td className=" font-normal">
+          <td className="text-sm font-normal">
             <span>
               {" "}
               {startDate} - {endDate}
             </span>
           </td>
-          <td className=" font-normal">
+          <td className="text-sm font-normal">
             <span> {moment(x?.createdAt).format("DD MMM YYYY")}</span>
           </td>
         </tr>
@@ -316,19 +316,19 @@ const TableCard = ({ x, type }) => {
     <>
       {/* <Delete /> */}
       <tr key={x?._id}>
-        <td>
+        <td className="text-sm font-normal">
           <span className=" font-normal family1 text-dark">{x?.plan}</span>
         </td>
-        <td>
+        <td className="text-sm font-normal">
           <span className="text-dark  font-normal family1">$ {x?.price}</span>
         </td>
 
-        <td>
+        <td className="text-sm font-normal">
           <span className="text-dark  font-normal family1 text-light">
             Type 1
           </span>
         </td>
-        <td>
+        <td className="text-sm font-normal">
           <span className="text-dark  font-normal family1 text-light">
             {x?.date}
           </span>

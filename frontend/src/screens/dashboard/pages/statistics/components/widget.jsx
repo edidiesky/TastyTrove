@@ -16,7 +16,8 @@ const Widget = () => {
     {
       title: "Total Revenue",
       icon: <FaMoneyBill />,
-      color: "#FD9D2A",
+      bgColor: "#cdeed3",
+      color: "#347345",
       subtitle: `₦${
         widgetData?.totalRevenue
           ? widgetData?.totalRevenue >= 1000
@@ -30,19 +31,28 @@ const Widget = () => {
     {
       title: "Total Sales",
       icon: <IoFastFood />,
-      color: "#8F0EBE",
+      bgColor: "#deddff",
+      color: "#3e3aff",
+      subtext:
+        "Browse your applied jobs here and check their respective progress..",
       subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "0"}`,
     },
     {
       title: "Total Menu",
       icon: <IoFastFood />,
-      color: "#8bca41",
+      bgColor: "#f3f3f1",
+      color: "#a37d18",
+      subtext:
+        "Browse your applied jobs here and check their respective progress..",
       subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "0"}`,
     },
     {
       title: "Total Ratings",
       icon: <MdReviews />,
-      color: "#8F0EBE",
+      bgColor: "#cdeed3",
+      color: "#002b31",
+      subtext:
+        "Browse your applied jobs here and check their respective progress..",
       subtitle: `${
         totalReview ? totalReview / widgetData?.totalReview?.length : 0
       }`,
@@ -50,49 +60,39 @@ const Widget = () => {
   ];
   return (
     <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8">
-      {widgetDatas?.map((widget, index) => {
+      {widgetDatas?.map((data, index) => {
         return (
           <div
-            onClick={() => setWidgetTab(index)}
             key={index}
-            style={{
-              backgroundColor: `#fafafa`,
-              transition: "all .3s",
-              gridTemplateColumns: "1fr 50px",
-            }}
-            className={`${
-              index === 0 ? "bg-[#000] text-[#000]" : "bg-[#eee] text-[#000]"
-            } p-6 family1  w-full rounded-[20px] flex-col
-               cursor-pointer flex items-start justify-between shadow-sm gap-4 min-h-48 md:min-h-56`}
+            className="w-full p-4 items-start  justify-center min-h-[200px] md:min-h-[220px] 
+                    border rounded-xl flex flex-col gap-4"
           >
-            <div className="w-full flex items-center justify-between">
+            <div className="flex md:flex-row flex-col md:items-center gap-1 md:gap-4">
               <div
-                className={`w-10 md:w-12 ${
-                  index === 0
-                    ? "bg-[#fff] text-[#000]"
-                    : "bg-[#fff] text-[#000]"
-                } text-base md:text-lg h-10 md:h-12 rounded-full flex items-center justify-center`}
+                style={{
+                  backgroundColor: `${data?.bgColor}`,
+                  color: `${data?.color}`,
+                }}
+                className="w-10 md:w-12 text-xl flex items-center justify-center h-10 md:h-12 rounded-md"
               >
-                {widget?.icon}
+                {data?.icon}
               </div>
-              <div
-                className={`w-10 md:w-12 ${
-                  index === 0
-                    ? "border-[rgba(255,255,255,.4)] border text-[#000]"
-                    : "border-[rgba(0,0,0,.4)] border text-[#000]"
-                } text-base md:text-lg h-10 md:h-12 rounded-full flex items-center justify-center`}
-              >
-                <MdOutlineArrowOutward />
-              </div>
+              <h4 className="text-sm md:text-base family1 font-semibold">
+                {data?.title}
+              </h4>
             </div>
-            <div className="flex flex-col">
-              <h3 className="text-3xl md:text-4xl font-semibold family1">
-                {widget?.subtitle}
-                <span className="text-grey pb-2 block family1 text-sm font-normal">
-                  {widget?.title}
-                </span>
+            <div className="w-full flex flex-col">
+              <h3 className="text-2xl md:text-3xl family1 font-semibold ">
+                {data?.subtitle}
               </h3>
+
+              <span className="text-xs family1 flex-1 pt-2 block font-normal">
+                {data?.subtext}
+              </span>
             </div>
+            {/* <div className="pt-3">
+                    <div className="shadows py-2 bg-[#fafafa] rounded-md cursor-pointer px-4 border text-dark text-sm">Browse</div>
+                  </div> */}
           </div>
         );
       })}

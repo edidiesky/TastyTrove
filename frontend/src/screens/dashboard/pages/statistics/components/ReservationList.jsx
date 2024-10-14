@@ -3,47 +3,6 @@ import moment from "moment";
 import { Table } from "@/components/common/styles";
 import TableCard from "@/components/common/TableCard";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllReservations } from "@/features/reservation/reservationReducer";
-import { getAllMenuForAdmin } from "@/features/menu/menuReducer";
-
-const reservation = [
-  {
-    user: "Villa Borghese Luxury",
-    venue: "Lavana 4",
-    type: "reservation",
-    status: "booked",
-    price: 44.8,
-    endDate: "8/24/2024",
-    startDate: "4/24/2024",
-  },
-  {
-    user: "Villa Borghese Luxury",
-    venue: "Lavana 2",
-    type: "reservation",
-    status: "canceled",
-    price: 44.8,
-    endDate: "8/24/2024",
-    startDate: "4/24/2024",
-  },
-  {
-    user: "Villa Borghese Luxury",
-    venue: "Lavana 4",
-    type: "reservation",
-    status: "booked",
-    price: 44.8,
-    endDate: "8/24/2024",
-    startDate: "4/24/2024",
-  },
-  {
-    user: "Villa Borghese Luxury",
-    venue: "Lavana 2",
-    type: "reservation",
-    status: "canceled",
-    price: 44.8,
-    endDate: "8/24/2024",
-    startDate: "4/24/2024",
-  },
-];
 
 const ReservationList = () => {
   //   const [roommodal, setRoomModal] = useState(false);
@@ -53,8 +12,8 @@ const ReservationList = () => {
   );
   const { recentSales, topSaledProduct } = useSelector((store) => store.stat);
   return (
-    <div className="p-6 bg-[#fafafa] w-full px-6 py-8 flex-col rounded-[10px] min-h-[200px] justify-center flex gap-4">
-      <h3 className="text-2xl md:text-3xl font-semibold family1">
+    <div className="px-6 py-8 border rounded-lg flex flex-col w-full gap-6">
+      <h3 className="text-xl md:text-2xl font-semibold family6">
         Recent Transaction
       </h3>
       {recentSales?.length === 0 ? (

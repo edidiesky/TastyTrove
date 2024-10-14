@@ -65,6 +65,7 @@ export const Table = styled.div`
 
           border-radius: 40px;
           padding: 1rem 0;
+          background-color: #fafafa;
           /* text-transform: uppercase; */
           font-weight: normal !important;
           &:hover {
@@ -72,10 +73,10 @@ export const Table = styled.div`
           }
           th {
             text-align: start;
-            font-size: 14px !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-            padding: 1.7rem;
-            font-family: "Work Sans";
+            padding: 1.6rem 1.2rem;
+            font-family: "Karla";
+            font-size: 14px;
             font-weight: 500 !important;
           }
         }
@@ -88,14 +89,12 @@ export const Table = styled.div`
           transition: all 0.5s;
           z-index: 200;
           &:hover {
-            background-color: rgba(0, 0, 0, 0.06);
+            background-color: #eee;
           }
           td {
             text-align: start;
-            padding: 1.5rem !important;
-            font-size: 13px !important;
-            font-weight: normal !important;
-            color: #000;
+            padding: 1.4rem 1.2rem !important;
+            font-family: "Karla" !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.09);
             line-height: 1.2 !important;
 

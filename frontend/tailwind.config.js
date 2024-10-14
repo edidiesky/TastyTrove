@@ -28,10 +28,10 @@ module.exports = {
         custom_2: "1304px",
       },
       fontFamily: {
-        booking_font: ["Lora", "sans-serif"],
-        booking_font_bold: ["Lora", "sans-serif"],
-        booking_font_normal: ["Lora", "sans-serif"],
-        booking_font4: ["Lora", "sans-serif"],
+        booking_font: ["Karla", "sans-serif"],
+        booking_font_bold: ["Karla", "sans-serif"],
+        booking_font_normal: ["Karla", "sans-serif"],
+        booking_font4: ["Karla", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",

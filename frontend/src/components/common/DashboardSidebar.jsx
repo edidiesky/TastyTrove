@@ -4,7 +4,7 @@ import { FiSettings } from "react-icons/fi";
 import { FaRegUser, FaMoneyBill } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { BiFoodMenu, BiMessage } from "react-icons/bi";
+import { BiFoodMenu,BiSolidDashboard, BiMessage } from "react-icons/bi";
 import { LayoutDashboard } from "lucide-react";
 import { MdRateReview } from "react-icons/md";
 
@@ -18,14 +18,14 @@ const DashboardSidebar = () => {
       tab: {
         title: "Dashboard",
         path: "",
-        icon: <LayoutDashboard fontSize={"14px"} />,
+        icon: <BiSolidDashboard fontSize={"16px"} />,
       },
       list: [],
     },
     {
       id: 61,
       tab: {
-        icon: <BiFoodMenu fontSize={"14px"} />,
+        icon: <BiFoodMenu fontSize={"16px"} />,
         title: "Menu",
         path: "/menu",
       },
@@ -34,7 +34,7 @@ const DashboardSidebar = () => {
     {
       id: 6,
       tab: {
-        icon: <FaMoneyBill fontSize={"14px"} />,
+        icon: <FaMoneyBill fontSize={"16px"} />,
         title: "Transactions",
         path: "/orders",
       },
@@ -43,7 +43,7 @@ const DashboardSidebar = () => {
     {
       id: 8,
       tab: {
-        icon: <MdRateReview fontSize={"14px"} />,
+        icon: <MdRateReview fontSize={"16px"} />,
         title: "Reviews",
         path: "/review",
       },
@@ -52,7 +52,7 @@ const DashboardSidebar = () => {
     // {
     //   id: 61,
     //   tab: {
-    //     icon: <FaRegUser fontSize={"14px"} />,
+    //     icon: <FaRegUser fontSize={"16px"} />,
     //     title: "Customers",
     //     path: "/customers",
     //   },
@@ -61,7 +61,7 @@ const DashboardSidebar = () => {
     // {
     //   id: 6,
     //   tab: {
-    //     icon: <BiMessage fontSize={"14px"} />,
+    //     icon: <BiMessage fontSize={"16px"} />,
     //     title: "Messages",
     //     path: "/message",
     //   },
@@ -70,9 +70,9 @@ const DashboardSidebar = () => {
   ];
   return (
     <HeaderStyles
-      className={`w-full hidden px-4 z-[40000] lg:flex column gap-2`}
+      className={`w-[310px] bg-[#18171C] lg:block hidden h-[100vh] overflow-auto sticky top-0`}
     >
-      <div className="w-full h-full py-4 justify-between flex items-center flex-col gap-4">
+      <div className="w-full h-full py-4 px-3 justify-between flex items-center flex-col gap-4">
         <div className="w-full h-[90%] flex flex-col gap-8">
           <div className="flex flex-col w-full items-start justify-between py-1">
             {/* <h4 className="text-sm text-[#000]">RockTrading</h4> */}
@@ -84,9 +84,9 @@ const DashboardSidebar = () => {
                 <img
                   loading="lazy"
                   src="https://www.hopper.com/assets/treasure-D-5S8iOp.svg"
-                  className="w-14 h-14 rounded-full object-cover"
+                  className="w-12 rounded-full object-cover"
                 />
-                <h4 className="hidden md:flex font-bold flex-col text-base family5">
+                <h4 className="hidden md:flex text-white flex-col text-base family6">
                   TastyTrove
                   <span className="block font-normal text-grey text-xs family5">
                     {" "}
@@ -107,26 +107,12 @@ const DashboardSidebar = () => {
                   <NavLink
                     // activeClassName="active"
                     end
-                    className={`group tab
-                      relative
-                      text-sm w-[90%] mx-auto`}
+                    className={`flex tab family1 py-3 hover:text-white text-[#969a9acb] font-semibold text-sm
+                                 rounded-md px-3 hover:bg-[#282c2b] w-full items-center gap-4`}
                     to={`/dashboard${x.tab.path}`}
                   >
-                    <div className="flex w-full gap-3 md:justify-start relative items-center">
-                      <span className="text-sm rounded-xl flex items-center text-blue justify-center">
-                        {" "}
-                        {x.tab.icon}
-                      </span>
-                      {x.tab?.title}
-                      {/* <div
-                        className="span_details absolute text-sm group-hover:opacity-1 
-                        opacity-1  block 
-                        px-4 py-2 bg-[#000] text-[#fff]
-                       rounded-[40px] left-[140%] "
-                      >
-                        {x.tab?.title}
-                      </div> */}
-                    </div>
+                    {x.tab.icon}
+                    {x.tab?.title}
                   </NavLink>
                 </div>
               );
@@ -136,17 +122,11 @@ const DashboardSidebar = () => {
                 // activeClassName="active"
                 to={`/dashboard/customers`}
                 end
-                className={`group tab
-                      relative
-                      text-sm w-[90%] mx-auto`}
+                className={`flex tab family1 py-3 hover:text-white text-[#969a9acb] font-semibold text-sm
+                                 rounded-md px-3 hover:bg-[#282c2b] w-full items-center gap-4`}
               >
-                <div className="flex w-full gap-3 relative items-center">
-                  <span className=" text-sm rounded-xl flex items-center text-blue justify-center">
-                    {" "}
-                    <FiSettings fontSize={"16px"} />
-                  </span>
-                  Clients
-                </div>
+                <FiSettings fontSize={"16px"} />
+                Clients
               </NavLink>
             )}
           </div>
@@ -158,9 +138,8 @@ const DashboardSidebar = () => {
                 // activeClassName="active"
                 to={`/dashboard/profile/${currentUser?.id}`}
                 end
-                className={`group tab
-                      relative
-                      text-sm w-[90%] mx-auto`}
+                className={`flex tab family1 py-3 hover:text-white text-[#969a9acb] font-semibold text-sm
+                                 rounded-md px-3 hover:bg-[#282c2b] w-full items-center gap-4`}
               >
                 <div className="flex w-full gap-3 relative items-center">
                   <span className=" text-sm rounded-xl flex items-center text-blue justify-center">
@@ -168,14 +147,6 @@ const DashboardSidebar = () => {
                     <FiSettings fontSize={"16px"} />
                   </span>
                   Settings
-                  {/* <div
-                    className="span_details absolute text-sm group-hover:opacity-1 
-                        opacity-1  block 
-                        px-4 py-2 bg-[#000] text-[#fff]
-                       rounded-[40px] left-[140%] "
-                  >
-                    Settings
-                  </div> */}
                 </div>
               </NavLink>
             </div>
@@ -185,25 +156,25 @@ const DashboardSidebar = () => {
                   <img
                     src={currentUser?.image}
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                    className="w-10 h-10 object-cover rounded-full"
                   />
                 ) : currentUser?.username ? (
-                  // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
+                  // <div className="w-10 h-10 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
                   //   {currentUser?.username[0]}{" "}
                   // </div>
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                    className="w-10 h-10 object-cover rounded-full"
                   />
                 ) : (
                   <img
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                    className="w-10 h-10 object-cover rounded-full"
                   />
                 )}
-                <h4 className="text-base font-bold family5">
+                <h4 className="text-base text-white family6">
                   {currentUser?.name}
                   <span className="block family5 text-xs font-normal text-grey">
                     {currentUser?.email}
@@ -219,12 +190,9 @@ const DashboardSidebar = () => {
 };
 
 export const HeaderStyles = styled.div`
-  width: 290px;
   position: sticky;
   top: 0;
   height: 100vh;
-  background: #fafafa;
-  /* border-right: 1px solid rgba(0, 0, 0, 0.1); */
 
   .dropdown {
     max-height: 0;
@@ -236,46 +204,28 @@ export const HeaderStyles = styled.div`
   }
 
   .tab {
-    margin: 0 auto;
-    border-radius: 40px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    gap: 2rem;
-    position: relative;
-    /* background: #fff; */
-    .span_details {
-      opacity: 0;
-      transform: scale(0.89);
-      transition: all ease 0.4s;
-      top: 55%;
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-    }
-
     &:hover {
-      background: var(--primary);
+      background: #282c2b;
       color: #fff;
-      .span_details {
-        opacity: 1;
-        /* transform: ; */
-        transform: scale(1);
-        top: 25%;
-      }
+    }
+    .nav_icons:hover {
       svg {
         color: #fff;
       }
     }
     &.active {
       position: relative;
-      // FD9D2A
-      /* 8bca41 */
-      /* 8F0EBE */
-      /* E3F2FD */
-      background: var(--primary);
+      background: #282c2b;
       color: #fff;
-      svg {
+
+      .nav_icons {
         color: #fff;
+      }
+
+      span {
+        svg {
+          color: #fff;
+        }
       }
     }
   }

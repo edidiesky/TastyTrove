@@ -9,18 +9,10 @@ import ProductBreakdown from "./ProductBreakdown";
 const Statistics = () => {
   return (
     <div className="w-full flex flex-col gap-12">
-      {/* <div className="w-full grid lg:grid-cols-custom_1 items-start gap-4">
-        <div className="flex w-full">
-          <MonthlyRevenue />
-        </div>
-        <div className="flex w-full flex-col gap-4 lg:w-[360px]">
-          <ProductBreakdown />
-        </div>
-      </div> */}
       <div className="flex w-full">
         <MonthlyRevenue />
       </div>
-      <SalesStat />
+      {/* <SalesStat /> */}
     </div>
   );
 };
@@ -32,8 +24,8 @@ const MonthlyRevenue = () => {
   const [options, setOptions] = useState({
     chart: {
       height: 350,
-      type: "line",
-      fontFamily: "Work Sans",
+      type: "bar",
+      fontFamily: "Karla",
       foreColor: "#333",
       fontSize: "30px",
       textTransform: "capitalize",
@@ -44,23 +36,9 @@ const MonthlyRevenue = () => {
     dataLabels: {
       enabled: false,
     },
-    colors: ["#000", "var(--primary)"],
-    stroke: {
-      curve: "smooth",
-    },
+    colors: ["#2E0266", "var(--primary)"],
     xaxis: {
       categories: totalMonth,
-      // categories: [
-      //   "Jan",
-      //   "Febr",
-      //   "Mar",
-      //   "Apr",
-      //   "May",
-      //   "Jun",
-      //   "Jul",
-      //   "Aug",
-      //   "sept",
-      // ],
     },
   });
 
@@ -69,10 +47,6 @@ const MonthlyRevenue = () => {
       name: "Revenue",
       data: totalMonthRevenue,
     },
-    // {
-    //   name: "Sales",
-    //   data: totalMonthSalesAmount,
-    // },
   ]);
   useEffect(() => {
     if (
@@ -106,20 +80,18 @@ const MonthlyRevenue = () => {
   }, [totalMonthSalesAmount, totalMonthRevenue, totalMonth]);
 
   return (
-    <div id="chart" className="w-full h-full">
-      <div className="w-full flex flex-col h-full gap-8">
-        <div className="bg-[#fafafa] w-full px-6 py-8 md:py-12 flex-col rounded-[10px] min-h-[430px] lg:min-h-[600px] flex gap-4">
-          <h3 className="text-3xl font-semibold family1">Sales Statistics</h3>
-          <div className="flex h-full w-full flex-col gap-8">
-            <Chart
-              options={options}
-              series={series}
-              type="line"
-              width={"100%"}
-              height={"400px"}
-            />
-          </div>
-        </div>
+    <div className="py-8 border rounded-lg flex flex-col w-full gap-6">
+      <h3 className="text-xl px-4 block lg:text-2xl text-dark family6">
+        Growth Analysis
+      </h3>
+      <div className="flex h-full w-full flex-col gap-8">
+        <Chart
+          options={options}
+          series={series}
+          type="bar"
+          width={"100%"}
+          height={"250px"}
+        />
       </div>
     </div>
   );
@@ -132,7 +104,7 @@ const MonthlySales = () => {
   const [options, setOptions] = useState({
     chart: {
       height: 350,
-      type: "line",
+      type: "bar",
       fontFamily: "Work Sans",
       foreColor: "#333",
       fontSize: "30px",
@@ -198,7 +170,7 @@ const MonthlySales = () => {
             <Chart
               options={options}
               series={series}
-              type="line"
+              type="bar"
               width={"100%"}
               height={"350px"}
             />

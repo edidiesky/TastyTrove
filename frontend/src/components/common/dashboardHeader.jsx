@@ -5,7 +5,8 @@ import { FaBell } from "react-icons/fa6";
 import { FaRegUser, FaMoneyBill } from "react-icons/fa";
 import { BiSearch } from "react-icons/bi";
 import { BiFoodMenu, BiMessage } from "react-icons/bi";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
 import { LayoutDashboard, LogOut } from "lucide-react";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -74,7 +75,7 @@ const AdminSidebarData = [
 const DashboardHeader = () => {
   const { currentUser } = useSelector((store) => store.auth);
   const [bar, setBar] = React.useState(false);
-  const [activeindex, setActiveIndex] = useState(0);
+  const [active, setActive] = useState(false);
   const [notificationactivebar, setNotificationActiveBar] =
     React.useState(false);
   const dispatch = useDispatch();
@@ -90,9 +91,14 @@ const DashboardHeader = () => {
         setNotificationActiveBar={setNotificationActiveBar}
         notificationactivebar={notificationactivebar}
       />
-      <HeaderStyles className="w-full z-[3000] py-4 flex relative items-center justify-center">
+      <HeaderStyles
+        style={{
+          backdropFilter: "blur(14px)",
+        }}
+        className="h-[85px] w-full border-b border-[rgba(0,0,0,.08)] bg-[#ffffff4e] flex z-40 sticky top-0 items-center justify-between"
+      >
         <div className="Header_wrapper w-[95%] max-w-custom mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1">
             <div
               onClick={() => setBar(!bar)}
               className="flex flex-1 lg:hidden gap-4 items-center justify-start text-dark"
@@ -104,65 +110,36 @@ const DashboardHeader = () => {
               )}
             </div>
 
-            <label
-              htmlFor=""
-              className="hidden md:grid grid-cols-custom_2 text-dark w-[200px] lg:w-[310px]
-             items-center min-h-8  border rounded-[40px] px-4"
+            <form
+              action=""
+              className="max-w-[200px] h-[50px] md:max-w-[400px] md:w-[300px] flex items-center relative"
             >
-              <div className="w-10 text-grey text-lg h-10 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center">
-                <BiSearch />
-              </div>
+              <span className="w-4 h-4 absolute left-6">
+                <BsSearch />
+              </span>
               <input
                 type="text"
-                placeholder="Search"
-                className="bg-transparent family1 text-sm border-none outline-none text-dark"
+                placeholder="Search menu"
+                className="text-sm pl-12 h-full border font-normal bg-white rounded-full w-full "
               />
-            </label>
+            </form>
           </div>
           <div className="flex w-full auto items-center justify-end gap-8">
-            <div
-              onClick={() => setNotificationActiveBar(true)}
-              className="w-10 text-grey text-lg relative h-10 bg-[#F1F1F1] rounded-full text-dark flex items-center justify-center"
-            >
-              <FaBell />
-              <div className="w-6 absolute -top-2 -right-2 text-sm h-6 bg-[#777] rounded-full text-[#fff] flex items-center justify-center">
-                1
-              </div>
-            </div>
-
-            {/* <label
-              onClick={() => setNotificationActiveBar(true)}
-              htmlFor=""
-              className="flex cursor-pointer justify-between gap-3 text-dark w-[250px]
-             items-center min-h-14 py-1 border rounded-[40px] px-4"
-            >
-             
-            </label> */}
-
             <div className="flex profile_wrapper relative items-center gap-2">
               <div className="flex items-center gap-2">
-                {/* <img
-                src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                alt=""
-                className="w-10 rounded-full"
-              />
-              <h4 className="text-base text-dark family1 family1">
-                {currentUser?.name}
-                <span className="block font-normal family1 text-xs text-dark">
-                  {currentUser?.email}
-                </span>
-              </h4> */}
                 {currentUser?.image ? (
                   <img
+                    onClick={() => setActive(!active)}
                     src={currentUser?.image}
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                    className="w-12 h-12 object-cover rounded-full"
                   />
                 ) : (
                   <img
+                    onClick={() => setActive(!active)}
                     src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                     alt=""
-                    className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                    className="w-12 h-12 object-cover rounded-full"
                   />
                 )}
                 {/* <h4 className="text-base text-dark family1 family1">
@@ -172,53 +149,77 @@ const DashboardHeader = () => {
               </span>
             </h4> */}
               </div>
-              <div className="profile_dropdown shadow absolute">
-                <div className="w-full flex flex-col">
-                  <div className="p-4 border-b flex items-center gap-4">
-                    {currentUser?.image ? (
-                      <img
-                        src={currentUser?.image}
-                        alt=""
-                        className="w-14 lg:w-14 h-14 lg:h-14 rounded-full"
-                      />
-                    ) : (
-                      <img
-                        src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
-                        alt=""
-                        className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
-                      />
-                    )}
-                    <h4 className="text-base text-dark font-bold family1">
-                      {currentUser?.name}
-                      <span className="block font-normal family1 text-xs text-dark">
-                        Seller Account
+              <div
+                style={{ transition: "all .4s ease" }}
+                className={`absolute ${
+                  active
+                    ? "opacity-100 scale-100 visible"
+                    : "scale-[0] opacity-0 "
+                } py-2 border right-[10%] top-[110%] shadow-lg w-[250px] bg-white rounded-lg`}
+              >
+                <div className="w-full flex flex-col gap-4">
+                  <div className="flex w-full relative pb-3 border-b px-4 items-center gap-4 cursor-pointer">
+                    <img
+                      src={
+                        currentUser?.image
+                          ? currentUser?.image
+                          : "https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
+                      }
+                      className="w-12 h-12 object-cover rounded-full"
+                      alt="Avatar for user"
+                    />
+                    <span className="text-base family6">
+                      Edidiong Essien
+                      <span className="text-xs block family1 font-normal text-[#969A9A]">
+                        essieneddy10@gmail.com
                       </span>
-                    </h4>
+                    </span>
                   </div>
-                  <div className="flex profile_dropdown_bottom flex-col w-full">
-                    <NavLink
-                      to={"/dashboard"}
-                      className="flex items-center gap-3 font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
+                  <div className="w-full family1 flex flex-col pb-3 border-b">
+                    <Link
+                      to={"/"}
+                      className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
-                      <LayoutDashboard
-                        width={"20px"}
-                        height={"20px"}
-                        fontSize={"10px"}
-                      />{" "}
-                      Dashboard
-                    </NavLink>
-                    <NavLink
-                      to={`/dashboard/profile/${currentUser?.id}`}
-                      className="flex items-center gap-3 font-booking_font_bold text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
+                      My Profile
+                    </Link>
+                    <Link
+                      to={"/"}
+                      className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
-                      <FaRegUser fontSize={"15px"} /> Profile
-                    </NavLink>
-                    <div
-                      onClick={handleLogOut}
-                      className="flex items-center gap-3 border-t font-booking_font_bold hover:bg-[#f7f7f7] text-xs p-8 h-[45px] px-2 family1 w-full profile_list text-dark"
+                      My Menus
+                    </Link>
+                    <Link
+                      to={"/"}
+                      className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
-                      <LogOut color="var(--red)" fontSize={"13px"} /> Log Out
-                    </div>
+                      My Orders
+                    </Link>
+                    <Link
+                      to={"/"}
+                      className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                    >
+                      My Customers
+                    </Link>
+                  </div>
+                  <div className="w-full family1 flex flex-col pb-3 border-b">
+                    <Link
+                      to={"/"}
+                      className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                    >
+                      My Mode
+                    </Link>
+                    <Link
+                      to={"/"}
+                      className="text-sm block  font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                    >
+                      Account Settings
+                    </Link>
+                  </div>
+                  <div
+                    onClick={handleLogOut}
+                    className="w-full hover:bg-[#fafafa] cursor-pointer family1 text-center py-2 font-semibold text-[#d02828ed]"
+                  >
+                    Sign Out
                   </div>
                 </div>
               </div>
@@ -248,7 +249,7 @@ const DashboardHeader = () => {
                 <img
                   src={currentUser?.image}
                   alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                  className="w-12 h-12 object-cover rounded-full"
                 />
               ) : currentUser?.username ? (
                 // <div className="w-12 h-12 text-white rounded-full bg-[#000] text-2xl flex items-center justify-center ">
@@ -257,7 +258,7 @@ const DashboardHeader = () => {
                 <img
                   src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                   alt=""
-                  className="w-12 lg:w-12 h-12 lg:h-12 object-cover rounded-full"
+                  className="w-12 h-12 object-cover rounded-full"
                 />
               ) : (
                 ""
@@ -300,7 +301,6 @@ const DashboardHeader = () => {
 };
 
 export const HeaderStyles = styled.div`
-  min-height: 4.8rem;
   width: 100%;
   position: sticky;
   top: 0;
