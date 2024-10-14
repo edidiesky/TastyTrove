@@ -127,7 +127,7 @@ export default function Reviews() {
                           value={formdata[input.name]}
                           type={input.type}
                           onChange={handleFormChange}
-                          className="w-full p-8 text-[#777] h-[100px]"
+                          className="w-full p-4 text-[#777] h-[100px]"
                         ></textarea>
                       </label>
                     ) : (
@@ -143,7 +143,7 @@ export default function Reviews() {
                           value={formdata[input.name]}
                           type={input.type}
                           onChange={handleFormChange}
-                          className="w-full p-8 text-[#777]"
+                          className="w-full p-4 text-[#777]"
                         ></input>
                       </label>
                     )}
