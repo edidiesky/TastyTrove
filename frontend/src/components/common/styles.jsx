@@ -93,7 +93,7 @@ export const Table = styled.div`
           }
           td {
             text-align: start;
-            padding: 1.4rem 1.2rem !important;
+            padding: 1rem 1.2rem !important;
             font-family: "Karla" !important;
             border-bottom: 1px solid rgba(0, 0, 0, 0.09);
             line-height: 1.2 !important;

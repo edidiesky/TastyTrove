@@ -25,11 +25,11 @@ const DashboardIndex = () => {
           <ReservationRoomsModal modal={roommodal} setModal={setRoomModal} />
         )}
       </AnimatePresence>
-      <div className="w-full pb-20 flex flex-col gap-12">
+      <div className="w-full pb-20 flex flex-col gap-4">
         <div className="w-full grid lg:grid-cols-2 lg:items-center gap-8 justify-between">
-          <h3 className="text-3xl block lg:text-4xl family1 font-semibold">
-            Summary of <br /> your Menu
-            <span className="block text-sm font-normal">
+          <h3 className="text-3xl block lg:text-4xl family6">
+            Summary of your Menu
+            <span className="block family1 text-sm font-normal">
               Make a review of your menu created either by adding or modifying
               their content
             </span>
@@ -38,7 +38,7 @@ const DashboardIndex = () => {
             <div className="flex items-center md:justify-end">
               <Link
                 to={"/dashboard/menu/create-menu"}
-                className="h-[50px]  md:h-[55px] min-w-[120px]  md:min-w-[160px] text-xs md:text-sm family1 rounded-[40px]"
+                className="h-[50px]  md:h-[53px] min-w-[100px]  md:min-w-[140px] text-xs md:text-sm family1 rounded-[40px]"
               >
                 <Button
                   type={"full_dark"}
