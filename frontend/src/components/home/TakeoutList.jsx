@@ -52,7 +52,6 @@ export default function Plans() {
               >
                 <div className="w-85 auto px-8 flex flex-col gap-12">
                   <h2 className={` family3 text-5xl uppercase text-start`}>
-            
                     {data?.title}
                   </h2>
                   <div className="w-full flex flex-col gap-4">
@@ -67,8 +66,8 @@ export default function Plans() {
                             <li className="w-full auto flex flex-col gap-2 text-base center border-bottom py-1 auto">
                               <div className="flex w-full items-center gap-2 justify-space">
                                 <div className="flex w-full justify-between gap-4 items-center">
-                                  <h3 className={`family3 text-4xl text-dark`}>
-                                {x?.title}
+                                  <h3 className={`family3 hover:text-[var(--primary)] hover:underline text-4xl text-dark`}>
+                                    {x?.title}
                                   </h3>
                                   <span className={`text-xl text-dark`}>
                                     ${x?.price}

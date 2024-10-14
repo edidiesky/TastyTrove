@@ -111,9 +111,9 @@ const RegisterModal = () => {
         </div>
         <div className="w-full mx-auto h-[600px] items-center justify-center flex flex-col">
           <div className="w-full sticky top-0 left-0 p-6 px-8 flex items-center justify-between">
-            <h3 className="text-2xl md:text-3xl font-bold family1">
+            <h3 className="text-2xl md:text-3xl font-bold family6">
               Sign Up
-              <span className="block text-sm font-normal family1">
+              <span className="block pt-3 text-sm font-normal family1">
                 Register to your account and check out your bookings
               </span>
             </h3>
@@ -159,15 +159,15 @@ const RegisterModal = () => {
                     data-test="registration_button"
                     type="submit"
                     disabled={registerisLoading || noEntry}
-                    className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
-                   bg-[#000] rounded-[40px] family1 font-normal"
+                    className="px-8 h-[50px] text-sm hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
+                   bg-[#000] rounded-full family6 font-semibold"
                   >
                     {registerisLoading ? (
                       <div className="w-full flex justify-center items-center gap-4">
                         <Loader type="dots" /> Registration in progress
                       </div>
                     ) : (
-                      <AnimateText children={"Sign Up"} />
+                      "Sign Up"
                     )}
                   </button>
                   <div className="w-full flex items-center justify-start gap-2">
