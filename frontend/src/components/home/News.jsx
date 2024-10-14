@@ -32,12 +32,12 @@ export default function News() {
       <h2
         data-aos="fade"
         data-aos-duration="1200"
-        className="  text-4xl italic lg:text-5xl w-full text-center family4 text-dark"
+        className="  text-4xl italic lg:text-5xl w-full text-center family5 text-dark"
       >
         Latest news & promotions
       </h2>
       <div className="w-85 auto gap-2 newswp">
-        {newsData?.map((data,index)=> {
+        {newsData?.map((data, index) => {
           return (
             <div
               key={index}
@@ -68,7 +68,6 @@ export default function News() {
             </div>
           );
         })}
-       
       </div>
     </NewsContent>
   );

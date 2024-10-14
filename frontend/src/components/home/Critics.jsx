@@ -11,9 +11,9 @@ export default function Critics() {
         data-aos="fade"
         data-aos-duration="1200"
         // style={{fontStyle:"italic"}}
-        className="text-5xl italic w-full flex items-center justify-center family4 text-dark"
+        className="text-5xl italic w-full flex items-center justify-center family5 text-dark"
       >
-     What critics are saying about us
+        What critics are saying about us
       </h2>
       <div
         data-aos="fade"
