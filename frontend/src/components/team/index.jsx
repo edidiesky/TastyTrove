@@ -83,25 +83,25 @@ const Main = () => {
                   >
                     {team.name}
                   </h3>
-                  <p className="text-lg leading-[1.6] md:text-xl family4">
+                  <p className="text-lg leading-[1.6] md:text-xl family5">
                     Tristique tempus condimentum diam donec. Condimentum
                     ullamcorper sit elementum hendrerit mi nulla in consequat,
                     ut. Metus, nullam scelerisque netus viverra dui pretium
                     pulvinar. Commodo morbi amet.
                   </p>
-                  <p className="text-lg leading-[1.6] md:text-xl family4">
+                  <p className="text-lg leading-[1.6] md:text-xl family5">
                     Tristique tempus condimentum diam donec. Condimentum
                     ullamcorper sit elementum hendrerit mi nulla in consequat,
                     ut. Metus, nullam scelerisque netus viverra dui pretium
                     pulvinar. Commodo morbi amet.
                   </p>
                 </div>
-                <div className="flex family1 flex-col gap-8">
+                <div className="flex family5 flex-col gap-8">
                   <h3
                     className="text-2xl md:text-3xl italic
                   relative after:w-[100px] after:left-0 after:-bottom-6 mb-8 after:h-[2px] after:bg-[#eee] 
                       after:rounded-lg after:absolute
-                  family4 font-normal"
+                  family5 font-normal"
                   >
                     {team.name}'s Accolades
                   </h3>
