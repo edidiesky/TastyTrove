@@ -75,9 +75,14 @@ const LoginModal = () => {
   return (
     <LoginModalStyles
       as={motion.div}
-      initial={{ opacity: 0, visibility: "hidden" }}
-      exit={{ opacity: 0, visibility: "hidden" }}
-      animate={{ opacity: 1, visibility: "visible" }}
+      initial={{ opacity: 0 }}
+      exit={{
+        opacity: 0,
+        transition: {
+          duration: 1.7,
+        },
+      }}
+      animate={{ opacity: 1 }}
     >
       {/* {loginisLoading && <Loader />} */}
       <motion.div

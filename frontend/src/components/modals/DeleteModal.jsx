@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useCallback, useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { CiWarning } from "react-icons/ci";
 import { motion } from "framer-motion";
 import styled from "styled-components";
@@ -12,7 +12,7 @@ import { handleClearMenuAlert } from "@/features/menu/menuSlice";
 import { DeleteMenu, getSingleMenu } from "@/features/menu/menuReducer";
 import { DeleteSingleCart, GetSingleCart } from "@/features/cart/cartReducer";
 import { clearCartAlert } from "@/features/cart/cartSlice";
-export default function DeleteModal({ type, modal, setModal, data, id }) {
+export default function DeleteModal({ type, setModal, id }) {
   const { deleteMenuisLoading, deleteMenuisSuccess } = useSelector(
     (store) => store.menu
   );
@@ -37,7 +37,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
     // console.log(id)
     dispatch(DeleteSingleUser(id));
   }, []);
-// console.log(cartDetails);
+  // console.log(cartDetails);
   // get singleCart singleUser singleMenu
   useEffect(() => {
     if (type === "user") {
@@ -46,7 +46,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
     if (type === "cart") {
       dispatch(GetSingleCart(id));
     }
-    if (type === '') {
+    if (type === "") {
       dispatch(getSingleMenu(id));
     }
   }, [id, type]);
@@ -62,13 +62,18 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
     }
   }, [setModal, deleteMenuisSuccess, deleteUserisSuccess, deleteCartisSuccess]);
 
-  // cart delete modal component
+  // cart delet component
   if (type === "cart") {
     return (
       <DeleteContainer
         as={motion.div}
         initial={{ opacity: 0 }}
-        exit={{ opacity: 0 }}
+        exit={{
+          opacity: 0,
+          transition: {
+            duration: 1.7,
+          },
+        }}
         animate={{ opacity: 1 }}
       >
         {deleteCartisLoading && <Loader />}
@@ -135,13 +140,18 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
       </DeleteContainer>
     );
   }
-  // user delete modal component
+  // user delet component
   if (type === "user") {
     return (
       <DeleteContainer
         as={motion.div}
         initial={{ opacity: 0 }}
-        exit={{ opacity: 0 }}
+        exit={{
+          opacity: 0,
+          transition: {
+            duration: 1.7,
+          },
+        }}
         animate={{ opacity: 1 }}
       >
         {deleteUserisLoading && <Loader />}
@@ -208,7 +218,7 @@ export default function DeleteModal({ type, modal, setModal, data, id }) {
       </DeleteContainer>
     );
   }
-  // menu delete modal component
+  // menu delet component
   return (
     <DeleteContainer
       as={motion.div}
