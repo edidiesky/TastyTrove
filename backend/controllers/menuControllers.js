@@ -42,7 +42,7 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
   const skip = (page - 1) * limit;
 
   const totalMenu = await prisma.menu.count({});
-  const cacheKey = "allMenus";
+  const cacheKey = `allMenus:${req.user?.userId}`;
   // getting the data from redis based on the cache key
   const cachedMenus = await redisClient.get(cacheKey);
   if (cachedMenus) {

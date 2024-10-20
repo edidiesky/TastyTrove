@@ -169,9 +169,9 @@ const DashboardHeader = () => {
                       alt="Avatar for user"
                     />
                     <span className="text-base family6">
-                      Edidiong Essien
+                      {currentUser?.name}
                       <span className="text-xs block family1 font-normal text-[#969A9A]">
-                        essieneddy10@gmail.com
+                        {currentUser?.email}
                       </span>
                     </span>
                   </div>
