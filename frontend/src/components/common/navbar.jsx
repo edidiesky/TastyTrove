@@ -143,14 +143,14 @@ const Navbar = () => {
                       onClick={() => setActive(!active)}
                       src={currentUser?.image}
                       alt=""
-                      className="w-12 h-12 object-cover rounded-full"
+                      className="w-14 h-14 object-cover rounded-full"
                     />
                   ) : (
                     <img
                       onClick={() => setActive(!active)}
                       src="https://fundednext.fra1.digitaloceanspaces.com/dashboard/demo-avatar.jpg"
                       alt=""
-                      className="w-12 h-12 object-cover rounded-full"
+                      className="w-14 h-14 object-cover rounded-full"
                     />
                   )}
                 </div>
