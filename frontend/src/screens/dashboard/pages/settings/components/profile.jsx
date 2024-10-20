@@ -6,11 +6,13 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { Switch } from "@/components/ui/switch";
 import { useDispatch, useSelector } from "react-redux";
-import { UpdateSingleUser } from "@/features/auth/authReducer";
+import { GetSingleUser, UpdateSingleUser } from "@/features/auth/authReducer";
 import Loader from "@/components/home/loader";
+import { useParams } from "react-router-dom";
 
 const Profile = () => {
   const [index, setIndex] = useState(0);
+  const {id} = useParams()
   const { userInfo, updateUserisLoading, getallUserisLoading } = useSelector(
     (store) => store.auth
   );
@@ -25,6 +27,7 @@ const Profile = () => {
   const [password, setPassword] = useState("");
   const [confirmpassword, setConfirmPassword] = useState("");
   const [role, setRole] = useState(false);
+
   useEffect(() => {
     if (userInfo) {
       setFormValue({
@@ -193,11 +196,11 @@ const Profile = () => {
                       <input
                         className="w-full input text-dark font-normal text-sm"
                         required={true}
-                        name={"password"}
-                        id={"password"}
-                        value={password}
-                        type={"password"}
-                        placeholder={"password"}
+                        name={input.name}
+                        id={input.name}
+                        value={formvalue[input.name]}
+                        type={input.type}
+                        placeholder={input.name}
                         onChange={(e) => setPassword(e.target.value)}
                       ></input>
                     </label>

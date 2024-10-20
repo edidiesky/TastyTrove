@@ -54,14 +54,14 @@ export default function App() {
     <div className="based" style={{ height }}>
       <Routes>
         <Route path={"/"} element={<Layout />}>
-<Route
-  index
-  element={
-    <Suspense fallback={<></>}>
-      <HomeWrapper />
-    </Suspense>
-  }
-/>
+          <Route
+            index
+            element={
+              <Suspense fallback={<></>}>
+                <HomeWrapper />
+              </Suspense>
+            }
+          />
           <Route
             path="/restaurant/takeout/:food"
             element={
