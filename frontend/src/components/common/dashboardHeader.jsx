@@ -177,29 +177,31 @@ const DashboardHeader = () => {
                   </div>
                   <div className="w-full family1 flex flex-col pb-3 border-b">
                     <Link
-                      to={"/"}
+                      to={`/dashboard/profile/${currentUser?.id}`}
                       className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
                       My Profile
                     </Link>
                     <Link
-                      to={"/"}
+                      to={"/dashboard/menu"}
                       className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
                       My Menus
                     </Link>
                     <Link
-                      to={"/"}
+                      to={"/dashboard/orders"}
                       className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
                       My Orders
                     </Link>
-                    <Link
-                      to={"/"}
-                      className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                    >
-                      My Customers
-                    </Link>
+                    {currentUser?.role === "ADMIN" && (
+                      <Link
+                        to={"/dashboard/customers"}
+                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                      >
+                        My Customers
+                      </Link>
+                    )}
                   </div>
                   <div className="w-full family1 flex flex-col pb-3 border-b">
                     <Link
@@ -209,7 +211,7 @@ const DashboardHeader = () => {
                       My Mode
                     </Link>
                     <Link
-                      to={"/"}
+                      to={`/dashboard/profile/${currentUser?.id}`}
                       className="text-sm block  font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                     >
                       Account Settings
