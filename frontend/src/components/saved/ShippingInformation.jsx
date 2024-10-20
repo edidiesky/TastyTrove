@@ -140,7 +140,7 @@ const ShippingInfo = () => {
         <div className="w-full relative">
           <div
             onClick={() => setCountryModal(!countrymodal)}
-            className="input z-[30000] py-2 flex items-center cursor-pointer w-full text-base"
+            className="h-[60px] border px-4 z-[30000] py-2 flex items-center cursor-pointer w-full text-base"
           >
             {countryinput ? country?.name : "Select your country first"}
           </div>
@@ -181,7 +181,7 @@ const ShippingInfo = () => {
           <div className="w-full relative">
             <div
               onClick={() => setStateModal(!statemodal)}
-              className="input flex cursor-pointer items-center py-2 w-full"
+              className="h-[60px] border px-4 flex cursor-pointer items-center py-2 w-full"
             >
               {stateinput ? state?.name : "Select your City"}
             </div>
@@ -222,7 +222,7 @@ const ShippingInfo = () => {
           <div className="w-full z-[40000] relative">
             <div
               onClick={() => setCityModal(!citymodal)}
-              className="input flex cursor-pointer items-center py-2 w-full"
+              className="h-[60px] border px-4 flex cursor-pointer items-center py-2 w-full"
             >
               {city ? city?.name : "Select your state"}
             </div>
@@ -268,7 +268,7 @@ const ShippingInfo = () => {
               setZipCode(e.target.value);
             }}
             placeholder="Enter your zipcode"
-            className="input bg-[#fff] w-full text-base"
+            className="h-[60px] border px-4 bg-[#fff] w-full text-base"
           />
           <div className="w-full flex items-center">
             <button
