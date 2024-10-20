@@ -1,23 +1,7 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
-import redis from "redis";
-const redisclient = redis.createClient({
-  url: "redis://127.0.0.1:6379",
-}); //default port 6379
+import redisClient from "../utils/redisClient.js";
 
-//Connect redis client to redis server
-(async () => {
-  await redisclient.connect();
-})();
-
-//Redis connection check
-redisclient.on("ready", () => {
-  console.log("Connected to Redis Server!");
-});
-
-redisclient.on("error", (err) => {
-  console.log("Error Connecting to Redis Server: ", err);
-});
 // @description  Get all menu
 // @route  GET /menu
 // @access  Public
@@ -25,7 +9,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
   // setting the cache key for getting all the menus
   const cacheKey = "allMenus";
   // getting the data from redis based on the cache key
-  const cachedMenus = await redisclient.get(cacheKey);
+  const cachedMenus = await redisClient.get(cacheKey);
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
@@ -40,7 +24,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
       },
     });
     // setting the cached data to expire in an hour
-    await redisclient.set(cacheKey, JSON.stringify(Menus), "EX", 3600);
+    await redisClient.set(cacheKey, JSON.stringify(Menus), { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     return res.json(Menus);
@@ -58,23 +42,33 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
   const skip = (page - 1) * limit;
 
   const totalMenu = await prisma.menu.count({});
+  const cacheKey = "allMenus";
+  // getting the data from redis based on the cache key
+  const cachedMenus = await redisClient.get(cacheKey);
+  if (cachedMenus) {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.json(JSON.parse(cachedMenus));
+  } else {
+    const Menus = await prisma.menu.findMany({
+      skip: skip,
+      take: limit,
+      where: {
+        userid: req.user?.userId,
+      },
+      include: {
+        user: true,
+      },
+    });
 
-  const Menus = await prisma.menu.findMany({
-    skip: skip,
-    take: limit,
-    where: {
-      userid: req.user?.userId,
-    },
-    include: {
-      user: true,
-    },
-  });
+    const noOfPages = Math.ceil(totalMenu / limit);
+    const menuResult = { Menus, noOfPages, totalMenu };
+    await redisClient.set(cacheKey, JSON.stringify(menuResult), { EX: 3600 });
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
-  const noOfPages = Math.ceil(totalMenu / limit);
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-
-  res.status(200).json({ Menus, noOfPages, totalMenu });
+    res.status(200).json(menuResult);
+  }
 });
 
 // @description  Create a menu for the seller
@@ -104,22 +98,32 @@ const CreateMenus = asyncHandler(async (req, res) => {
 // @access  Public
 const GetSingleMenu = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  const Menu = await prisma.menu.findUnique({
-    where: {
-      id: id,
-    },
-    include: {
-      user: true,
-    },
-  });
+  const cacheKey = `menu_${id}`;
+  // get the menu
+  const cachedMenus = await redisClient.get(cacheKey);
+  if (cachedMenus) {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.json(JSON.parse(cachedMenus));
+  } else {
+    const Menu = await prisma.menu.findUnique({
+      where: {
+        id: id,
+      },
+      include: {
+        user: true,
+      },
+    });
 
-  if (!Menu) {
-    res.status(404);
-    throw new Error("The Menu does not exist");
+    if (!Menu) {
+      res.status(404);
+      throw new Error("The Menu does not exist");
+    }
+    await redisClient.set(cacheKey, JSON.stringify(Menu), { EX: 3600 });
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.json(Menu);
   }
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  return res.json(Menu);
 });
 
 // @description  Update a menu for the seller
