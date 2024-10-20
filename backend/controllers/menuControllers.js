@@ -39,7 +39,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
         user: true,
       },
     });
-    // setting the 
+    // setting the cached data to expire in an hour
     await redisclient.set(cacheKey, JSON.stringify(Menus), "EX", 3600);
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
