@@ -100,7 +100,7 @@ export default function DeleteModal({ type, setModal, id }) {
             </span>
             <h3 className="text-2xl font-bold text-center family6">
               <span
-                className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
+                className="family6 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
               >
                 Delete {cartDetails?.menu?.title}?
@@ -178,7 +178,7 @@ export default function DeleteModal({ type, setModal, id }) {
             </span>
             <h3 className="text-2xl flex-1 font-bold text-center family1">
               <span
-                className="family1 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
+                className="family6 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
               >
                 Delete {userInfo?.name}?
