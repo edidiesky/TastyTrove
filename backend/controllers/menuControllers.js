@@ -1,21 +1,50 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
+import redis from "redis";
+const redisclient = redis.createClient({
+  url: "redis://127.0.0.1:6379",
+}); //default port 6379
 
+//Connect redis client to redis server
+(async () => {
+  await redisclient.connect();
+})();
+
+//Redis connection check
+redisclient.on("ready", () => {
+  console.log("Connected to Redis Server!");
+});
+
+redisclient.on("error", (err) => {
+  console.log("Error Connecting to Redis Server: ", err);
+});
 // @description  Get all menu
 // @route  GET /menu
 // @access  Public
 const GetAllMenu = asyncHandler(async (req, res) => {
-  const Menus = await prisma.menu.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-    include: {
-      user: true,
-    },
-  });
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-  return res.json(Menus);
+  // setting the cache key for getting all the menus
+  const cacheKey = "allMenus";
+  // getting the data from redis based on the cache key
+  const cachedMenus = await redisclient.get(cacheKey);
+  if (cachedMenus) {
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.json(JSON.parse(cachedMenus));
+  } else {
+    const Menus = await prisma.menu.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+      include: {
+        user: true,
+      },
+    });
+    // setting the 
+    await redisclient.set(cacheKey, JSON.stringify(Menus), "EX", 3600);
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+    return res.json(Menus);
+  }
 });
 
 const GetAllMenuAndReservations = asyncHandler(async (req, res) => {});

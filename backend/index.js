@@ -1,6 +1,6 @@
 import express from "express";
 import path from "path";
-
+import redis from 'redis'
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -9,6 +9,7 @@ dotenv.config();
 
 import { createServer } from "node:http";
 import { Server } from "socket.io";
+
 
 const app = express();
 const server = createServer(app);
