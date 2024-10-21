@@ -26,8 +26,8 @@ const Loader = ({ type, color, size }) => {
         background: "#ffffff7a",
       }}
     >
-      <div className="spinner text-xl">
-        <CiSettings fontSize={'30px'} />
+      <div className="spinner text-[30px] md:text-[40px]">
+        <CiSettings />
       </div>
       {/* <ThreeDots
         height="40"
