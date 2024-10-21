@@ -1,14 +1,16 @@
 import dotenv from "dotenv";
 dotenv.config(); 
-import redis from "redis";
-const redisClient = redis.createClient({
-  url: process.env.UPSTASH_REDIS_REST_URL,
-}); //default port 6379
+import { Redis } from '@upstash/redis'
 
-//Connect redis client to redis server
-(async () => {
-  await redisClient.connect();
-})();
+const redisClient = new Redis({
+  url: "https://cunning-halibut-44067.upstash.io",
+  token: "AawjAAIjcDEwYzM0MmFiMDdjZGQ0ZWY2OGU3YjRhODM0MjkzZTg5YnAxMA",
+})(
+  //Connect redis client to redis server
+  async () => {
+    await redisClient.connect();
+  }
+)();
 
 //Redis connection check
 redisClient.on("ready", () => {
