@@ -1,6 +1,6 @@
 import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
-import redisClient from "../utils/redisClient.js";
+import redis from "../utils/redis.js";
 
 // @description  Get all menu
 // @route  GET /menu
@@ -9,7 +9,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
   // setting the cache key for getting all the menus
   const cacheKey = "allMenus";
   // getting the data from redis based on the cache key
-  const cachedMenus = await redisClient.get(cacheKey);
+  const cachedMenus = await redis.get(cacheKey);
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
@@ -24,7 +24,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
       },
     });
     // setting the cached data to expire in an hour
-    await redisClient.set(cacheKey, JSON.stringify(Menus), { EX: 3600 });
+    await redis.set(cacheKey, JSON.stringify(Menus), { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     return res.json(Menus);
@@ -43,7 +43,7 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
   const totalMenu = await prisma.menu.count({});
   const cacheKey = `allMenus:${req.user?.userId}`;
   // getting the data from redis based on the cache key
-  const cachedMenus = await redisClient.get(cacheKey);
+  const cachedMenus = await redis.get(cacheKey);
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
@@ -62,7 +62,7 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
 
     const noOfPages = Math.ceil(totalMenu / limit);
     const menuResult = { Menus, noOfPages, totalMenu };
-    await redisClient.set(cacheKey, JSON.stringify(menuResult), { EX: 3600 });
+    await redis.set(cacheKey, JSON.stringify(menuResult), { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
@@ -99,7 +99,7 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
   const id = req.params.id;
   const cacheKey = `menu_${id}`;
   // get the menu
-  const cachedMenus = await redisClient.get(cacheKey);
+  const cachedMenus = await redis.get(cacheKey);
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
@@ -118,7 +118,7 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
       res.status(404);
       throw new Error("The Menu does not exist");
     }
-    await redisClient.set(cacheKey, JSON.stringify(Menu), { EX: 3600 });
+    await redis.set(cacheKey, JSON.stringify(Menu), { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     return res.json(Menu);

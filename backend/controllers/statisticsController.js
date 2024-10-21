@@ -2,12 +2,12 @@ import asyncHandler from "express-async-handler";
 import prisma from "../prisma/index.js";
 import { format } from "date-fns";
 import moment from "moment";
-import redisClient from "../utils/redisClient.js";
+import redis from "../utils/redis.js";
 const GetStatisticsDataForAdmin = asyncHandler(async (req, res) => {
   const sellerid = req?.user?.userId;
   const cacheKey = `seller:${sellerid}`;
   // get the cached value
-  const cachedData = await redisClient.get(cacheKey);
+  const cachedData = await redis.get(cacheKey);
   if (cachedData) {
     return res.status(200).json(JSON.parse(cachedData));
   }
@@ -94,7 +94,7 @@ const GetStatisticsDataForAdmin = asyncHandler(async (req, res) => {
     orderHistory,
     latency: `Total Latency - ${(end - start) / 1000} seconds`,
   };
-  await redisClient.set(cacheKey, JSON.stringify(result), { EX: 3600 });
+  await redis.set(cacheKey, JSON.stringify(result), { EX: 3600 });
   res.status(200).json(result);
 });
 
