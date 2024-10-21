@@ -9,7 +9,7 @@ const GetStatisticsDataForAdmin = asyncHandler(async (req, res) => {
   // get the cached value
   const cachedData = await redis.get(cacheKey);
   if (cachedData) {
-    return res.status(200).json(JSON.parse(cachedData));
+    return res.status(200).json(cachedData);
   }
   const start = performance.now();
   const [topproduct, recentsales, totalMenu, totalReview, completedOrder] =
@@ -94,7 +94,7 @@ const GetStatisticsDataForAdmin = asyncHandler(async (req, res) => {
     orderHistory,
     latency: `Total Latency - ${(end - start) / 1000} seconds`,
   };
-  await redis.set(cacheKey, JSON.stringify(result), { EX: 3600 });
+  await redis.set(cacheKey, result, { EX: 3600 });
   res.status(200).json(result);
 });
 
