@@ -187,6 +187,12 @@ const Navbar = () => {
                     </div>
                     <div className="w-full family1 flex flex-col pb-3 border-b">
                       <Link
+                        to={`/dashboard`}
+                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                      >
+                        My Profile
+                      </Link>
+                      <Link
                         to={`/dashboard/profile/${currentUser?.id}`}
                         className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
                       >
