@@ -23,7 +23,7 @@ const Loader = ({ type, color, size }) => {
         width: "100vw",
         position: "fixed",
         height: "100vh",
-        background: "#ffffff7a",
+        background: "#ffffffde",
       }}
     >
       <div className="spinner text-[30px] md:text-[40px]">
