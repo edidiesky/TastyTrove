@@ -13,7 +13,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    return res.json(JSON.parse(cachedMenus));
+    return res.json(cachedMenus);
   } else {
     const Menus = await prisma.menu.findMany({
       orderBy: {
@@ -47,7 +47,7 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    return res.json(JSON.parse(cachedMenus));
+    return res.json(cachedMenus);
   } else {
     const Menus = await prisma.menu.findMany({
       skip: skip,
@@ -103,7 +103,7 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
   if (cachedMenus) {
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
-    return res.json(JSON.parse(cachedMenus));
+    return res.json(cachedMenus);
   } else {
     const Menu = await prisma.menu.findUnique({
       where: {
