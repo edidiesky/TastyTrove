@@ -34,7 +34,7 @@ const Widget = () => {
       bgColor: "#deddff",
       color: "#3e3aff",
       subtext:
-        "Browse your applied jobs here and check their respective progress..",
+        "Browse your menu here and check their respective progress..",
       subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "0"}`,
     },
     {
@@ -43,7 +43,7 @@ const Widget = () => {
       bgColor: "#f3f3f1",
       color: "#a37d18",
       subtext:
-        "Browse your applied jobs here and check their respective progress..",
+        "Browse your menu here and check their respective progress..",
       subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "0"}`,
     },
     {
@@ -52,7 +52,7 @@ const Widget = () => {
       bgColor: "#cdeed3",
       color: "#002b31",
       subtext:
-        "Browse your applied jobs here and check their respective progress..",
+        "Browse your menu here and check their respective progress..",
       subtitle: `${
         totalReview ? totalReview / widgetData?.totalReview?.length : 0
       }`,

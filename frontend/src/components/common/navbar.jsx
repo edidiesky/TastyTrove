@@ -185,8 +185,8 @@ const Navbar = () => {
                         </span>
                       </span>
                     </div>
-                    {currentUser?.role === "SELLER" ||
-                      (currentUser?.role === "ADMIN" && (
+                    {(currentUser?.role === "SELLER" ||
+                      currentUser?.role === "ADMIN" ) && (
                         <div className="flex flex-col gap-3">
                           <div className="w-full family1 flex flex-col pb-3 border-b">
                             <Link
@@ -237,7 +237,7 @@ const Navbar = () => {
                             </Link>
                           </div>
                         </div>
-                      ))}
+                      )}
 
                     <div
                       onClick={handleLogOut}

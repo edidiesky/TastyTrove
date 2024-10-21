@@ -24,8 +24,8 @@ const DashboardIndex = () => {
             Explore information and activity about your property
           </span>
         </h3>
-        <div className="flex flex-col gap-20">
-          <div className="w-full grid gap-12 lg:gap-4 lg:grid-cols-1">
+        <div className="flex flex-col gap-16">
+          <div className="w-full grid gap-16 lg:gap-4 lg:grid-cols-1">
             <Widget />
             <div className="w-full flex flex-col gap-12">
               <Statistics />
