@@ -1,6 +1,8 @@
+import dotenv from "dotenv";
+dotenv.config(); 
 import redis from "redis";
 const redisClient = redis.createClient({
-  url: "redis://127.0.0.1:6379",
+  url: process.env.UPSTASH_REDIS_REST_URL,
 }); //default port 6379
 
 //Connect redis client to redis server
