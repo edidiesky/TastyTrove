@@ -24,7 +24,7 @@ const GetAllMenu = asyncHandler(async (req, res) => {
       },
     });
     // setting the cached data to expire in an hour
-    await redis.set(cacheKey, JSON.stringify(Menus), { EX: 3600 });
+    await redis.set(cacheKey, Menus, { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     return res.json(Menus);
@@ -62,7 +62,7 @@ const GetAllAdminMenus = asyncHandler(async (req, res) => {
 
     const noOfPages = Math.ceil(totalMenu / limit);
     const menuResult = { Menus, noOfPages, totalMenu };
-    await redis.set(cacheKey, JSON.stringify(menuResult), { EX: 3600 });
+    await redis.set(cacheKey,menuResult, { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
 
@@ -118,7 +118,7 @@ const GetSingleMenu = asyncHandler(async (req, res) => {
       res.status(404);
       throw new Error("The Menu does not exist");
     }
-    await redis.set(cacheKey, JSON.stringify(Menu), { EX: 3600 });
+    await redis.set(cacheKey, Menu, { EX: 3600 });
     res.setHeader("Content-Type", "text/html");
     res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
     return res.json(Menu);
