@@ -185,54 +185,60 @@ const Navbar = () => {
                         </span>
                       </span>
                     </div>
-                    <div className="w-full family1 flex flex-col pb-3 border-b">
-                      <Link
-                        to={`/dashboard`}
-                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                      >
-                        My Dashboard
-                      </Link>
-                      <Link
-                        to={`/dashboard/profile/${currentUser?.id}`}
-                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                      >
-                        My Profile
-                      </Link>
-                      <Link
-                        to={"/dashboard/menu"}
-                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                      >
-                        My Menus
-                      </Link>
-                      <Link
-                        to={"/dashboard/orders"}
-                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                      >
-                        My Orders
-                      </Link>
-                      {currentUser?.role === "ADMIN" && (
-                        <Link
-                          to={"/dashboard/customers"}
-                          className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                        >
-                          My Customers
-                        </Link>
-                      )}
-                    </div>
-                    <div className="w-full family1 flex flex-col pb-3 border-b">
-                      <Link
-                        to={"/"}
-                        className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                      >
-                        My Mode
-                      </Link>
-                      <Link
-                        to={`/dashboard/profile/${currentUser?.id}`}
-                        className="text-sm block  font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
-                      >
-                        Account Settings
-                      </Link>
-                    </div>
+                    {currentUser?.role === "SELLER" ||
+                      (currentUser?.role === "ADMIN" && (
+                        <div className="flex flex-col gap-3">
+                          <div className="w-full family1 flex flex-col pb-3 border-b">
+                            <Link
+                              to={`/dashboard`}
+                              className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                            >
+                              My Dashboard
+                            </Link>
+                            <Link
+                              to={`/dashboard/profile/${currentUser?.id}`}
+                              className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                            >
+                              My Profile
+                            </Link>
+                            <Link
+                              to={"/dashboard/menu"}
+                              className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                            >
+                              My Menus
+                            </Link>
+                            <Link
+                              to={"/dashboard/orders"}
+                              className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                            >
+                              My Orders
+                            </Link>
+                            {currentUser?.role === "ADMIN" && (
+                              <Link
+                                to={"/dashboard/customers"}
+                                className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                              >
+                                My Customers
+                              </Link>
+                            )}
+                          </div>
+                          <div className="w-full family1 flex flex-col pb-3 border-b">
+                            <Link
+                              to={"/"}
+                              className="text-sm block font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                            >
+                              My Mode
+                            </Link>
+                            <Link
+                              to={`/dashboard/profile/${currentUser?.id}`}
+                              className="text-sm block  font-normal px-4 py-2 hover:bg-[#fafafa] text-[#000]"
+                            >
+                              Account Settings
+                            </Link>
+                          </div>
+                        </div>
+                      ))}
+
                     <div
                       onClick={handleLogOut}
                       className="w-full hover:bg-[#fafafa] cursor-pointer family1 text-center py-2 font-semibold text-[#d02828ed]"
