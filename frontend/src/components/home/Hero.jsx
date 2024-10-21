@@ -99,7 +99,7 @@ export default function Hero() {
               </h4>
             </div>
             <div className="w-full hide">
-              <h1 className="hero_main_text hide family3 text-8xl text-white">
+              <h1 className="hero_main_text hide family3 text-6xl md:text-8xl text-white">
                 <span className="">FINE</span>
                 <br /> <span className="">DINING</span> <br />{" "}
                 <span className="">EXPERIENCE</span>

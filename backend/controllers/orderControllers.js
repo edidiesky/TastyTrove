@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "uuid";
 dotenv.config();
 import prisma from "../prisma/index.js";
 import expressAsyncHandler from "express-async-handler";
+import redis from "../utils/redis.js";
 
 // @description  Distribute the payment to the separate sellers
 // @route  POST /order
@@ -83,28 +84,41 @@ const CreatePayment = expressAsyncHandler(async (req, res) => {
 // @access  Private
 const GetPaymentHistoryForAdmin = expressAsyncHandler(async (req, res) => {
   const { limit = 6, page = 1 } = req.query;
+  // setting the cache key for getting all the menus
+  const cacheKey = `admin_order_${req.user.userId}`;
+  // getting the data from redis based on the cache key
+  const cachedorders = await redis.get(cacheKey);
   // calculate the pagination
   const skip = (page - 1) * limit;
-  // instantiate the form data from the request body
-  const payment = await prisma.payment.findMany({
-    where: {
-      sellerId: req.user.userId,
-    },
-    skip: parseInt(skip),
-    take: parseInt(limit),
-    include: {
-      user: true,
-    },
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
-  const totalPayment = await prisma.payment.count({});
-  const noOfPages = Math.ceil(totalPayment / limit)
-  res.setHeader("Content-Type", "text/html");
-  res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+  if(cachedorders) {
+    return res.json(cachedorders);
+  } else {
+    // instantiate the form data from the request body
+    const payment = await prisma.payment.findMany({
+      where: {
+        sellerId: req.user.userId,
+      },
+      skip: parseInt(skip),
+      take: parseInt(limit),
+      include: {
+        user: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    
+    const totalPayment = await prisma.payment.count({});
+    const noOfPages = Math.ceil(totalPayment / limit);
+    const result = { payment, noOfPages, totalPayment };
+    await redis.set(cacheKey, result, { EX: 3600 });
 
-  res.status(200).json({ payment, noOfPages, totalPayment });
+    res.setHeader("Content-Type", "text/html");
+    res.setHeader("Cache-Control", "s-max-age=1, stale-while-revalidate");
+
+    res.status(200).json(result);
+  }
+
 });
 
 // @description  Get a single payment details
