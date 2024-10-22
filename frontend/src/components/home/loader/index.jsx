@@ -26,7 +26,7 @@ const Loader = ({ type, color, size }) => {
         background: "#ffffffdd",
       }}
     >
-      <div className="spinner text-[30px] md:text-[40px]">
+      <div className="spinner text-[30px] md:text-[35px]">
         <CiSettings />
       </div>
       {/* <ThreeDots

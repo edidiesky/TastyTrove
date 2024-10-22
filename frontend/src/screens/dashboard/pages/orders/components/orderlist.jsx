@@ -10,15 +10,19 @@ const OrderList = () => {
   const { payments, page } = useSelector((store) => store.payment);
   return (
     <div className="flex flex-col w-full gap-6">
-      {payments?.length === 0 ? (
-        <div className="flex flex-col gap-2">
-          <h3 className="text-2xl md:text-3xl family6">No Transactions</h3>
-          <span className="block family1 text-sm font-normal">
-            You have not recorded any sales
-          </span>
-        </div>
-      ) : (
-        <div className="w-full flex flex-col gap-4">
+      <div className="w-full flex flex-col gap-4">
+        {payments?.length === 0 ? (
+          <div className="flex flex-col items-center justify-center gap-1 w-full">
+            <img
+              src="/images/no_result.jpg"
+              alt=""
+              className="w-[300px] md:w-[400px]"
+            />
+            <span className="block text-base font-normal family5">
+              You have no Orders
+            </span>
+          </div>
+        ) : (
           <Table>
             <div className="TableContainer">
               <table className="tableWrapper">
@@ -43,6 +47,8 @@ const OrderList = () => {
               </table>
             </div>
           </Table>
+        )}
+        {payments?.length !== 0 && (
           <div className="w-full family1 flex items-center justify-end gap-4">
             <div
               onClick={() => dispatch(handlePage("prev"))}
@@ -59,8 +65,8 @@ const OrderList = () => {
               <BiChevronRight />
             </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };

@@ -17,11 +17,12 @@ const ReservationList = () => {
         Recent Transaction
       </h3>
       {recentSales?.length === 0 ? (
-        <span>
-          <span className="block text-sm font-normal">
+        <div className="flex flex-col items-center justify-center gap-1 w-full">
+          <img src="/images/no_result.jpg" alt="" className="w-[300px] md:w-[400px]" />
+          <span className="block text-base font-normal family5">
             You have not sold any product
           </span>
-        </span>
+        </div>
       ) : (
         <Table>
           <div className="TableContainer">
