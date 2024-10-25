@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import { MdReviews } from "react-icons/md";
-import { MdOutlineArrowOutward } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { FaRegUser, FaMoneyBill } from "react-icons/fa";
+import { FaMoneyBill } from "react-icons/fa";
 import { IoFastFood } from "react-icons/io5";
 const Widget = () => {
-  const [widgettab, setWidgetTab] = useState(1);
   const { widgetData } = useSelector((store) => store.stat);
   const totalReview = widgetData?.totalReview?.reduce((acc, total) => {
     acc += total?.review;
@@ -64,7 +62,7 @@ const Widget = () => {
         return (
           <div
             key={index}
-            className="w-full p-4 items-start  justify-center min-h-[200px] md:min-h-[220px] 
+            className="w-full p-2 md:p-4 items-start  justify-center min-h-[200px] md:min-h-[220px] 
                     border rounded-xl flex flex-col gap-4"
           >
             <div className="flex md:flex-row flex-col md:items-center gap-1 md:gap-4">

@@ -161,7 +161,7 @@ const LoginModal = () => {
                   data-test="loginmodal_button"
                   type="submit"
                   disabled={loginisLoading}
-                  className="p-4 px-8 hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
+                  className="p-4 px-8 text-sm hover:opacity-[.5] text-[#fff] flex items-center justify-center w-full cursor-pointer 
                    bg-[#000] rounded-[40px] family6 font-normal"
                 >
                   {loginisLoading ? (

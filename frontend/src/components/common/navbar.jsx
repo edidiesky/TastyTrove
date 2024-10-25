@@ -77,7 +77,7 @@ const Navbar = () => {
           {/* <img src="/images/TestLogo.png" alt="" className="w-40" /> */}
 
           <div className="hidden lg:flex items-center justify-center gap-3">
-            <div className="items-center justify-end flex gap-4">
+            <div className="items-center justify-end flex gap-8">
               {linkData?.map((list, index) => {
                 return (
                   <NavLink
