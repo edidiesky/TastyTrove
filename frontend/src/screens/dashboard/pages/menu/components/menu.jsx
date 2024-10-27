@@ -71,7 +71,7 @@ const RoomsList = () => {
               </div>
             )}
           </div>
-          }
+          
         </div>
       )}
     </>

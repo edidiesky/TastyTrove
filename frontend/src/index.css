@@ -238,6 +238,11 @@ textarea {
     hsla(0, 0%, 0%, calc(100% - 45%)) 100%
   );
 }
+.btnshadows:hover {
+  border: 1px solid #000;
+  box-shadow: 0 0 0 4px #e7e7e9;
+  transition: all 0.3s;
+}
 .line {
   display: flex !important;
   flex-wrap: wrap !important;

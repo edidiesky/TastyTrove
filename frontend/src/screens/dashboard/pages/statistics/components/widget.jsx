@@ -3,6 +3,7 @@ import { MdReviews } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { FaMoneyBill } from "react-icons/fa";
 import { IoFastFood } from "react-icons/io5";
+import { Link } from "react-router-dom";
 const Widget = () => {
   const { widgetData } = useSelector((store) => store.stat);
   const totalReview = widgetData?.totalReview?.reduce((acc, total) => {
@@ -15,6 +16,7 @@ const Widget = () => {
       title: "Total Revenue",
       icon: <FaMoneyBill />,
       bgColor: "#cdeed3",
+      path: "",
       color: "#347345",
       subtitle: `₦${
         widgetData?.totalRevenue
@@ -30,27 +32,27 @@ const Widget = () => {
       title: "Total Sales",
       icon: <IoFastFood />,
       bgColor: "#deddff",
+      path: "/dashboard/orders",
       color: "#3e3aff",
-      subtext:
-        "Browse your menu here and check their respective progress..",
+      subtext: "Browse your menu here and check their respective progress..",
       subtitle: `${widgetData?.totalSales ? widgetData?.totalSales : "0"}`,
     },
     {
       title: "Total Menu",
       icon: <IoFastFood />,
       bgColor: "#f3f3f1",
+      path: "/dashboard/menu",
       color: "#a37d18",
-      subtext:
-        "Browse your menu here and check their respective progress..",
+      subtext: "Browse your menu here and check their respective progress..",
       subtitle: `${widgetData?.totalMenu ? widgetData?.totalMenu : "0"}`,
     },
     {
       title: "Total Ratings",
       icon: <MdReviews />,
       bgColor: "#cdeed3",
+      path: "/dashboard/review",
       color: "#002b31",
-      subtext:
-        "Browse your menu here and check their respective progress..",
+      subtext: "Browse your menu here and check their respective progress..",
       subtitle: `${
         totalReview ? totalReview / widgetData?.totalReview?.length : 0
       }`,
@@ -62,7 +64,7 @@ const Widget = () => {
         return (
           <div
             key={index}
-            className="w-full p-2 md:p-4 items-start  justify-center min-h-[200px] md:min-h-[220px] 
+            className="w-full p-3 md:p-4 items-start  justify-center min-h-[250px] md:min-h-[250px] 
                     border rounded-xl flex flex-col gap-4"
           >
             <div className="flex md:flex-row flex-col md:items-center gap-1 md:gap-4">
@@ -88,9 +90,14 @@ const Widget = () => {
                 {data?.subtext}
               </span>
             </div>
-            {/* <div className="pt-3">
-                    <div className="shadows py-2 bg-[#fafafa] rounded-md cursor-pointer px-4 border text-dark text-sm">Browse</div>
-                  </div> */}
+            <div className="pt-4">
+              {data.path && (
+                <Link to={`${data.path}`} className="btnshadows py-2 bg-[#fafafa] 
+                rounded-md cursor-pointer px-4 border text-dark text-xs md:text-sm family4">
+                  Browse
+                </Link>
+              )}
+            </div>
           </div>
         );
       })}
