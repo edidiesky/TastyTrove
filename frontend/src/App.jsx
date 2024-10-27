@@ -27,6 +27,8 @@ const TripsWrapper = lazy(() => import("./screens/Trips"));
 const TeamWrapper = lazy(() => import("./screens/Team"));
 // const PaymentWrapper = lazy(() => import("./screens/Payment"));
 const PaymentSuccess = lazy(() => import("./screens/Payment-Success"));
+const ProfileWrapper = lazy(() => import("./screens/Profile"));
+
 // // PaymentSuccess
 export default function App() {
   const [height, setHeight] = useState(0);
@@ -59,6 +61,14 @@ export default function App() {
             element={
               <Suspense fallback={<></>}>
                 <HomeWrapper />
+              </Suspense>
+            }
+          />
+          <Route
+            path="profile"
+            element={
+              <Suspense fallback={<></>}>
+                <ProfileWrapper />
               </Suspense>
             }
           />

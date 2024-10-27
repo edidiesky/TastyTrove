@@ -173,7 +173,7 @@ body {
 }
 
 form input {
-  min-height: 49px;
+  min-height: 43px;
   /* min-width: 130px; */
   border-radius: 5px;
   background-color: inherit;
@@ -182,7 +182,7 @@ form input {
   padding: 0 1rem;
 }
 input {
-  min-height: 49px;
+  min-height: 43px;
   /* min-width: 130px; */
   border-radius: 5px;
   background-color: inherit;

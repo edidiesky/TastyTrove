@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { AnimatePresence } from "framer-motion";
 import Button from "../common/Button";
 import ChatCard from "../chat/ChatCard";
 import Reviews from "./Reviews";
+import {
+  Createconversation,
+  GetUsersMessageConversation,
+} from "@/features/conversation/conversationReducer";
+import { clearconversation } from "@/features/conversation/conversationSlice";
 
 export default function Bottom() {
   let [searchParams, setSearchParams] = useSearchParams();
+  const [message, setMessage] = React.useState([]);
   const category = searchParams.get("category");
   const { menus, menu, getallMenuisLoading } = useSelector(
     (store) => store.menu
   );
+  const dispatch = useDispatch();
 
   const maincourse = menus.filter(
     (data) =>
@@ -19,10 +26,36 @@ export default function Bottom() {
   );
   // console.log(maincourse, category);
   const [active, setActive] = useState(false);
+
+  const { conversationDetails } = useSelector((store) => store.conversation);
+  useEffect(() => {
+    // console.log("active:", active);
+    // console.log("conversationDetails:", conversationDetails);
+    if (conversationDetails === null) {
+      setMessage([]);
+      dispatch(clearconversation());
+    }
+    if (active && !conversationDetails) {
+      // console.log("useEffect triggered");
+      dispatch(Createconversation(menu?.user?.id));
+    }
+    
+  }, [active, conversationDetails, dispatch, menu?.user?.id]);
+  
+  
+
+
   return (
     <>
       <AnimatePresence>
-        {active && <ChatCard active={active} setActive={setActive} />}
+        {active && (
+          <ChatCard
+            message={message}
+            setMessage={setMessage}
+            active={active}
+            setActive={setActive}
+          />
+        )}
       </AnimatePresence>
       <div className="flex flex-col gap-20 pb-20">
         <div className="w-full flex items-start gap-4 justify-between topWrapper">

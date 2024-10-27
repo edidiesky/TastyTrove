@@ -22,7 +22,7 @@ const createConversation = asyncHandler(async (req, res) => {
     });
   }
 
-  res.status(200).json(conversation);
+  res.status(200).json({conversation});
 });
 
 // GET Review of the user conversation

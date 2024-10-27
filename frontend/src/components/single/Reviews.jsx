@@ -217,14 +217,14 @@ export default function Reviews() {
             </h4>
             <div
               data-test={`review_list_content`}
-              className="w-full grid lg:grid-cols-2 gap-8"
+              className="w-full grid lg:grid-cols-1 gap-8"
             >
               {reviews?.map((review, index) => {
                 return (
                   <div
                     data-test={`review_list_item_${index}`}
                     key={index}
-                    className="w-full flex flex-col gap-4"
+                    className="w-full flex max-w-[700px] pb-6 border-b flex-col gap-4"
                   >
                     <div className="w-full flex items-start gap-4">
                       {review?.user?.image ? (

@@ -105,7 +105,7 @@ export const conversationSlice = createSlice({
       state.conversationisLoading = true;
     });
     builder.addCase(Createconversation.fulfilled, (state, action) => {
-      state.conversationDetails = action.payload;
+      state.conversationDetails = action.payload.conversation;
       state.alertText = "conversation created succesfully";
       state.showAlert = true;
       state.conversationisLoading = false;

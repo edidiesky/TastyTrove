@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import io from "socket.io-client";
@@ -17,68 +17,30 @@ import { BsImage } from "react-icons/bs";
 import Loader from "../loader";
 import { chatCardVariants } from "@/socket/utils/framer";
 
-const ChatCard = ({ active, setActive }) => {
+const ChatCard = ({ active, setActive, setMessage, message }) => {
   socketIo = socketIo.connect("http://localhost:4000");
   const dispatch = useDispatch();
   const [conversationId, setConversationId] = useState("");
   const { users, currentUser, userDetails, token } = useSelector(
     (store) => store.auth
   );
+  const { conversationDetails } = useSelector((store) => store.conversation);
   const { menu } = useSelector((store) => store.menu);
-
-  const [message, setMessage] = React.useState([]);
   const [messageloading, setMessageLoading] = React.useState(false);
-  // const [message, setMessage] = React.useState([...messages]);
   const [body, setBody] = React.useState("");
+  // useEffect(() => {
+  //   console.log("conversationDetails", conversationDetails);
+  //   if (conversationDetails?.id) {
+  //     console.log("conversationDetails", conversationDetails);
 
-  const { conversationDetails, userconversationDetails } = useSelector(
-    (store) => store.conversation
-  );
-  // const conversationDetails = {
-  //   id:""
-  // }
-  useLayoutEffect(() => {
-    setMessage([]);
-    dispatch(clearconversation());
-    dispatch(Createconversation(menu?.user?.id));
-  }, []);
-  // Ensure that conversation details are fetched and created only once
-  useEffect(() => {
-    if (conversationDetails) {
-      dispatch(GetUsersMessageConversation(conversationDetails?.id));
-    }
-  }, [ dispatch]);
-
+  //     dispatch(GetUsersMessageConversation(conversationDetails?.id));
+  //   }
+  // }, [ dispatch]);
   // get the messages of the chat
-  const handleSingleMessageDetails = async () => {
-    try {
-   
-      setMessageLoading(true);
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/message/${
-          conversationDetails?.id
-        }`,
-        { withCredentials: true }
-      );
-      setMessage(response.data.messages);
-      setMessageLoading(false);
-      // setMessage(response.data.messages)
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
-  useEffect(() => {
-    if (conversationDetails) {
-      handleSingleMessageDetails();
-    } else {
-      setMessage([]);
-    }
-  }, [ conversationDetails]);
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
-   
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationDetails?.id
@@ -91,16 +53,16 @@ const ChatCard = ({ active, setActive }) => {
       );
 
       handleSingleMessageDetails();
-   
+
       socketIo?.emit("sendMessage", {
         receiverId: menu?.user?.id,
         senderId: currentUser?.id,
         text: body,
       });
-         setMessage((prev) => [
-           ...message,
-           { body: data.body, userId: currentUser?.id },
-         ]);
+      setMessage((prev) => [
+        ...message,
+        { body: data.body, userId: currentUser?.id },
+      ]);
 
       setBody("");
     } catch (err) {
@@ -110,19 +72,19 @@ const ChatCard = ({ active, setActive }) => {
     setBody("");
   };
 
-  React.useEffect(() => {
-    socketIo?.emit("addUserId", currentUser?.id);
-    socketIo?.on("getAllConnectedUser", (users) => {
-      // console.log(users)
-    });
-    socketIo?.on("getMessage", (message) => {
-      setMessage((prev) => [
-        ...message,
-        { body: message.text, userId: currentUser?.id },
-      ]);
-      console.log(message);
-    });
-  }, [socketIo, setMessage]);
+  // React.useEffect(() => {
+  //   socketIo?.emit("addUserId", currentUser?.id);
+  //   socketIo?.on("getAllConnectedUser", (users) => {
+  //     // console.log(users)
+  //   });
+  //   socketIo?.on("getMessage", (message) => {
+  //     setMessage((prev) => [
+  //       ...message,
+  //       { body: message.text, userId: currentUser?.id },
+  //     ]);
+  //     console.log(message);
+  //   });
+  // }, [socketIo, setMessage]);
 
   // console.log(conversationDetails);
   return (
@@ -134,13 +96,13 @@ const ChatCard = ({ active, setActive }) => {
       className="fixed z-[3000000000] bottom-10 left-5 h-screen md:h-[550px] border rounded-2xl
        overflow-hidden bg-white w-screen lg:w-[450px] shadow-2xl"
     >
-      <div className="w-full flex h-[90px] items-center border-b">
-        <div className="w-full items-center px-8 flex gap-4">
+      <div className="w-full flex h-[80px] items-center border-b">
+        <div className="w-full items-center px-4 flex gap-2">
           {menu?.user?.image ? (
             <img
               src={menu?.user?.image}
               alt=""
-              className="w-16 h-16 object-cover  rounded-full"
+              className="w-14 h-14 object-cover  rounded-full"
             />
           ) : (
             <div
@@ -150,7 +112,7 @@ const ChatCard = ({ active, setActive }) => {
               {menu?.user?.username && menu?.user?.username[0]}
             </div>
           )}
-          <h4 className="text-lg font-bold family1">
+          <h4 className="text-base font-bold family1">
             {menu?.user?.name}
             <span className="font-normal block text-sm">
               {menu?.user?.email}
@@ -186,8 +148,10 @@ const ChatCard = ({ active, setActive }) => {
                       <div className="w-full flex items-center justify-end">
                         <div className="flex w-full justify-end items-end gap-1">
                           <div className="flex-1 flex items-end flex-col justify-end gap-1">
-                            <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-sm md:text-sm leading-[1.6]
-                             text-white flex items-center bg-[#1d9bf0] justify-center p-3 px-4">
+                            <span
+                              className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-sm md:text-sm leading-[1.6]
+                             text-white flex items-center bg-[#1d9bf0] justify-center p-3 px-4"
+                            >
                               {message?.body}
                             </span>
                             <span className="text-xs family1 text-dark">
@@ -233,7 +197,7 @@ const ChatCard = ({ active, setActive }) => {
       <div className="h-[80px] border-t w-full border-[rgba(0,0,0,.1)] flex items-center justify-center">
         <form
           onSubmit={(e) => handleCreateMessage(e)}
-          className="flex w-full px-4 h-full justify-center items-center gap-1"
+          className="flex w-full h-full justify-center items-center gap-1"
         >
           <label
             htmlFor="search"

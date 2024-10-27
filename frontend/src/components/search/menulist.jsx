@@ -64,8 +64,8 @@ const Menulist = () => {
                   </div>
                 </div>
               )}
-              <div className="w-[90%] max-w-[1100px] flex flex-col gap-20 mx-auto">
-                <h3 className="text-3xl md:text-5xl family4 italic font-normal">
+              <div className="w-[90%] max-w-[1100px] flex flex-col gap-12 mx-auto">
+                <h3 className="text-3xl md:text-5xl family5 italic font-normal">
                   {menu?.title}
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-20">
@@ -91,7 +91,7 @@ const Menulist = () => {
                               ₦{data?.price}
                             </h4>
                           </div>
-                          <p className="text-lg leading-[1.5] family4">
+                          <p className="text-lg md:text-xl leading-[1.5] family5">
                             {data?.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                           </p>
                         </div>

@@ -3,17 +3,14 @@ import axios, { AxiosError } from "axios";
 // Create User conversation
 export const Createconversation = createAsyncThunk(
   "Createconversation",
-  async (conversationData, { rejectWithValue, getState }) => {
+  async (userId, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
-  
-
       const response = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation`,
-        { userId: conversationData },
+        { userId: userId },
           { withCredentials: true }
       );
-      return response.data.conversation;
+      return response.data;
 
       // console.log(conversationData)
     } catch (err) {
@@ -28,9 +25,9 @@ export const Createconversation = createAsyncThunk(
 
 export const getAllSellerConversationUsers = createAsyncThunk(
   "getAllSellerConversationUsers",
-  async (conversationData, { rejectWithValue, getState }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
+     
   
 
       const response = await axios.get(
@@ -52,9 +49,9 @@ export const getAllSellerConversationUsers = createAsyncThunk(
 // Deelete User conversation
 export const Deleteconversation = createAsyncThunk(
   "deleteconversation",
-  async (conversationId, { rejectWithValue, getState }) => {
+  async (conversationId, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
+     
       // console.log(auth.token)
       // console.log(conversationdata?._id)
   
@@ -76,13 +73,11 @@ export const Deleteconversation = createAsyncThunk(
 // Get User conversation
 export const GetUsersMessageConversation = createAsyncThunk(
   "GetUserconversation",
-  async (receiverId, { rejectWithValue, getState }) => {
+  async (conversationid, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
-
-  
+     
       const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/conversation/${receiverId}`,
+        `${import.meta.env.VITE_API_BASE_URLS}/conversation/${conversationid}`,
           { withCredentials: true }
       );
       return response.data?.conversation;
@@ -99,11 +94,8 @@ export const GetUsersMessageConversation = createAsyncThunk(
 
 export const UserConversationChat = createAsyncThunk(
   "UserConversationChat",
-  async (receiverId, { rejectWithValue, getState }) => {
+  async (receiverId, { rejectWithValue }) => {
     try {
-      const { auth } = getState();
-
-  
       const response = await axios.get(
         `${
           import.meta.env.VITE_API_BASE_URLS

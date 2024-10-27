@@ -7,7 +7,7 @@ export const chatCardVariants = {
   enter: {
     opacity: 1,
     transition: { duration: 0.7, ease: [0.76, 0, 0.24, 1] },
-    width: "450px",
+    width: "400px",
     height: "550px",
   },
   closed: {
