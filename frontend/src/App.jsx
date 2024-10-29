@@ -43,11 +43,6 @@ export default function App() {
         console.log(users);
       });
       socketIo?.on("getMessage", (message) => {
-        // setMessage((prev) => [
-        //   ...message,
-        //   { body: message.text, userId: currentUser?.id },
-        // ]);
-        // console.log(message);
       });
     }
   }, []);

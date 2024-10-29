@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import Button from "../common/Button";
 import ChatCard from "../chat/ChatCard";
 import Reviews from "./Reviews";
+import { onLoginModal } from "@/features/modals/modalSlice";
 import {
   Createconversation,
   GetUsersMessageConversation,
@@ -14,6 +15,8 @@ import { clearconversation } from "@/features/conversation/conversationSlice";
 export default function Bottom() {
   let [searchParams, setSearchParams] = useSearchParams();
   const [message, setMessage] = React.useState([]);
+  const { currentUser } = useSelector((store) => store.auth);
+
   const category = searchParams.get("category");
   const { menus, menu, getallMenuisLoading } = useSelector(
     (store) => store.menu
@@ -26,7 +29,13 @@ export default function Bottom() {
   );
   // console.log(maincourse, category);
   const [active, setActive] = useState(false);
-
+  const hanldeChatWithSeller = () => {
+    if (currentUser) {
+      setActive(true);
+    } else {
+      dispatch(onLoginModal());
+    }
+  };
   const { conversationDetails } = useSelector((store) => store.conversation);
   useEffect(() => {
     // console.log("active:", active);
@@ -39,11 +48,7 @@ export default function Bottom() {
       // console.log("useEffect triggered");
       dispatch(Createconversation(menu?.user?.id));
     }
-    
   }, [active, conversationDetails, dispatch, menu?.user?.id]);
-  
-  
-
 
   return (
     <>
@@ -124,7 +129,7 @@ export default function Bottom() {
               </span>
               <div className="w-full mt-3 flex items-center gap-4">
                 <button
-                  onClick={() => setActive(true)}
+                  onClick={hanldeChatWithSeller}
                   className="h-[55px] w-[170px] text-sm"
                 >
                   <Button

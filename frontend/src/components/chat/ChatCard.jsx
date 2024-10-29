@@ -28,14 +28,21 @@ const ChatCard = ({ active, setActive, setMessage, message }) => {
   const { menu } = useSelector((store) => store.menu);
   const [messageloading, setMessageLoading] = React.useState(false);
   const [body, setBody] = React.useState("");
-  // useEffect(() => {
-  //   console.log("conversationDetails", conversationDetails);
-  //   if (conversationDetails?.id) {
-  //     console.log("conversationDetails", conversationDetails);
+  const [messagesFetched, setMessagesFetched] = useState(false);
+  useEffect(() => {
+    console.log("conversationDetails", conversationDetails);
 
-  //     dispatch(GetUsersMessageConversation(conversationDetails?.id));
-  //   }
-  // }, [ dispatch]);
+    // Check if `conversationDetails` is defined and messages haven't been fetched yet
+    if (conversationDetails !== undefined && !messagesFetched) {
+      console.log("Fetching conversation messages...");
+
+      // Dispatch the action to get the messages
+      dispatch(GetUsersMessageConversation(conversationDetails?.id));
+
+      // Set the flag to true to prevent reruns
+      setMessagesFetched(true);
+    }
+  }, [conversationDetails, messagesFetched, dispatch]);
   // get the messages of the chat
 
   const handleCreateMessage = async (e) => {
