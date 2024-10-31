@@ -91,7 +91,13 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
     }
   }, [socket, chat]);
   // console.log("chat", chat);
-
+  useEffect(() => {
+    if (conversationDetails) {
+      setChat({ ...chat, messages: conversationDetails?.messages });
+    }
+  }, [conversationDetails, setChat]);
+  // console.log("conversationDetails", conversationDetails);
+  console.log("chat", chat);
   return (
     <motion.div
       variants={chatCardVariants}

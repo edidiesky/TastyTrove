@@ -4,11 +4,7 @@ import moment from "moment";
 import axios from "axios";
 import { IoMdSend } from "react-icons/io";
 import { BsImage } from "react-icons/bs";
-import { messages } from "@/data/message";
-import { user } from "@/data/user";
-import io from "socket.io-client";
 import {
-  Createconversation,
   getAllSellerConversationUsers,
   GetUsersMessageConversation,
 } from "@/features/conversation/conversationReducer";
@@ -18,16 +14,14 @@ import { SocketContext } from "@/context/SocketContext";
 
 const Nessage = () => {
   const { socket } = useContext(SocketContext);
-  //   const [roommodal, setRoomModal] = useState(false);
   const dispatch = useDispatch();
-  const [conversationId, setConversationId] = useState("");
   const { users, currentUser } = useSelector((store) => store.auth);
 
-const [chat, setChat] = React.useState({ messages: [] });
+  const [chat, setChat] = useState({ messages: [] });
 
-  const [tabid, setTabId] = React.useState(null);
-  const [messageloading, setMessageLoading] = React.useState(false);
-  const [body, setBody] = React.useState("");
+  const [conversationId, setConversationId] = useState(null);
+  const [messageloading, setMessageLoading] = useState(false);
+  const [body, setBody] = useState("");
   const { conversationDetails, getUsersInConversationisLoading, conversation } =
     useSelector((store) => store.conversation);
   useEffect(() => {
@@ -36,19 +30,12 @@ const [chat, setChat] = React.useState({ messages: [] });
     dispatch(getAllSellerConversationUsers());
   }, []);
 
-  // useEffect(() => {
-  //   if (tabid) {
-  //     dispatch(Createconversation(tabid));
-  //   }
-  // }, []);
-
   // get the conversation
   useEffect(() => {
-    if (tabid) {
-      dispatch(GetUsersMessageConversation(tabid));
+    if (conversationId) {
+      dispatch(GetUsersMessageConversation(conversationId));
     }
-  }, [tabid]);
-
+  }, [conversationId]);
 
   const handleCreateMessage = async (e) => {
     e.preventDefault();
@@ -72,7 +59,7 @@ const [chat, setChat] = React.useState({ messages: [] });
       }));
 
       socket?.emit("sendMessage", {
-        receiverId: tabid,
+        receiverId: conversationId,
         senderId: currentUser?.id,
         text: body,
       });
@@ -82,7 +69,7 @@ const [chat, setChat] = React.useState({ messages: [] });
     }
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (socket) {
       socket?.on("getMessage", (message) => {
         setChat((prev) => ({
@@ -96,11 +83,17 @@ const [chat, setChat] = React.useState({ messages: [] });
       });
     }
   }, [socket, chat]);
-
-  // console.log(message);
+  useEffect(() => {
+    if (conversationDetails) {
+      setChat({...chat, messages:conversationDetails?.messages});
+    }
+  }, [conversationDetails, setChat]);
+  // console.log(conversationDetails);
   // find specific user
-  const mainuser = users?.find((user) => user?.id === tabid);
+  const mainuser = users?.find((user) => user?.id === conversationId);
   // console.log(mainuser);
+  console.log("conversationDetails", conversationDetails);
+  
   return (
     <div className="w-full h-[520px] border rounded-[20px] grid md:grid-cols-custom_2 ">
       <div className="w-[340px] h-full border-r flex gap-4 flex-col">
@@ -133,10 +126,10 @@ const [chat, setChat] = React.useState({ messages: [] });
             {conversation?.map((data, index) => {
               return (
                 <div
-                  onClick={() => setTabId(data?.id)}
+                  onClick={() => setConversationId(data?.id)}
                   key={index}
                   className={`${
-                    data?.id === tabid ? "bg-[#f1f1f1]" : ""
+                    data?.id === conversationId ? "bg-[#f1f1f1]" : ""
                   } hover:bg-[#fafafa] w-full cursor-pointer flex items-center justify-between py-4 px-4`}
                 >
                   <div className="flex-1 flex items-center gap-4">
@@ -215,7 +208,7 @@ const [chat, setChat] = React.useState({ messages: [] });
             <>
               {
                 // {/* first conversation */ }
-                conversationDetails?.messages?.map((message, index) => {
+                chat?.messages?.map((message, index) => {
                   const senderMessage = currentUser?.id === message?.sender?.id;
                   const createdAt = moment(message?.createdAt).format(
                     "MMMM Do YYYY, h:mm a"

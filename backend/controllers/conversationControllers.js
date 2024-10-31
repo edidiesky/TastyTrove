@@ -39,6 +39,22 @@ const getSingleUserConversation = asyncHandler(async (req, res) => {
     },
     include: {
       messages: {
+        include: {
+          seller: {
+            select: {
+              name: true,
+              username: true,
+              image: true,
+            },
+          },
+          user: {
+            select: {
+              name: true,
+              username: true,
+              image: true,
+            },
+          },
+        },
         orderBy: {
           createdAt: "asc",
         },
