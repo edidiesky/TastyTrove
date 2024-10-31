@@ -19,10 +19,7 @@ import { SocketContext } from "@/context/SocketContext";
 
 const ChatCard = ({ active, setActive, setChat, chat }) => {
   const dispatch = useDispatch();
-  const [conversationId, setConversationId] = useState("");
-  const {currentUser} = useSelector(
-    (store) => store.auth
-  );
+  const { currentUser } = useSelector((store) => store.auth);
   const { socket } = useContext(SocketContext);
   const { conversationDetails } = useSelector((store) => store.conversation);
   const { menu } = useSelector((store) => store.menu);
@@ -54,13 +51,14 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
         }`,
         {
           text: body,
+          receiverid: menu?.user?.id,
         },
         { withCredentials: true }
       );
       setChat((prev) => ({
         ...prev,
         messages: [
-          ...prev.messages,
+          ...prev?.messages,
           { body: data.body, userId: currentUser?.id },
         ],
       }));
@@ -84,15 +82,15 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
         setChat((prev) => ({
           ...prev,
           messages: [
-            ...prev.messages,
-            { body: message.body, userId: currentUser?.id },
+            ...(prev?.messages || []),
+            { body: data.body, userId: currentUser?.id },
           ],
         }));
         console.log(message);
       });
     }
   }, [socket, chat]);
-  // console.log("conversationDetails", conversationDetails);
+  // console.log("chat", chat);
 
   return (
     <motion.div

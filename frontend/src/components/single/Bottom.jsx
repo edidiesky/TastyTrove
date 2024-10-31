@@ -14,7 +14,7 @@ import { clearconversation } from "@/features/conversation/conversationSlice";
 
 export default function Bottom() {
   let [searchParams, setSearchParams] = useSearchParams();
-  const [message, setMessage] = React.useState(null);
+const [chat, setChat] = React.useState({ messages: [] });
   const { currentUser } = useSelector((store) => store.auth);
 
   const category = searchParams.get("category");
@@ -41,7 +41,7 @@ export default function Bottom() {
     // console.log("active:", active);
     // console.log("conversationDetails:", conversationDetails);
     if (conversationDetails === null) {
-      setMessage([]);
+      setChat([]);
       dispatch(clearconversation());
     }
     if (active && !conversationDetails) {
@@ -55,8 +55,8 @@ export default function Bottom() {
       <AnimatePresence>
         {active && (
           <ChatCard
-            message={message}
-            setMessage={setMessage}
+            chat={chat}
+            setChat={setChat}
             active={active}
             setActive={setActive}
           />

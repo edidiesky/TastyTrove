@@ -23,7 +23,8 @@ const Nessage = () => {
   const [conversationId, setConversationId] = useState("");
   const { users, currentUser } = useSelector((store) => store.auth);
 
-  const [chat, setChat] = React.useState([]);
+const [chat, setChat] = React.useState({ messages: [] });
+
   const [tabid, setTabId] = React.useState(null);
   const [messageloading, setMessageLoading] = React.useState(false);
   const [body, setBody] = React.useState("");

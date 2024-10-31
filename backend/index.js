@@ -103,7 +103,7 @@ io.on("connection", (socket) => {
     const newuser = getASpecificUser(receiverId);
     // console.log(newuser);
     // console.log(newuser?.socketId)
-    console.log({ receiverId, senderId, text })
+    console.log({ receiverId, text })
     if (newuser?.socketId) {
       io.to(newuser?.socketId).emit("getMessage", {
         receiverId: receiverId,

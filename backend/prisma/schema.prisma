@@ -164,6 +164,5 @@ model Message {
   seller          User?          @relation("ReceiverMessage", fields: [receiverid], references: [id], onDelete: SetNull)
   conversationId  String         @db.ObjectId
   createdAt       DateTime       @default(now())
-  Conversations   Conversations? @relation(fields: [conversationsId], references: [id])
-  conversationsId String?        @db.ObjectId
+  Conversations   Conversations? @relation(fields: [conversationId], references: [id])
 }

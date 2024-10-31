@@ -7,12 +7,12 @@ const createMessage = asyncHandler(async (req, res) => {
   const conversationId = req.params.id;
   const { text, receiverid } = req.body;
   // console.log(conversationId)
-  const senderId = req.user?.userId;
+  const senderid = req.user?.userId;
   const conversation = await prisma.conversations.findUnique({
     where: {
       id: conversationId,
       userIDs: {
-        hasSome: [senderId],
+        hasSome: [senderid],
       },
     },
   });
@@ -25,7 +25,7 @@ const createMessage = asyncHandler(async (req, res) => {
     data: {
       text,
       conversationId,
-      userId: senderId,
+      senderid,
       receiverid,
     },
   });
@@ -35,7 +35,7 @@ const createMessage = asyncHandler(async (req, res) => {
       id: conversationId,
     },
     data: {
-      seenBy: [senderId],
+      seenBy: [senderid],
       lastMessage: text,
     },
   });
