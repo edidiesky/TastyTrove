@@ -47,6 +47,8 @@ const initialState = {
   updateUserisError: false,
   noOfPages: 0,
   totalUser: 0,
+  limit: "",
+  page: 1,
 
   wishisLoading: false,
   wishisSuccess: false,
@@ -78,6 +80,15 @@ export const authSlice = createSlice({
       );
       state.shippingInformation = action.payload;
       toast.success("Shipping Information has been saved sucessfully!!!!");
+    },
+    handlePage: (state, action) => {
+      if (action.payload === "next") {
+        state.page =
+          state.page === state.noOfPages ? state.noOfPages : state.page + 1;
+      }
+      if (action.payload === "prev") {
+        state.page = state.page === 1 ? 1 : state.page - 1;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -146,6 +157,8 @@ export const authSlice = createSlice({
       state.getallUserisLoading = false;
       state.getallUserisSuccess = true;
       state.users = action.payload.user;
+      state.noOfPages = action.payload.noOfPages;
+      // noOfPages
       state.totalUser = action.payload.totalUser;
     });
     builder.addCase(GetAllUsers.rejected, (state, action) => {
@@ -211,7 +224,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { handleClearUserAlert, ClearUserInfo, SaveShippingInformation } =
+export const { handleClearUserAlert,handlePage, ClearUserInfo, SaveShippingInformation } =
   authSlice.actions;
 
 export default authSlice.reducer;

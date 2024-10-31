@@ -87,13 +87,20 @@ export const GetAllUsers = createAsyncThunk(
   "GetAllUsers",
   async (userId, thunkAPI) => {
     try {
-      const state = thunkAPI.getState();
-
-      const { data } = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/user`,
-        { withCredentials: true }
-      );
-      return data;
+      const { page, search } = thunkAPI.getState().auth;
+      let AuthUrl = `${import.meta.env.VITE_API_BASE_URLS}/user`;
+      if (page) {
+        AuthUrl = AuthUrl + `?page=${page}`;
+        const { data } = await axios.get(AuthUrl, { withCredentials: true });
+        return data;
+      } else if (search) {
+        AuthUrl = AuthUrl + `?search=${search}`;
+        const { data } = await axios.get(AuthUrl, { withCredentials: true });
+        return data;
+      } else {
+        const { data } = await axios.get(AuthUrl, { withCredentials: true });
+        return data;
+      }
     } catch (error) {
       return thunkAPI.rejectWithValue(
         error.response && error.response.data.message

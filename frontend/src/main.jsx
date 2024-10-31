@@ -8,6 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Provider } from "react-redux";
 import { store } from "./store";
 import SmoothScroll from "./constants/utils/SmoothScroll";
+import SocketContextProvider from "./context/SocketContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
@@ -20,7 +21,9 @@ root.render(
         }}
       />
       <BrowserRouter>
-        <App />
+        <SocketContextProvider>
+          <App />
+        </SocketContextProvider>
       </BrowserRouter>
     </Provider>
     ,

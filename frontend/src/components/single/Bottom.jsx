@@ -14,7 +14,7 @@ import { clearconversation } from "@/features/conversation/conversationSlice";
 
 export default function Bottom() {
   let [searchParams, setSearchParams] = useSearchParams();
-  const [message, setMessage] = React.useState([]);
+  const [message, setMessage] = React.useState(null);
   const { currentUser } = useSelector((store) => store.auth);
 
   const category = searchParams.get("category");

@@ -45,6 +45,7 @@ import StatRoute from "./routes/statRoute.js";
 import ConversationRoute from "./routes/conversationRoutes.js";
 import messageRoute from "./routes/messageRoutes.js";
 import reviewRoute from "./routes/reviewRoutes.js";
+import { attachSocketIo } from "./middleware/attachSocketIo.js";
 
 app.use("/api/v1/auth", Auth);
 app.use("/api/v1/user", userAuth);
@@ -56,7 +57,7 @@ app.use("/api/v1/payment", orderRoute);
 app.use("/api/v1/stat", StatRoute);
 app.use("/api/v1/notification", NotificationRoutes);
 app.use("/api/v1/conversation", ConversationRoute);
-app.use("/api/v1/message", messageRoute);
+app.use("/api/v1/message",attachSocketIo(io), messageRoute);
 app.use("/api/v1/review", reviewRoute);
 // // Middlewares
 app.use(NotFound);
@@ -96,17 +97,13 @@ io.on("connection", (socket) => {
     addUserId(id, socket?.id);
     io.emit("getAllConnectedUser", users);
   });
-  // socket.on('addUserId', (id) => console.log(id))
 
-  // // get the userId connected from the client and send the users back to the client
-
-  // // send message to a speco=ific user
-  socket.on("sendMessage", ({ receiverId, senderId, text }) => {
+  socket.on("sendMessage", ({ receiverId, text }) => {
     // get the specific usre u intend to send the message to
     const newuser = getASpecificUser(receiverId);
     // console.log(newuser);
     // console.log(newuser?.socketId)
-    // console.log({ receiverId, senderId, text })
+    console.log({ receiverId, senderId, text })
     if (newuser?.socketId) {
       io.to(newuser?.socketId).emit("getMessage", {
         receiverId: receiverId,

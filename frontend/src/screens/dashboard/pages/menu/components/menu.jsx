@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { BiChevronLeft, BiChevronRight, BiSearch } from "react-icons/bi";
+import { BiChevronLeft, BiChevronRight } from "react-icons/bi";
 import { Table } from "@/components/common/styles";
 import TableCard from "@/components/common/TableCard";
 import Loader from "@/components/home/loader";
@@ -9,7 +9,7 @@ import { handlePage } from "@/features/menu/menuSlice";
 
 const RoomsList = () => {
   const dispatch = useDispatch();
-  const { menus, getallRoomisLoading, page } = useSelector(
+  const { menus, getallRoomisLoading, page, noOfPages } = useSelector(
     (store) => store.menu
   );
   return (
@@ -54,24 +54,25 @@ const RoomsList = () => {
             </Table>
             {menus?.length !== 0 && (
               <div className="w-full family1 flex items-center justify-end gap-4">
-                <div
+                <button
+                  disabled={page === 1}
                   onClick={() => dispatch(handlePage("prev"))}
                   className="p-2 rounded-md text-lg font-semibold family1 px-2 border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.2)]"
                 >
                   <BiChevronLeft />
-                </div>
+                </button>
                 {page}
-                <div
+                <button
+                  disabled={noOfPages === page}
                   onClick={() => dispatch(handlePage("next"))}
                   className="p-2 rounded-md text-lg font-semibold family1 px-2 border hover:opacity-[.8] cursor-pointer border-[rgba(0,0,0,0.3)]"
                 >
                   {" "}
                   <BiChevronRight />
-                </div>
+                </button>
               </div>
             )}
           </div>
-          
         </div>
       )}
     </>

@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import io from "socket.io-client";
-let socketIo = io;
 import moment from "moment";
 import { clearconversation } from "@/features/conversation/conversationSlice";
 import {
@@ -16,30 +15,31 @@ import { RxCross1 } from "react-icons/rx";
 import { BsImage } from "react-icons/bs";
 import Loader from "../loader";
 import { chatCardVariants } from "@/socket/utils/framer";
+import { SocketContext } from "@/context/SocketContext";
 
-const ChatCard = ({ active, setActive, setMessage, message }) => {
-  socketIo = socketIo.connect("http://localhost:4000");
+const ChatCard = ({ active, setActive, setChat, chat }) => {
   const dispatch = useDispatch();
   const [conversationId, setConversationId] = useState("");
-  const { users, currentUser, userDetails, token } = useSelector(
+  const {currentUser} = useSelector(
     (store) => store.auth
   );
+  const { socket } = useContext(SocketContext);
   const { conversationDetails } = useSelector((store) => store.conversation);
   const { menu } = useSelector((store) => store.menu);
   const [messageloading, setMessageLoading] = React.useState(false);
   const [body, setBody] = React.useState("");
   const [messagesFetched, setMessagesFetched] = useState(false);
   useEffect(() => {
-    console.log("conversationDetails", conversationDetails);
+    // console.log("conversationDetails", conversationDetails);
 
     // Check if `conversationDetails` is defined and messages haven't been fetched yet
-    if (conversationDetails !== undefined && !messagesFetched) {
+    if (
+      conversationDetails !== undefined &&
+      conversationDetails?.id &&
+      !messagesFetched
+    ) {
       console.log("Fetching conversation messages...");
-
-      // Dispatch the action to get the messages
       dispatch(GetUsersMessageConversation(conversationDetails?.id));
-
-      // Set the flag to true to prevent reruns
       setMessagesFetched(true);
     }
   }, [conversationDetails, messagesFetched, dispatch]);
@@ -53,23 +53,22 @@ const ChatCard = ({ active, setActive, setMessage, message }) => {
           conversationDetails?.id
         }`,
         {
-          body,
-          userId: currentUser?.id,
+          text: body,
         },
         { withCredentials: true }
       );
+      setChat((prev) => ({
+        ...prev,
+        messages: [
+          ...prev.messages,
+          { body: data.body, userId: currentUser?.id },
+        ],
+      }));
 
-      handleSingleMessageDetails();
-
-      socketIo?.emit("sendMessage", {
+      socket?.emit("sendMessage", {
         receiverId: menu?.user?.id,
-        senderId: currentUser?.id,
         text: body,
       });
-      setMessage((prev) => [
-        ...message,
-        { body: data.body, userId: currentUser?.id },
-      ]);
 
       setBody("");
     } catch (err) {
@@ -79,21 +78,22 @@ const ChatCard = ({ active, setActive, setMessage, message }) => {
     setBody("");
   };
 
-  // React.useEffect(() => {
-  //   socketIo?.emit("addUserId", currentUser?.id);
-  //   socketIo?.on("getAllConnectedUser", (users) => {
-  //     // console.log(users)
-  //   });
-  //   socketIo?.on("getMessage", (message) => {
-  //     setMessage((prev) => [
-  //       ...message,
-  //       { body: message.text, userId: currentUser?.id },
-  //     ]);
-  //     console.log(message);
-  //   });
-  // }, [socketIo, setMessage]);
+  React.useEffect(() => {
+    if (socket) {
+      socket?.on("getMessage", (message) => {
+        setChat((prev) => ({
+          ...prev,
+          messages: [
+            ...prev.messages,
+            { body: message.body, userId: currentUser?.id },
+          ],
+        }));
+        console.log(message);
+      });
+    }
+  }, [socket, chat]);
+  // console.log("conversationDetails", conversationDetails);
 
-  // console.log(conversationDetails);
   return (
     <motion.div
       variants={chatCardVariants}
@@ -142,7 +142,7 @@ const ChatCard = ({ active, setActive, setMessage, message }) => {
           <>
             {
               // {/* first conversation */ }
-              message?.map((message, index) => {
+              chat?.messages?.map((message, index) => {
                 const senderMessage = currentUser?.id === message?.sender?.id;
                 const createdAt = moment(message?.createdAt).format(
                   "MMMM Do YYYY, h:mm a"

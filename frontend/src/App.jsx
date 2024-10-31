@@ -33,20 +33,6 @@ const ProfileWrapper = lazy(() => import("./screens/Profile"));
 export default function App() {
   const [height, setHeight] = useState(0);
 
-  socketIo = socketIo.connect("http://localhost:4000");
-  const { currentUser } = useSelector((store) => store.auth);
-
-  React.useEffect(() => {
-    if (currentUser) {
-      socketIo?.emit("addUserId", currentUser?.id);
-      socketIo?.on("getAllConnectedUser", (users) => {
-        console.log(users);
-      });
-      socketIo?.on("getMessage", (message) => {
-      });
-    }
-  }, []);
-
   return (
     <div className="based" style={{ height }}>
       <Routes>

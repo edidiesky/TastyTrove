@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import axios from "axios";
@@ -14,29 +14,32 @@ import {
 } from "@/features/conversation/conversationReducer";
 import { clearconversation } from "@/features/conversation/conversationSlice";
 import Loader from "@/components/loader";
-let socketIo = io;
+import { SocketContext } from "@/context/SocketContext";
 
 const Nessage = () => {
+  const { socket } = useContext(SocketContext);
   //   const [roommodal, setRoomModal] = useState(false);
-  socketIo = socketIo.connect("http://localhost:4000");
   const dispatch = useDispatch();
   const [conversationId, setConversationId] = useState("");
-  const { users, currentUser, userDetails, token } =
-    useSelector((store) => store.auth);
+  const { users, currentUser, userDetails, token } = useSelector(
+    (store) => store.auth
+  );
   const { menu } = useSelector((store) => store.menu);
 
-  const [message, setMessage] = React.useState([]);
+  const [chat, setChat] = React.useState([]);
   const [tabid, setTabId] = React.useState(null);
   const [messageloading, setMessageLoading] = React.useState(false);
   const [body, setBody] = React.useState("");
-  const { conversationDetails,getUsersInConversationisLoading, usersInconversation } = useSelector(
-    (store) => store.conversation
-  );
+  const {
+    conversationDetails,
+    getUsersInConversationisLoading,
+    usersInconversation,
+  } = useSelector((store) => store.conversation);
   // const conversationDetails = {
   //   id:""
   // }
   useEffect(() => {
-    setMessage([]);
+    setChat([]);
     dispatch(clearconversation());
     dispatch(getAllSellerConversationUsers());
   }, []);
@@ -57,7 +60,6 @@ const Nessage = () => {
   // get the messages of the chat
   const handleSingleMessageDetails = async () => {
     try {
-    
       setMessageLoading(true);
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
@@ -65,9 +67,9 @@ const Nessage = () => {
         }`,
         { withCredentials: true }
       );
-      setMessage(response.data.messages);
+      setChat(response.data.messages);
       setMessageLoading(false);
-      // setMessage(response.data.messages)
+      // setChat(response.data.messages)
     } catch (err) {
       console.log(err);
     }
@@ -77,32 +79,31 @@ const Nessage = () => {
     if (conversationDetails) {
       handleSingleMessageDetails();
     } else {
-      setMessage([]);
+      setChat([]);
       dispatch(clearconversation());
     }
-  }, [setMessage, conversationDetails]);
+  }, [setChat, conversationDetails]);
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
-    
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
           conversationDetails?.id
         }`,
         {
-          body,
-          userId: currentUser?.id,
+          text: body,
         },
         { withCredentials: true }
       );
+      setChat((prev) => ({
+        ...prev,
+        messages: [
+          ...prev.messages,
+          { body: data.body, userId: currentUser?.id },
+        ],
+      }));
 
-      // handleSingleMessageDetails();
-      setMessage((prev) => [
-        ...message,
-        { body: data.body, userId: currentUser?.id },
-      ]);
-
-      socketIo?.emit("sendMessage", {
+      socket?.emit("sendMessage", {
         receiverId: tabid,
         senderId: currentUser?.id,
         text: body,
@@ -111,23 +112,22 @@ const Nessage = () => {
     } catch (err) {
       console.log(err);
     }
-
-    setBody("");
   };
 
   React.useEffect(() => {
-    socketIo?.emit("addUserId", currentUser?.id);
-    socketIo?.on("getAllConnectedUser", (users) => {
-      // console.log(users)
-    });
-    socketIo?.on("getMessage", (message) => {
-      setMessage((prev) => [
-        ...message,
-        { body: message.text, userId: message?.receiverId },
-      ]);
-      console.log(message);
-    });
-  }, [socketIo, setMessage]);
+    if (socket) {
+      socket?.on("getMessage", (message) => {
+        setChat((prev) => ({
+          ...prev,
+          messages: [
+            ...prev.messages,
+            { body: message.body, userId: currentUser?.id },
+          ],
+        }));
+        console.log(message);
+      });
+    }
+  }, [socket, chat]);
 
   // console.log(message);
   // find specific user
@@ -247,7 +247,7 @@ const Nessage = () => {
             <>
               {
                 // {/* first conversation */ }
-                message?.map((message, index) => {
+                chat?.map((message, index) => {
                   const senderMessage = currentUser?.id === message?.sender?.id;
                   const createdAt = moment(message?.createdAt).format(
                     "MMMM Do YYYY, h:mm a"
