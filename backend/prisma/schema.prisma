@@ -54,13 +54,15 @@ model User {
   updatedAt                   DateTime        @updatedAt
   conversationIds             String[]        @db.ObjectId
   conversations               Conversations[] @relation(fields: [conversationIds], references: [id])
-  menu           Menu[]
-  cart           Cart[]
-  payment        Payment[]       @relation("SellerPayments")
-  paymentsMade   Payment[]       @relation("UserPayments")
-  reviews        Review[]        @relation("SellerReviews")
-  reviewsMade    Review[]        @relation("UserReview")
-  notifications  Notifications[]
+  menu                        Menu[]
+  cart                        Cart[]
+  payment                     Payment[]       @relation("SellerPayments")
+  paymentsMade                Payment[]       @relation("UserPayments")
+  reviews                     Review[]        @relation("SellerReviews")
+  reviewsMade                 Review[]        @relation("UserReview")
+  notifications               Notifications[]
+  Message                     Message[]       @relation("senderMessage")
+  ReceiverMessage             Message[]       @relation("ReceiverMessage")
 }
 
 model Menu {
@@ -107,15 +109,16 @@ model Payment {
 }
 
 model Review {
-  id          String  @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   review      Int
   description String
-  menuid      String  @db.ObjectId
-  menu        Menu?   @relation(fields: [menuid], references: [id], onDelete: Cascade)
-  userid      String? @db.ObjectId // Customer ID
-  sellerId    String? @db.ObjectId // Seller ID
-  user        User?   @relation("UserReview", fields: [userid], references: [id], onDelete: SetNull)
-  seller      User?   @relation("SellerReviews", fields: [sellerId], references: [id], onDelete: SetNull)
+  menuid      String   @db.ObjectId
+  menu        Menu?    @relation(fields: [menuid], references: [id], onDelete: Cascade)
+  userid      String?  @db.ObjectId // Customer ID
+  sellerId    String?  @db.ObjectId // Seller ID
+  user        User?    @relation("UserReview", fields: [userid], references: [id], onDelete: SetNull)
+  seller      User?    @relation("SellerReviews", fields: [sellerId], references: [id], onDelete: SetNull)
+  createdAt   DateTime @default(now())
 }
 
 model Cart {
@@ -143,20 +146,24 @@ model Notifications {
 }
 
 model Conversations {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
-  users     User[]    @relation(fields: [userIDs], references: [id])
-  userIDs   String[]  @db.ObjectId
-  createdAt DateTime  @default(now())
-  seenBy    String[]  @db.ObjectId
-  messages  Message[]
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  users       User[]    @relation(fields: [userIDs], references: [id])
+  userIDs     String[]  @db.ObjectId
+  createdAt   DateTime  @default(now())
+  seenBy      String[]  @db.ObjectId
+  messages    Message[]
   lastMessage String?
 }
 
 model Message {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  text      String
-  userId    String
-  conversation      Conversations     @relation(fields: [conversationId], references: [id])
-  conversationId    String   @db.ObjectId
-  createdAt DateTime @default(now())
+  id              String         @id @default(auto()) @map("_id") @db.ObjectId
+  text            String
+  senderid        String?        @db.ObjectId // Customer ID
+  receiverid      String?        @db.ObjectId // Seller ID
+  user            User?          @relation("senderMessage", fields: [senderid], references: [id], onDelete: SetNull)
+  seller          User?          @relation("ReceiverMessage", fields: [receiverid], references: [id], onDelete: SetNull)
+  conversationId  String         @db.ObjectId
+  createdAt       DateTime       @default(now())
+  Conversations   Conversations? @relation(fields: [conversationsId], references: [id])
+  conversationsId String?        @db.ObjectId
 }

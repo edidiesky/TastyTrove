@@ -21,68 +21,34 @@ const Nessage = () => {
   //   const [roommodal, setRoomModal] = useState(false);
   const dispatch = useDispatch();
   const [conversationId, setConversationId] = useState("");
-  const { users, currentUser, userDetails, token } = useSelector(
-    (store) => store.auth
-  );
-  const { menu } = useSelector((store) => store.menu);
+  const { users, currentUser } = useSelector((store) => store.auth);
 
   const [chat, setChat] = React.useState([]);
   const [tabid, setTabId] = React.useState(null);
   const [messageloading, setMessageLoading] = React.useState(false);
   const [body, setBody] = React.useState("");
-  const {
-    conversationDetails,
-    getUsersInConversationisLoading,
-    usersInconversation,
-  } = useSelector((store) => store.conversation);
-  // const conversationDetails = {
-  //   id:""
-  // }
+  const { conversationDetails, getUsersInConversationisLoading, conversation } =
+    useSelector((store) => store.conversation);
   useEffect(() => {
     setChat([]);
     dispatch(clearconversation());
     dispatch(getAllSellerConversationUsers());
   }, []);
 
-  useEffect(() => {
-    if (tabid) {
-      dispatch(Createconversation(tabid));
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (tabid) {
+  //     dispatch(Createconversation(tabid));
+  //   }
+  // }, []);
 
   // get the conversation
   useEffect(() => {
-    if (conversationDetails) {
-      dispatch(GetUsersMessageConversation(conversationDetails?.id));
+    if (tabid) {
+      dispatch(GetUsersMessageConversation(tabid));
     }
-  }, []);
+  }, [tabid]);
 
-  // get the messages of the chat
-  const handleSingleMessageDetails = async () => {
-    try {
-      setMessageLoading(true);
-      const response = await axios.get(
-        `${import.meta.env.VITE_API_BASE_URLS}/message/${
-          conversationDetails?.id
-        }`,
-        { withCredentials: true }
-      );
-      setChat(response.data.messages);
-      setMessageLoading(false);
-      // setChat(response.data.messages)
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
-  useEffect(() => {
-    if (conversationDetails) {
-      handleSingleMessageDetails();
-    } else {
-      setChat([]);
-      dispatch(clearconversation());
-    }
-  }, [setChat, conversationDetails]);
   const handleCreateMessage = async (e) => {
     e.preventDefault();
     try {
@@ -92,6 +58,7 @@ const Nessage = () => {
         }`,
         {
           text: body,
+          receiverid,
         },
         { withCredentials: true }
       );
@@ -135,7 +102,7 @@ const Nessage = () => {
   // console.log(mainuser);
   return (
     <div className="w-full h-[520px] border rounded-[20px] grid md:grid-cols-custom_2 ">
-      <div className="w-[340px] h-full border-r flex flex-col">
+      <div className="w-[340px] h-full border-r flex gap-4 flex-col">
         <div className="w-full px-6 border-b h-[70px] flex items-center gap-3">
           <h4 className="text-xl lg:text-2xl font-semibold family1">
             Messages
@@ -162,19 +129,19 @@ const Nessage = () => {
           </div>
         ) : (
           <div className="w-full flex flex-col">
-            {usersInconversation?.map((user, index) => {
+            {conversation?.map((data, index) => {
               return (
                 <div
-                  onClick={() => setTabId(user?.id)}
+                  onClick={() => setTabId(data?.id)}
                   key={index}
                   className={`${
-                    user?.id === tabid ? "bg-[#f1f1f1]" : ""
-                  } hover:bg-[#fafafa] w-full cursor-pointer flex items-center justify-between py-3 px-4`}
+                    data?.id === tabid ? "bg-[#f1f1f1]" : ""
+                  } hover:bg-[#fafafa] w-full cursor-pointer flex items-center justify-between py-4 px-4`}
                 >
-                  <div className="w-full flex items-center gap-4">
-                    {user?.image ? (
+                  <div className="flex-1 flex items-center gap-4">
+                    {data?.receiver?.image ? (
                       <img
-                        src={user?.image}
+                        src={data?.receiver?.image}
                         alt=""
                         className="w-12 h-12 rounded-full"
                       />
@@ -187,14 +154,14 @@ const Nessage = () => {
                     )}
 
                     <h5 className="text-sm font-semibold family1">
-                      {user?.name}
+                      {data?.receiver?.name}
                       <span className="block font-normal text-xs text-grey">
-                        Last Message
+                        {data?.lastMessage}
                       </span>
                     </h5>
                   </div>
                   <h6 className="text-xs font-normal family1">
-                    4:45pm
+                    {moment(data?.createdAt).format("DD MMM YYYY")}
                     <span className="block font-normal text-xs text-grey">
                       {/* Last Message */}
                     </span>
@@ -247,7 +214,7 @@ const Nessage = () => {
             <>
               {
                 // {/* first conversation */ }
-                chat?.map((message, index) => {
+                conversationDetails?.messages?.map((message, index) => {
                   const senderMessage = currentUser?.id === message?.sender?.id;
                   const createdAt = moment(message?.createdAt).format(
                     "MMMM Do YYYY, h:mm a"
@@ -261,7 +228,7 @@ const Nessage = () => {
                           <div className="flex w-full justify-end items-end gap-1">
                             <div className="flex-1 flex items-end flex-col justify-end gap-1">
                               <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-xs leading-[1.6] text-white flex items-center bg-[#000] justify-center p-3 px-6">
-                                {message?.body}
+                                {message?.text}
                               </span>
                               <span className="text-xs family1 text-dark">
                                 {createdAt}

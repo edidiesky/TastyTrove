@@ -5,7 +5,7 @@ import prisma from "../prisma/index.js";
 const createMessage = asyncHandler(async (req, res) => {
   // get the body message
   const conversationId = req.params.id;
-  const { text } = req.body;
+  const { text, receiverid } = req.body;
   // console.log(conversationId)
   const senderId = req.user?.userId;
   const conversation = await prisma.conversations.findUnique({
@@ -26,6 +26,7 @@ const createMessage = asyncHandler(async (req, res) => {
       text,
       conversationId,
       userId: senderId,
+      receiverid,
     },
   });
   // updated the conversation

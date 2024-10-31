@@ -90,7 +90,7 @@ export const conversationSlice = createSlice({
     builder.addCase(
       getAllSellerConversationUsers.fulfilled,
       (state, action) => {
-        state.usersInconversation = action.payload;
+        state.conversation = action.payload;
         state.getUsersInConversationisLoading = false;
       }
     );

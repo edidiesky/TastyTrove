@@ -56,7 +56,26 @@ const getSingleUserConversation = asyncHandler(async (req, res) => {
       },
     },
   });
-  res.status(200).json(conversation);
+  //  for (let singleconversation of conversation?.messages) {
+  //    // get the receiverid
+  //    const receiverid = singleconversation.userId.find(
+  //      (id) => id != tokenUserId
+  //    );
+  //    // find the user (receiver)
+  //    const receiver = await prisma.user.findUnique({
+  //      where: {
+  //        id: receiverid,
+  //      },
+  //      select: {
+  //        id: true,
+  //        name: true,
+  //        image: true,
+  //        username: true,
+  //      },
+  //    });
+  //    singleconversation.receiver = receiver;
+  //  }
+  res.status(200).json({conversation});
 });
 
 const getAllUserConversation = asyncHandler(async (req, res) => {
@@ -89,7 +108,7 @@ const getAllUserConversation = asyncHandler(async (req, res) => {
     });
     singleconversation.receiver = receiver;
   }
-  res.status(200).json(conversation);
+  res.status(200).json({conversation});
 });
 
 //  Public
