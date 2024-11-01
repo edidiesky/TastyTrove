@@ -40,9 +40,10 @@ const getSingleUserConversation = asyncHandler(async (req, res) => {
     include: {
       messages: {
         include: {
-          seller: {
+          receiver: {
             select: {
               name: true,
+              id: true,
               username: true,
               image: true,
             },
@@ -50,6 +51,7 @@ const getSingleUserConversation = asyncHandler(async (req, res) => {
           user: {
             select: {
               name: true,
+              id: true,
               username: true,
               image: true,
             },
@@ -61,6 +63,7 @@ const getSingleUserConversation = asyncHandler(async (req, res) => {
       },
     },
   });
+
   // update the read parameter
   await prisma.conversations.update({
     where: {

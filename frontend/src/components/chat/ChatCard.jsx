@@ -58,14 +58,27 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
       setChat((prev) => ({
         ...prev,
         messages: [
-          ...prev?.messages,
-          { body: data.body, userId: currentUser?.id },
+          ...prev.messages,
+          {
+            text: data.text,
+            receiverid: data?.receiverid,
+            receiver: {
+              name: menu?.user?.name,
+              username: menu?.user?.username,
+              image: menu?.user?.image,
+            },
+          },
         ],
       }));
 
       socket?.emit("sendMessage", {
-        receiverId: menu?.user?.id,
-        text: body,
+        text: data.text,
+        receiverid: data?.receiverid,
+        receiver: {
+          name: menu?.user?.name,
+          username: menu?.user?.username,
+          image: menu?.user?.image,
+        },
       });
 
       setBody("");
@@ -82,8 +95,15 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
         setChat((prev) => ({
           ...prev,
           messages: [
-            ...(prev?.messages || []),
-            { body: data.body, userId: currentUser?.id },
+            ...prev.messages,
+            {
+              text: message.body,
+              receiverid: message?.receiverId,
+              receiver: {
+                name: message?.receiver?.name,
+                name: message?.receiver?.username,
+              },
+            },
           ],
         }));
         console.log(message);
@@ -140,14 +160,14 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
       <div className="w-full max-h-[380px] h-[380px] overflow-y-auto p-2 flex flex-col gap-3">
         {messageloading ? (
           <div className="w-full h-full flex items-start justify-center">
-            <Loader type={"dots"} />
+            <Loader type={"dots"} color={"#000"} />
           </div>
         ) : (
           <>
             {
               // {/* first conversation */ }
               chat?.messages?.map((message, index) => {
-                const senderMessage = currentUser?.id === message?.sender?.id;
+                const senderMessage = currentUser?.id === message?.senderid;
                 const createdAt = moment(message?.createdAt).format(
                   "MMMM Do YYYY, h:mm a"
                 );
@@ -163,29 +183,29 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
                               className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-sm md:text-sm leading-[1.6]
                              text-white flex items-center bg-[#1d9bf0] justify-center p-3 px-4"
                             >
-                              {message?.body}
+                              {message?.text}
                             </span>
                             <span className="text-xs family1 text-dark">
                               {createdAt}
                             </span>
                           </div>
                           <div className="w-10 h-10 rounded-full family1 flex items-center uppercase justify-center text-lg text-white bg-[#000]">
-                            {message?.sender?.username &&
-                              message?.sender?.username[0]}
+                            {message?.user?.username &&
+                              message?.user?.username[0]}
                           </div>
-                          {/* <img src={message?.sender?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
+                          {/* <img src={message?.user?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
                         </div>
                       </div>
                     ) : (
                       <div className="w-full flex items-center justify-start">
                         <div className="flex w-full justify-start items-end gap-1">
                           <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#2f3336]">
-                            {message?.sender?.username &&
-                              message?.sender?.username[0]}
+                            {message?.receiver?.username &&
+                              message?.receiver?.username[0]}
                           </div>
                           <div className="flex-1 flex items-start flex-col justify-start gap-1">
                             <span className="max-w-[200px] md:max-w-[400px] rounded-[30px] family1 text-[12px] md:text-[12px] leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-4 px-8">
-                              {message?.body}
+                              {message?.text}
                             </span>
                             <span className="text-xs family1 text-dark">
                               {createdAt}

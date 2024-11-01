@@ -98,16 +98,17 @@ io.on("connection", (socket) => {
     io.emit("getAllConnectedUser", users);
   });
 
-  socket.on("sendMessage", ({ receiverId, text }) => {
+  socket.on("sendMessage", ({ receiverId, text, receiver }) => {
     // get the specific usre u intend to send the message to
     const newuser = getASpecificUser(receiverId);
     // console.log(newuser);
     // console.log(newuser?.socketId)
-    console.log({ receiverId, text })
+    console.log({ receiverId, text });
     if (newuser?.socketId) {
       io.to(newuser?.socketId).emit("getMessage", {
-        receiverId: receiverId,
-        text: text,
+        receiverId,
+        text,
+        receiver,
       });
     }
   });

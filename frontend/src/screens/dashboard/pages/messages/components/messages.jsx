@@ -37,7 +37,7 @@ const Nessage = () => {
     }
   }, [conversationId]);
 
-  const handleCreateMessage = async (e) => {
+  const handleCreateMessage = async ({ e, receiverid }) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
@@ -76,24 +76,34 @@ const Nessage = () => {
           ...prev,
           messages: [
             ...prev.messages,
-            { body: message.body, userId: currentUser?.id },
+            {
+              text: message.body,
+              receiverid: message?.receiverId,
+              seller: {
+                name: message?.receiver?.name,
+                name: message?.receiver?.username,
+              },
+            },
           ],
         }));
         console.log(message);
       });
     }
+     return () => {
+       socket.off("getMessage");
+     };
   }, [socket, chat]);
   useEffect(() => {
     if (conversationDetails) {
-      setChat({...chat, messages:conversationDetails?.messages});
+      setChat({ ...chat, messages: conversationDetails?.messages });
     }
   }, [conversationDetails, setChat]);
   // console.log(conversationDetails);
   // find specific user
   const mainuser = users?.find((user) => user?.id === conversationId);
   // console.log(mainuser);
-  console.log("conversationDetails", conversationDetails);
-  
+  // console.log("conversationDetails", conversationDetails);
+
   return (
     <div className="w-full h-[520px] border rounded-[20px] grid md:grid-cols-custom_2 ">
       <div className="w-[340px] h-full border-r flex gap-4 flex-col">
@@ -119,7 +129,7 @@ const Nessage = () => {
 
         {getUsersInConversationisLoading ? (
           <div className="w-full pt-6 flex justify-center">
-            <Loader type={"dots"} />
+            <Loader type={"dots"} color={"#000"} />
           </div>
         ) : (
           <div className="w-full flex flex-col">
@@ -202,14 +212,14 @@ const Nessage = () => {
         >
           {messageloading ? (
             <div className="w-full h-full flex items-start justify-center">
-              <Loader type={"dots"} />
+              <Loader type={"dots"} color={"#000"} />
             </div>
           ) : (
             <>
               {
                 // {/* first conversation */ }
                 chat?.messages?.map((message, index) => {
-                  const senderMessage = currentUser?.id === message?.sender?.id;
+                  const senderMessage = currentUser?.id === message?.senderid;
                   const createdAt = moment(message?.createdAt).format(
                     "MMMM Do YYYY, h:mm a"
                   );
@@ -228,9 +238,9 @@ const Nessage = () => {
                                 {createdAt}
                               </span>
                             </div>
-                            <div className="w-12 h-12 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
-                              {message?.sender?.username &&
-                                message?.sender?.username[0]}
+                            <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
+                              {message?.user?.username &&
+                                message?.user?.username[0]}
                             </div>
                             {/* <img src={message?.sender?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
                           </div>
@@ -238,13 +248,13 @@ const Nessage = () => {
                       ) : (
                         <div className="w-full flex items-center justify-start">
                           <div className="flex w-full justify-start items-end gap-1">
-                            <div className="w-12 h-12 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
-                              {message?.sender?.username &&
-                                message?.sender?.username[0]}
+                            <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
+                              {message?.seller?.username &&
+                                message?.seller?.username[0]}
                             </div>
                             <div className="flex-1 flex items-start flex-col justify-start gap-1">
                               <span className="max-w-[200px] md:max-w-[400px] rounded-[30px] family1 text-xs leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-3 px-6">
-                                {message?.body}
+                                {message?.text}
                               </span>
                               <span className="text-xs family1 text-dark">
                                 {createdAt}
@@ -266,7 +276,12 @@ const Nessage = () => {
         {/* input form */}
         <div className="w-full border-t h-[70px] px-8 flex items-center justify-center">
           <form
-            onSubmit={(e) => handleCreateMessage(e)}
+            onSubmit={(e) =>
+              handleCreateMessage({
+                e,
+                receiverid: chat?.messages[0]?.seller?.id,
+              })
+            }
             action=""
             className="w-full"
           >
