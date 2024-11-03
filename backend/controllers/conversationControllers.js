@@ -48,7 +48,7 @@ const getSingleUserConversation = asyncHandler(async (req, res) => {
               image: true,
             },
           },
-          user: {
+          sender: {
             select: {
               name: true,
               id: true,

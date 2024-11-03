@@ -261,12 +261,13 @@ const LoginModalStyles = styled(motion.div)`
     box-shadow: 0 2rem 3rem rgba(0, 0, 0, 0.4);
     position: relative;
     @media (max-width: 980px) {
-      max-width:400px;
-      min-width:400px;
+      max-width: 400px;
+      min-width: 400px;
     }
     @media (max-width: 480px) {
-      max-width: 90%;
-      min-width: 90%;
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 100vh;
     }
     .cross {
       width: 34px;

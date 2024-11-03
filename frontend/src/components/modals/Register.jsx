@@ -248,8 +248,9 @@ const RegisterModalStyles = styled(motion.div)`
       min-width: 400px;
     }
     @media (max-width: 480px) {
-      max-width: 90%;
-      min-width: 90%;
+      max-width: 100%;
+      min-width: 100%;
+      min-height: 100vh;
     }
     .cross {
       width: 3rem;

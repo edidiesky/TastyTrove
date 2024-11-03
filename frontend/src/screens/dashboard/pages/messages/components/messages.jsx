@@ -36,39 +36,6 @@ const Nessage = () => {
       dispatch(GetUsersMessageConversation(conversationId));
     }
   }, [conversationId]);
-
-  const handleCreateMessage = async ({ e, receiverid }) => {
-    e.preventDefault();
-    try {
-      const { data } = await axios.post(
-        `${import.meta.env.VITE_API_BASE_URLS}/message/${
-          conversationDetails?.id
-        }`,
-        {
-          text: body,
-          receiverid,
-        },
-        { withCredentials: true }
-      );
-      setChat((prev) => ({
-        ...prev,
-        messages: [
-          ...prev.messages,
-          { body: data.body, userId: currentUser?.id },
-        ],
-      }));
-
-      socket?.emit("sendMessage", {
-        receiverId: conversationId,
-        senderId: currentUser?.id,
-        text: body,
-      });
-      setBody("");
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
     if (socket) {
       socket?.on("getMessage", (message) => {
@@ -77,11 +44,13 @@ const Nessage = () => {
           messages: [
             ...prev.messages,
             {
-              text: message.body,
-              receiverid: message?.receiverId,
-              seller: {
-                name: message?.receiver?.name,
-                name: message?.receiver?.username,
+              text: message.text,
+              receiverid: message?.receiverid,
+              sender: {
+                name: message?.sender?.name,
+                username: message?.sender?.username,
+                image: message?.sender?.image,
+                id: message?.sender?.id,
               },
             },
           ],
@@ -89,20 +58,68 @@ const Nessage = () => {
         console.log(message);
       });
     }
-     return () => {
-       socket.off("getMessage");
-     };
-  }, [socket, chat]);
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [socket]);
   useEffect(() => {
     if (conversationDetails) {
       setChat({ ...chat, messages: conversationDetails?.messages });
     }
   }, [conversationDetails, setChat]);
+  const handleCreateMessage = async (e) => {
+    e.preventDefault();
+    try {
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_BASE_URLS}/message/${
+          conversationDetails?.id
+        }`,
+        {
+          text: body,
+          receiverid: "",
+        },
+        { withCredentials: true }
+      );
+      setChat((prev) => ({
+        ...prev,
+        messages: [
+          ...prev.messages,
+          {
+            text: data.text,
+            receiverid: data?.receiverid,
+            sender: {
+              name: currentUser?.name,
+              id: currentUser?.id,
+              image: currentUser?.image,
+              username: currentUser?.username,
+            },
+          },
+        ],
+      }));
+
+      socket?.emit("sendMessage", {
+        text: data.text,
+        receiverid: data?.receiverid,
+        sender: {
+          name: currentUser?.name,
+          id: currentUser?.id,
+          image: currentUser?.image,
+          username: currentUser?.username,
+        },
+      });
+      setBody("");
+    } catch (err) {
+      console.log(err);
+    }
+
+    setBody("");
+  };
+
   // console.log(conversationDetails);
   // find specific user
   const mainuser = users?.find((user) => user?.id === conversationId);
   // console.log(mainuser);
-  // console.log("conversationDetails", conversationDetails);
+  console.log("chat", chat);
 
   return (
     <div className="w-full h-[520px] border rounded-[20px] grid md:grid-cols-custom_2 ">
@@ -114,7 +131,7 @@ const Nessage = () => {
           {/* <label
             htmlFor=""
             className="text-dark w-full
-             items-center py-2 border rounded-[40px] px-4"
+             items-center py-2 border rounded-full px-4"
           >
             <div className="text-grey rounded-full text-dark flex items-center justify-center">
               <BiSearch />
@@ -219,7 +236,7 @@ const Nessage = () => {
               {
                 // {/* first conversation */ }
                 chat?.messages?.map((message, index) => {
-                  const senderMessage = currentUser?.id === message?.senderid;
+                  const senderMessage = currentUser?.id === message?.receiverid;
                   const createdAt = moment(message?.createdAt).format(
                     "MMMM Do YYYY, h:mm a"
                   );
@@ -231,29 +248,32 @@ const Nessage = () => {
                         <div className="w-full flex items-center justify-end">
                           <div className="flex w-full justify-end items-end gap-1">
                             <div className="flex-1 flex items-end flex-col justify-end gap-1">
-                              <span className="max-w-[200px] md:max-w-[400px] rounded-[40px] family1 text-xs leading-[1.6] text-white flex items-center bg-[#000] justify-center p-3 px-6">
+                              <span
+                                className="max-w-[200px] md:max-w-[400px] rounded-full family1 text-sm md:text-sm leading-[1.6]
+                             text-white flex items-center bg-[#1d9bf0] justify-center p-3 px-4"
+                              >
                                 {message?.text}
                               </span>
                               <span className="text-xs family1 text-dark">
                                 {createdAt}
                               </span>
                             </div>
-                            <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
-                              {message?.user?.username &&
-                                message?.user?.username[0]}
+                            <div className="w-10 h-10 rounded-full family1 flex items-center uppercase justify-center text-lg text-white bg-[#000]">
+                              {message?.receiver?.username &&
+                                message?.receiver?.username[0]}
                             </div>
-                            {/* <img src={message?.sender?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
+                            {/* <img src={message?.user?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
                           </div>
                         </div>
                       ) : (
                         <div className="w-full flex items-center justify-start">
                           <div className="flex w-full justify-start items-end gap-1">
-                            <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#000]">
-                              {message?.seller?.username &&
-                                message?.seller?.username[0]}
+                            <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#2f3336]">
+                              {message?.sender?.username &&
+                                message?.sender?.username[0]}
                             </div>
                             <div className="flex-1 flex items-start flex-col justify-start gap-1">
-                              <span className="max-w-[200px] md:max-w-[400px] rounded-[30px] family1 text-xs leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-3 px-6">
+                              <span className="max-w-[200px] md:max-w-[400px] rounded-full family1 text-[12px] md:text-[12px] leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-3 px-4">
                                 {message?.text}
                               </span>
                               <span className="text-xs family1 text-dark">
