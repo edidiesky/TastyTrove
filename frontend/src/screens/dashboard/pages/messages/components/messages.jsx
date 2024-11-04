@@ -85,8 +85,7 @@ const Nessage = () => {
         messages: [
           ...prev.messages,
           {
-            text: data.text,
-            receiverid: data?.receiverid,
+            ...data,
             sender: {
               name: currentUser?.name,
               id: currentUser?.id,
@@ -98,8 +97,7 @@ const Nessage = () => {
       }));
 
       socket?.emit("sendMessage", {
-        text: data.text,
-        receiverid: data?.receiverid,
+        ...data,
         sender: {
           name: currentUser?.name,
           id: currentUser?.id,
@@ -107,6 +105,7 @@ const Nessage = () => {
           username: currentUser?.username,
         },
       });
+
       setBody("");
     } catch (err) {
       console.log(err);
@@ -236,7 +235,7 @@ const Nessage = () => {
               {
                 // {/* first conversation */ }
                 chat?.messages?.map((message, index) => {
-                  const senderMessage = currentUser?.id === message?.receiverid;
+                  const senderMessage = currentUser?.id === message?.sender?.id;
                   const createdAt = moment(message?.createdAt).format(
                     "MMMM Do YYYY, h:mm a"
                   );
@@ -244,8 +243,8 @@ const Nessage = () => {
                   return (
                     <div key={index} className="w-full flex px-2 flex-col">
                       {/* first sender Message */}
-                      {senderMessage ? (
-                        <div className="w-full flex items-center justify-end">
+                      {!senderMessage ? (
+                        <div className="w-full flex items-center justify-start">
                           <div className="flex w-full justify-end items-end gap-1">
                             <div className="flex-1 flex items-end flex-col justify-end gap-1">
                               <span
@@ -259,18 +258,18 @@ const Nessage = () => {
                               </span>
                             </div>
                             <div className="w-10 h-10 rounded-full family1 flex items-center uppercase justify-center text-lg text-white bg-[#000]">
-                              {message?.receiver?.username &&
-                                message?.receiver?.username[0]}
+                              {message?.sender?.username &&
+                                message?.sender?.username[0]}
                             </div>
                             {/* <img src={message?.user?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
                           </div>
                         </div>
                       ) : (
-                        <div className="w-full flex items-center justify-start">
+                        <div className="w-full flex items-center justify-end">
                           <div className="flex w-full justify-start items-end gap-1">
                             <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#2f3336]">
-                              {message?.sender?.username &&
-                                message?.sender?.username[0]}
+                              {message?.receiver?.username &&
+                                message?.receiver?.username[0]}
                             </div>
                             <div className="flex-1 flex items-start flex-col justify-start gap-1">
                               <span className="max-w-[200px] md:max-w-[400px] rounded-full family1 text-[12px] md:text-[12px] leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-3 px-4">

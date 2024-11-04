@@ -90,8 +90,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
         messages: [
           ...prev.messages,
           {
-            text: data.text,
-            receiverid: data?.receiverid,
+            ...data,
             sender: {
               name: currentUser?.name,
               id: currentUser?.id,
@@ -103,8 +102,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
       }));
 
       socket?.emit("sendMessage", {
-        text: data.text,
-        receiverid: data?.receiverid,
+        ...data,
         sender: {
           name: currentUser?.name,
           id: currentUser?.id,
