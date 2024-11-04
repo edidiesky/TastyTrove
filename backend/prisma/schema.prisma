@@ -81,7 +81,7 @@ model Menu {
   cart              Cart[]
   Review            Review[]
 
-  @@index([userid])
+@@index([userid, servedCount])
 }
 
 model Payment {
