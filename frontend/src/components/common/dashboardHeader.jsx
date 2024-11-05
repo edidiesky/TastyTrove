@@ -112,7 +112,7 @@ const DashboardHeader = () => {
 
             <form
               action=""
-              className="max-w-[200px] h-[50px] md:max-w-[400px] md:w-[300px] flex items-center relative"
+              className="max-w-[120px] h-[45px] md:max-w-[160px] md:w-[150px] flex items-center relative"
             >
               <span className="w-4 h-4 absolute left-6">
                 <BsSearch />
