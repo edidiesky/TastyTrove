@@ -81,7 +81,7 @@ model Menu {
   cart              Cart[]
   Review            Review[]
 
-@@index([userid, servedCount])
+  @@index([userid, servedCount])
 }
 
 model Payment {
@@ -156,13 +156,13 @@ model Conversations {
 }
 
 model Message {
-  id              String         @id @default(auto()) @map("_id") @db.ObjectId
-  text            String
-  senderid        String?        @db.ObjectId // Customer ID
-  receiverid      String?        @db.ObjectId // Seller ID
-  sender            User?          @relation("senderMessage", fields: [senderid], references: [id], onDelete: SetNull)
-  receiver          User?          @relation("ReceiverMessage", fields: [receiverid], references: [id], onDelete: SetNull)
-  conversationId  String         @db.ObjectId
-  createdAt       DateTime       @default(now())
-  Conversations   Conversations? @relation(fields: [conversationId], references: [id])
+  id             String         @id @default(auto()) @map("_id") @db.ObjectId
+  text           String
+  senderid       String?        @db.ObjectId // Customer ID
+  receiverid     String?        @db.ObjectId // Seller ID
+  sender         User?          @relation("senderMessage", fields: [senderid], references: [id], onDelete: SetNull)
+  receiver       User?          @relation("ReceiverMessage", fields: [receiverid], references: [id], onDelete: SetNull)
+  conversationId String         @db.ObjectId
+  createdAt      DateTime       @default(now())
+  Conversations  Conversations? @relation(fields: [conversationId], references: [id])
 }

@@ -26,19 +26,16 @@ const Loader = ({ type, color, size }) => {
         background: "#ffffffdd",
       }}
     >
-      <div className="spinner text-[30px] md:text-[35px]">
-        <CiSettings />
-      </div>
-      {/* <ThreeDots
-        height="40"
-        width="40"
+      <ThreeDots
+        height="80"
+        width="80"
         radius="10"
         color={"#000"}
         ariaLabel="three-dots-loading"
         wrapperStyle={{}}
         wrapperClassName=""
         visible={true}
-      /> */}
+      />
     </div>
   );
 };

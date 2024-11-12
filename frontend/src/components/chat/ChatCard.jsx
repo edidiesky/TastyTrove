@@ -16,6 +16,7 @@ import { BsImage } from "react-icons/bs";
 import Loader from "../loader";
 import { chatCardVariants } from "@/socket/utils/framer";
 import { SocketContext } from "@/context/SocketContext";
+import ChatDetails from "../common/ChatDetails";
 
 const ChatCard = ({ active, setActive, setChat, chat }) => {
   const dispatch = useDispatch();
@@ -120,7 +121,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
   };
 
   // console.log("conversationDetails", conversationDetails);
-  console.log("chat", chat);
+  // console.log("chat", chat);
   return (
     <motion.div
       variants={chatCardVariants}
@@ -160,7 +161,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
           <RxCross1 />
         </div>
       </div>
-      <div className="w-full max-h-[380px] h-[380px] overflow-y-auto p-2 flex flex-col gap-3">
+      <div className="w-full max-h-[390px] h-[390px] overflow-y-auto p-2 flex flex-col gap-3">
         {getUsersInConversationisLoading ? (
           <div className="w-full h-full flex items-start justify-center">
             <Loader type={"dots"} color={"#000"} />
@@ -170,57 +171,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
             {
               // {/* first conversation */ }
               chat?.messages?.map((message, index) => {
-                const senderMessage = currentUser?.id === message?.receiverid;
-                const createdAt = moment(message?.createdAt).format(
-                  "MMMM Do YYYY, h:mm a"
-                );
-                // console.log(senderMessage)
-                return (
-                  <div key={index} className="w-full flex px-2 flex-col">
-                    {/* first sender Message */}
-                    {senderMessage ? (
-                      <div className="w-full flex items-center justify-end">
-                        <div className="flex w-full justify-end items-end gap-1">
-                          <div className="flex-1 flex items-end flex-col justify-end gap-1">
-                            <span
-                              className="max-w-[200px] md:max-w-[400px] rounded-full family1 text-sm md:text-sm leading-[1.6]
-                             text-white flex items-center bg-[#1d9bf0] justify-center p-3 px-4"
-                            >
-                              {message?.text}
-                            </span>
-                            <span className="text-xs family1 text-dark">
-                              {createdAt}
-                            </span>
-                          </div>
-                          <div className="w-10 h-10 rounded-full family1 flex items-center uppercase justify-center text-lg text-white bg-[#000]">
-                            {message?.receiver?.username &&
-                              message?.receiver?.username[0]}
-                          </div>
-                          {/* <img src={message?.user?.username} className='w-14 h-14 mb-8 rounded-full' alt="" /> */}
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="w-full flex items-center justify-start">
-                        <div className="flex w-full justify-start items-end gap-1">
-                          <div className="w-10 h-10 rounded-full family1 flex items-center justify-center text-lg text-white bg-[#2f3336]">
-                            {message?.sender?.username &&
-                              message?.sender?.username[0]}
-                          </div>
-                          <div className="flex-1 flex items-start flex-col justify-start gap-1">
-                            <span className="max-w-[200px] md:max-w-[400px] rounded-full family1 text-[12px] md:text-[12px] leading-[1.6] text-dark flex items-center bg-[#e9e9e9] justify-center p-3 px-4">
-                              {message?.text}
-                            </span>
-                            <span className="text-xs family1 text-dark">
-                              {createdAt}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-
-                    {/* first receiver Message */}
-                  </div>
-                );
+                return <ChatDetails key={index} message={message} />;
               })
             }
           </>
@@ -228,39 +179,27 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
       </div>
 
       {/* message form */}
-      <div className="h-[80px] border-t w-full border-[rgba(0,0,0,.1)] flex items-center justify-center">
+      <div className="h-[70px] border-t w-full border-[rgba(0,0,0,.1)] flex items-center justify-center">
         <form
           onSubmit={(e) => handleCreateMessage(e)}
-          className="flex w-full h-full justify-center items-center gap-1"
+          className="flex w-full h-full py-4 px-3 justify-between items-start gap-2"
         >
-          <label
-            htmlFor="search"
-            className="text-base family1 w-full rounded-[40px] justify-center h-full flex items-center"
-          >
-            <div
-              // onClick={() => setActive(false)}
-              className="w-12 hover:bg-[#eee] h-12 cursor-pointer flex
-               items-center justify-center rounded-full  text-lg"
-            >
-              <BsImage fontSize={"20px"} />
-            </div>
-            <input
-              value={body}
-              name="body"
-              onChange={(e) => setBody(e.target.value)}
-              id="search"
-              type="text"
-              placeholder="Start a new Message"
-              className="text-sm bg-transparent flex-1"
-            ></input>
+          <input
+            value={body}
+            name="body"
+            onChange={(e) => setBody(e.target.value)}
+            id="search"
+            placeholder="Start a new Message"
+            className="text-sm py-4 family1 border-none outline-none px-4 flex-1"
+          />
 
-            <div
-              // onClick={() => setActive(false)}
-              className="w-12 hover:bg-[#eee] h-12 cursor-pointer flex items-center justify-center rounded-full  text-lg"
-            >
-              <IoMdSend fontSize={"20px"} />
-            </div>
-          </label>
+          <div
+            // onClick={() => setActive(false)}
+            className="w-12 hover:bg-[#eee] h-12 cursor-pointer flex items-center justify-center rounded-full  text-lg"
+          >
+            <IoMdSend fontSize={"20px"} />
+          </div>
+
         </form>
       </div>
     </motion.div>

@@ -172,7 +172,7 @@ body {
   font-family: "Karla";
 }
 
-form input {
+form .input {
   min-height: 43px;
   /* min-width: 130px; */
   border-radius: 5px;
@@ -181,7 +181,7 @@ form input {
   border: 1.5px solid #e7e7e9;
   padding: 0 1rem;
 }
-input {
+.input {
   min-height: 43px;
   /* min-width: 130px; */
   border-radius: 5px;
@@ -191,25 +191,22 @@ input {
   padding: 0 1rem;
   font-family: "Karla", sans-serif !important;
 }
-form input:hover {
+
+.input:hover {
   box-shadow: 0 0 0 6px #e7e7e9;
   transition: all 0.3s;
   outline: 1px solid #3e3aff;
 }
-input:hover {
-  box-shadow: 0 0 0 6px #e7e7e9;
-  transition: all 0.3s;
-  outline: 1px solid #3e3aff;
-}
-input:focus {
+.input:focus {
   box-shadow: 0 0 0 6px #e7e7e9;
   transition: all 0.3s;
   outline: 1px solid #3e3aff;
 }
 textarea {
-  background-color: var(--light-grey);
-  padding: 1rem;
+  
   border: none;
+  outline: none;
+  resize: none;
 }
 .hide {
   overflow: hidden !important;
@@ -237,6 +234,17 @@ textarea {
     #000000 12%,
     hsla(0, 0%, 0%, calc(100% - 45%)) 100%
   );
+}
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+  background: #f3f3f3;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #000;
+  border-radius: 10px;
+  transition: all 0.5s;
 }
 .btnshadows:hover {
   border: 1px solid #000;

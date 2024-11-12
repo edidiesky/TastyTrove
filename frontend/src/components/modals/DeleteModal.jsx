@@ -310,11 +310,12 @@ const DeleteContainer = styled(motion.div)`
       max-width: 350px;
       min-width: 350px;
     }
-    @media (max-width: 490px) {
+    @media (max-width: 590px) {
       max-width: 100%;
       min-width: 100%;
       height:100vh;
       border-radius: 0px !important;
+      padding:0 1rem;
     }
     .cross {
       position: absolute;
