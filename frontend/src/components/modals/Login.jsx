@@ -8,17 +8,22 @@ import { RxCross2 } from "react-icons/rx";
 import toast from "react-hot-toast";
 import Loader from "../home/loader";
 import { LoginFormInputData } from "@/constants/data/formdata";
-import {
-  offLoginModal,
-  offRegisterModal,
-  onRegisterModal,
-} from "../../features/modals/modalSlice";
+// import {
+//   offLoginModal,
+// offRegisterModal,
+// onRegisterModal,
+// } from '@/services/modalSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { LoginUser } from "@/features/auth/authReducer";
 import AnimateText from "@/animations/AnimateText";
 
 import Image from "../common/Image";
 import { handleClearUserAlert } from "@/features/auth/authSlice";
+import {
+  offLoginModal,
+  offRegisterModal,
+  onRegisterModal,
+} from "@/features/modals/modalSlice";
 const ModalVariants = {
   initial: {
     opacity: 0,
@@ -65,7 +70,7 @@ const LoginModal = () => {
     dispatch(LoginUser(formvalue));
   };
   useEffect(() => {
-   dispatch(handleClearUserAlert());
+    dispatch(handleClearUserAlert());
   }, []);
   useEffect(() => {
     if (loginisSuccess) {
@@ -169,7 +174,7 @@ const LoginModal = () => {
                       <Loader type="dots" /> Login in progress
                     </div>
                   ) : (
-                   "Sign In"
+                    "Sign In"
                   )}
                 </button>
                 <div className="w-full flex items-center justify-start gap-2">

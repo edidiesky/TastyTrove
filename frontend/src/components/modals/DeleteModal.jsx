@@ -98,7 +98,7 @@ export default function DeleteModal({ type, setModal, id }) {
             <span className="w-full flex items-center justify-center">
               <CiWarning fontSize={"55px"} color={"#c31212"} />
             </span>
-            <h3 className="text-2xl font-bold text-center family6">
+            <h3 className="text-xl font-bold text-center family6">
               <span
                 className="family6 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
@@ -106,14 +106,14 @@ export default function DeleteModal({ type, setModal, id }) {
                 Delete {cartDetails?.menu?.title}?
               </span>
 
-              <span className="block text-xs w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
+              <span className="block text-xs lg:text-sm w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
                 By deleting this cart item, It cannot be retrieved back if this
                 action you carry has been taken.
               </span>
             </h3>
           </div>
 
-          <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 border-t">
+          <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 lg:border-t">
             <button
               className="family1 font-booking_font_bold flex items-center justify-center text-sm"
               onClick={handleClearAlert}
@@ -176,7 +176,7 @@ export default function DeleteModal({ type, setModal, id }) {
             <span className="w-full flex items-center justify-center">
               <CiWarning fontSize={"55px"} color={"#c31212"} />
             </span>
-            <h3 className="text-2xl flex-1 font-bold text-center family1">
+            <h3 className="text-xl flex-1 font-bold text-center family1">
               <span
                 className="family6 relative after:w-[100px] after:right-0 after:-bottom-0 after:h-[2px]
                after:bg-[#eee] after:rounded-lg font-bold after:absolute text-dark"
@@ -184,14 +184,14 @@ export default function DeleteModal({ type, setModal, id }) {
                 Delete {userInfo?.name}?
               </span>
 
-              <span className="block text-xs w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
+              <span className="block text-xs lg:text-sm w-[90%] pt-2 mx-auto capitalize font-normal text-center family1">
                 By deleting this User, It cannot be retrieved back if this
                 action you carry has been taken.
               </span>
             </h3>
           </div>
 
-          <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 border-t">
+          <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 lg:border-t">
             <button
               className="family1 font-booking_font_bold flex items-center justify-center text-sm"
               onClick={handleClearAlert}
@@ -247,16 +247,16 @@ export default function DeleteModal({ type, setModal, id }) {
           <span className="w-full flex items-center justify-center">
             <CiWarning fontSize={"45px"} color={"#c31212"} />
           </span>
-          <h3 className="text-2xl font-bold text-center family6">
+          <h3 className="text-xl font-bold text-center family6">
             <span>Delete this menu?</span>
-            <span className="block pt-2 font-normal text-xs w-[90%] mx-auto capitalize text-center family1">
+            <span className="block pt-2 font-normal text-xs lg:text-sm w-[90%] mx-auto capitalize text-center family1">
               By deleting this menu, It cannot be retrieved back if this action
               you carry has been taken.
             </span>
           </h3>
         </div>
 
-        <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 border-t">
+        <div className="deleteCardBottom py-3 w-full flex items-center justify-end px-4 lg:border-t">
           <button
             className="family1 font-booking_font_bold flex items-center justify-center text-sm"
             onClick={handleClearAlert}
@@ -296,8 +296,8 @@ const DeleteContainer = styled(motion.div)`
   top: 0;
   background: rgba(0, 0, 0, 0.4);
   .deleteCard {
-    max-width: 400px;
-    min-width: 300px;
+    max-width: 480px;
+    min-width: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -311,8 +311,10 @@ const DeleteContainer = styled(motion.div)`
       min-width: 350px;
     }
     @media (max-width: 490px) {
-      max-width: 90%;
-      min-width: 90%;
+      max-width: 100%;
+      min-width: 100%;
+      height:100vh;
+      border-radius: 0px !important;
     }
     .cross {
       position: absolute;
@@ -336,14 +338,14 @@ const DeleteContainer = styled(motion.div)`
       display: flex;
       gap: 1rem;
       button {
-        padding: 0.5rem 1.6rem;
+        padding: 0.5rem 1.5rem;
         min-height: 46px;
         border: none;
         font-weight: 500;
         background: #eee;
         color: #000;
         outline: none;
-        border-radius: 10px;
+        border-radius: 60px;
         cursor: pointer;
         text-transform: none;
         &:hover {

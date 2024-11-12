@@ -6,19 +6,19 @@ import { GetAllUsers } from "@/features/auth/authReducer";
 import Loader from "@/components/loader";
 
 export default function Customers() {
-  const dispatch = useDispatch()
- const { users, getallUserisLoading, page } = useSelector(
-   (store) => store.auth
- );
+  const dispatch = useDispatch();
+  const { users, getallUserisLoading, page } = useSelector(
+    (store) => store.auth
+  );
   useEffect(() => {
     dispatch(GetAllUsers());
   }, [page]);
-  if (getallUserisLoading) {
-    return <Loader/>
-  }
-    return (
-      <div className="py-12">
-        <DashboardIndex />
-      </div>
-    );
+  // if (getallUserisLoading) {
+  //   return <Loader/>
+  // }
+  return (
+    <div className="py-12">
+      <DashboardIndex />
+    </div>
+  );
 }
