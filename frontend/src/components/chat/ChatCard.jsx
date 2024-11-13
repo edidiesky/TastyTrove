@@ -1,18 +1,12 @@
 import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
-import io from "socket.io-client";
-import moment from "moment";
-import { clearconversation } from "@/features/conversation/conversationSlice";
 import {
-  Createconversation,
   GetUsersMessageConversation,
-  UserConversationChat,
 } from "@/features/conversation/conversationReducer";
 import { IoMdSend } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { RxCross1 } from "react-icons/rx";
-import { BsImage } from "react-icons/bs";
 import Loader from "../loader";
 import { chatCardVariants } from "@/socket/utils/framer";
 import { SocketContext } from "@/context/SocketContext";
