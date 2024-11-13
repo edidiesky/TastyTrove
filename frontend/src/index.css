@@ -204,8 +204,8 @@ form .input {
 }
 textarea {
   
-  border: none;
-  outline: none;
+  /* border: none;
+  outline: none; */
   resize: none;
 }
 .hide {

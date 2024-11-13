@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import axios from "axios";
 import { IoMdSend } from "react-icons/io";
-import { BsSearch } from "react-icons/bs";
 import {
   getAllSellerConversationUsers,
   GetUsersMessageConversation,
@@ -16,16 +15,20 @@ import ChatDetails from "@/components/common/ChatDetails";
 const Nessage = () => {
   const { socket } = useContext(SocketContext);
   const dispatch = useDispatch();
-  const { users, currentUser } = useSelector((store) => store.auth);
+  const { currentUser } = useSelector((store) => store.auth);
 
   const [chat, setChat] = useState({ messages: [] });
   const [chatDetail, setChatDetail] = useState(null);
 
   const [conversationId, setConversationId] = useState(null);
-  const [messageloading, setMessageLoading] = useState(false);
+  const [createmessageloading, setCreateMessageLoading] = useState(false);
   const [body, setBody] = useState("");
-  const { conversationDetails, getUsersInConversationisLoading, conversation } =
-    useSelector((store) => store.conversation);
+  const {
+    conversationDetails,
+    getUsersInConversationisLoading,
+    conversationisLoading,
+    conversation,
+  } = useSelector((store) => store.conversation);
   useEffect(() => {
     setChat([]);
     dispatch(clearconversation());
@@ -44,7 +47,7 @@ const Nessage = () => {
         setChat((prev) => ({
           ...prev,
           messages: [
-            ...prev.messages,
+            ...prev?.messages,
             {
               text: message.text,
               receiverid: message?.receiverid,
@@ -71,6 +74,7 @@ const Nessage = () => {
   }, [conversationDetails, setChat]);
   const handleCreateMessage = async ({ e, receiverid }) => {
     e.preventDefault();
+    setCreateMessageLoading(true);
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_BASE_URLS}/message/${
@@ -82,6 +86,7 @@ const Nessage = () => {
         },
         { withCredentials: true }
       );
+      console.log("Data from server after posting message:", data);
       setChat((prev) => ({
         ...prev,
         messages: [
@@ -107,10 +112,12 @@ const Nessage = () => {
           username: currentUser?.username,
         },
       });
+      setCreateMessageLoading(false);
 
       setBody("");
     } catch (err) {
       console.log(err);
+      setCreateMessageLoading(false);
     }
     // console.log(receiverid);
     setBody("");
@@ -146,7 +153,7 @@ const Nessage = () => {
                         key={index}
                         className={`${
                           data?.id === conversationId ? "bg-[#f7f7f7]" : ""
-                        } hover:bg-[#fafafa] w-full cursor-pointer flex items-center justify-between py-4 px-4`}
+                        } hover:bg-[#fafafa] w-full cursor-pointer flex flex-col py-4 px-4`}
                       >
                         <div className="flex-1 flex items-center gap-4">
                           {data?.receiver?.image ? (
@@ -161,22 +168,20 @@ const Nessage = () => {
                             </div>
                           )}
 
-                          <h5 className="">
-                            <span className="family6 text-base">
-                              {" "}
-                              {data?.receiver?.name}
-                            </span>
-                            <span className="block font-normal family1 text-xs text-grey">
+                          <div className="flex-1 flex flex-col gap-1">
+                            <div className="w-full flex items-start justify-between">
+                              <h5 className="family6">
+                                {data?.receiver?.name}
+                              </h5>
+                              <span className="block font-normal family1 text-xs text-grey">
+                                {moment(data?.createdAt).format("DD MMM YYYY")}
+                              </span>
+                            </div>
+                            <h6 className="text-xs md:text-sm font-normal family1">
                               {data?.lastMessage}
-                            </span>
-                          </h5>
+                            </h6>
+                          </div>
                         </div>
-                        <h6 className="text-xs font-normal family1">
-                          {moment(data?.createdAt).format("DD MMM YYYY")}
-                          <span className="block font-normal text-xs text-grey">
-                            {/* Last Message */}
-                          </span>
-                        </h6>
                       </div>
                     );
                   })}
@@ -218,7 +223,7 @@ const Nessage = () => {
             </div>
           </div>
           <div className="w-full px-6 h-[400px] overflow-auto flex-col gap-2">
-            {messageloading ? (
+            {conversationisLoading ? (
               <div className="w-full h-full flex items-start justify-center">
                 <Loader type={"dots"} color={"#000"} />
               </div>
@@ -227,9 +232,10 @@ const Nessage = () => {
                 {
                   // {/* first conversation */ }
                   chat?.messages?.map((message, index) => {
+                    const isSender = currentUser?.id === message?.senderid;
                     return (
                       <ChatDetails
-                        type="dashboard"
+                        isSender={isSender}
                         key={index}
                         message={message}
                       />
@@ -254,6 +260,7 @@ const Nessage = () => {
                 name="body"
                 onChange={(e) => setBody(e.target.value)}
                 id="search"
+                disabled={createmessageloading}
                 placeholder="Start a new Message"
                 className="text-sm border-none outline-none family1 px-4 flex-1"
               />

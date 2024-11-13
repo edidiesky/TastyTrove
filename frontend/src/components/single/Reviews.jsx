@@ -117,7 +117,7 @@ export default function Reviews() {
                     {input?.inputtype === "textarea" ? (
                       <label
                         htmlFor={input.label}
-                        className="flex w-full flex-col gap-2 text-base family1 font-normal"
+                        className="flex w-full flex-col gap-2 text-sm family1 font-normal"
                       >
                         {input.label}
                         <textarea
@@ -127,13 +127,13 @@ export default function Reviews() {
                           value={formdata[input.name]}
                           type={input.type}
                           onChange={handleFormChange}
-                          className="w-full p-4 text-[#777] h-[100px]"
+                          className="w-full rounded-lg p-4 border text-[#777] h-[100px]"
                         ></textarea>
                       </label>
                     ) : (
                       <label
                         htmlFor={input.label}
-                        className="flex w-full flex-col gap-2 text-base family1 font-normal"
+                        className="flex w-full flex-col gap-2 text-sm family1 font-normal"
                       >
                         {input.label}
                         <input
@@ -143,7 +143,7 @@ export default function Reviews() {
                           value={formdata[input.name]}
                           type={input.type}
                           onChange={handleFormChange}
-                          className="w-full p-4 text-[#777]"
+                          className="w-full input p-4 text-[#777]"
                         ></input>
                       </label>
                     )}

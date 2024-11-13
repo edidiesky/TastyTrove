@@ -1,6 +1,4 @@
 import express from "express";
-import path from "path";
-import redis from 'redis'
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
@@ -98,17 +96,16 @@ io.on("connection", (socket) => {
     io.emit("getAllConnectedUser", users);
   });
 
-  socket.on("sendMessage", ({ receiverid, text, sender }) => {
+  socket.on("sendMessage", ({ receiverid, ...data }) => {
     // get the specific usre u intend to send the message to
     const newuser = getASpecificUser(receiverid);
     // console.log(newuser);
     // console.log(newuser?.socketId)
-    console.log({ receiverid, text });
+    console.log({ receiverid });
     if (newuser?.socketId) {
       io.to(newuser?.socketId).emit("getMessage", {
         receiverid,
-        text,
-        sender,
+        ...data,
       });
     }
   });

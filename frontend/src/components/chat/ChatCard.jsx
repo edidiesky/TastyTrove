@@ -86,6 +86,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
         },
         { withCredentials: true }
       );
+      console.log("Data from server after posting message:", data);
       setChat((prev) => ({
         ...prev,
         messages: [
@@ -171,7 +172,14 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
             {
               // {/* first conversation */ }
               chat?.messages?.map((message, index) => {
-                return <ChatDetails key={index} message={message} />;
+                const isSender = currentUser?.id === message?.senderid;
+                return (
+                  <ChatDetails
+                    isSender={isSender}
+                    key={index}
+                    message={message}
+                  />
+                );
               })
             }
           </>
@@ -199,7 +207,6 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
           >
             <IoMdSend fontSize={"20px"} />
           </div>
-
         </form>
       </div>
     </motion.div>
