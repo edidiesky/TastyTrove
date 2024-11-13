@@ -30,7 +30,8 @@ const Nessage = () => {
     conversation,
   } = useSelector((store) => store.conversation);
   useEffect(() => {
-    setChat([]);
+    setChat({ messages: [] });
+    setChatDetail()
     dispatch(clearconversation());
     dispatch(getAllSellerConversationUsers());
   }, []);
@@ -43,6 +44,7 @@ const Nessage = () => {
   }, [conversationId]);
   useEffect(() => {
     if (socket) {
+      socket?.off("getMessage"); // Clear previous listener
       socket?.on("getMessage", (message) => {
         setChat((prev) => ({
           ...prev,

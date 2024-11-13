@@ -45,6 +45,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
   // get the messages of the chat
   useEffect(() => {
     if (socket) {
+      socket?.off("getMessage"); // Clear previous listener
       socket?.on("getMessage", (message) => {
         setChat((prev) => ({
           ...prev,
