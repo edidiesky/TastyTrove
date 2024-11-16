@@ -4,8 +4,8 @@ import moment from "moment";
 import axios from "axios";
 import { IoMdSend } from "react-icons/io";
 import {
-  getAllSellerConversationUsers,
-  GetUsersMessageConversation,
+  getSellerConversations,
+  GetSingleConversation,
 } from "@/features/conversation/conversationReducer";
 import { clearconversation } from "@/features/conversation/conversationSlice";
 import Loader from "@/components/loader";
@@ -33,13 +33,13 @@ const Nessage = () => {
     setChat({ messages: [] });
     setChatDetail()
     dispatch(clearconversation());
-    dispatch(getAllSellerConversationUsers());
+    dispatch(getSellerConversations());
   }, []);
 
   // get the conversation
   useEffect(() => {
     if (conversationId) {
-      dispatch(GetUsersMessageConversation(conversationId));
+      dispatch(GetSingleConversation(conversationId));
     }
   }, [conversationId]);
   useEffect(() => {

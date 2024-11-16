@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   Createconversation,
   Deleteconversation,
-  GetUsersMessageConversation,
-  getAllSellerConversationUsers,
+  GetSingleConversation,
+  getSellerConversations,
   UserConversationChat,
 } from "./conversationReducer";
 import toast from "react-hot-toast";
@@ -49,15 +49,15 @@ export const conversationSlice = createSlice({
   },
   extraReducers: (builder) => {
     // // registration build case
-    builder.addCase(GetUsersMessageConversation.pending, (state, action) => {
+    builder.addCase(GetSingleConversation.pending, (state, action) => {
       state.conversationisLoading = true;
     });
-    builder.addCase(GetUsersMessageConversation.fulfilled, (state, action) => {
+    builder.addCase(GetSingleConversation.fulfilled, (state, action) => {
       state.conversationisSuccess = true;
       state.conversationisLoading = false;
       state.conversationDetails = action.payload;
     });
-    builder.addCase(GetUsersMessageConversation.rejected, (state, action) => {
+    builder.addCase(GetSingleConversation.rejected, (state, action) => {
       state.conversationisSuccess = false;
       state.conversationisError = true;
       state.conversationisLoading = false;
@@ -84,17 +84,17 @@ export const conversationSlice = createSlice({
     });
 
     
-    builder.addCase(getAllSellerConversationUsers.pending, (state, action) => {
+    builder.addCase(getSellerConversations.pending, (state, action) => {
       state.getUsersInConversationisLoading = true;
     });
     builder.addCase(
-      getAllSellerConversationUsers.fulfilled,
+      getSellerConversations.fulfilled,
       (state, action) => {
         state.conversation = action.payload;
         state.getUsersInConversationisLoading = false;
       }
     );
-    builder.addCase(getAllSellerConversationUsers.rejected, (state, action) => {
+    builder.addCase(getSellerConversations.rejected, (state, action) => {
       state.conversationisSuccess = false;
       state.conversationisError = true;
       state.getUsersInConversationisLoading = false;

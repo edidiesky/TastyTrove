@@ -23,8 +23,8 @@ export const Createconversation = createAsyncThunk(
   }
 );
 
-export const getAllSellerConversationUsers = createAsyncThunk(
-  "getAllSellerConversationUsers",
+export const getSellerConversations = createAsyncThunk(
+  "getSellerConversations",
   async (_, { rejectWithValue }) => {
     try {
      
@@ -71,14 +71,13 @@ export const Deleteconversation = createAsyncThunk(
 );
 
 // Get User conversation
-export const GetUsersMessageConversation = createAsyncThunk(
-  "GetUserconversation",
+export const GetSingleConversation = createAsyncThunk(
+  "GetSingleConversation",
   async (conversationid, { rejectWithValue }) => {
     try {
-     
       const response = await axios.get(
         `${import.meta.env.VITE_API_BASE_URLS}/conversation/${conversationid}`,
-          { withCredentials: true }
+        { withCredentials: true }
       );
       return response.data?.conversation;
     } catch (err) {

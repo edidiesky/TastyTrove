@@ -2,15 +2,15 @@ import React, { useState, useEffect, useContext } from "react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import {
-  GetUsersMessageConversation,
+  GetSingleConversation,
 } from "@/features/conversation/conversationReducer";
 import { IoMdSend } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import { RxCross1 } from "react-icons/rx";
 import Loader from "../loader";
-import { chatCardVariants } from "@/socket/utils/framer";
 import { SocketContext } from "@/context/SocketContext";
 import ChatDetails from "../common/ChatDetails";
+import { chatCardVariants } from "@/constants/utils/framer";
 
 const ChatCard = ({ active, setActive, setChat, chat }) => {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const ChatCard = ({ active, setActive, setChat, chat }) => {
       !messagesFetched
     ) {
       console.log("Fetching conversation messages...");
-      dispatch(GetUsersMessageConversation(conversationDetails?.id));
+      dispatch(GetSingleConversation(conversationDetails?.id));
       setMessagesFetched(true);
     }
   }, [conversationDetails, messagesFetched, dispatch]);
