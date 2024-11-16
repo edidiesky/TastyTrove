@@ -1,6 +1,6 @@
 # TastyTrove Restaurant
 
-TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users to explore various menus, place orders, and leave reviews. Sellers are given the priviledges when authenticated to see foods, manage food items, see reviews, receive payment, see list of customers, and lastly see how their products(food items) has been purchased over a period of time. I built TastyTrove with NodeJs, Prisma, MongoDB, and Typescript.
+TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users to explore various menus, place orders, and leave reviews. Sellers are given the priviledges when authenticated to see foods, manage food items, see reviews, receive payment, see list of customers, and lastly see how their products(food items) has been purchased over a period of time. I built TastyTrove with NodeJs, Prisma, Socket-IO, MongoDB, and Typescript.
 
 ![Project Screenshot](/Tasttrove_1.png)
 
@@ -25,6 +25,7 @@ TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users
 - **User Authentication:** Secure login and registration.
 - **Role Management:** Admin, User, and Seller roles.
 - **Menu Management:** Menus can be managed by the sellers.
+- **Messaging System Management:** Sellers and Buyers can interract with eachother real-time through the help of socket-io.
 - **Reservation System:** Status management for reservations.
 - **Payment Integration:** Support for multiple payment statuses.
 - **Review System:** Users can leave reviews and ratings.
