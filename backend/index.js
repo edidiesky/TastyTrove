@@ -13,12 +13,12 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: process.env.WEB_ORIGIN, // Explicitly set the client origin
     methods: ["GET", "POST"],
-    credentials: true, // Allow cookies
+    credentials: true,
   },
+  transports: ["websocket", "polling"], // Support both transports
 });
-
 import { errorHandler, NotFound } from "./middleware/error-handler.js";
 
 app.use(

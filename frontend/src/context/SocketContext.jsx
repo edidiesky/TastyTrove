@@ -7,14 +7,37 @@ const SocketContextProvider = ({ children }) => {
   const { currentUser } = useSelector((store) => store.auth);
 
   useEffect(() => {
-    setSocket(io.connect(`${import.meta.env.VITE_API_BASE_URL}`));
+    // Initialize Socket.IO client
+    const socketInstance = io(import.meta.env.VITE_API_BASE_URL, {
+      transports: ["websocket", "polling"], // Ensure both transports are supported
+      withCredentials: true, // Allow credentials for cross-origin
+    });
+
+    // Set socket instance
+    setSocket(socketInstance);
+
+    // Cleanup socket connection on unmount
+    return () => {
+      socketInstance.disconnect();
+      console.log("Socket disconnected");
+    };
   }, []);
   useEffect(() => {
-    currentUser && socket?.emit("addUserId", currentUser?.id);
-    currentUser &&
-      socket?.on("getAllConnectedUser", (users) => {
-        console.log(users);
-      });
+    if (socket && currentUser) {
+      // Emit user ID to the server
+      socket.emit("addUserId", currentUser?.id);
+
+      // Register the event listener for connected users
+      const handleConnectedUsers = (users) => {
+        console.log("Connected users:", users);
+      };
+      socket.on("getAllConnectedUser", handleConnectedUsers);
+
+      // Cleanup listeners on dependency change
+      return () => {
+        socket.off("getAllConnectedUser", handleConnectedUsers);
+      };
+    }
   }, [socket, currentUser]);
   return (
     <SocketContext.Provider
