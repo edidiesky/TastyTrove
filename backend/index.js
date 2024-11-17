@@ -13,7 +13,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.WEB_ORIGIN,
+    origin: "*",
     methods: ["GET", "POST"],
     credentials: true, // Allow cookies
   },
