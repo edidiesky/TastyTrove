@@ -13,17 +13,17 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
-    origin: process.env.WEB_ORIGIN, // Explicitly set the client origin
+    origin: process.env.WEB_ORIGIN || "https://tastytrove.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
-  transports: ["websocket", "polling"], // Support both transports
+  transports: ["websocket"], // Support both transports
 });
 import { errorHandler, NotFound } from "./middleware/error-handler.js";
 
 app.use(
   cors({
-    origin: process.env.WEB_ORIGIN,
+    origin: process.env.WEB_ORIGIN || "https://tastytrove.vercel.app",
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })

@@ -9,7 +9,7 @@ const SocketContextProvider = ({ children }) => {
   useEffect(() => {
     // Initialize Socket.IO client
     const socketInstance = io(import.meta.env.VITE_API_BASE_URL, {
-      transports: ["websocket", "polling"], // Ensure both transports are supported
+      transports: ["websocket"], // Ensure both transports are supported
       withCredentials: true, // Allow credentials for cross-origin
     });
 
