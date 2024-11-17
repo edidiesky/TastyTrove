@@ -8,22 +8,31 @@ dotenv.config();
 import { createServer } from "node:http";
 import { Server } from "socket.io";
 
-
 const app = express();
 const server = createServer(app);
+// const io = new Server(server, {
+//   cors: {
+//     origin: process.env.WEB_ORIGIN,
+//     methods: ["GET", "POST"],
+//     credentials: true, // Allow cookies
+//   },
+// });
 const io = new Server(server, {
+  path: "/api/socket", // Custom path for the WebSocket connection
+  addTrailingSlash: false,
   cors: {
     origin: process.env.WEB_ORIGIN || "https://tastytrove.vercel.app",
     methods: ["GET", "POST"],
     credentials: true,
   },
-  transports: ["websocket"], // Support both transports
+  transports: ["websocket"], // Prefer WebSocket transport
 });
+
 import { errorHandler, NotFound } from "./middleware/error-handler.js";
 
 app.use(
   cors({
-    origin: process.env.WEB_ORIGIN || "https://tastytrove.vercel.app",
+    origin: process.env.WEB_ORIGIN,
     methods: ["POST", "GET", "DELETE", "PUT"],
     credentials: true,
   })
@@ -57,7 +66,7 @@ app.use("/api/v1/payment", orderRoute);
 app.use("/api/v1/stat", StatRoute);
 app.use("/api/v1/notification", NotificationRoutes);
 app.use("/api/v1/conversation", ConversationRoute);
-app.use("/api/v1/message",attachSocketIo(io), messageRoute);
+app.use("/api/v1/message", attachSocketIo(io), messageRoute);
 app.use("/api/v1/review", reviewRoute);
 // // Middlewares
 app.use(NotFound);
