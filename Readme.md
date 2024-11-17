@@ -25,11 +25,10 @@ TastyTrove is a dynamic marketplace for food lovers and sellers. It allows users
 - **User Authentication:** Secure login and registration.
 - **Role Management:** Admin, User, and Seller roles.
 - **Menu Management:** Menus can be managed by the sellers.
-- **Messaging System Management:** Sellers and Buyers can interract with eachother real-time through the help of socket-io.
+- **Messaging System:** Sellers and Buyers can interract with eachother real-time through the help of socket-io.
 - **Reservation System:** Status management for reservations.
 - **Payment Integration:** Support for multiple payment statuses.
 - **Review System:** Users can leave reviews and ratings.
-- **Social System:** Users can chat with Sellers.
 - **Notification System:** Sellers can receive notifications for every purchase .
 
 ## Getting Started
